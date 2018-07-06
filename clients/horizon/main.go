@@ -19,13 +19,13 @@ import (
 
 // DefaultTestNetClient is a default client to connect to test network
 var DefaultTestNetClient = &Client{
-	URL:  "https://horizon-testnet.stellar.org",
+	URL:  "http://localhost:8000/",
 	HTTP: http.DefaultClient,
 }
 
 // DefaultPublicNetClient is a default client to connect to public network
 var DefaultPublicNetClient = &Client{
-	URL:  "https://horizon.stellar.org",
+	URL:  "http://localhost:8000/",
 	HTTP: http.DefaultClient,
 }
 
