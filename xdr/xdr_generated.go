@@ -3518,14 +3518,14 @@ func (e OperationType) String() string {
 //    {
 //        AccountID destination; // account to create
 //        int64 startingBalance; // amount they end up with
-//        uint32 accType; // role of the account
+//        uint32 accountType; // role of the account
 //
 //    };
 //
 type CreateAccountOp struct {
   Destination AccountId
   StartingBalance Int64
-  AccType Uint32
+  AccountType Uint32
 }
 
 // PaymentOp is an XDR Struct defines as:
@@ -3551,11 +3551,11 @@ type PaymentOp struct {
 //        int64 sendMax;   // the maximum amount of sendAsset to
 //                         // send (excluding fees).
 //                         // The operation will fail if can't be met
-//    
+//
 //        AccountID destination; // recipient of the payment
 //        Asset destAsset;       // what they end up with
 //        int64 destAmount;      // amount they end up with
-//    
+//
 //        Asset path<5>; // additional hops it must go through to get there
 //    };
 //
@@ -3576,7 +3576,7 @@ type PathPaymentOp struct {
 //        Asset buying;
 //        int64 amount; // amount being sold. if set to 0, delete the offer
 //        Price price;  // price of thing being sold in terms of what you are buying
-//    
+//
 //        // 0=create a new offer, otherwise edit an existing offer
 //        uint64 offerID;
 //    };
@@ -3611,18 +3611,18 @@ type CreatePassiveOfferOp struct {
 //   struct SetOptionsOp
 //    {
 //        AccountID* inflationDest; // sets the inflation destination
-//    
+//
 //        uint32* clearFlags; // which flags to clear
 //        uint32* setFlags;   // which flags to set
-//    
+//
 //        // account threshold manipulation
 //        uint32* masterWeight; // weight of the master account
 //        uint32* lowThreshold;
 //        uint32* medThreshold;
 //        uint32* highThreshold;
-//    
+//
 //        string32* homeDomain; // sets the home domain
-//    
+//
 //        // Add, update or remove a signer for the account
 //        // signer is deleted if the weight is 0
 //        Signer* signer;
@@ -3645,7 +3645,7 @@ type SetOptionsOp struct {
 //   struct ChangeTrustOp
 //    {
 //        Asset line;
-//    
+//
 //        // if limit is set to 0, deletes the trust line
 //        int64 limit;
 //    };
@@ -3662,10 +3662,10 @@ type ChangeTrustOp struct {
 //        // ASSET_TYPE_NATIVE is not allowed
 //        case ASSET_TYPE_CREDIT_ALPHANUM4:
 //            opaque assetCode4[4];
-//    
+//
 //        case ASSET_TYPE_CREDIT_ALPHANUM12:
 //            opaque assetCode12[12];
-//    
+//
 //            // add other asset types here in the future
 //        }
 //
@@ -3773,14 +3773,14 @@ func (u AllowTrustOpAsset) GetAssetCode12() (result [12]byte, ok bool) {
 //        // ASSET_TYPE_NATIVE is not allowed
 //        case ASSET_TYPE_CREDIT_ALPHANUM4:
 //            opaque assetCode4[4];
-//    
+//
 //        case ASSET_TYPE_CREDIT_ALPHANUM12:
 //            opaque assetCode12[12];
-//    
+//
 //            // add other asset types here in the future
 //        }
 //        asset;
-//    
+//
 //        bool authorize;
 //    };
 //
@@ -4256,7 +4256,7 @@ func (u OperationBody) GetBumpSequenceOp() (result BumpSequenceOp, ok bool) {
 //        // if not set, the runtime defaults to "sourceAccount" specified at
 //        // the transaction level
 //        AccountID* sourceAccount;
-//    
+//
 //        union switch (OperationType type)
 //        {
 //        case CREATE_ACCOUNT:
@@ -4570,20 +4570,20 @@ func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err e
 //    {
 //        // account used to run the transaction
 //        AccountID sourceAccount;
-//    
+//
 //        // the fee the sourceAccount will pay
 //        uint32 fee;
-//    
+//
 //        // sequence number to consume in the account
 //        SequenceNumber seqNum;
-//    
+//
 //        // validity range (inclusive) for the last ledger close time
 //        TimeBounds* timeBounds;
-//    
+//
 //        Memo memo;
-//    
+//
 //        Operation operations<100>;
-//    
+//
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -4713,11 +4713,11 @@ type TransactionEnvelope struct {
 //        // emitted to identify the offer
 //        AccountID sellerID; // Account that owns the offer
 //        uint64 offerID;
-//    
+//
 //        // amount and asset taken from the owner
 //        Asset assetSold;
 //        int64 amountSold;
-//    
+//
 //        // amount and asset sent to the owner
 //        Asset assetBought;
 //        int64 amountBought;
@@ -4738,7 +4738,7 @@ type ClaimOfferAtom struct {
 //    {
 //        // codes considered as "success" for the operation
 //        CREATE_ACCOUNT_SUCCESS = 0, // account was created
-//    
+//
 //        // codes considered as "failure" for the operation
 //        CREATE_ACCOUNT_MALFORMED = -1,   // invalid destination
 //        CREATE_ACCOUNT_UNDERFUNDED = -2, // not enough funds in source account
@@ -4824,7 +4824,7 @@ func NewCreateAccountResult(code CreateAccountResultCode, value interface{}) (re
 //    {
 //        // codes considered as "success" for the operation
 //        PAYMENT_SUCCESS = 0, // payment successfuly completed
-//    
+//
 //        // codes considered as "failure" for the operation
 //        PAYMENT_MALFORMED = -1,          // bad input
 //        PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
@@ -4924,7 +4924,7 @@ func NewPaymentResult(code PaymentResultCode, value interface{}) (result Payment
 //    {
 //        // codes considered as "success" for the operation
 //        PATH_PAYMENT_SUCCESS = 0, // success
-//    
+//
 //        // codes considered as "failure" for the operation
 //        PATH_PAYMENT_MALFORMED = -1,          // bad input
 //        PATH_PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
@@ -5131,7 +5131,7 @@ func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
 //    {
 //        // codes considered as "success" for the operation
 //        MANAGE_OFFER_SUCCESS = 0,
-//    
+//
 //        // codes considered as "failure" for the operation
 //        MANAGE_OFFER_MALFORMED = -1,     // generated offer would be invalid
 //        MANAGE_OFFER_SELL_NO_TRUST = -2, // no trust line for what we're selling
@@ -5143,10 +5143,10 @@ func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
 //        MANAGE_OFFER_CROSS_SELF = -8,     // would cross an offer from the same user
 //        MANAGE_OFFER_SELL_NO_ISSUER = -9, // no issuer for what we're selling
 //        MANAGE_OFFER_BUY_NO_ISSUER = -10, // no issuer for what we're buying
-//    
+//
 //        // update errors
 //        MANAGE_OFFER_NOT_FOUND = -11, // offerID does not match an existing offer
-//    
+//
 //        MANAGE_OFFER_LOW_RESERVE = -12 // not enough funds to create a new Offer
 //    };
 //
@@ -5316,7 +5316,7 @@ func (u ManageOfferSuccessResultOffer) GetOffer() (result OfferEntry, ok bool) {
 //    {
 //        // offers that got claimed while creating this offer
 //        ClaimOfferAtom offersClaimed<>;
-//    
+//
 //        union switch (ManageOfferEffect effect)
 //        {
 //        case MANAGE_OFFER_CREATED:
@@ -6083,7 +6083,7 @@ func NewBumpSequenceResult(code BumpSequenceResultCode, value interface{}) (resu
 //   enum OperationResultCode
 //    {
 //        opINNER = 0, // inner object result is valid
-//    
+//
 //        opBAD_AUTH = -1,     // too few valid signatures / wrong network
 //        opNO_ACCOUNT = -2,   // source account was not found
 //        opNOT_SUPPORTED = -3 // operation not supported at this time
@@ -6684,14 +6684,14 @@ func (u OperationResult) GetTr() (result OperationResultTr, ok bool) {
 //   enum TransactionResultCode
 //    {
 //        txSUCCESS = 0, // all operations succeeded
-//    
+//
 //        txFAILED = -1, // one of the operations failed (none were applied)
-//    
+//
 //        txTOO_EARLY = -2,         // ledger closeTime before minTime
 //        txTOO_LATE = -3,          // ledger closeTime after maxTime
 //        txMISSING_OPERATION = -4, // no operation was specified
 //        txBAD_SEQ = -5,           // sequence number does not match source account
-//    
+//
 //        txBAD_AUTH = -6,             // too few valid signatures / wrong network
 //        txINSUFFICIENT_BALANCE = -7, // fee would bring account below reserve
 //        txNO_ACCOUNT = -8,           // source account not found
@@ -6868,7 +6868,7 @@ func NewTransactionResultExt(v int32, value interface{}) (result TransactionResu
 //   struct TransactionResult
 //    {
 //        int64 feeCharged; // actual fee charged for the transaction
-//    
+//
 //        union switch (TransactionResultCode code)
 //        {
 //        case txSUCCESS:
@@ -6878,7 +6878,7 @@ func NewTransactionResultExt(v int32, value interface{}) (result TransactionResu
 //            void;
 //        }
 //        result;
-//    
+//
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -7668,7 +7668,7 @@ func (u ScpStatementPledges) GetNominate() (result ScpNomination, ok bool) {
 //    {
 //        NodeID nodeID;    // v
 //        uint64 slotIndex; // i
-//    
+//
 //        union switch (SCPStatementType type)
 //        {
 //        case SCP_ST_PREPARE:
