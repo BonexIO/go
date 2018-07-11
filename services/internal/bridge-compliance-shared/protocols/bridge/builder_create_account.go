@@ -1,10 +1,10 @@
 package bridge
 
 import (
-	"github.com/stellar/go/amount"
-	b "github.com/stellar/go/build"
-	shared "github.com/stellar/go/services/internal/bridge-compliance-shared"
-	"github.com/stellar/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/stivens13/go/amount"
+	b "github.com/stivens13/go/build"
+	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
+	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
 )
 
 // CreateAccountOperationBody represents create_account operation
@@ -12,6 +12,7 @@ type CreateAccountOperationBody struct {
 	Source          *string
 	Destination     string
 	StartingBalance string `json:"starting_balance"`
+	AccType 		uint32
 }
 
 // ToTransactionMutator returns go-stellar-base TransactionMutator
@@ -19,6 +20,7 @@ func (op CreateAccountOperationBody) ToTransactionMutator() b.TransactionMutator
 	mutators := []interface{}{
 		b.Destination{op.Destination},
 		b.NativeAmount{op.StartingBalance},
+		b.AccountType{op.AccType},
 	}
 
 	if op.Source != nil {

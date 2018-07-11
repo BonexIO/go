@@ -6,14 +6,14 @@ Horizon is the server for the client facing API for the Stellar ecosystem.  It a
 
 You can interact directly with horizon via curl or a web browser but SDF provides a [JavaScript SDK](https://www.stellar.org/developers/js-stellar-sdk/learn/) for clients to use to interact with Horizon.
 
-SDF runs a instance of Horizon that is connected to the test net [https://horizon-testnet.stellar.org/](https://horizon-testnet.stellar.org/).
+SDF runs a instance of Horizon that is connected to the test net [http://localhost:8000/](http://localhost:8000/).
 
 ## Libraries
 
 SDF maintained libraries:<br />
 - [JavaScript](https://github.com/stellar/js-stellar-sdk)
 - [Java](https://github.com/stellar/java-stellar-sdk)
-- [Go](https://github.com/stellar/go)
+- [Go](https://github.com/stivens13/go)
 
 Community maintained libraries (in various states of completeness) for interacting with Horizon in other languages:<br>
 - [Ruby](https://github.com/stellar/ruby-stellar-sdk)

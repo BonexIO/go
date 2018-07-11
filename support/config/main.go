@@ -8,9 +8,9 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/asaskevich/govalidator"
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
+	"github.com/stivens13/go/amount"
+	"github.com/stivens13/go/strkey"
+	"github.com/stivens13/go/support/errors"
 )
 
 // TLS represents a common configuration snippet for configuring TLS in a server process

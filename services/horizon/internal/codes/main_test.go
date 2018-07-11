@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/xdr"
 )
 
 func TestCodes(t *testing.T) {

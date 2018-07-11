@@ -1,9 +1,9 @@
 package build
 
 import (
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/amount"
+	"github.com/stivens13/go/support/errors"
+	"github.com/stivens13/go/xdr"
 )
 
 // CreateAccount groups the creation of a new CreateAccountBuilder with a call
@@ -18,6 +18,7 @@ func CreateAccount(muts ...interface{}) (result CreateAccountBuilder) {
 // specify how they modify an xdr.PaymentOp object
 type CreateAccountMutator interface {
 	MutateCreateAccount(*xdr.CreateAccountOp) error
+	//SetAccountType(*xdr.CreateAccountOp)
 }
 
 // CreateAccountBuilder helps to build CreateAccountOp structs.
@@ -34,6 +35,7 @@ func (b *CreateAccountBuilder) Mutate(muts ...interface{}) {
 		switch mut := m.(type) {
 		case CreateAccountMutator:
 			err = mut.MutateCreateAccount(&b.CA)
+			//err = SetAccountType(&b.CA)
 		case OperationMutator:
 			err = mut.MutateOperation(&b.O)
 		default:
@@ -47,6 +49,17 @@ func (b *CreateAccountBuilder) Mutate(muts ...interface{}) {
 	}
 }
 
+// SetAccountType sets AccType
+//func (n AccountType) SetAccountType(op *xdr.CreateAccountOp) error {
+//	op.AccType = xdr.Uint32(n)
+//	return
+//}
+
+func (m AccountType) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
+	o.AccType = xdr.Uint32(m.Type)
+	return
+}
+
 // MutateCreateAccount for Destination sets the CreateAccountOp's Destination
 // field
 func (m Destination) MutateCreateAccount(o *xdr.CreateAccountOp) error {
@@ -57,5 +70,7 @@ func (m Destination) MutateCreateAccount(o *xdr.CreateAccountOp) error {
 // StartingBalance field
 func (m NativeAmount) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
 	o.StartingBalance, err = amount.Parse(m.Amount)
+
 	return
 }
+

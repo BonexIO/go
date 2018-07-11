@@ -28,8 +28,8 @@ The `bridge.cfg` file must be present in a working directory (you can load anoth
 * `port` - server listening port
 * `api_key` - when set, all requests to bridge server must contain `api_key` parameter with a correct value, otherwise the server will respond with `503 Forbidden`
 * `network_passphrase` - passphrase of the network that will be used with this bridge server:
-   * test network: `Test SDF Network ; September 2015`
-   * public network: `Public Global Stellar Network ; September 2015`
+   * test network: `TEST BONEX Foundation Network; July 2018`
+   * public network: `PUBLIC BONEX Foundation Network; July 2018`
 * `compliance` - URL to compliance server instance if you want to carry out the compliance protocol
 * `horizon` - URL to [horizon](https://github.com/stellar/horizon) server instance
 * `assets` - array of approved assets codes that this server can authorize or receive. These are currency code/issuer pairs. Use asset code 'XLM' with no issuer to listen for XLM payments. See [`bridge_example.cfg`](./bridge_example.cfg) for example.

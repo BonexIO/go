@@ -470,7 +470,7 @@ INSERT INTO storestate VALUES ('historyarchivestate             ', '{
 }');
 INSERT INTO storestate VALUES ('lastscpdata                     ', 'AAAAAgAAAAAt6KZmYrl1PfbuDMKjg5IMJK/ogfnyWmo97d6VekX6uwAAAAAAAAAEAAAAA8PZj6iArNG+hVRLN+PtPZsWtkCoBdX+oxfyEZy5kcCkAAAAAQAAADBYB3bIbr36NwuuEtQu9fUBmZVfSDXQRVMPU2SELckzmgAAAABbEX37AAAAAAAAAAAAAAABAAAAMFgHdshuvfo3C64S1C719QGZlV9INdBFUw9TZIQtyTOaAAAAAFsRffsAAAAAAAAAAAAAAEDIB4mi9WDKx+XIHLD6J06YJAmoL8hkdFnnZtXyTGP1zLo2mN0br9EzzcLFhaB2uZk0p6qm6q3fp/EbC+6XmEwEAAAAAC3opmZiuXU99u4MwqODkgwkr+iB+fJaaj3t3pV6Rfq7AAAAAAAAAAQAAAACAAAAAQAAADBYB3bIbr36NwuuEtQu9fUBmZVfSDXQRVMPU2SELckzmgAAAABbEX37AAAAAAAAAAAAAAABw9mPqICs0b6FVEs34+09mxa2QKgF1f6jF/IRnLmRwKQAAABAQ068crUVQzH+aoSnImxtJnT5SSJPD2mFgPA0oc1k1g9wdxw3hEuOk1TFNnoM5NhbpG+hXBfghNCxfvy3WCmyCwAAAAF3FlyzQOLZEyU89o+JHyCxLjEc9Xd8fN8Fe5cHQnodewAAAAAAAAABAAAAAQAAAAEAAAAALeimZmK5dT327gzCo4OSDCSv6IH58lpqPe3elXpF+rsAAAAA');
 INSERT INTO storestate VALUES ('databaseschema                  ', '6');
-INSERT INTO storestate VALUES ('networkpassphrase               ', 'Test SDF Network ; September 2015');
+INSERT INTO storestate VALUES ('networkpassphrase               ', 'TEST BONEX Foundation Network; July 2018');
 INSERT INTO storestate VALUES ('forcescponnextlaunch            ', 'false');
 INSERT INTO storestate VALUES ('ledgerupgrades                  ', '{
     "time": 0,

@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stellar/go/clients/horizon"
-	"github.com/stellar/go/clients/stellartoml"
-	proto "github.com/stellar/go/protocols/federation"
+	"github.com/stivens13/go/clients/horizon"
+	"github.com/stivens13/go/clients/stellartoml"
+	proto "github.com/stivens13/go/protocols/federation"
 )
 
 // FederationResponseMaxSize is the maximum size of response from a federation server

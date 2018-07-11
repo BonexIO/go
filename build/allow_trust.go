@@ -1,8 +1,8 @@
 package build
 
 import (
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/support/errors"
+	"github.com/stivens13/go/xdr"
 )
 
 // AllowTrust groups the creation of a new AllowTrustBuilder with a call to Mutate.

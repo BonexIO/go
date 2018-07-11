@@ -19,7 +19,7 @@ As with all errors Horizon returns, `stale_history` follows the [Problem Details
 ## Example
 
 ```shell
-$ curl -X GET "https://horizon-testnet.stellar.org/transactions?cursor=1&order=desc"
+$ curl -X GET "http://localhost:8000/transactions?cursor=1&order=desc"
 {
   "type": "stale_history",
   "title": "Historical DB Is Too Stale",

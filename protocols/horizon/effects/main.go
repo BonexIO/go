@@ -2,8 +2,8 @@ package effects
 
 import (
 	"time"
-	"github.com/stellar/go/protocols/horizon/base"
-	"github.com/stellar/go/support/render/hal"
+	"github.com/stivens13/go/protocols/horizon/base"
+	"github.com/stivens13/go/support/render/hal"
 )
 
 

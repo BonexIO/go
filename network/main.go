@@ -8,16 +8,16 @@ import (
 
 	"strings"
 
-	"github.com/stellar/go/hash"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/hash"
+	"github.com/stivens13/go/support/errors"
+	"github.com/stivens13/go/xdr"
 )
 
 const (
 	// PublicNetworkPassphrase is the pass phrase used for every transaction intended for the public stellar network
-	PublicNetworkPassphrase = "Public Global Stellar Network ; September 2015"
+	PublicNetworkPassphrase = "PUBLIC BONEX Foundation Network; July 2018"
 	// TestNetworkPassphrase is the pass phrase used for every transaction intended for the SDF-run test network
-	TestNetworkPassphrase = "Test SDF Network ; September 2015"
+	TestNetworkPassphrase = "TEST BONEX Foundation Network; July 2018"
 )
 
 // ID returns the network ID derived from the provided passphrase.  This value

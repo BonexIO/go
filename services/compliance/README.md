@@ -20,8 +20,8 @@ The `compliance.cfg` file must be present in a working directory (you can load a
 * `internal_port` - internal server listening port (should be accessible from your internal network only!)
 * `needs_auth` - set to `true` if you need to do sanctions check for payment receiver
 * `network_passphrase` - passphrase of the network that will be used with this bridge server:
-   * test network: `Test SDF Network ; September 2015`
-   * public network: `Public Global Stellar Network ; September 2015`
+   * test network: `TEST BONEX Foundation Network; July 2018`
+   * public network: `PUBLIC BONEX Foundation Network; July 2018`
 * `database` - This database is used internally to store memo information and to keep track of what FIs have been authorized to receive customer info.
   * `type` - database type (mysql, postgres)
   * `url` - url to database connection. **IMPORTANT** The `compliance` server must not use the same database as the `bridge` server.

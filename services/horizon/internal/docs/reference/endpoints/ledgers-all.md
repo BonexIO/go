@@ -26,7 +26,7 @@ GET /ledgers{?cursor,limit,order}
 
 ```sh
 # Retrieve the 200 latest ledgers, ordered chronologically
-curl "https://horizon-testnet.stellar.org/ledgers?limit=200&order=desc"
+curl "http://localhost:8000/ledgers?limit=200&order=desc"
 ```
 
 ### JavaScript Example Request

@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stellar/go/protocols/compliance"
-	"github.com/stellar/go/services/internal/bridge-compliance-shared/http/helpers"
-	"github.com/stellar/go/services/internal/bridge-compliance-shared/protocols"
+	"github.com/stivens13/go/protocols/compliance"
+	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols"
 )
 
 // SendRequest represents request sent to /send endpoint of compliance server

@@ -26,14 +26,14 @@ GET /ledgers/{id}/effects{?cursor,limit,order}
 ### curl Example Request
 
 ```sh
-curl "https://horizon-testnet.stellar.org/ledgers/69859/effects"
+curl "http://localhost:8000/ledgers/69859/effects"
 ```
 
 ### JavaScript Example Request
 
 ```javascript
 var StellarSdk = require('stellar-sdk');
-var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+var server = new StellarSdk.Server('http://localhost:8000');
 
 server.effects()
   .forLedger("2")

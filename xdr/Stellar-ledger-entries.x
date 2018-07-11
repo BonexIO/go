@@ -43,6 +43,16 @@ case ASSET_TYPE_CREDIT_ALPHANUM12:
     // add other asset types here in the future
 };
 
+// Defines account roles 
+enum AccountType 
+{
+    FOUNDATION = 0,
+    VENDOR = 1,
+    MERCHANT = 2,
+    CLIENT = 3
+};
+
+
 // price in fractional representation
 struct Price
 {
@@ -109,6 +119,8 @@ struct AccountEntry
                               // drives the reserve
     AccountID* inflationDest; // Account to vote for during inflation
     uint32 flags;             // see AccountFlags
+
+    uint32 accountType;           // Account role
 
     string32 homeDomain; // can be used for reverse federation and memo lookup
 

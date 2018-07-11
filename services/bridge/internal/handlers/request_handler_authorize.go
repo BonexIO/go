@@ -5,10 +5,10 @@ import (
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
-	b "github.com/stellar/go/build"
-	"github.com/stellar/go/clients/horizon"
-	"github.com/stellar/go/services/internal/bridge-compliance-shared/http/helpers"
-	"github.com/stellar/go/services/internal/bridge-compliance-shared/protocols/bridge"
+	b "github.com/stivens13/go/build"
+	"github.com/stivens13/go/clients/horizon"
+	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/bridge"
 )
 
 // Authorize implements /authorize endpoint

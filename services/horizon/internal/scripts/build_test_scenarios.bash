@@ -3,17 +3,17 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 GOTOP="$( cd "$DIR/../../../../../../../.." && pwd )"
-PACKAGES=$(find $GOTOP/src/github.com/stellar/go/services/horizon/internal/test/scenarios -iname '*.rb' -not -name '_common_accounts.rb')
-# PACKAGES=$(find $GOTOP/src/github.com/stellar/go/services/horizon/internal/test/scenarios -iname 'kahuna.rb')
+PACKAGES=$(find $GOTOP/src/github.com/stivens13/go/services/horizon/internal/test/scenarios -iname '*.rb' -not -name '_common_accounts.rb')
+# PACKAGES=$(find $GOTOP/src/github.com/stivens13/go/services/horizon/internal/test/scenarios -iname 'kahuna.rb')
 
-go install github.com/stellar/go/services/horizon
+go install github.com/stivens13/go/services/horizon
 
 dropdb hayashi_scenarios --if-exists
 createdb hayashi_scenarios
 
 export STELLAR_CORE_DATABASE_URL="postgres://localhost/hayashi_scenarios?sslmode=disable"
 export DATABASE_URL="postgres://localhost/horizon_scenarios?sslmode=disable"
-export NETWORK_PASSPHRASE="Test SDF Network ; September 2015"
+export NETWORK_PASSPHRASE="TEST BONEX Foundation Network; July 2018"
 export STELLAR_CORE_URL="http://localhost:8080"
 export SKIP_CURSOR_UPDATE="true"
 
@@ -44,5 +44,5 @@ done
 
 
 # commit new sql files to bindata
-go generate github.com/stellar/go/services/horizon/internal/test/scenarios
-# go test github.com/stellar/go/services/horizon/internal/ingest
+go generate github.com/stivens13/go/services/horizon/internal/test/scenarios
+# go test github.com/stivens13/go/services/horizon/internal/ingest

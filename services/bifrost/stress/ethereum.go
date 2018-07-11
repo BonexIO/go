@@ -9,8 +9,8 @@ import (
 
 	ethereumCommon "github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/stellar/go/services/bifrost/common"
-	"github.com/stellar/go/support/log"
+	"github.com/stivens13/go/services/bifrost/common"
+	"github.com/stivens13/go/support/log"
 )
 
 func (c *RandomEthereumClient) Start(addresses <-chan string) {

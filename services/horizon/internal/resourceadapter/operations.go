@@ -2,12 +2,12 @@ package resourceadapter
 
 import (
 	"context"
-	"github.com/stellar/go/services/horizon/internal/db2/history"
-	"github.com/stellar/go/protocols/horizon/operations"
-	"github.com/stellar/go/xdr"
-	"github.com/stellar/go/support/render/hal"
+	"github.com/stivens13/go/services/horizon/internal/db2/history"
+	"github.com/stivens13/go/protocols/horizon/operations"
+	"github.com/stivens13/go/xdr"
+	"github.com/stivens13/go/support/render/hal"
 	"fmt"
-	"github.com/stellar/go/services/horizon/internal/httpx"
+	"github.com/stivens13/go/services/horizon/internal/httpx"
 )
 
 // NewOperation creates a new operation resource, finding the appropriate type to use

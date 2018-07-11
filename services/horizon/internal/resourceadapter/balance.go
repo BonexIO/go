@@ -3,11 +3,11 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/services/horizon/internal/assets"
-	"github.com/stellar/go/services/horizon/internal/db2/core"
-	"github.com/stellar/go/xdr"
-	. "github.com/stellar/go/protocols/horizon"
+	"github.com/stivens13/go/amount"
+	"github.com/stivens13/go/services/horizon/internal/assets"
+	"github.com/stivens13/go/services/horizon/internal/db2/core"
+	"github.com/stivens13/go/xdr"
+	. "github.com/stivens13/go/protocols/horizon"
 )
 
 func PopulateBalance(ctx context.Context, dest *Balance, row core.Trustline) (err error) {

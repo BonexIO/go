@@ -5,10 +5,10 @@ import (
 	"time"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/stellar/go/services/horizon/internal/db2"
-	"github.com/stellar/go/support/errors"
-	strtime "github.com/stellar/go/support/time"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/services/horizon/internal/db2"
+	"github.com/stivens13/go/support/errors"
+	strtime "github.com/stivens13/go/support/time"
+	"github.com/stivens13/go/xdr"
 )
 
 // AllowedResolutions is the set of trade aggregation time windows allowed to be used as the

@@ -14,13 +14,13 @@ import (
 	"encoding/base64"
 
 	"github.com/sirupsen/logrus"
-	"github.com/stellar/go/clients/horizon"
-	"github.com/stellar/go/protocols/compliance"
-	"github.com/stellar/go/services/bridge/internal/config"
-	"github.com/stellar/go/services/bridge/internal/db"
-	callback "github.com/stellar/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
+	"github.com/stivens13/go/clients/horizon"
+	"github.com/stivens13/go/protocols/compliance"
+	"github.com/stivens13/go/services/bridge/internal/config"
+	"github.com/stivens13/go/services/bridge/internal/db"
+	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/stivens13/go/strkey"
+	"github.com/stivens13/go/support/errors"
 )
 
 // PaymentListener is listening for a new payments received by ReceivingAccount

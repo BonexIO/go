@@ -11,9 +11,9 @@ package build
 import (
 	"math"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/xdr"
+	"github.com/stivens13/go/amount"
+	"github.com/stivens13/go/network"
+	"github.com/stivens13/go/xdr"
 )
 
 const (
@@ -139,6 +139,20 @@ type MemoText struct {
 type NativeAmount struct {
 	Amount string
 }
+
+// Account type that defines account role in the BONEX system
+// FOUNDATION 0
+// VENDOR 1
+// MERCHANT 2
+// CLIENT 3
+//type AccountType struct {
+//	accType AccountType
+//	//accType uint32
+//}
+type AccountType struct {
+	Type uint32
+}
+
 
 // OfferID is a mutator that sets offer ID on offer operations
 type OfferID uint64

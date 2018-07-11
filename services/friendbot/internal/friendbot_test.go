@@ -3,7 +3,7 @@ package internal
 import (
 	"testing"
 
-	"github.com/stellar/go/clients/horizon"
+	"github.com/stivens13/go/clients/horizon"
 	"github.com/stretchr/testify/assert"
 
 	"sync"
@@ -21,7 +21,7 @@ func TestFriendbot_Pay(t *testing.T) {
 
 	fb := &Bot{
 		Secret:            "SAQWC7EPIYF3XGILYVJM4LVAVSLZKT27CTEI3AFBHU2VRCMQ3P3INPG5",
-		Network:           "Test SDF Network ; September 2015",
+		Network:           "TEST BONEX Foundation Network; July 2018",
 		StartingBalance:   "100.00",
 		SubmitTransaction: mockSubmitTransaction,
 		sequence:          2,

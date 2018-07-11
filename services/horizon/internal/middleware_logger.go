@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-chi/chi/middleware"
 	chimiddleware "github.com/go-chi/chi/middleware"
-	"github.com/stellar/go/services/horizon/internal/log"
-	"github.com/stellar/go/services/horizon/internal/render"
+	"github.com/stivens13/go/services/horizon/internal/log"
+	"github.com/stivens13/go/services/horizon/internal/render"
 )
 
 // LoggerMiddleware is the middleware that logs http requests and resposnes

@@ -3,13 +3,13 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/services/horizon/internal/assets"
-	"github.com/stellar/go/services/horizon/internal/db2/core"
-	"github.com/stellar/go/services/horizon/internal/httpx"
-	. "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/support/render/hal"
-	"github.com/stellar/go/services/horizon/internal/db2/history"
+	"github.com/stivens13/go/amount"
+	"github.com/stivens13/go/services/horizon/internal/assets"
+	"github.com/stivens13/go/services/horizon/internal/db2/core"
+	"github.com/stivens13/go/services/horizon/internal/httpx"
+	. "github.com/stivens13/go/protocols/horizon"
+	"github.com/stivens13/go/support/render/hal"
+	"github.com/stivens13/go/services/horizon/internal/db2/history"
 )
 
 func PopulateOffer(ctx context.Context, dest *Offer, row core.Offer, ledger history.Ledger) {

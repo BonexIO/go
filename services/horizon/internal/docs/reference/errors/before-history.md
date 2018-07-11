@@ -19,7 +19,7 @@ As with all errors Horizon returns, `before_history` follows the [Problem Detail
 ## Example
 
 ```shell
-$ curl -X GET "https://horizon-testnet.stellar.org/transactions?cursor=1&order=desc"
+$ curl -X GET "http://localhost:8000/transactions?cursor=1&order=desc"
 {
   "type": "before_history",
   "title": "Data Requested Is Before Recorded History",
