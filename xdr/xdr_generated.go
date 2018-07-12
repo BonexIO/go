@@ -1,13 +1,13 @@
-// Package main is generated from:
-//
-//  Stellar-ledger-entries.x
+          // Package main is generated from:
+          //
+          //  Stellar-ledger-entries.x
 //  Stellar-ledger.x
 //  Stellar-overlay.x
 //  Stellar-transaction.x
 //  Stellar-types.x
 //  Stellar-SCP.x
-//
-// DO NOT EDIT or your changes may be overwritten
+          //
+          // DO NOT EDIT or your changes may be overwritten
 package xdr
 
 import (
@@ -154,7 +154,7 @@ func (e AssetType) String() string {
 //
 type AssetAlphaNum4 struct {
   AssetCode [4]byte `xdrmaxsize:"4"`
-  Issuer AccountId
+  Issuer AccountId 
 }
 
 // AssetAlphaNum12 is an XDR NestedStruct defines as:
@@ -167,7 +167,7 @@ type AssetAlphaNum4 struct {
 //
 type AssetAlphaNum12 struct {
   AssetCode [12]byte `xdrmaxsize:"12"`
-  Issuer AccountId
+  Issuer AccountId 
 }
 
 // Asset is an XDR Union defines as:
@@ -176,28 +176,28 @@ type AssetAlphaNum12 struct {
 //    {
 //    case ASSET_TYPE_NATIVE: // Not credit
 //        void;
-//
+//    
 //    case ASSET_TYPE_CREDIT_ALPHANUM4:
 //        struct
 //        {
 //            opaque assetCode[4]; // 1 to 4 characters
 //            AccountID issuer;
 //        } alphaNum4;
-//
+//    
 //    case ASSET_TYPE_CREDIT_ALPHANUM12:
 //        struct
 //        {
 //            opaque assetCode[12]; // 5 to 12 characters
 //            AccountID issuer;
 //        } alphaNum12;
-//
+//    
 //        // add other asset types here in the future
 //    };
 //
 type Asset struct{
   Type AssetType
-  AlphaNum4 *AssetAlphaNum4
-  AlphaNum12 *AssetAlphaNum12
+  AlphaNum4 *AssetAlphaNum4 
+  AlphaNum12 *AssetAlphaNum12 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -209,38 +209,38 @@ func (u Asset) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of Asset
 func (u Asset) ArmForSwitch(sw int32) (string, bool) {
-  switch AssetType(sw) {
-  case AssetTypeAssetTypeNative:
-    return "", true
-  case AssetTypeAssetTypeCreditAlphanum4:
-    return "AlphaNum4", true
-  case AssetTypeAssetTypeCreditAlphanum12:
-    return "AlphaNum12", true
-  }
-  return "-", false
+switch AssetType(sw) {
+    case AssetTypeAssetTypeNative:
+      return "", true
+    case AssetTypeAssetTypeCreditAlphanum4:
+      return "AlphaNum4", true
+    case AssetTypeAssetTypeCreditAlphanum12:
+      return "AlphaNum12", true
+}
+return "-", false
 }
 
 // NewAsset creates a new  Asset.
 func NewAsset(aType AssetType, value interface{}) (result Asset, err error) {
   result.Type = aType
-  switch AssetType(aType) {
-  case AssetTypeAssetTypeNative:
-    // void
-  case AssetTypeAssetTypeCreditAlphanum4:
-    tv, ok := value.(AssetAlphaNum4)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AssetAlphaNum4")
-      return
-    }
-    result.AlphaNum4 = &tv
-  case AssetTypeAssetTypeCreditAlphanum12:
-    tv, ok := value.(AssetAlphaNum12)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AssetAlphaNum12")
-      return
-    }
-    result.AlphaNum12 = &tv
-  }
+switch AssetType(aType) {
+    case AssetTypeAssetTypeNative:
+      // void
+    case AssetTypeAssetTypeCreditAlphanum4:
+                  tv, ok := value.(AssetAlphaNum4)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AssetAlphaNum4")
+              return
+            }
+            result.AlphaNum4 = &tv
+    case AssetTypeAssetTypeCreditAlphanum12:
+                  tv, ok := value.(AssetAlphaNum12)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AssetAlphaNum12")
+              return
+            }
+            result.AlphaNum12 = &tv
+}
   return
 }
 // MustAlphaNum4 retrieves the AlphaNum4 value from the union,
@@ -294,7 +294,7 @@ func (u Asset) GetAlphaNum12() (result AssetAlphaNum12, ok bool) {
 
 // AccountType is an XDR Enum defines as:
 //
-//   enum AccountType
+//   enum AccountType 
 //    {
 //        FOUNDATION = 0,
 //        VENDOR = 1,
@@ -337,8 +337,8 @@ func (e AccountType) String() string {
 //    };
 //
 type Price struct {
-  N Int32
-  D Int32
+  N Int32 
+  D Int32 
 }
 
 // ThresholdIndexes is an XDR Enum defines as:
@@ -422,15 +422,15 @@ func (e LedgerEntryType) String() string {
 //    };
 //
 type Signer struct {
-  Key SignerKey
-  Weight Uint32
+  Key SignerKey 
+  Weight Uint32 
 }
 
 // AccountFlags is an XDR Enum defines as:
 //
 //   enum AccountFlags
 //    { // masks for each flag
-//
+//    
 //        // Flags set on issuer accounts
 //        // TrustLines are created with authorized set to "false" requiring
 //        // the issuer to set it for each TrustLine
@@ -493,20 +493,20 @@ func (u AccountEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of AccountEntryExt
 func (u AccountEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewAccountEntryExt creates a new  AccountEntryExt.
 func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -521,17 +521,17 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //                                  // drives the reserve
 //        AccountID* inflationDest; // Account to vote for during inflation
 //        uint32 flags;             // see AccountFlags
-//
+//    
 //        uint32 accountType;           // Account role
-//
+//    
 //        string32 homeDomain; // can be used for reverse federation and memo lookup
-//
+//    
 //        // fields used for signatures
 //        // thresholds stores unsigned bytes: [weight of master|low|medium|high]
 //        Thresholds thresholds;
-//
+//    
 //        Signer signers<20>; // possible signers for this account
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -542,17 +542,17 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //    };
 //
 type AccountEntry struct {
-  AccountId AccountId
-  Balance Int64
-  SeqNum SequenceNumber
-  NumSubEntries Uint32
-  InflationDest *AccountId
-  Flags Uint32
-  AccountType Uint32
-  HomeDomain String32
-  Thresholds Thresholds
+  AccountId AccountId 
+  Balance Int64 
+  SeqNum SequenceNumber 
+  NumSubEntries Uint32 
+  InflationDest *AccountId 
+  Flags Uint32 
+  AccountType Uint32 
+  HomeDomain String32 
+  Thresholds Thresholds 
   Signers []Signer `xdrmaxsize:"20"`
-  Ext AccountEntryExt
+  Ext AccountEntryExt 
 }
 
 // TrustLineFlags is an XDR Enum defines as:
@@ -610,20 +610,20 @@ func (u TrustLineEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TrustLineEntryExt
 func (u TrustLineEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewTrustLineEntryExt creates a new  TrustLineEntryExt.
 func NewTrustLineEntryExt(v int32, value interface{}) (result TrustLineEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -635,10 +635,10 @@ func NewTrustLineEntryExt(v int32, value interface{}) (result TrustLineEntryExt,
 //        Asset asset;         // type of asset (with issuer)
 //        int64 balance;       // how much of this asset the user has.
 //                             // Asset defines the unit for this;
-//
+//    
 //        int64 limit;  // balance cannot be above this
 //        uint32 flags; // see TrustLineFlags
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -649,12 +649,12 @@ func NewTrustLineEntryExt(v int32, value interface{}) (result TrustLineEntryExt,
 //    };
 //
 type TrustLineEntry struct {
-  AccountId AccountId
-  Asset Asset
-  Balance Int64
-  Limit Int64
-  Flags Uint32
-  Ext TrustLineEntryExt
+  AccountId AccountId 
+  Asset Asset 
+  Balance Int64 
+  Limit Int64 
+  Flags Uint32 
+  Ext TrustLineEntryExt 
 }
 
 // OfferEntryFlags is an XDR Enum defines as:
@@ -712,20 +712,20 @@ func (u OfferEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of OfferEntryExt
 func (u OfferEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewOfferEntryExt creates a new  OfferEntryExt.
 func NewOfferEntryExt(v int32, value interface{}) (result OfferEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -738,7 +738,7 @@ func NewOfferEntryExt(v int32, value interface{}) (result OfferEntryExt, err err
 //        Asset selling; // A
 //        Asset buying;  // B
 //        int64 amount;  // amount of A
-//
+//    
 //        /* price for this offer:
 //            price of A in terms of B
 //            price=AmountB/AmountA=priceNumerator/priceDenominator
@@ -746,7 +746,7 @@ func NewOfferEntryExt(v int32, value interface{}) (result OfferEntryExt, err err
 //        */
 //        Price price;
 //        uint32 flags; // see OfferEntryFlags
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -757,14 +757,14 @@ func NewOfferEntryExt(v int32, value interface{}) (result OfferEntryExt, err err
 //    };
 //
 type OfferEntry struct {
-  SellerId AccountId
-  OfferId Uint64
-  Selling Asset
-  Buying Asset
-  Amount Int64
-  Price Price
-  Flags Uint32
-  Ext OfferEntryExt
+  SellerId AccountId 
+  OfferId Uint64 
+  Selling Asset 
+  Buying Asset 
+  Amount Int64 
+  Price Price 
+  Flags Uint32 
+  Ext OfferEntryExt 
 }
 
 // DataEntryExt is an XDR NestedUnion defines as:
@@ -788,20 +788,20 @@ func (u DataEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of DataEntryExt
 func (u DataEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewDataEntryExt creates a new  DataEntryExt.
 func NewDataEntryExt(v int32, value interface{}) (result DataEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -812,7 +812,7 @@ func NewDataEntryExt(v int32, value interface{}) (result DataEntryExt, err error
 //        AccountID accountID; // account this data belongs to
 //        string64 dataName;
 //        DataValue dataValue;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -823,10 +823,10 @@ func NewDataEntryExt(v int32, value interface{}) (result DataEntryExt, err error
 //    };
 //
 type DataEntry struct {
-  AccountId AccountId
-  DataName String64
-  DataValue DataValue
-  Ext DataEntryExt
+  AccountId AccountId 
+  DataName String64 
+  DataValue DataValue 
+  Ext DataEntryExt 
 }
 
 // LedgerEntryData is an XDR NestedUnion defines as:
@@ -845,10 +845,10 @@ type DataEntry struct {
 //
 type LedgerEntryData struct{
   Type LedgerEntryType
-  Account *AccountEntry
-  TrustLine *TrustLineEntry
-  Offer *OfferEntry
-  Data *DataEntry
+  Account *AccountEntry 
+  TrustLine *TrustLineEntry 
+  Offer *OfferEntry 
+  Data *DataEntry 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -860,52 +860,52 @@ func (u LedgerEntryData) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerEntryData
 func (u LedgerEntryData) ArmForSwitch(sw int32) (string, bool) {
-  switch LedgerEntryType(sw) {
-  case LedgerEntryTypeAccount:
-    return "Account", true
-  case LedgerEntryTypeTrustline:
-    return "TrustLine", true
-  case LedgerEntryTypeOffer:
-    return "Offer", true
-  case LedgerEntryTypeData:
-    return "Data", true
-  }
-  return "-", false
+switch LedgerEntryType(sw) {
+    case LedgerEntryTypeAccount:
+      return "Account", true
+    case LedgerEntryTypeTrustline:
+      return "TrustLine", true
+    case LedgerEntryTypeOffer:
+      return "Offer", true
+    case LedgerEntryTypeData:
+      return "Data", true
+}
+return "-", false
 }
 
 // NewLedgerEntryData creates a new  LedgerEntryData.
 func NewLedgerEntryData(aType LedgerEntryType, value interface{}) (result LedgerEntryData, err error) {
   result.Type = aType
-  switch LedgerEntryType(aType) {
-  case LedgerEntryTypeAccount:
-    tv, ok := value.(AccountEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AccountEntry")
-      return
-    }
-    result.Account = &tv
-  case LedgerEntryTypeTrustline:
-    tv, ok := value.(TrustLineEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be TrustLineEntry")
-      return
-    }
-    result.TrustLine = &tv
-  case LedgerEntryTypeOffer:
-    tv, ok := value.(OfferEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be OfferEntry")
-      return
-    }
-    result.Offer = &tv
-  case LedgerEntryTypeData:
-    tv, ok := value.(DataEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be DataEntry")
-      return
-    }
-    result.Data = &tv
-  }
+switch LedgerEntryType(aType) {
+    case LedgerEntryTypeAccount:
+                  tv, ok := value.(AccountEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AccountEntry")
+              return
+            }
+            result.Account = &tv
+    case LedgerEntryTypeTrustline:
+                  tv, ok := value.(TrustLineEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be TrustLineEntry")
+              return
+            }
+            result.TrustLine = &tv
+    case LedgerEntryTypeOffer:
+                  tv, ok := value.(OfferEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be OfferEntry")
+              return
+            }
+            result.Offer = &tv
+    case LedgerEntryTypeData:
+                  tv, ok := value.(DataEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be DataEntry")
+              return
+            }
+            result.Data = &tv
+}
   return
 }
 // MustAccount retrieves the Account value from the union,
@@ -1026,20 +1026,20 @@ func (u LedgerEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerEntryExt
 func (u LedgerEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewLedgerEntryExt creates a new  LedgerEntryExt.
 func NewLedgerEntryExt(v int32, value interface{}) (result LedgerEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -1048,7 +1048,7 @@ func NewLedgerEntryExt(v int32, value interface{}) (result LedgerEntryExt, err e
 //   struct LedgerEntry
 //    {
 //        uint32 lastModifiedLedgerSeq; // ledger the LedgerEntry was last changed
-//
+//    
 //        union switch (LedgerEntryType type)
 //        {
 //        case ACCOUNT:
@@ -1061,7 +1061,7 @@ func NewLedgerEntryExt(v int32, value interface{}) (result LedgerEntryExt, err e
 //            DataEntry data;
 //        }
 //        data;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -1072,9 +1072,9 @@ func NewLedgerEntryExt(v int32, value interface{}) (result LedgerEntryExt, err e
 //    };
 //
 type LedgerEntry struct {
-  LastModifiedLedgerSeq Uint32
-  Data LedgerEntryData
-  Ext LedgerEntryExt
+  LastModifiedLedgerSeq Uint32 
+  Data LedgerEntryData 
+  Ext LedgerEntryExt 
 }
 
 // EnvelopeType is an XDR Enum defines as:
@@ -1141,20 +1141,20 @@ func (u StellarValueExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of StellarValueExt
 func (u StellarValueExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewStellarValueExt creates a new  StellarValueExt.
 func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -1164,14 +1164,14 @@ func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err
 //    {
 //        Hash txSetHash;   // transaction set to apply to previous ledger
 //        uint64 closeTime; // network close time
-//
+//    
 //        // upgrades to apply to the previous ledger (usually empty)
 //        // this is a vector of encoded 'LedgerUpgrade' so that nodes can drop
 //        // unknown steps during consensus if needed.
 //        // see notes below on 'LedgerUpgrade' for more detail
 //        // max size is dictated by number of upgrade types (+ room for future)
 //        UpgradeType upgrades<6>;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -1182,10 +1182,10 @@ func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err
 //    };
 //
 type StellarValue struct {
-  TxSetHash Hash
-  CloseTime Uint64
+  TxSetHash Hash 
+  CloseTime Uint64 
   Upgrades []UpgradeType `xdrmaxsize:"6"`
-  Ext StellarValueExt
+  Ext StellarValueExt 
 }
 
 // LedgerHeaderExt is an XDR NestedUnion defines as:
@@ -1209,20 +1209,20 @@ func (u LedgerHeaderExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerHeaderExt
 func (u LedgerHeaderExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewLedgerHeaderExt creates a new  LedgerHeaderExt.
 func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -1235,28 +1235,28 @@ func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err
 //        StellarValue scpValue;   // what consensus agreed to
 //        Hash txSetResultHash;    // the TransactionResultSet that led to this ledger
 //        Hash bucketListHash;     // hash of the ledger state
-//
+//    
 //        uint32 ledgerSeq; // sequence number of this ledger
-//
+//    
 //        int64 totalCoins; // total number of stroops in existence.
 //                          // 10,000,000 stroops in 1 XLM
-//
+//    
 //        int64 feePool;       // fees burned since last inflation run
 //        uint32 inflationSeq; // inflation sequence number
-//
+//    
 //        uint64 idPool; // last used global ID, used for generating objects
-//
+//    
 //        uint32 baseFee;     // base fee per operation in stroops
 //        uint32 baseReserve; // account base reserve in stroops
-//
+//    
 //        uint32 maxTxSetSize; // maximum size a transaction set can be
-//
+//    
 //        Hash skipList[4]; // hashes of ledgers in the past. allows you to jump back
 //                          // in time without walking the chain back ledger by ledger
 //                          // each slot contains the oldest ledger that is mod of
 //                          // either 50  5000  50000 or 500000 depending on index
 //                          // skipList[0] mod(50), skipList[1] mod(5000), etc
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -1267,21 +1267,21 @@ func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err
 //    };
 //
 type LedgerHeader struct {
-  LedgerVersion Uint32
-  PreviousLedgerHash Hash
-  ScpValue StellarValue
-  TxSetResultHash Hash
-  BucketListHash Hash
-  LedgerSeq Uint32
-  TotalCoins Int64
-  FeePool Int64
-  InflationSeq Uint32
-  IdPool Uint64
-  BaseFee Uint32
-  BaseReserve Uint32
-  MaxTxSetSize Uint32
-  SkipList [4]Hash
-  Ext LedgerHeaderExt
+  LedgerVersion Uint32 
+  PreviousLedgerHash Hash 
+  ScpValue StellarValue 
+  TxSetResultHash Hash 
+  BucketListHash Hash 
+  LedgerSeq Uint32 
+  TotalCoins Int64 
+  FeePool Int64 
+  InflationSeq Uint32 
+  IdPool Uint64 
+  BaseFee Uint32 
+  BaseReserve Uint32 
+  MaxTxSetSize Uint32 
+  SkipList [4]Hash 
+  Ext LedgerHeaderExt 
 }
 
 // LedgerUpgradeType is an XDR Enum defines as:
@@ -1336,10 +1336,10 @@ func (e LedgerUpgradeType) String() string {
 //
 type LedgerUpgrade struct{
   Type LedgerUpgradeType
-  NewLedgerVersion *Uint32
-  NewBaseFee *Uint32
-  NewMaxTxSetSize *Uint32
-  NewBaseReserve *Uint32
+  NewLedgerVersion *Uint32 
+  NewBaseFee *Uint32 
+  NewMaxTxSetSize *Uint32 
+  NewBaseReserve *Uint32 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -1351,52 +1351,52 @@ func (u LedgerUpgrade) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerUpgrade
 func (u LedgerUpgrade) ArmForSwitch(sw int32) (string, bool) {
-  switch LedgerUpgradeType(sw) {
-  case LedgerUpgradeTypeLedgerUpgradeVersion:
-    return "NewLedgerVersion", true
-  case LedgerUpgradeTypeLedgerUpgradeBaseFee:
-    return "NewBaseFee", true
-  case LedgerUpgradeTypeLedgerUpgradeMaxTxSetSize:
-    return "NewMaxTxSetSize", true
-  case LedgerUpgradeTypeLedgerUpgradeBaseReserve:
-    return "NewBaseReserve", true
-  }
-  return "-", false
+switch LedgerUpgradeType(sw) {
+    case LedgerUpgradeTypeLedgerUpgradeVersion:
+      return "NewLedgerVersion", true
+    case LedgerUpgradeTypeLedgerUpgradeBaseFee:
+      return "NewBaseFee", true
+    case LedgerUpgradeTypeLedgerUpgradeMaxTxSetSize:
+      return "NewMaxTxSetSize", true
+    case LedgerUpgradeTypeLedgerUpgradeBaseReserve:
+      return "NewBaseReserve", true
+}
+return "-", false
 }
 
 // NewLedgerUpgrade creates a new  LedgerUpgrade.
 func NewLedgerUpgrade(aType LedgerUpgradeType, value interface{}) (result LedgerUpgrade, err error) {
   result.Type = aType
-  switch LedgerUpgradeType(aType) {
-  case LedgerUpgradeTypeLedgerUpgradeVersion:
-    tv, ok := value.(Uint32)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint32")
-      return
-    }
-    result.NewLedgerVersion = &tv
-  case LedgerUpgradeTypeLedgerUpgradeBaseFee:
-    tv, ok := value.(Uint32)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint32")
-      return
-    }
-    result.NewBaseFee = &tv
-  case LedgerUpgradeTypeLedgerUpgradeMaxTxSetSize:
-    tv, ok := value.(Uint32)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint32")
-      return
-    }
-    result.NewMaxTxSetSize = &tv
-  case LedgerUpgradeTypeLedgerUpgradeBaseReserve:
-    tv, ok := value.(Uint32)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint32")
-      return
-    }
-    result.NewBaseReserve = &tv
-  }
+switch LedgerUpgradeType(aType) {
+    case LedgerUpgradeTypeLedgerUpgradeVersion:
+                  tv, ok := value.(Uint32)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint32")
+              return
+            }
+            result.NewLedgerVersion = &tv
+    case LedgerUpgradeTypeLedgerUpgradeBaseFee:
+                  tv, ok := value.(Uint32)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint32")
+              return
+            }
+            result.NewBaseFee = &tv
+    case LedgerUpgradeTypeLedgerUpgradeMaxTxSetSize:
+                  tv, ok := value.(Uint32)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint32")
+              return
+            }
+            result.NewMaxTxSetSize = &tv
+    case LedgerUpgradeTypeLedgerUpgradeBaseReserve:
+                  tv, ok := value.(Uint32)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint32")
+              return
+            }
+            result.NewBaseReserve = &tv
+}
   return
 }
 // MustNewLedgerVersion retrieves the NewLedgerVersion value from the union,
@@ -1504,7 +1504,7 @@ func (u LedgerUpgrade) GetNewBaseReserve() (result Uint32, ok bool) {
 //        }
 //
 type LedgerKeyAccount struct {
-  AccountId AccountId
+  AccountId AccountId 
 }
 
 // LedgerKeyTrustLine is an XDR NestedStruct defines as:
@@ -1516,8 +1516,8 @@ type LedgerKeyAccount struct {
 //        }
 //
 type LedgerKeyTrustLine struct {
-  AccountId AccountId
-  Asset Asset
+  AccountId AccountId 
+  Asset Asset 
 }
 
 // LedgerKeyOffer is an XDR NestedStruct defines as:
@@ -1529,8 +1529,8 @@ type LedgerKeyTrustLine struct {
 //        }
 //
 type LedgerKeyOffer struct {
-  SellerId AccountId
-  OfferId Uint64
+  SellerId AccountId 
+  OfferId Uint64 
 }
 
 // LedgerKeyData is an XDR NestedStruct defines as:
@@ -1542,8 +1542,8 @@ type LedgerKeyOffer struct {
 //        }
 //
 type LedgerKeyData struct {
-  AccountId AccountId
-  DataName String64
+  AccountId AccountId 
+  DataName String64 
 }
 
 // LedgerKey is an XDR Union defines as:
@@ -1555,21 +1555,21 @@ type LedgerKeyData struct {
 //        {
 //            AccountID accountID;
 //        } account;
-//
+//    
 //    case TRUSTLINE:
 //        struct
 //        {
 //            AccountID accountID;
 //            Asset asset;
 //        } trustLine;
-//
+//    
 //    case OFFER:
 //        struct
 //        {
 //            AccountID sellerID;
 //            uint64 offerID;
 //        } offer;
-//
+//    
 //    case DATA:
 //        struct
 //        {
@@ -1580,10 +1580,10 @@ type LedgerKeyData struct {
 //
 type LedgerKey struct{
   Type LedgerEntryType
-  Account *LedgerKeyAccount
-  TrustLine *LedgerKeyTrustLine
-  Offer *LedgerKeyOffer
-  Data *LedgerKeyData
+  Account *LedgerKeyAccount 
+  TrustLine *LedgerKeyTrustLine 
+  Offer *LedgerKeyOffer 
+  Data *LedgerKeyData 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -1595,52 +1595,52 @@ func (u LedgerKey) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerKey
 func (u LedgerKey) ArmForSwitch(sw int32) (string, bool) {
-  switch LedgerEntryType(sw) {
-  case LedgerEntryTypeAccount:
-    return "Account", true
-  case LedgerEntryTypeTrustline:
-    return "TrustLine", true
-  case LedgerEntryTypeOffer:
-    return "Offer", true
-  case LedgerEntryTypeData:
-    return "Data", true
-  }
-  return "-", false
+switch LedgerEntryType(sw) {
+    case LedgerEntryTypeAccount:
+      return "Account", true
+    case LedgerEntryTypeTrustline:
+      return "TrustLine", true
+    case LedgerEntryTypeOffer:
+      return "Offer", true
+    case LedgerEntryTypeData:
+      return "Data", true
+}
+return "-", false
 }
 
 // NewLedgerKey creates a new  LedgerKey.
 func NewLedgerKey(aType LedgerEntryType, value interface{}) (result LedgerKey, err error) {
   result.Type = aType
-  switch LedgerEntryType(aType) {
-  case LedgerEntryTypeAccount:
-    tv, ok := value.(LedgerKeyAccount)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKeyAccount")
-      return
-    }
-    result.Account = &tv
-  case LedgerEntryTypeTrustline:
-    tv, ok := value.(LedgerKeyTrustLine)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKeyTrustLine")
-      return
-    }
-    result.TrustLine = &tv
-  case LedgerEntryTypeOffer:
-    tv, ok := value.(LedgerKeyOffer)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKeyOffer")
-      return
-    }
-    result.Offer = &tv
-  case LedgerEntryTypeData:
-    tv, ok := value.(LedgerKeyData)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKeyData")
-      return
-    }
-    result.Data = &tv
-  }
+switch LedgerEntryType(aType) {
+    case LedgerEntryTypeAccount:
+                  tv, ok := value.(LedgerKeyAccount)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKeyAccount")
+              return
+            }
+            result.Account = &tv
+    case LedgerEntryTypeTrustline:
+                  tv, ok := value.(LedgerKeyTrustLine)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKeyTrustLine")
+              return
+            }
+            result.TrustLine = &tv
+    case LedgerEntryTypeOffer:
+                  tv, ok := value.(LedgerKeyOffer)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKeyOffer")
+              return
+            }
+            result.Offer = &tv
+    case LedgerEntryTypeData:
+                  tv, ok := value.(LedgerKeyData)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKeyData")
+              return
+            }
+            result.Data = &tv
+}
   return
 }
 // MustAccount retrieves the Account value from the union,
@@ -1776,15 +1776,15 @@ func (e BucketEntryType) String() string {
 //    {
 //    case LIVEENTRY:
 //        LedgerEntry liveEntry;
-//
+//    
 //    case DEADENTRY:
 //        LedgerKey deadEntry;
 //    };
 //
 type BucketEntry struct{
   Type BucketEntryType
-  LiveEntry *LedgerEntry
-  DeadEntry *LedgerKey
+  LiveEntry *LedgerEntry 
+  DeadEntry *LedgerKey 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -1796,34 +1796,34 @@ func (u BucketEntry) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of BucketEntry
 func (u BucketEntry) ArmForSwitch(sw int32) (string, bool) {
-  switch BucketEntryType(sw) {
-  case BucketEntryTypeLiveentry:
-    return "LiveEntry", true
-  case BucketEntryTypeDeadentry:
-    return "DeadEntry", true
-  }
-  return "-", false
+switch BucketEntryType(sw) {
+    case BucketEntryTypeLiveentry:
+      return "LiveEntry", true
+    case BucketEntryTypeDeadentry:
+      return "DeadEntry", true
+}
+return "-", false
 }
 
 // NewBucketEntry creates a new  BucketEntry.
 func NewBucketEntry(aType BucketEntryType, value interface{}) (result BucketEntry, err error) {
   result.Type = aType
-  switch BucketEntryType(aType) {
-  case BucketEntryTypeLiveentry:
-    tv, ok := value.(LedgerEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerEntry")
-      return
-    }
-    result.LiveEntry = &tv
-  case BucketEntryTypeDeadentry:
-    tv, ok := value.(LedgerKey)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKey")
-      return
-    }
-    result.DeadEntry = &tv
-  }
+switch BucketEntryType(aType) {
+    case BucketEntryTypeLiveentry:
+                  tv, ok := value.(LedgerEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerEntry")
+              return
+            }
+            result.LiveEntry = &tv
+    case BucketEntryTypeDeadentry:
+                  tv, ok := value.(LedgerKey)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKey")
+              return
+            }
+            result.DeadEntry = &tv
+}
   return
 }
 // MustLiveEntry retrieves the LiveEntry value from the union,
@@ -1884,8 +1884,8 @@ func (u BucketEntry) GetDeadEntry() (result LedgerKey, ok bool) {
 //    };
 //
 type TransactionSet struct {
-  PreviousLedgerHash Hash
-  Txs []TransactionEnvelope
+  PreviousLedgerHash Hash 
+  Txs []TransactionEnvelope 
 }
 
 // TransactionResultPair is an XDR Struct defines as:
@@ -1897,8 +1897,8 @@ type TransactionSet struct {
 //    };
 //
 type TransactionResultPair struct {
-  TransactionHash Hash
-  Result TransactionResult
+  TransactionHash Hash 
+  Result TransactionResult 
 }
 
 // TransactionResultSet is an XDR Struct defines as:
@@ -1909,7 +1909,7 @@ type TransactionResultPair struct {
 //    };
 //
 type TransactionResultSet struct {
-  Results []TransactionResultPair
+  Results []TransactionResultPair 
 }
 
 // TransactionHistoryEntryExt is an XDR NestedUnion defines as:
@@ -1933,20 +1933,20 @@ func (u TransactionHistoryEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionHistoryEntryExt
 func (u TransactionHistoryEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewTransactionHistoryEntryExt creates a new  TransactionHistoryEntryExt.
 func NewTransactionHistoryEntryExt(v int32, value interface{}) (result TransactionHistoryEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -1956,7 +1956,7 @@ func NewTransactionHistoryEntryExt(v int32, value interface{}) (result Transacti
 //    {
 //        uint32 ledgerSeq;
 //        TransactionSet txSet;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -1967,9 +1967,9 @@ func NewTransactionHistoryEntryExt(v int32, value interface{}) (result Transacti
 //    };
 //
 type TransactionHistoryEntry struct {
-  LedgerSeq Uint32
-  TxSet TransactionSet
-  Ext TransactionHistoryEntryExt
+  LedgerSeq Uint32 
+  TxSet TransactionSet 
+  Ext TransactionHistoryEntryExt 
 }
 
 // TransactionHistoryResultEntryExt is an XDR NestedUnion defines as:
@@ -1993,20 +1993,20 @@ func (u TransactionHistoryResultEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionHistoryResultEntryExt
 func (u TransactionHistoryResultEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewTransactionHistoryResultEntryExt creates a new  TransactionHistoryResultEntryExt.
 func NewTransactionHistoryResultEntryExt(v int32, value interface{}) (result TransactionHistoryResultEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -2016,7 +2016,7 @@ func NewTransactionHistoryResultEntryExt(v int32, value interface{}) (result Tra
 //    {
 //        uint32 ledgerSeq;
 //        TransactionResultSet txResultSet;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -2027,9 +2027,9 @@ func NewTransactionHistoryResultEntryExt(v int32, value interface{}) (result Tra
 //    };
 //
 type TransactionHistoryResultEntry struct {
-  LedgerSeq Uint32
-  TxResultSet TransactionResultSet
-  Ext TransactionHistoryResultEntryExt
+  LedgerSeq Uint32 
+  TxResultSet TransactionResultSet 
+  Ext TransactionHistoryResultEntryExt 
 }
 
 // LedgerHeaderHistoryEntryExt is an XDR NestedUnion defines as:
@@ -2053,20 +2053,20 @@ func (u LedgerHeaderHistoryEntryExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerHeaderHistoryEntryExt
 func (u LedgerHeaderHistoryEntryExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewLedgerHeaderHistoryEntryExt creates a new  LedgerHeaderHistoryEntryExt.
 func NewLedgerHeaderHistoryEntryExt(v int32, value interface{}) (result LedgerHeaderHistoryEntryExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -2076,7 +2076,7 @@ func NewLedgerHeaderHistoryEntryExt(v int32, value interface{}) (result LedgerHe
 //    {
 //        Hash hash;
 //        LedgerHeader header;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -2087,9 +2087,9 @@ func NewLedgerHeaderHistoryEntryExt(v int32, value interface{}) (result LedgerHe
 //    };
 //
 type LedgerHeaderHistoryEntry struct {
-  Hash Hash
-  Header LedgerHeader
-  Ext LedgerHeaderHistoryEntryExt
+  Hash Hash 
+  Header LedgerHeader 
+  Ext LedgerHeaderHistoryEntryExt 
 }
 
 // LedgerScpMessages is an XDR Struct defines as:
@@ -2101,8 +2101,8 @@ type LedgerHeaderHistoryEntry struct {
 //    };
 //
 type LedgerScpMessages struct {
-  LedgerSeq Uint32
-  Messages []ScpEnvelope
+  LedgerSeq Uint32 
+  Messages []ScpEnvelope 
 }
 
 // ScpHistoryEntryV0 is an XDR Struct defines as:
@@ -2114,8 +2114,8 @@ type LedgerScpMessages struct {
 //    };
 //
 type ScpHistoryEntryV0 struct {
-  QuorumSets []ScpQuorumSet
-  LedgerMessages LedgerScpMessages
+  QuorumSets []ScpQuorumSet 
+  LedgerMessages LedgerScpMessages 
 }
 
 // ScpHistoryEntry is an XDR Union defines as:
@@ -2128,7 +2128,7 @@ type ScpHistoryEntryV0 struct {
 //
 type ScpHistoryEntry struct{
   V int32
-  V0 *ScpHistoryEntryV0
+  V0 *ScpHistoryEntryV0 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -2140,25 +2140,25 @@ func (u ScpHistoryEntry) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ScpHistoryEntry
 func (u ScpHistoryEntry) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "V0", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "V0", true
+}
+return "-", false
 }
 
 // NewScpHistoryEntry creates a new  ScpHistoryEntry.
 func NewScpHistoryEntry(v int32, value interface{}) (result ScpHistoryEntry, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    tv, ok := value.(ScpHistoryEntryV0)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpHistoryEntryV0")
-      return
-    }
-    result.V0 = &tv
-  }
+switch int32(v) {
+    case 0:
+                  tv, ok := value.(ScpHistoryEntryV0)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpHistoryEntryV0")
+              return
+            }
+            result.V0 = &tv
+}
   return
 }
 // MustV0 retrieves the V0 value from the union,
@@ -2238,10 +2238,10 @@ func (e LedgerEntryChangeType) String() string {
 //
 type LedgerEntryChange struct{
   Type LedgerEntryChangeType
-  Created *LedgerEntry
-  Updated *LedgerEntry
-  Removed *LedgerKey
-  State *LedgerEntry
+  Created *LedgerEntry 
+  Updated *LedgerEntry 
+  Removed *LedgerKey 
+  State *LedgerEntry 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -2253,52 +2253,52 @@ func (u LedgerEntryChange) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of LedgerEntryChange
 func (u LedgerEntryChange) ArmForSwitch(sw int32) (string, bool) {
-  switch LedgerEntryChangeType(sw) {
-  case LedgerEntryChangeTypeLedgerEntryCreated:
-    return "Created", true
-  case LedgerEntryChangeTypeLedgerEntryUpdated:
-    return "Updated", true
-  case LedgerEntryChangeTypeLedgerEntryRemoved:
-    return "Removed", true
-  case LedgerEntryChangeTypeLedgerEntryState:
-    return "State", true
-  }
-  return "-", false
+switch LedgerEntryChangeType(sw) {
+    case LedgerEntryChangeTypeLedgerEntryCreated:
+      return "Created", true
+    case LedgerEntryChangeTypeLedgerEntryUpdated:
+      return "Updated", true
+    case LedgerEntryChangeTypeLedgerEntryRemoved:
+      return "Removed", true
+    case LedgerEntryChangeTypeLedgerEntryState:
+      return "State", true
+}
+return "-", false
 }
 
 // NewLedgerEntryChange creates a new  LedgerEntryChange.
 func NewLedgerEntryChange(aType LedgerEntryChangeType, value interface{}) (result LedgerEntryChange, err error) {
   result.Type = aType
-  switch LedgerEntryChangeType(aType) {
-  case LedgerEntryChangeTypeLedgerEntryCreated:
-    tv, ok := value.(LedgerEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerEntry")
-      return
-    }
-    result.Created = &tv
-  case LedgerEntryChangeTypeLedgerEntryUpdated:
-    tv, ok := value.(LedgerEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerEntry")
-      return
-    }
-    result.Updated = &tv
-  case LedgerEntryChangeTypeLedgerEntryRemoved:
-    tv, ok := value.(LedgerKey)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerKey")
-      return
-    }
-    result.Removed = &tv
-  case LedgerEntryChangeTypeLedgerEntryState:
-    tv, ok := value.(LedgerEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be LedgerEntry")
-      return
-    }
-    result.State = &tv
-  }
+switch LedgerEntryChangeType(aType) {
+    case LedgerEntryChangeTypeLedgerEntryCreated:
+                  tv, ok := value.(LedgerEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerEntry")
+              return
+            }
+            result.Created = &tv
+    case LedgerEntryChangeTypeLedgerEntryUpdated:
+                  tv, ok := value.(LedgerEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerEntry")
+              return
+            }
+            result.Updated = &tv
+    case LedgerEntryChangeTypeLedgerEntryRemoved:
+                  tv, ok := value.(LedgerKey)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerKey")
+              return
+            }
+            result.Removed = &tv
+    case LedgerEntryChangeTypeLedgerEntryState:
+                  tv, ok := value.(LedgerEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be LedgerEntry")
+              return
+            }
+            result.State = &tv
+}
   return
 }
 // MustCreated retrieves the Created value from the union,
@@ -2411,7 +2411,7 @@ type LedgerEntryChanges []LedgerEntryChange
 //    };
 //
 type OperationMeta struct {
-  Changes LedgerEntryChanges
+  Changes LedgerEntryChanges 
 }
 
 // TransactionMetaV1 is an XDR Struct defines as:
@@ -2423,8 +2423,8 @@ type OperationMeta struct {
 //    };
 //
 type TransactionMetaV1 struct {
-  TxChanges LedgerEntryChanges
-  Operations []OperationMeta
+  TxChanges LedgerEntryChanges 
+  Operations []OperationMeta 
 }
 
 // TransactionMeta is an XDR Union defines as:
@@ -2439,8 +2439,8 @@ type TransactionMetaV1 struct {
 //
 type TransactionMeta struct{
   V int32
-  Operations *[]OperationMeta
-  V1 *TransactionMetaV1
+  Operations *[]OperationMeta 
+  V1 *TransactionMetaV1 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -2452,34 +2452,34 @@ func (u TransactionMeta) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionMeta
 func (u TransactionMeta) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "Operations", true
-  case 1:
-    return "V1", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "Operations", true
+    case 1:
+      return "V1", true
+}
+return "-", false
 }
 
 // NewTransactionMeta creates a new  TransactionMeta.
 func NewTransactionMeta(v int32, value interface{}) (result TransactionMeta, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    tv, ok := value.([]OperationMeta)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be []OperationMeta")
-      return
-    }
-    result.Operations = &tv
-  case 1:
-    tv, ok := value.(TransactionMetaV1)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be TransactionMetaV1")
-      return
-    }
-    result.V1 = &tv
-  }
+switch int32(v) {
+    case 0:
+                  tv, ok := value.([]OperationMeta)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be []OperationMeta")
+              return
+            }
+            result.Operations = &tv
+    case 1:
+                  tv, ok := value.(TransactionMetaV1)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be TransactionMetaV1")
+              return
+            }
+            result.V1 = &tv
+}
   return
 }
 // MustOperations retrieves the Operations value from the union,
@@ -2579,7 +2579,7 @@ func (e ErrorCode) String() string {
 //    };
 //
 type Error struct {
-  Code ErrorCode
+  Code ErrorCode 
   Msg string `xdrmaxsize:"100"`
 }
 
@@ -2593,9 +2593,9 @@ type Error struct {
 //    };
 //
 type AuthCert struct {
-  Pubkey Curve25519Public
-  Expiration Uint64
-  Sig Signature
+  Pubkey Curve25519Public 
+  Expiration Uint64 
+  Sig Signature 
 }
 
 // Hello is an XDR Struct defines as:
@@ -2614,15 +2614,15 @@ type AuthCert struct {
 //    };
 //
 type Hello struct {
-  LedgerVersion Uint32
-  OverlayVersion Uint32
-  OverlayMinVersion Uint32
-  NetworkId Hash
+  LedgerVersion Uint32 
+  OverlayVersion Uint32 
+  OverlayMinVersion Uint32 
+  NetworkId Hash 
   VersionStr string `xdrmaxsize:"100"`
-  ListeningPort int32
-  PeerId NodeId
-  Cert AuthCert
-  Nonce Uint256
+  ListeningPort int32 
+  PeerId NodeId 
+  Cert AuthCert 
+  Nonce Uint256 
 }
 
 // Auth is an XDR Struct defines as:
@@ -2635,7 +2635,7 @@ type Hello struct {
 //    };
 //
 type Auth struct {
-  Unused int32
+  Unused int32 
 }
 
 // IpAddrType is an XDR Enum defines as:
@@ -2693,34 +2693,34 @@ func (u PeerAddressIp) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of PeerAddressIp
 func (u PeerAddressIp) ArmForSwitch(sw int32) (string, bool) {
-  switch IpAddrType(sw) {
-  case IpAddrTypeIPv4:
-    return "Ipv4", true
-  case IpAddrTypeIPv6:
-    return "Ipv6", true
-  }
-  return "-", false
+switch IpAddrType(sw) {
+    case IpAddrTypeIPv4:
+      return "Ipv4", true
+    case IpAddrTypeIPv6:
+      return "Ipv6", true
+}
+return "-", false
 }
 
 // NewPeerAddressIp creates a new  PeerAddressIp.
 func NewPeerAddressIp(aType IpAddrType, value interface{}) (result PeerAddressIp, err error) {
   result.Type = aType
-  switch IpAddrType(aType) {
-  case IpAddrTypeIPv4:
-    tv, ok := value.([4]byte)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be [4]byte")
-      return
-    }
-    result.Ipv4 = &tv
-  case IpAddrTypeIPv6:
-    tv, ok := value.([16]byte)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be [16]byte")
-      return
-    }
-    result.Ipv6 = &tv
-  }
+switch IpAddrType(aType) {
+    case IpAddrTypeIPv4:
+                  tv, ok := value.([4]byte)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be [4]byte")
+              return
+            }
+            result.Ipv4 = &tv
+    case IpAddrTypeIPv6:
+                  tv, ok := value.([16]byte)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be [16]byte")
+              return
+            }
+            result.Ipv6 = &tv
+}
   return
 }
 // MustIpv4 retrieves the Ipv4 value from the union,
@@ -2789,9 +2789,9 @@ func (u PeerAddressIp) GetIpv6() (result [16]byte, ok bool) {
 //    };
 //
 type PeerAddress struct {
-  Ip PeerAddressIp
-  Port Uint32
-  NumFailures Uint32
+  Ip PeerAddressIp 
+  Port Uint32 
+  NumFailures Uint32 
 }
 
 // MessageType is an XDR Enum defines as:
@@ -2801,21 +2801,21 @@ type PeerAddress struct {
 //        ERROR_MSG = 0,
 //        AUTH = 2,
 //        DONT_HAVE = 3,
-//
+//    
 //        GET_PEERS = 4, // gets a list of peers this guy knows about
 //        PEERS = 5,
-//
+//    
 //        GET_TX_SET = 6, // gets a particular txset by hash
 //        TX_SET = 7,
-//
+//    
 //        TRANSACTION = 8, // pass on a tx you have heard about
-//
+//    
 //        // SCP
 //        GET_SCP_QUORUMSET = 9,
 //        SCP_QUORUMSET = 10,
 //        SCP_MESSAGE = 11,
 //        GET_SCP_STATE = 12,
-//
+//    
 //        // new messages
 //        HELLO = 13
 //    };
@@ -2873,8 +2873,8 @@ func (e MessageType) String() string {
 //    };
 //
 type DontHave struct {
-  Type MessageType
-  ReqHash Uint256
+  Type MessageType 
+  ReqHash Uint256 
 }
 
 // StellarMessage is an XDR Union defines as:
@@ -2893,15 +2893,15 @@ type DontHave struct {
 //        void;
 //    case PEERS:
 //        PeerAddress peers<100>;
-//
+//    
 //    case GET_TX_SET:
 //        uint256 txSetHash;
 //    case TX_SET:
 //        TransactionSet txSet;
-//
+//    
 //    case TRANSACTION:
 //        TransactionEnvelope transaction;
-//
+//    
 //    // SCP
 //    case GET_SCP_QUORUMSET:
 //        uint256 qSetHash;
@@ -2915,18 +2915,18 @@ type DontHave struct {
 //
 type StellarMessage struct{
   Type MessageType
-  Error *Error
-  Hello *Hello
-  Auth *Auth
-  DontHave *DontHave
+  Error *Error 
+  Hello *Hello 
+  Auth *Auth 
+  DontHave *DontHave 
   Peers *[]PeerAddress `xdrmaxsize:"100"`
-  TxSetHash *Uint256
-  TxSet *TransactionSet
-  Transaction *TransactionEnvelope
-  QSetHash *Uint256
-  QSet *ScpQuorumSet
-  Envelope *ScpEnvelope
-  GetScpLedgerSeq *Uint32
+  TxSetHash *Uint256 
+  TxSet *TransactionSet 
+  Transaction *TransactionEnvelope 
+  QSetHash *Uint256 
+  QSet *ScpQuorumSet 
+  Envelope *ScpEnvelope 
+  GetScpLedgerSeq *Uint32 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -2938,128 +2938,128 @@ func (u StellarMessage) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of StellarMessage
 func (u StellarMessage) ArmForSwitch(sw int32) (string, bool) {
-  switch MessageType(sw) {
-  case MessageTypeErrorMsg:
-    return "Error", true
-  case MessageTypeHello:
-    return "Hello", true
-  case MessageTypeAuth:
-    return "Auth", true
-  case MessageTypeDontHave:
-    return "DontHave", true
-  case MessageTypeGetPeers:
-    return "", true
-  case MessageTypePeers:
-    return "Peers", true
-  case MessageTypeGetTxSet:
-    return "TxSetHash", true
-  case MessageTypeTxSet:
-    return "TxSet", true
-  case MessageTypeTransaction:
-    return "Transaction", true
-  case MessageTypeGetScpQuorumset:
-    return "QSetHash", true
-  case MessageTypeScpQuorumset:
-    return "QSet", true
-  case MessageTypeScpMessage:
-    return "Envelope", true
-  case MessageTypeGetScpState:
-    return "GetScpLedgerSeq", true
-  }
-  return "-", false
+switch MessageType(sw) {
+    case MessageTypeErrorMsg:
+      return "Error", true
+    case MessageTypeHello:
+      return "Hello", true
+    case MessageTypeAuth:
+      return "Auth", true
+    case MessageTypeDontHave:
+      return "DontHave", true
+    case MessageTypeGetPeers:
+      return "", true
+    case MessageTypePeers:
+      return "Peers", true
+    case MessageTypeGetTxSet:
+      return "TxSetHash", true
+    case MessageTypeTxSet:
+      return "TxSet", true
+    case MessageTypeTransaction:
+      return "Transaction", true
+    case MessageTypeGetScpQuorumset:
+      return "QSetHash", true
+    case MessageTypeScpQuorumset:
+      return "QSet", true
+    case MessageTypeScpMessage:
+      return "Envelope", true
+    case MessageTypeGetScpState:
+      return "GetScpLedgerSeq", true
+}
+return "-", false
 }
 
 // NewStellarMessage creates a new  StellarMessage.
 func NewStellarMessage(aType MessageType, value interface{}) (result StellarMessage, err error) {
   result.Type = aType
-  switch MessageType(aType) {
-  case MessageTypeErrorMsg:
-    tv, ok := value.(Error)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Error")
-      return
-    }
-    result.Error = &tv
-  case MessageTypeHello:
-    tv, ok := value.(Hello)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Hello")
-      return
-    }
-    result.Hello = &tv
-  case MessageTypeAuth:
-    tv, ok := value.(Auth)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Auth")
-      return
-    }
-    result.Auth = &tv
-  case MessageTypeDontHave:
-    tv, ok := value.(DontHave)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be DontHave")
-      return
-    }
-    result.DontHave = &tv
-  case MessageTypeGetPeers:
-    // void
-  case MessageTypePeers:
-    tv, ok := value.([]PeerAddress)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be []PeerAddress")
-      return
-    }
-    result.Peers = &tv
-  case MessageTypeGetTxSet:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.TxSetHash = &tv
-  case MessageTypeTxSet:
-    tv, ok := value.(TransactionSet)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be TransactionSet")
-      return
-    }
-    result.TxSet = &tv
-  case MessageTypeTransaction:
-    tv, ok := value.(TransactionEnvelope)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be TransactionEnvelope")
-      return
-    }
-    result.Transaction = &tv
-  case MessageTypeGetScpQuorumset:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.QSetHash = &tv
-  case MessageTypeScpQuorumset:
-    tv, ok := value.(ScpQuorumSet)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpQuorumSet")
-      return
-    }
-    result.QSet = &tv
-  case MessageTypeScpMessage:
-    tv, ok := value.(ScpEnvelope)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpEnvelope")
-      return
-    }
-    result.Envelope = &tv
-  case MessageTypeGetScpState:
-    tv, ok := value.(Uint32)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint32")
-      return
-    }
-    result.GetScpLedgerSeq = &tv
-  }
+switch MessageType(aType) {
+    case MessageTypeErrorMsg:
+                  tv, ok := value.(Error)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Error")
+              return
+            }
+            result.Error = &tv
+    case MessageTypeHello:
+                  tv, ok := value.(Hello)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Hello")
+              return
+            }
+            result.Hello = &tv
+    case MessageTypeAuth:
+                  tv, ok := value.(Auth)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Auth")
+              return
+            }
+            result.Auth = &tv
+    case MessageTypeDontHave:
+                  tv, ok := value.(DontHave)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be DontHave")
+              return
+            }
+            result.DontHave = &tv
+    case MessageTypeGetPeers:
+      // void
+    case MessageTypePeers:
+                  tv, ok := value.([]PeerAddress)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be []PeerAddress")
+              return
+            }
+            result.Peers = &tv
+    case MessageTypeGetTxSet:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.TxSetHash = &tv
+    case MessageTypeTxSet:
+                  tv, ok := value.(TransactionSet)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be TransactionSet")
+              return
+            }
+            result.TxSet = &tv
+    case MessageTypeTransaction:
+                  tv, ok := value.(TransactionEnvelope)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be TransactionEnvelope")
+              return
+            }
+            result.Transaction = &tv
+    case MessageTypeGetScpQuorumset:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.QSetHash = &tv
+    case MessageTypeScpQuorumset:
+                  tv, ok := value.(ScpQuorumSet)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpQuorumSet")
+              return
+            }
+            result.QSet = &tv
+    case MessageTypeScpMessage:
+                  tv, ok := value.(ScpEnvelope)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpEnvelope")
+              return
+            }
+            result.Envelope = &tv
+    case MessageTypeGetScpState:
+                  tv, ok := value.(Uint32)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint32")
+              return
+            }
+            result.GetScpLedgerSeq = &tv
+}
   return
 }
 // MustError retrieves the Error value from the union,
@@ -3361,9 +3361,9 @@ func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 //        }
 //
 type AuthenticatedMessageV0 struct {
-  Sequence Uint64
-  Message StellarMessage
-  Mac HmacSha256Mac
+  Sequence Uint64 
+  Message StellarMessage 
+  Mac HmacSha256Mac 
 }
 
 // AuthenticatedMessage is an XDR Union defines as:
@@ -3381,7 +3381,7 @@ type AuthenticatedMessageV0 struct {
 //
 type AuthenticatedMessage struct{
   V Uint32
-  V0 *AuthenticatedMessageV0
+  V0 *AuthenticatedMessageV0 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -3393,25 +3393,25 @@ func (u AuthenticatedMessage) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of AuthenticatedMessage
 func (u AuthenticatedMessage) ArmForSwitch(sw int32) (string, bool) {
-  switch Uint32(sw) {
-  case 0:
-    return "V0", true
-  }
-  return "-", false
+switch Uint32(sw) {
+    case 0:
+      return "V0", true
+}
+return "-", false
 }
 
 // NewAuthenticatedMessage creates a new  AuthenticatedMessage.
 func NewAuthenticatedMessage(v Uint32, value interface{}) (result AuthenticatedMessage, err error) {
   result.V = v
-  switch Uint32(v) {
-  case 0:
-    tv, ok := value.(AuthenticatedMessageV0)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AuthenticatedMessageV0")
-      return
-    }
-    result.V0 = &tv
-  }
+switch Uint32(v) {
+    case 0:
+                  tv, ok := value.(AuthenticatedMessageV0)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AuthenticatedMessageV0")
+              return
+            }
+            result.V0 = &tv
+}
   return
 }
 // MustV0 retrieves the V0 value from the union,
@@ -3448,8 +3448,8 @@ func (u AuthenticatedMessage) GetV0() (result AuthenticatedMessageV0, ok bool) {
 //    };
 //
 type DecoratedSignature struct {
-  Hint SignatureHint
-  Signature Signature
+  Hint SignatureHint 
+  Signature Signature 
 }
 
 // OperationType is an XDR Enum defines as:
@@ -3519,13 +3519,13 @@ func (e OperationType) String() string {
 //        AccountID destination; // account to create
 //        int64 startingBalance; // amount they end up with
 //        uint32 accountType; // role of the account
-//
+//    
 //    };
 //
 type CreateAccountOp struct {
-  Destination AccountId
-  StartingBalance Int64
-  AccountType Uint32
+  Destination AccountId 
+  StartingBalance Int64 
+  AccountType Uint32 
 }
 
 // PaymentOp is an XDR Struct defines as:
@@ -3538,9 +3538,9 @@ type CreateAccountOp struct {
 //    };
 //
 type PaymentOp struct {
-  Destination AccountId
-  Asset Asset
-  Amount Int64
+  Destination AccountId 
+  Asset Asset 
+  Amount Int64 
 }
 
 // PathPaymentOp is an XDR Struct defines as:
@@ -3551,20 +3551,20 @@ type PaymentOp struct {
 //        int64 sendMax;   // the maximum amount of sendAsset to
 //                         // send (excluding fees).
 //                         // The operation will fail if can't be met
-//
+//    
 //        AccountID destination; // recipient of the payment
 //        Asset destAsset;       // what they end up with
 //        int64 destAmount;      // amount they end up with
-//
+//    
 //        Asset path<5>; // additional hops it must go through to get there
 //    };
 //
 type PathPaymentOp struct {
-  SendAsset Asset
-  SendMax Int64
-  Destination AccountId
-  DestAsset Asset
-  DestAmount Int64
+  SendAsset Asset 
+  SendMax Int64 
+  Destination AccountId 
+  DestAsset Asset 
+  DestAmount Int64 
   Path []Asset `xdrmaxsize:"5"`
 }
 
@@ -3576,17 +3576,17 @@ type PathPaymentOp struct {
 //        Asset buying;
 //        int64 amount; // amount being sold. if set to 0, delete the offer
 //        Price price;  // price of thing being sold in terms of what you are buying
-//
+//    
 //        // 0=create a new offer, otherwise edit an existing offer
 //        uint64 offerID;
 //    };
 //
 type ManageOfferOp struct {
-  Selling Asset
-  Buying Asset
-  Amount Int64
-  Price Price
-  OfferId Uint64
+  Selling Asset 
+  Buying Asset 
+  Amount Int64 
+  Price Price 
+  OfferId Uint64 
 }
 
 // CreatePassiveOfferOp is an XDR Struct defines as:
@@ -3600,10 +3600,10 @@ type ManageOfferOp struct {
 //    };
 //
 type CreatePassiveOfferOp struct {
-  Selling Asset
-  Buying Asset
-  Amount Int64
-  Price Price
+  Selling Asset 
+  Buying Asset 
+  Amount Int64 
+  Price Price 
 }
 
 // SetOptionsOp is an XDR Struct defines as:
@@ -3611,33 +3611,33 @@ type CreatePassiveOfferOp struct {
 //   struct SetOptionsOp
 //    {
 //        AccountID* inflationDest; // sets the inflation destination
-//
+//    
 //        uint32* clearFlags; // which flags to clear
 //        uint32* setFlags;   // which flags to set
-//
+//    
 //        // account threshold manipulation
 //        uint32* masterWeight; // weight of the master account
 //        uint32* lowThreshold;
 //        uint32* medThreshold;
 //        uint32* highThreshold;
-//
+//    
 //        string32* homeDomain; // sets the home domain
-//
+//    
 //        // Add, update or remove a signer for the account
 //        // signer is deleted if the weight is 0
 //        Signer* signer;
 //    };
 //
 type SetOptionsOp struct {
-  InflationDest *AccountId
-  ClearFlags *Uint32
-  SetFlags *Uint32
-  MasterWeight *Uint32
-  LowThreshold *Uint32
-  MedThreshold *Uint32
-  HighThreshold *Uint32
-  HomeDomain *String32
-  Signer *Signer
+  InflationDest *AccountId 
+  ClearFlags *Uint32 
+  SetFlags *Uint32 
+  MasterWeight *Uint32 
+  LowThreshold *Uint32 
+  MedThreshold *Uint32 
+  HighThreshold *Uint32 
+  HomeDomain *String32 
+  Signer *Signer 
 }
 
 // ChangeTrustOp is an XDR Struct defines as:
@@ -3645,14 +3645,14 @@ type SetOptionsOp struct {
 //   struct ChangeTrustOp
 //    {
 //        Asset line;
-//
+//    
 //        // if limit is set to 0, deletes the trust line
 //        int64 limit;
 //    };
 //
 type ChangeTrustOp struct {
-  Line Asset
-  Limit Int64
+  Line Asset 
+  Limit Int64 
 }
 
 // AllowTrustOpAsset is an XDR NestedUnion defines as:
@@ -3662,10 +3662,10 @@ type ChangeTrustOp struct {
 //        // ASSET_TYPE_NATIVE is not allowed
 //        case ASSET_TYPE_CREDIT_ALPHANUM4:
 //            opaque assetCode4[4];
-//
+//    
 //        case ASSET_TYPE_CREDIT_ALPHANUM12:
 //            opaque assetCode12[12];
-//
+//    
 //            // add other asset types here in the future
 //        }
 //
@@ -3684,34 +3684,34 @@ func (u AllowTrustOpAsset) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of AllowTrustOpAsset
 func (u AllowTrustOpAsset) ArmForSwitch(sw int32) (string, bool) {
-  switch AssetType(sw) {
-  case AssetTypeAssetTypeCreditAlphanum4:
-    return "AssetCode4", true
-  case AssetTypeAssetTypeCreditAlphanum12:
-    return "AssetCode12", true
-  }
-  return "-", false
+switch AssetType(sw) {
+    case AssetTypeAssetTypeCreditAlphanum4:
+      return "AssetCode4", true
+    case AssetTypeAssetTypeCreditAlphanum12:
+      return "AssetCode12", true
+}
+return "-", false
 }
 
 // NewAllowTrustOpAsset creates a new  AllowTrustOpAsset.
 func NewAllowTrustOpAsset(aType AssetType, value interface{}) (result AllowTrustOpAsset, err error) {
   result.Type = aType
-  switch AssetType(aType) {
-  case AssetTypeAssetTypeCreditAlphanum4:
-    tv, ok := value.([4]byte)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be [4]byte")
-      return
-    }
-    result.AssetCode4 = &tv
-  case AssetTypeAssetTypeCreditAlphanum12:
-    tv, ok := value.([12]byte)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be [12]byte")
-      return
-    }
-    result.AssetCode12 = &tv
-  }
+switch AssetType(aType) {
+    case AssetTypeAssetTypeCreditAlphanum4:
+                  tv, ok := value.([4]byte)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be [4]byte")
+              return
+            }
+            result.AssetCode4 = &tv
+    case AssetTypeAssetTypeCreditAlphanum12:
+                  tv, ok := value.([12]byte)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be [12]byte")
+              return
+            }
+            result.AssetCode12 = &tv
+}
   return
 }
 // MustAssetCode4 retrieves the AssetCode4 value from the union,
@@ -3773,21 +3773,21 @@ func (u AllowTrustOpAsset) GetAssetCode12() (result [12]byte, ok bool) {
 //        // ASSET_TYPE_NATIVE is not allowed
 //        case ASSET_TYPE_CREDIT_ALPHANUM4:
 //            opaque assetCode4[4];
-//
+//    
 //        case ASSET_TYPE_CREDIT_ALPHANUM12:
 //            opaque assetCode12[12];
-//
+//    
 //            // add other asset types here in the future
 //        }
 //        asset;
-//
+//    
 //        bool authorize;
 //    };
 //
 type AllowTrustOp struct {
-  Trustor AccountId
-  Asset AllowTrustOpAsset
-  Authorize bool
+  Trustor AccountId 
+  Asset AllowTrustOpAsset 
+  Authorize bool 
 }
 
 // ManageDataOp is an XDR Struct defines as:
@@ -3799,8 +3799,8 @@ type AllowTrustOp struct {
 //    };
 //
 type ManageDataOp struct {
-  DataName String64
-  DataValue *DataValue
+  DataName String64 
+  DataValue *DataValue 
 }
 
 // BumpSequenceOp is an XDR Struct defines as:
@@ -3811,7 +3811,7 @@ type ManageDataOp struct {
 //    };
 //
 type BumpSequenceOp struct {
-  BumpTo SequenceNumber
+  BumpTo SequenceNumber 
 }
 
 // OperationBody is an XDR NestedUnion defines as:
@@ -3846,17 +3846,17 @@ type BumpSequenceOp struct {
 //
 type OperationBody struct{
   Type OperationType
-  CreateAccountOp *CreateAccountOp
-  PaymentOp *PaymentOp
-  PathPaymentOp *PathPaymentOp
-  ManageOfferOp *ManageOfferOp
-  CreatePassiveOfferOp *CreatePassiveOfferOp
-  SetOptionsOp *SetOptionsOp
-  ChangeTrustOp *ChangeTrustOp
-  AllowTrustOp *AllowTrustOp
-  Destination *AccountId
-  ManageDataOp *ManageDataOp
-  BumpSequenceOp *BumpSequenceOp
+  CreateAccountOp *CreateAccountOp 
+  PaymentOp *PaymentOp 
+  PathPaymentOp *PathPaymentOp 
+  ManageOfferOp *ManageOfferOp 
+  CreatePassiveOfferOp *CreatePassiveOfferOp 
+  SetOptionsOp *SetOptionsOp 
+  ChangeTrustOp *ChangeTrustOp 
+  AllowTrustOp *AllowTrustOp 
+  Destination *AccountId 
+  ManageDataOp *ManageDataOp 
+  BumpSequenceOp *BumpSequenceOp 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -3868,119 +3868,119 @@ func (u OperationBody) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of OperationBody
 func (u OperationBody) ArmForSwitch(sw int32) (string, bool) {
-  switch OperationType(sw) {
-  case OperationTypeCreateAccount:
-    return "CreateAccountOp", true
-  case OperationTypePayment:
-    return "PaymentOp", true
-  case OperationTypePathPayment:
-    return "PathPaymentOp", true
-  case OperationTypeManageOffer:
-    return "ManageOfferOp", true
-  case OperationTypeCreatePassiveOffer:
-    return "CreatePassiveOfferOp", true
-  case OperationTypeSetOptions:
-    return "SetOptionsOp", true
-  case OperationTypeChangeTrust:
-    return "ChangeTrustOp", true
-  case OperationTypeAllowTrust:
-    return "AllowTrustOp", true
-  case OperationTypeAccountMerge:
-    return "Destination", true
-  case OperationTypeInflation:
-    return "", true
-  case OperationTypeManageData:
-    return "ManageDataOp", true
-  case OperationTypeBumpSequence:
-    return "BumpSequenceOp", true
-  }
-  return "-", false
+switch OperationType(sw) {
+    case OperationTypeCreateAccount:
+      return "CreateAccountOp", true
+    case OperationTypePayment:
+      return "PaymentOp", true
+    case OperationTypePathPayment:
+      return "PathPaymentOp", true
+    case OperationTypeManageOffer:
+      return "ManageOfferOp", true
+    case OperationTypeCreatePassiveOffer:
+      return "CreatePassiveOfferOp", true
+    case OperationTypeSetOptions:
+      return "SetOptionsOp", true
+    case OperationTypeChangeTrust:
+      return "ChangeTrustOp", true
+    case OperationTypeAllowTrust:
+      return "AllowTrustOp", true
+    case OperationTypeAccountMerge:
+      return "Destination", true
+    case OperationTypeInflation:
+      return "", true
+    case OperationTypeManageData:
+      return "ManageDataOp", true
+    case OperationTypeBumpSequence:
+      return "BumpSequenceOp", true
+}
+return "-", false
 }
 
 // NewOperationBody creates a new  OperationBody.
 func NewOperationBody(aType OperationType, value interface{}) (result OperationBody, err error) {
   result.Type = aType
-  switch OperationType(aType) {
-  case OperationTypeCreateAccount:
-    tv, ok := value.(CreateAccountOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be CreateAccountOp")
-      return
-    }
-    result.CreateAccountOp = &tv
-  case OperationTypePayment:
-    tv, ok := value.(PaymentOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be PaymentOp")
-      return
-    }
-    result.PaymentOp = &tv
-  case OperationTypePathPayment:
-    tv, ok := value.(PathPaymentOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be PathPaymentOp")
-      return
-    }
-    result.PathPaymentOp = &tv
-  case OperationTypeManageOffer:
-    tv, ok := value.(ManageOfferOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageOfferOp")
-      return
-    }
-    result.ManageOfferOp = &tv
-  case OperationTypeCreatePassiveOffer:
-    tv, ok := value.(CreatePassiveOfferOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be CreatePassiveOfferOp")
-      return
-    }
-    result.CreatePassiveOfferOp = &tv
-  case OperationTypeSetOptions:
-    tv, ok := value.(SetOptionsOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be SetOptionsOp")
-      return
-    }
-    result.SetOptionsOp = &tv
-  case OperationTypeChangeTrust:
-    tv, ok := value.(ChangeTrustOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ChangeTrustOp")
-      return
-    }
-    result.ChangeTrustOp = &tv
-  case OperationTypeAllowTrust:
-    tv, ok := value.(AllowTrustOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AllowTrustOp")
-      return
-    }
-    result.AllowTrustOp = &tv
-  case OperationTypeAccountMerge:
-    tv, ok := value.(AccountId)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AccountId")
-      return
-    }
-    result.Destination = &tv
-  case OperationTypeInflation:
-    // void
-  case OperationTypeManageData:
-    tv, ok := value.(ManageDataOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageDataOp")
-      return
-    }
-    result.ManageDataOp = &tv
-  case OperationTypeBumpSequence:
-    tv, ok := value.(BumpSequenceOp)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be BumpSequenceOp")
-      return
-    }
-    result.BumpSequenceOp = &tv
-  }
+switch OperationType(aType) {
+    case OperationTypeCreateAccount:
+                  tv, ok := value.(CreateAccountOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be CreateAccountOp")
+              return
+            }
+            result.CreateAccountOp = &tv
+    case OperationTypePayment:
+                  tv, ok := value.(PaymentOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be PaymentOp")
+              return
+            }
+            result.PaymentOp = &tv
+    case OperationTypePathPayment:
+                  tv, ok := value.(PathPaymentOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be PathPaymentOp")
+              return
+            }
+            result.PathPaymentOp = &tv
+    case OperationTypeManageOffer:
+                  tv, ok := value.(ManageOfferOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageOfferOp")
+              return
+            }
+            result.ManageOfferOp = &tv
+    case OperationTypeCreatePassiveOffer:
+                  tv, ok := value.(CreatePassiveOfferOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be CreatePassiveOfferOp")
+              return
+            }
+            result.CreatePassiveOfferOp = &tv
+    case OperationTypeSetOptions:
+                  tv, ok := value.(SetOptionsOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be SetOptionsOp")
+              return
+            }
+            result.SetOptionsOp = &tv
+    case OperationTypeChangeTrust:
+                  tv, ok := value.(ChangeTrustOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ChangeTrustOp")
+              return
+            }
+            result.ChangeTrustOp = &tv
+    case OperationTypeAllowTrust:
+                  tv, ok := value.(AllowTrustOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AllowTrustOp")
+              return
+            }
+            result.AllowTrustOp = &tv
+    case OperationTypeAccountMerge:
+                  tv, ok := value.(AccountId)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AccountId")
+              return
+            }
+            result.Destination = &tv
+    case OperationTypeInflation:
+      // void
+    case OperationTypeManageData:
+                  tv, ok := value.(ManageDataOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageDataOp")
+              return
+            }
+            result.ManageDataOp = &tv
+    case OperationTypeBumpSequence:
+                  tv, ok := value.(BumpSequenceOp)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be BumpSequenceOp")
+              return
+            }
+            result.BumpSequenceOp = &tv
+}
   return
 }
 // MustCreateAccountOp retrieves the CreateAccountOp value from the union,
@@ -4256,7 +4256,7 @@ func (u OperationBody) GetBumpSequenceOp() (result BumpSequenceOp, ok bool) {
 //        // if not set, the runtime defaults to "sourceAccount" specified at
 //        // the transaction level
 //        AccountID* sourceAccount;
-//
+//    
 //        union switch (OperationType type)
 //        {
 //        case CREATE_ACCOUNT:
@@ -4288,8 +4288,8 @@ func (u OperationBody) GetBumpSequenceOp() (result BumpSequenceOp, ok bool) {
 //    };
 //
 type Operation struct {
-  SourceAccount *AccountId
-  Body OperationBody
+  SourceAccount *AccountId 
+  Body OperationBody 
 }
 
 // MemoType is an XDR Enum defines as:
@@ -4350,9 +4350,9 @@ func (e MemoType) String() string {
 type Memo struct{
   Type MemoType
   Text *string `xdrmaxsize:"28"`
-  Id *Uint64
-  Hash *Hash
-  RetHash *Hash
+  Id *Uint64 
+  Hash *Hash 
+  RetHash *Hash 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -4364,56 +4364,56 @@ func (u Memo) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of Memo
 func (u Memo) ArmForSwitch(sw int32) (string, bool) {
-  switch MemoType(sw) {
-  case MemoTypeMemoNone:
-    return "", true
-  case MemoTypeMemoText:
-    return "Text", true
-  case MemoTypeMemoId:
-    return "Id", true
-  case MemoTypeMemoHash:
-    return "Hash", true
-  case MemoTypeMemoReturn:
-    return "RetHash", true
-  }
-  return "-", false
+switch MemoType(sw) {
+    case MemoTypeMemoNone:
+      return "", true
+    case MemoTypeMemoText:
+      return "Text", true
+    case MemoTypeMemoId:
+      return "Id", true
+    case MemoTypeMemoHash:
+      return "Hash", true
+    case MemoTypeMemoReturn:
+      return "RetHash", true
+}
+return "-", false
 }
 
 // NewMemo creates a new  Memo.
 func NewMemo(aType MemoType, value interface{}) (result Memo, err error) {
   result.Type = aType
-  switch MemoType(aType) {
-  case MemoTypeMemoNone:
-    // void
-  case MemoTypeMemoText:
-    tv, ok := value.(string)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be string")
-      return
-    }
-    result.Text = &tv
-  case MemoTypeMemoId:
-    tv, ok := value.(Uint64)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint64")
-      return
-    }
-    result.Id = &tv
-  case MemoTypeMemoHash:
-    tv, ok := value.(Hash)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Hash")
-      return
-    }
-    result.Hash = &tv
-  case MemoTypeMemoReturn:
-    tv, ok := value.(Hash)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Hash")
-      return
-    }
-    result.RetHash = &tv
-  }
+switch MemoType(aType) {
+    case MemoTypeMemoNone:
+      // void
+    case MemoTypeMemoText:
+                  tv, ok := value.(string)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be string")
+              return
+            }
+            result.Text = &tv
+    case MemoTypeMemoId:
+                  tv, ok := value.(Uint64)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint64")
+              return
+            }
+            result.Id = &tv
+    case MemoTypeMemoHash:
+                  tv, ok := value.(Hash)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Hash")
+              return
+            }
+            result.Hash = &tv
+    case MemoTypeMemoReturn:
+                  tv, ok := value.(Hash)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Hash")
+              return
+            }
+            result.RetHash = &tv
+}
   return
 }
 // MustText retrieves the Text value from the union,
@@ -4522,8 +4522,8 @@ func (u Memo) GetRetHash() (result Hash, ok bool) {
 //    };
 //
 type TimeBounds struct {
-  MinTime Uint64
-  MaxTime Uint64
+  MinTime Uint64 
+  MaxTime Uint64 
 }
 
 // TransactionExt is an XDR NestedUnion defines as:
@@ -4547,20 +4547,20 @@ func (u TransactionExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionExt
 func (u TransactionExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewTransactionExt creates a new  TransactionExt.
 func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -4570,20 +4570,23 @@ func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err e
 //    {
 //        // account used to run the transaction
 //        AccountID sourceAccount;
-//
+//    
+//        // account type of transcaction source
+//        uint32 accountType;
+//    
 //        // the fee the sourceAccount will pay
 //        uint32 fee;
-//
+//    
 //        // sequence number to consume in the account
 //        SequenceNumber seqNum;
-//
+//    
 //        // validity range (inclusive) for the last ledger close time
 //        TimeBounds* timeBounds;
-//
+//    
 //        Memo memo;
-//
+//    
 //        Operation operations<100>;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -4594,13 +4597,14 @@ func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err e
 //    };
 //
 type Transaction struct {
-  SourceAccount AccountId
-  Fee Uint32
-  SeqNum SequenceNumber
-  TimeBounds *TimeBounds
-  Memo Memo
+  SourceAccount AccountId 
+  AccountType Uint32 
+  Fee Uint32 
+  SeqNum SequenceNumber 
+  TimeBounds *TimeBounds 
+  Memo Memo 
   Operations []Operation `xdrmaxsize:"100"`
-  Ext TransactionExt
+  Ext TransactionExt 
 }
 
 // TransactionSignaturePayloadTaggedTransaction is an XDR NestedUnion defines as:
@@ -4614,7 +4618,7 @@ type Transaction struct {
 //
 type TransactionSignaturePayloadTaggedTransaction struct{
   Type EnvelopeType
-  Tx *Transaction
+  Tx *Transaction 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -4626,25 +4630,25 @@ func (u TransactionSignaturePayloadTaggedTransaction) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionSignaturePayloadTaggedTransaction
 func (u TransactionSignaturePayloadTaggedTransaction) ArmForSwitch(sw int32) (string, bool) {
-  switch EnvelopeType(sw) {
-  case EnvelopeTypeEnvelopeTypeTx:
-    return "Tx", true
-  }
-  return "-", false
+switch EnvelopeType(sw) {
+    case EnvelopeTypeEnvelopeTypeTx:
+      return "Tx", true
+}
+return "-", false
 }
 
 // NewTransactionSignaturePayloadTaggedTransaction creates a new  TransactionSignaturePayloadTaggedTransaction.
 func NewTransactionSignaturePayloadTaggedTransaction(aType EnvelopeType, value interface{}) (result TransactionSignaturePayloadTaggedTransaction, err error) {
   result.Type = aType
-  switch EnvelopeType(aType) {
-  case EnvelopeTypeEnvelopeTypeTx:
-    tv, ok := value.(Transaction)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Transaction")
-      return
-    }
-    result.Tx = &tv
-  }
+switch EnvelopeType(aType) {
+    case EnvelopeTypeEnvelopeTypeTx:
+                  tv, ok := value.(Transaction)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Transaction")
+              return
+            }
+            result.Tx = &tv
+}
   return
 }
 // MustTx retrieves the Tx value from the union,
@@ -4687,8 +4691,8 @@ func (u TransactionSignaturePayloadTaggedTransaction) GetTx() (result Transactio
 //    };
 //
 type TransactionSignaturePayload struct {
-  NetworkId Hash
-  TaggedTransaction TransactionSignaturePayloadTaggedTransaction
+  NetworkId Hash 
+  TaggedTransaction TransactionSignaturePayloadTaggedTransaction 
 }
 
 // TransactionEnvelope is an XDR Struct defines as:
@@ -4702,7 +4706,7 @@ type TransactionSignaturePayload struct {
 //    };
 //
 type TransactionEnvelope struct {
-  Tx Transaction
+  Tx Transaction 
   Signatures []DecoratedSignature `xdrmaxsize:"20"`
 }
 
@@ -4713,23 +4717,23 @@ type TransactionEnvelope struct {
 //        // emitted to identify the offer
 //        AccountID sellerID; // Account that owns the offer
 //        uint64 offerID;
-//
+//    
 //        // amount and asset taken from the owner
 //        Asset assetSold;
 //        int64 amountSold;
-//
+//    
 //        // amount and asset sent to the owner
 //        Asset assetBought;
 //        int64 amountBought;
 //    };
 //
 type ClaimOfferAtom struct {
-  SellerId AccountId
-  OfferId Uint64
-  AssetSold Asset
-  AmountSold Int64
-  AssetBought Asset
-  AmountBought Int64
+  SellerId AccountId 
+  OfferId Uint64 
+  AssetSold Asset 
+  AmountSold Int64 
+  AssetBought Asset 
+  AmountBought Int64 
 }
 
 // CreateAccountResultCode is an XDR Enum defines as:
@@ -4738,13 +4742,15 @@ type ClaimOfferAtom struct {
 //    {
 //        // codes considered as "success" for the operation
 //        CREATE_ACCOUNT_SUCCESS = 0, // account was created
-//
+//    
 //        // codes considered as "failure" for the operation
 //        CREATE_ACCOUNT_MALFORMED = -1,   // invalid destination
 //        CREATE_ACCOUNT_UNDERFUNDED = -2, // not enough funds in source account
 //        CREATE_ACCOUNT_LOW_RESERVE =
 //            -3, // would create an account below the min reserve
-//        CREATE_ACCOUNT_ALREADY_EXIST = -4 // account already exists
+//        CREATE_ACCOUNT_ALREADY_EXIST = -4, // account already exists
+//    
+//        CREATE_ACCOUNT_UNDERAUTHORIZED = -5 // source account doesnt have enought rights to create this type of account
 //    };
 //
 type CreateAccountResultCode int32
@@ -4754,6 +4760,7 @@ const (
   CreateAccountResultCodeCreateAccountUnderfunded CreateAccountResultCode = -2
   CreateAccountResultCodeCreateAccountLowReserve CreateAccountResultCode = -3
   CreateAccountResultCodeCreateAccountAlreadyExist CreateAccountResultCode = -4
+  CreateAccountResultCodeCreateAccountUnderauthorized CreateAccountResultCode = -5
 )
 var createAccountResultCodeMap = map[int32]string{
   0: "CreateAccountResultCodeCreateAccountSuccess",
@@ -4761,6 +4768,7 @@ var createAccountResultCodeMap = map[int32]string{
   -2: "CreateAccountResultCodeCreateAccountUnderfunded",
   -3: "CreateAccountResultCodeCreateAccountLowReserve",
   -4: "CreateAccountResultCodeCreateAccountAlreadyExist",
+  -5: "CreateAccountResultCodeCreateAccountUnderauthorized",
 }
 
 // ValidEnum validates a proposed value for this enum.  Implements
@@ -4798,23 +4806,23 @@ func (u CreateAccountResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of CreateAccountResult
 func (u CreateAccountResult) ArmForSwitch(sw int32) (string, bool) {
-  switch CreateAccountResultCode(sw) {
-  case CreateAccountResultCodeCreateAccountSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch CreateAccountResultCode(sw) {
+    case CreateAccountResultCodeCreateAccountSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewCreateAccountResult creates a new  CreateAccountResult.
 func NewCreateAccountResult(code CreateAccountResultCode, value interface{}) (result CreateAccountResult, err error) {
   result.Code = code
-  switch CreateAccountResultCode(code) {
-  case CreateAccountResultCodeCreateAccountSuccess:
-    // void
-  default:
-    // void
-  }
+switch CreateAccountResultCode(code) {
+    case CreateAccountResultCodeCreateAccountSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -4824,7 +4832,7 @@ func NewCreateAccountResult(code CreateAccountResultCode, value interface{}) (re
 //    {
 //        // codes considered as "success" for the operation
 //        PAYMENT_SUCCESS = 0, // payment successfuly completed
-//
+//    
 //        // codes considered as "failure" for the operation
 //        PAYMENT_MALFORMED = -1,          // bad input
 //        PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
@@ -4898,23 +4906,23 @@ func (u PaymentResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of PaymentResult
 func (u PaymentResult) ArmForSwitch(sw int32) (string, bool) {
-  switch PaymentResultCode(sw) {
-  case PaymentResultCodePaymentSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch PaymentResultCode(sw) {
+    case PaymentResultCodePaymentSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewPaymentResult creates a new  PaymentResult.
 func NewPaymentResult(code PaymentResultCode, value interface{}) (result PaymentResult, err error) {
   result.Code = code
-  switch PaymentResultCode(code) {
-  case PaymentResultCodePaymentSuccess:
-    // void
-  default:
-    // void
-  }
+switch PaymentResultCode(code) {
+    case PaymentResultCodePaymentSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -4924,7 +4932,7 @@ func NewPaymentResult(code PaymentResultCode, value interface{}) (result Payment
 //    {
 //        // codes considered as "success" for the operation
 //        PATH_PAYMENT_SUCCESS = 0, // success
-//
+//    
 //        // codes considered as "failure" for the operation
 //        PATH_PAYMENT_MALFORMED = -1,          // bad input
 //        PATH_PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
@@ -4994,9 +5002,9 @@ func (e PathPaymentResultCode) String() string {
 //    };
 //
 type SimplePaymentResult struct {
-  Destination AccountId
-  Asset Asset
-  Amount Int64
+  Destination AccountId 
+  Asset Asset 
+  Amount Int64 
 }
 
 // PathPaymentResultSuccess is an XDR NestedStruct defines as:
@@ -5008,8 +5016,8 @@ type SimplePaymentResult struct {
 //        }
 //
 type PathPaymentResultSuccess struct {
-  Offers []ClaimOfferAtom
-  Last SimplePaymentResult
+  Offers []ClaimOfferAtom 
+  Last SimplePaymentResult 
 }
 
 // PathPaymentResult is an XDR Union defines as:
@@ -5030,8 +5038,8 @@ type PathPaymentResultSuccess struct {
 //
 type PathPaymentResult struct{
   Code PathPaymentResultCode
-  Success *PathPaymentResultSuccess
-  NoIssuer *Asset
+  Success *PathPaymentResultSuccess 
+  NoIssuer *Asset 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5043,37 +5051,37 @@ func (u PathPaymentResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of PathPaymentResult
 func (u PathPaymentResult) ArmForSwitch(sw int32) (string, bool) {
-  switch PathPaymentResultCode(sw) {
-  case PathPaymentResultCodePathPaymentSuccess:
-    return "Success", true
-  case PathPaymentResultCodePathPaymentNoIssuer:
-    return "NoIssuer", true
-  default:
-    return "", true
-  }
+switch PathPaymentResultCode(sw) {
+    case PathPaymentResultCodePathPaymentSuccess:
+      return "Success", true
+    case PathPaymentResultCodePathPaymentNoIssuer:
+      return "NoIssuer", true
+    default:
+      return "", true
+}
 }
 
 // NewPathPaymentResult creates a new  PathPaymentResult.
 func NewPathPaymentResult(code PathPaymentResultCode, value interface{}) (result PathPaymentResult, err error) {
   result.Code = code
-  switch PathPaymentResultCode(code) {
-  case PathPaymentResultCodePathPaymentSuccess:
-    tv, ok := value.(PathPaymentResultSuccess)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be PathPaymentResultSuccess")
-      return
-    }
-    result.Success = &tv
-  case PathPaymentResultCodePathPaymentNoIssuer:
-    tv, ok := value.(Asset)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Asset")
-      return
-    }
-    result.NoIssuer = &tv
-  default:
-    // void
-  }
+switch PathPaymentResultCode(code) {
+    case PathPaymentResultCodePathPaymentSuccess:
+                  tv, ok := value.(PathPaymentResultSuccess)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be PathPaymentResultSuccess")
+              return
+            }
+            result.Success = &tv
+    case PathPaymentResultCodePathPaymentNoIssuer:
+                  tv, ok := value.(Asset)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Asset")
+              return
+            }
+            result.NoIssuer = &tv
+    default:
+      // void
+}
   return
 }
 // MustSuccess retrieves the Success value from the union,
@@ -5131,7 +5139,7 @@ func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
 //    {
 //        // codes considered as "success" for the operation
 //        MANAGE_OFFER_SUCCESS = 0,
-//
+//    
 //        // codes considered as "failure" for the operation
 //        MANAGE_OFFER_MALFORMED = -1,     // generated offer would be invalid
 //        MANAGE_OFFER_SELL_NO_TRUST = -2, // no trust line for what we're selling
@@ -5143,10 +5151,10 @@ func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
 //        MANAGE_OFFER_CROSS_SELF = -8,     // would cross an offer from the same user
 //        MANAGE_OFFER_SELL_NO_ISSUER = -9, // no issuer for what we're selling
 //        MANAGE_OFFER_BUY_NO_ISSUER = -10, // no issuer for what we're buying
-//
+//    
 //        // update errors
 //        MANAGE_OFFER_NOT_FOUND = -11, // offerID does not match an existing offer
-//
+//    
 //        MANAGE_OFFER_LOW_RESERVE = -12 // not enough funds to create a new Offer
 //    };
 //
@@ -5240,7 +5248,7 @@ func (e ManageOfferEffect) String() string {
 //
 type ManageOfferSuccessResultOffer struct{
   Effect ManageOfferEffect
-  Offer *OfferEntry
+  Offer *OfferEntry 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5252,37 +5260,37 @@ func (u ManageOfferSuccessResultOffer) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ManageOfferSuccessResultOffer
 func (u ManageOfferSuccessResultOffer) ArmForSwitch(sw int32) (string, bool) {
-  switch ManageOfferEffect(sw) {
-  case ManageOfferEffectManageOfferCreated:
-    return "Offer", true
-  case ManageOfferEffectManageOfferUpdated:
-    return "Offer", true
-  default:
-    return "", true
-  }
+switch ManageOfferEffect(sw) {
+    case ManageOfferEffectManageOfferCreated:
+      return "Offer", true
+    case ManageOfferEffectManageOfferUpdated:
+      return "Offer", true
+    default:
+      return "", true
+}
 }
 
 // NewManageOfferSuccessResultOffer creates a new  ManageOfferSuccessResultOffer.
 func NewManageOfferSuccessResultOffer(effect ManageOfferEffect, value interface{}) (result ManageOfferSuccessResultOffer, err error) {
   result.Effect = effect
-  switch ManageOfferEffect(effect) {
-  case ManageOfferEffectManageOfferCreated:
-    tv, ok := value.(OfferEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be OfferEntry")
-      return
-    }
-    result.Offer = &tv
-  case ManageOfferEffectManageOfferUpdated:
-    tv, ok := value.(OfferEntry)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be OfferEntry")
-      return
-    }
-    result.Offer = &tv
-  default:
-    // void
-  }
+switch ManageOfferEffect(effect) {
+    case ManageOfferEffectManageOfferCreated:
+                  tv, ok := value.(OfferEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be OfferEntry")
+              return
+            }
+            result.Offer = &tv
+    case ManageOfferEffectManageOfferUpdated:
+                  tv, ok := value.(OfferEntry)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be OfferEntry")
+              return
+            }
+            result.Offer = &tv
+    default:
+      // void
+}
   return
 }
 // MustOffer retrieves the Offer value from the union,
@@ -5316,7 +5324,7 @@ func (u ManageOfferSuccessResultOffer) GetOffer() (result OfferEntry, ok bool) {
 //    {
 //        // offers that got claimed while creating this offer
 //        ClaimOfferAtom offersClaimed<>;
-//
+//    
 //        union switch (ManageOfferEffect effect)
 //        {
 //        case MANAGE_OFFER_CREATED:
@@ -5329,8 +5337,8 @@ func (u ManageOfferSuccessResultOffer) GetOffer() (result OfferEntry, ok bool) {
 //    };
 //
 type ManageOfferSuccessResult struct {
-  OffersClaimed []ClaimOfferAtom
-  Offer ManageOfferSuccessResultOffer
+  OffersClaimed []ClaimOfferAtom 
+  Offer ManageOfferSuccessResultOffer 
 }
 
 // ManageOfferResult is an XDR Union defines as:
@@ -5345,7 +5353,7 @@ type ManageOfferSuccessResult struct {
 //
 type ManageOfferResult struct{
   Code ManageOfferResultCode
-  Success *ManageOfferSuccessResult
+  Success *ManageOfferSuccessResult 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5357,28 +5365,28 @@ func (u ManageOfferResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ManageOfferResult
 func (u ManageOfferResult) ArmForSwitch(sw int32) (string, bool) {
-  switch ManageOfferResultCode(sw) {
-  case ManageOfferResultCodeManageOfferSuccess:
-    return "Success", true
-  default:
-    return "", true
-  }
+switch ManageOfferResultCode(sw) {
+    case ManageOfferResultCodeManageOfferSuccess:
+      return "Success", true
+    default:
+      return "", true
+}
 }
 
 // NewManageOfferResult creates a new  ManageOfferResult.
 func NewManageOfferResult(code ManageOfferResultCode, value interface{}) (result ManageOfferResult, err error) {
   result.Code = code
-  switch ManageOfferResultCode(code) {
-  case ManageOfferResultCodeManageOfferSuccess:
-    tv, ok := value.(ManageOfferSuccessResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageOfferSuccessResult")
-      return
-    }
-    result.Success = &tv
-  default:
-    // void
-  }
+switch ManageOfferResultCode(code) {
+    case ManageOfferResultCodeManageOfferSuccess:
+                  tv, ok := value.(ManageOfferSuccessResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageOfferSuccessResult")
+              return
+            }
+            result.Success = &tv
+    default:
+      // void
+}
   return
 }
 // MustSuccess retrieves the Success value from the union,
@@ -5485,23 +5493,23 @@ func (u SetOptionsResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of SetOptionsResult
 func (u SetOptionsResult) ArmForSwitch(sw int32) (string, bool) {
-  switch SetOptionsResultCode(sw) {
-  case SetOptionsResultCodeSetOptionsSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch SetOptionsResultCode(sw) {
+    case SetOptionsResultCodeSetOptionsSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewSetOptionsResult creates a new  SetOptionsResult.
 func NewSetOptionsResult(code SetOptionsResultCode, value interface{}) (result SetOptionsResult, err error) {
   result.Code = code
-  switch SetOptionsResultCode(code) {
-  case SetOptionsResultCodeSetOptionsSuccess:
-    // void
-  default:
-    // void
-  }
+switch SetOptionsResultCode(code) {
+    case SetOptionsResultCodeSetOptionsSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -5574,23 +5582,23 @@ func (u ChangeTrustResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ChangeTrustResult
 func (u ChangeTrustResult) ArmForSwitch(sw int32) (string, bool) {
-  switch ChangeTrustResultCode(sw) {
-  case ChangeTrustResultCodeChangeTrustSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch ChangeTrustResultCode(sw) {
+    case ChangeTrustResultCodeChangeTrustSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewChangeTrustResult creates a new  ChangeTrustResult.
 func NewChangeTrustResult(code ChangeTrustResultCode, value interface{}) (result ChangeTrustResult, err error) {
   result.Code = code
-  switch ChangeTrustResultCode(code) {
-  case ChangeTrustResultCodeChangeTrustSuccess:
-    // void
-  default:
-    // void
-  }
+switch ChangeTrustResultCode(code) {
+    case ChangeTrustResultCodeChangeTrustSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -5662,23 +5670,23 @@ func (u AllowTrustResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of AllowTrustResult
 func (u AllowTrustResult) ArmForSwitch(sw int32) (string, bool) {
-  switch AllowTrustResultCode(sw) {
-  case AllowTrustResultCodeAllowTrustSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch AllowTrustResultCode(sw) {
+    case AllowTrustResultCodeAllowTrustSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewAllowTrustResult creates a new  AllowTrustResult.
 func NewAllowTrustResult(code AllowTrustResultCode, value interface{}) (result AllowTrustResult, err error) {
   result.Code = code
-  switch AllowTrustResultCode(code) {
-  case AllowTrustResultCodeAllowTrustSuccess:
-    // void
-  default:
-    // void
-  }
+switch AllowTrustResultCode(code) {
+    case AllowTrustResultCodeAllowTrustSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -5738,7 +5746,7 @@ func (e AccountMergeResultCode) String() string {
 //
 type AccountMergeResult struct{
   Code AccountMergeResultCode
-  SourceAccountBalance *Int64
+  SourceAccountBalance *Int64 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5750,28 +5758,28 @@ func (u AccountMergeResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of AccountMergeResult
 func (u AccountMergeResult) ArmForSwitch(sw int32) (string, bool) {
-  switch AccountMergeResultCode(sw) {
-  case AccountMergeResultCodeAccountMergeSuccess:
-    return "SourceAccountBalance", true
-  default:
-    return "", true
-  }
+switch AccountMergeResultCode(sw) {
+    case AccountMergeResultCodeAccountMergeSuccess:
+      return "SourceAccountBalance", true
+    default:
+      return "", true
+}
 }
 
 // NewAccountMergeResult creates a new  AccountMergeResult.
 func NewAccountMergeResult(code AccountMergeResultCode, value interface{}) (result AccountMergeResult, err error) {
   result.Code = code
-  switch AccountMergeResultCode(code) {
-  case AccountMergeResultCodeAccountMergeSuccess:
-    tv, ok := value.(Int64)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Int64")
-      return
-    }
-    result.SourceAccountBalance = &tv
-  default:
-    // void
-  }
+switch AccountMergeResultCode(code) {
+    case AccountMergeResultCodeAccountMergeSuccess:
+                  tv, ok := value.(Int64)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Int64")
+              return
+            }
+            result.SourceAccountBalance = &tv
+    default:
+      // void
+}
   return
 }
 // MustSourceAccountBalance retrieves the SourceAccountBalance value from the union,
@@ -5840,8 +5848,8 @@ func (e InflationResultCode) String() string {
 //    };
 //
 type InflationPayout struct {
-  Destination AccountId
-  Amount Int64
+  Destination AccountId 
+  Amount Int64 
 }
 
 // InflationResult is an XDR Union defines as:
@@ -5856,7 +5864,7 @@ type InflationPayout struct {
 //
 type InflationResult struct{
   Code InflationResultCode
-  Payouts *[]InflationPayout
+  Payouts *[]InflationPayout 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5868,28 +5876,28 @@ func (u InflationResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of InflationResult
 func (u InflationResult) ArmForSwitch(sw int32) (string, bool) {
-  switch InflationResultCode(sw) {
-  case InflationResultCodeInflationSuccess:
-    return "Payouts", true
-  default:
-    return "", true
-  }
+switch InflationResultCode(sw) {
+    case InflationResultCodeInflationSuccess:
+      return "Payouts", true
+    default:
+      return "", true
+}
 }
 
 // NewInflationResult creates a new  InflationResult.
 func NewInflationResult(code InflationResultCode, value interface{}) (result InflationResult, err error) {
   result.Code = code
-  switch InflationResultCode(code) {
-  case InflationResultCodeInflationSuccess:
-    tv, ok := value.([]InflationPayout)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be []InflationPayout")
-      return
-    }
-    result.Payouts = &tv
-  default:
-    // void
-  }
+switch InflationResultCode(code) {
+    case InflationResultCodeInflationSuccess:
+                  tv, ok := value.([]InflationPayout)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be []InflationPayout")
+              return
+            }
+            result.Payouts = &tv
+    default:
+      // void
+}
   return
 }
 // MustPayouts retrieves the Payouts value from the union,
@@ -5983,23 +5991,23 @@ func (u ManageDataResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ManageDataResult
 func (u ManageDataResult) ArmForSwitch(sw int32) (string, bool) {
-  switch ManageDataResultCode(sw) {
-  case ManageDataResultCodeManageDataSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch ManageDataResultCode(sw) {
+    case ManageDataResultCodeManageDataSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewManageDataResult creates a new  ManageDataResult.
 func NewManageDataResult(code ManageDataResultCode, value interface{}) (result ManageDataResult, err error) {
   result.Code = code
-  switch ManageDataResultCode(code) {
-  case ManageDataResultCodeManageDataSuccess:
-    // void
-  default:
-    // void
-  }
+switch ManageDataResultCode(code) {
+    case ManageDataResultCodeManageDataSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -6058,23 +6066,23 @@ func (u BumpSequenceResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of BumpSequenceResult
 func (u BumpSequenceResult) ArmForSwitch(sw int32) (string, bool) {
-  switch BumpSequenceResultCode(sw) {
-  case BumpSequenceResultCodeBumpSequenceSuccess:
-    return "", true
-  default:
-    return "", true
-  }
+switch BumpSequenceResultCode(sw) {
+    case BumpSequenceResultCodeBumpSequenceSuccess:
+      return "", true
+    default:
+      return "", true
+}
 }
 
 // NewBumpSequenceResult creates a new  BumpSequenceResult.
 func NewBumpSequenceResult(code BumpSequenceResultCode, value interface{}) (result BumpSequenceResult, err error) {
   result.Code = code
-  switch BumpSequenceResultCode(code) {
-  case BumpSequenceResultCodeBumpSequenceSuccess:
-    // void
-  default:
-    // void
-  }
+switch BumpSequenceResultCode(code) {
+    case BumpSequenceResultCodeBumpSequenceSuccess:
+      // void
+    default:
+      // void
+}
   return
 }
 
@@ -6083,7 +6091,7 @@ func NewBumpSequenceResult(code BumpSequenceResultCode, value interface{}) (resu
 //   enum OperationResultCode
 //    {
 //        opINNER = 0, // inner object result is valid
-//
+//    
 //        opBAD_AUTH = -1,     // too few valid signatures / wrong network
 //        opNO_ACCOUNT = -2,   // source account was not found
 //        opNOT_SUPPORTED = -3 // operation not supported at this time
@@ -6147,18 +6155,18 @@ func (e OperationResultCode) String() string {
 //
 type OperationResultTr struct{
   Type OperationType
-  CreateAccountResult *CreateAccountResult
-  PaymentResult *PaymentResult
-  PathPaymentResult *PathPaymentResult
-  ManageOfferResult *ManageOfferResult
-  CreatePassiveOfferResult *ManageOfferResult
-  SetOptionsResult *SetOptionsResult
-  ChangeTrustResult *ChangeTrustResult
-  AllowTrustResult *AllowTrustResult
-  AccountMergeResult *AccountMergeResult
-  InflationResult *InflationResult
-  ManageDataResult *ManageDataResult
-  BumpSeqResult *BumpSequenceResult
+  CreateAccountResult *CreateAccountResult 
+  PaymentResult *PaymentResult 
+  PathPaymentResult *PathPaymentResult 
+  ManageOfferResult *ManageOfferResult 
+  CreatePassiveOfferResult *ManageOfferResult 
+  SetOptionsResult *SetOptionsResult 
+  ChangeTrustResult *ChangeTrustResult 
+  AllowTrustResult *AllowTrustResult 
+  AccountMergeResult *AccountMergeResult 
+  InflationResult *InflationResult 
+  ManageDataResult *ManageDataResult 
+  BumpSeqResult *BumpSequenceResult 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -6170,124 +6178,124 @@ func (u OperationResultTr) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of OperationResultTr
 func (u OperationResultTr) ArmForSwitch(sw int32) (string, bool) {
-  switch OperationType(sw) {
-  case OperationTypeCreateAccount:
-    return "CreateAccountResult", true
-  case OperationTypePayment:
-    return "PaymentResult", true
-  case OperationTypePathPayment:
-    return "PathPaymentResult", true
-  case OperationTypeManageOffer:
-    return "ManageOfferResult", true
-  case OperationTypeCreatePassiveOffer:
-    return "CreatePassiveOfferResult", true
-  case OperationTypeSetOptions:
-    return "SetOptionsResult", true
-  case OperationTypeChangeTrust:
-    return "ChangeTrustResult", true
-  case OperationTypeAllowTrust:
-    return "AllowTrustResult", true
-  case OperationTypeAccountMerge:
-    return "AccountMergeResult", true
-  case OperationTypeInflation:
-    return "InflationResult", true
-  case OperationTypeManageData:
-    return "ManageDataResult", true
-  case OperationTypeBumpSequence:
-    return "BumpSeqResult", true
-  }
-  return "-", false
+switch OperationType(sw) {
+    case OperationTypeCreateAccount:
+      return "CreateAccountResult", true
+    case OperationTypePayment:
+      return "PaymentResult", true
+    case OperationTypePathPayment:
+      return "PathPaymentResult", true
+    case OperationTypeManageOffer:
+      return "ManageOfferResult", true
+    case OperationTypeCreatePassiveOffer:
+      return "CreatePassiveOfferResult", true
+    case OperationTypeSetOptions:
+      return "SetOptionsResult", true
+    case OperationTypeChangeTrust:
+      return "ChangeTrustResult", true
+    case OperationTypeAllowTrust:
+      return "AllowTrustResult", true
+    case OperationTypeAccountMerge:
+      return "AccountMergeResult", true
+    case OperationTypeInflation:
+      return "InflationResult", true
+    case OperationTypeManageData:
+      return "ManageDataResult", true
+    case OperationTypeBumpSequence:
+      return "BumpSeqResult", true
+}
+return "-", false
 }
 
 // NewOperationResultTr creates a new  OperationResultTr.
 func NewOperationResultTr(aType OperationType, value interface{}) (result OperationResultTr, err error) {
   result.Type = aType
-  switch OperationType(aType) {
-  case OperationTypeCreateAccount:
-    tv, ok := value.(CreateAccountResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be CreateAccountResult")
-      return
-    }
-    result.CreateAccountResult = &tv
-  case OperationTypePayment:
-    tv, ok := value.(PaymentResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be PaymentResult")
-      return
-    }
-    result.PaymentResult = &tv
-  case OperationTypePathPayment:
-    tv, ok := value.(PathPaymentResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be PathPaymentResult")
-      return
-    }
-    result.PathPaymentResult = &tv
-  case OperationTypeManageOffer:
-    tv, ok := value.(ManageOfferResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageOfferResult")
-      return
-    }
-    result.ManageOfferResult = &tv
-  case OperationTypeCreatePassiveOffer:
-    tv, ok := value.(ManageOfferResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageOfferResult")
-      return
-    }
-    result.CreatePassiveOfferResult = &tv
-  case OperationTypeSetOptions:
-    tv, ok := value.(SetOptionsResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be SetOptionsResult")
-      return
-    }
-    result.SetOptionsResult = &tv
-  case OperationTypeChangeTrust:
-    tv, ok := value.(ChangeTrustResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ChangeTrustResult")
-      return
-    }
-    result.ChangeTrustResult = &tv
-  case OperationTypeAllowTrust:
-    tv, ok := value.(AllowTrustResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AllowTrustResult")
-      return
-    }
-    result.AllowTrustResult = &tv
-  case OperationTypeAccountMerge:
-    tv, ok := value.(AccountMergeResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be AccountMergeResult")
-      return
-    }
-    result.AccountMergeResult = &tv
-  case OperationTypeInflation:
-    tv, ok := value.(InflationResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be InflationResult")
-      return
-    }
-    result.InflationResult = &tv
-  case OperationTypeManageData:
-    tv, ok := value.(ManageDataResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ManageDataResult")
-      return
-    }
-    result.ManageDataResult = &tv
-  case OperationTypeBumpSequence:
-    tv, ok := value.(BumpSequenceResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be BumpSequenceResult")
-      return
-    }
-    result.BumpSeqResult = &tv
-  }
+switch OperationType(aType) {
+    case OperationTypeCreateAccount:
+                  tv, ok := value.(CreateAccountResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be CreateAccountResult")
+              return
+            }
+            result.CreateAccountResult = &tv
+    case OperationTypePayment:
+                  tv, ok := value.(PaymentResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be PaymentResult")
+              return
+            }
+            result.PaymentResult = &tv
+    case OperationTypePathPayment:
+                  tv, ok := value.(PathPaymentResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be PathPaymentResult")
+              return
+            }
+            result.PathPaymentResult = &tv
+    case OperationTypeManageOffer:
+                  tv, ok := value.(ManageOfferResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageOfferResult")
+              return
+            }
+            result.ManageOfferResult = &tv
+    case OperationTypeCreatePassiveOffer:
+                  tv, ok := value.(ManageOfferResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageOfferResult")
+              return
+            }
+            result.CreatePassiveOfferResult = &tv
+    case OperationTypeSetOptions:
+                  tv, ok := value.(SetOptionsResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be SetOptionsResult")
+              return
+            }
+            result.SetOptionsResult = &tv
+    case OperationTypeChangeTrust:
+                  tv, ok := value.(ChangeTrustResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ChangeTrustResult")
+              return
+            }
+            result.ChangeTrustResult = &tv
+    case OperationTypeAllowTrust:
+                  tv, ok := value.(AllowTrustResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AllowTrustResult")
+              return
+            }
+            result.AllowTrustResult = &tv
+    case OperationTypeAccountMerge:
+                  tv, ok := value.(AccountMergeResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be AccountMergeResult")
+              return
+            }
+            result.AccountMergeResult = &tv
+    case OperationTypeInflation:
+                  tv, ok := value.(InflationResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be InflationResult")
+              return
+            }
+            result.InflationResult = &tv
+    case OperationTypeManageData:
+                  tv, ok := value.(ManageDataResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ManageDataResult")
+              return
+            }
+            result.ManageDataResult = &tv
+    case OperationTypeBumpSequence:
+                  tv, ok := value.(BumpSequenceResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be BumpSequenceResult")
+              return
+            }
+            result.BumpSeqResult = &tv
+}
   return
 }
 // MustCreateAccountResult retrieves the CreateAccountResult value from the union,
@@ -6618,7 +6626,7 @@ func (u OperationResultTr) GetBumpSeqResult() (result BumpSequenceResult, ok boo
 //
 type OperationResult struct{
   Code OperationResultCode
-  Tr *OperationResultTr
+  Tr *OperationResultTr 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -6630,28 +6638,28 @@ func (u OperationResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of OperationResult
 func (u OperationResult) ArmForSwitch(sw int32) (string, bool) {
-  switch OperationResultCode(sw) {
-  case OperationResultCodeOpInner:
-    return "Tr", true
-  default:
-    return "", true
-  }
+switch OperationResultCode(sw) {
+    case OperationResultCodeOpInner:
+      return "Tr", true
+    default:
+      return "", true
+}
 }
 
 // NewOperationResult creates a new  OperationResult.
 func NewOperationResult(code OperationResultCode, value interface{}) (result OperationResult, err error) {
   result.Code = code
-  switch OperationResultCode(code) {
-  case OperationResultCodeOpInner:
-    tv, ok := value.(OperationResultTr)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be OperationResultTr")
-      return
-    }
-    result.Tr = &tv
-  default:
-    // void
-  }
+switch OperationResultCode(code) {
+    case OperationResultCodeOpInner:
+                  tv, ok := value.(OperationResultTr)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be OperationResultTr")
+              return
+            }
+            result.Tr = &tv
+    default:
+      // void
+}
   return
 }
 // MustTr retrieves the Tr value from the union,
@@ -6684,14 +6692,14 @@ func (u OperationResult) GetTr() (result OperationResultTr, ok bool) {
 //   enum TransactionResultCode
 //    {
 //        txSUCCESS = 0, // all operations succeeded
-//
+//    
 //        txFAILED = -1, // one of the operations failed (none were applied)
-//
+//    
 //        txTOO_EARLY = -2,         // ledger closeTime before minTime
 //        txTOO_LATE = -3,          // ledger closeTime after maxTime
 //        txMISSING_OPERATION = -4, // no operation was specified
 //        txBAD_SEQ = -5,           // sequence number does not match source account
-//
+//    
 //        txBAD_AUTH = -6,             // too few valid signatures / wrong network
 //        txINSUFFICIENT_BALANCE = -7, // fee would bring account below reserve
 //        txNO_ACCOUNT = -8,           // source account not found
@@ -6755,7 +6763,7 @@ func (e TransactionResultCode) String() string {
 //
 type TransactionResultResult struct{
   Code TransactionResultCode
-  Results *[]OperationResult
+  Results *[]OperationResult 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -6767,37 +6775,37 @@ func (u TransactionResultResult) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionResultResult
 func (u TransactionResultResult) ArmForSwitch(sw int32) (string, bool) {
-  switch TransactionResultCode(sw) {
-  case TransactionResultCodeTxSuccess:
-    return "Results", true
-  case TransactionResultCodeTxFailed:
-    return "Results", true
-  default:
-    return "", true
-  }
+switch TransactionResultCode(sw) {
+    case TransactionResultCodeTxSuccess:
+      return "Results", true
+    case TransactionResultCodeTxFailed:
+      return "Results", true
+    default:
+      return "", true
+}
 }
 
 // NewTransactionResultResult creates a new  TransactionResultResult.
 func NewTransactionResultResult(code TransactionResultCode, value interface{}) (result TransactionResultResult, err error) {
   result.Code = code
-  switch TransactionResultCode(code) {
-  case TransactionResultCodeTxSuccess:
-    tv, ok := value.([]OperationResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be []OperationResult")
-      return
-    }
-    result.Results = &tv
-  case TransactionResultCodeTxFailed:
-    tv, ok := value.([]OperationResult)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be []OperationResult")
-      return
-    }
-    result.Results = &tv
-  default:
-    // void
-  }
+switch TransactionResultCode(code) {
+    case TransactionResultCodeTxSuccess:
+                  tv, ok := value.([]OperationResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be []OperationResult")
+              return
+            }
+            result.Results = &tv
+    case TransactionResultCodeTxFailed:
+                  tv, ok := value.([]OperationResult)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be []OperationResult")
+              return
+            }
+            result.Results = &tv
+    default:
+      // void
+}
   return
 }
 // MustResults retrieves the Results value from the union,
@@ -6846,20 +6854,20 @@ func (u TransactionResultExt) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of TransactionResultExt
 func (u TransactionResultExt) ArmForSwitch(sw int32) (string, bool) {
-  switch int32(sw) {
-  case 0:
-    return "", true
-  }
-  return "-", false
+switch int32(sw) {
+    case 0:
+      return "", true
+}
+return "-", false
 }
 
 // NewTransactionResultExt creates a new  TransactionResultExt.
 func NewTransactionResultExt(v int32, value interface{}) (result TransactionResultExt, err error) {
   result.V = v
-  switch int32(v) {
-  case 0:
-    // void
-  }
+switch int32(v) {
+    case 0:
+      // void
+}
   return
 }
 
@@ -6868,7 +6876,7 @@ func NewTransactionResultExt(v int32, value interface{}) (result TransactionResu
 //   struct TransactionResult
 //    {
 //        int64 feeCharged; // actual fee charged for the transaction
-//
+//    
 //        union switch (TransactionResultCode code)
 //        {
 //        case txSUCCESS:
@@ -6878,7 +6886,7 @@ func NewTransactionResultExt(v int32, value interface{}) (result TransactionResu
 //            void;
 //        }
 //        result;
-//
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -6889,9 +6897,9 @@ func NewTransactionResultExt(v int32, value interface{}) (result TransactionResu
 //    };
 //
 type TransactionResult struct {
-  FeeCharged Int64
-  Result TransactionResultResult
-  Ext TransactionResultExt
+  FeeCharged Int64 
+  Result TransactionResultResult 
+  Ext TransactionResultExt 
 }
 
 // Hash is an XDR Typedef defines as:
@@ -7041,7 +7049,7 @@ func (e SignerKeyType) String() string {
 //
 type PublicKey struct{
   Type PublicKeyType
-  Ed25519 *Uint256
+  Ed25519 *Uint256 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -7053,25 +7061,25 @@ func (u PublicKey) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of PublicKey
 func (u PublicKey) ArmForSwitch(sw int32) (string, bool) {
-  switch PublicKeyType(sw) {
-  case PublicKeyTypePublicKeyTypeEd25519:
-    return "Ed25519", true
-  }
-  return "-", false
+switch PublicKeyType(sw) {
+    case PublicKeyTypePublicKeyTypeEd25519:
+      return "Ed25519", true
+}
+return "-", false
 }
 
 // NewPublicKey creates a new  PublicKey.
 func NewPublicKey(aType PublicKeyType, value interface{}) (result PublicKey, err error) {
   result.Type = aType
-  switch PublicKeyType(aType) {
-  case PublicKeyTypePublicKeyTypeEd25519:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.Ed25519 = &tv
-  }
+switch PublicKeyType(aType) {
+    case PublicKeyTypePublicKeyTypeEd25519:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.Ed25519 = &tv
+}
   return
 }
 // MustEd25519 retrieves the Ed25519 value from the union,
@@ -7115,9 +7123,9 @@ func (u PublicKey) GetEd25519() (result Uint256, ok bool) {
 //
 type SignerKey struct{
   Type SignerKeyType
-  Ed25519 *Uint256
-  PreAuthTx *Uint256
-  HashX *Uint256
+  Ed25519 *Uint256 
+  PreAuthTx *Uint256 
+  HashX *Uint256 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -7129,43 +7137,43 @@ func (u SignerKey) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of SignerKey
 func (u SignerKey) ArmForSwitch(sw int32) (string, bool) {
-  switch SignerKeyType(sw) {
-  case SignerKeyTypeSignerKeyTypeEd25519:
-    return "Ed25519", true
-  case SignerKeyTypeSignerKeyTypePreAuthTx:
-    return "PreAuthTx", true
-  case SignerKeyTypeSignerKeyTypeHashX:
-    return "HashX", true
-  }
-  return "-", false
+switch SignerKeyType(sw) {
+    case SignerKeyTypeSignerKeyTypeEd25519:
+      return "Ed25519", true
+    case SignerKeyTypeSignerKeyTypePreAuthTx:
+      return "PreAuthTx", true
+    case SignerKeyTypeSignerKeyTypeHashX:
+      return "HashX", true
+}
+return "-", false
 }
 
 // NewSignerKey creates a new  SignerKey.
 func NewSignerKey(aType SignerKeyType, value interface{}) (result SignerKey, err error) {
   result.Type = aType
-  switch SignerKeyType(aType) {
-  case SignerKeyTypeSignerKeyTypeEd25519:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.Ed25519 = &tv
-  case SignerKeyTypeSignerKeyTypePreAuthTx:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.PreAuthTx = &tv
-  case SignerKeyTypeSignerKeyTypeHashX:
-    tv, ok := value.(Uint256)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be Uint256")
-      return
-    }
-    result.HashX = &tv
-  }
+switch SignerKeyType(aType) {
+    case SignerKeyTypeSignerKeyTypeEd25519:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.Ed25519 = &tv
+    case SignerKeyTypeSignerKeyTypePreAuthTx:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.PreAuthTx = &tv
+    case SignerKeyTypeSignerKeyTypeHashX:
+                  tv, ok := value.(Uint256)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be Uint256")
+              return
+            }
+            result.HashX = &tv
+}
   return
 }
 // MustEd25519 retrieves the Ed25519 value from the union,
@@ -7356,8 +7364,8 @@ type Value []byte
 //    };
 //
 type ScpBallot struct {
-  Counter Uint32
-  Value Value
+  Counter Uint32 
+  Value Value 
 }
 
 // ScpStatementType is an XDR Enum defines as:
@@ -7406,9 +7414,9 @@ func (e ScpStatementType) String() string {
 //    };
 //
 type ScpNomination struct {
-  QuorumSetHash Hash
-  Votes []Value
-  Accepted []Value
+  QuorumSetHash Hash 
+  Votes []Value 
+  Accepted []Value 
 }
 
 // ScpStatementPrepare is an XDR NestedStruct defines as:
@@ -7424,12 +7432,12 @@ type ScpNomination struct {
 //            }
 //
 type ScpStatementPrepare struct {
-  QuorumSetHash Hash
-  Ballot ScpBallot
-  Prepared *ScpBallot
-  PreparedPrime *ScpBallot
-  NC Uint32
-  NH Uint32
+  QuorumSetHash Hash 
+  Ballot ScpBallot 
+  Prepared *ScpBallot 
+  PreparedPrime *ScpBallot 
+  NC Uint32 
+  NH Uint32 
 }
 
 // ScpStatementConfirm is an XDR NestedStruct defines as:
@@ -7444,11 +7452,11 @@ type ScpStatementPrepare struct {
 //            }
 //
 type ScpStatementConfirm struct {
-  Ballot ScpBallot
-  NPrepared Uint32
-  NCommit Uint32
-  NH Uint32
-  QuorumSetHash Hash
+  Ballot ScpBallot 
+  NPrepared Uint32 
+  NCommit Uint32 
+  NH Uint32 
+  QuorumSetHash Hash 
 }
 
 // ScpStatementExternalize is an XDR NestedStruct defines as:
@@ -7461,9 +7469,9 @@ type ScpStatementConfirm struct {
 //            }
 //
 type ScpStatementExternalize struct {
-  Commit ScpBallot
-  NH Uint32
-  CommitQuorumSetHash Hash
+  Commit ScpBallot 
+  NH Uint32 
+  CommitQuorumSetHash Hash 
 }
 
 // ScpStatementPledges is an XDR NestedUnion defines as:
@@ -7502,10 +7510,10 @@ type ScpStatementExternalize struct {
 //
 type ScpStatementPledges struct{
   Type ScpStatementType
-  Prepare *ScpStatementPrepare
-  Confirm *ScpStatementConfirm
-  Externalize *ScpStatementExternalize
-  Nominate *ScpNomination
+  Prepare *ScpStatementPrepare 
+  Confirm *ScpStatementConfirm 
+  Externalize *ScpStatementExternalize 
+  Nominate *ScpNomination 
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -7517,52 +7525,52 @@ func (u ScpStatementPledges) SwitchFieldName() string {
 // ArmForSwitch returns which field name should be used for storing
 // the value for an instance of ScpStatementPledges
 func (u ScpStatementPledges) ArmForSwitch(sw int32) (string, bool) {
-  switch ScpStatementType(sw) {
-  case ScpStatementTypeScpStPrepare:
-    return "Prepare", true
-  case ScpStatementTypeScpStConfirm:
-    return "Confirm", true
-  case ScpStatementTypeScpStExternalize:
-    return "Externalize", true
-  case ScpStatementTypeScpStNominate:
-    return "Nominate", true
-  }
-  return "-", false
+switch ScpStatementType(sw) {
+    case ScpStatementTypeScpStPrepare:
+      return "Prepare", true
+    case ScpStatementTypeScpStConfirm:
+      return "Confirm", true
+    case ScpStatementTypeScpStExternalize:
+      return "Externalize", true
+    case ScpStatementTypeScpStNominate:
+      return "Nominate", true
+}
+return "-", false
 }
 
 // NewScpStatementPledges creates a new  ScpStatementPledges.
 func NewScpStatementPledges(aType ScpStatementType, value interface{}) (result ScpStatementPledges, err error) {
   result.Type = aType
-  switch ScpStatementType(aType) {
-  case ScpStatementTypeScpStPrepare:
-    tv, ok := value.(ScpStatementPrepare)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpStatementPrepare")
-      return
-    }
-    result.Prepare = &tv
-  case ScpStatementTypeScpStConfirm:
-    tv, ok := value.(ScpStatementConfirm)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpStatementConfirm")
-      return
-    }
-    result.Confirm = &tv
-  case ScpStatementTypeScpStExternalize:
-    tv, ok := value.(ScpStatementExternalize)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpStatementExternalize")
-      return
-    }
-    result.Externalize = &tv
-  case ScpStatementTypeScpStNominate:
-    tv, ok := value.(ScpNomination)
-    if !ok {
-      err = fmt.Errorf("invalid value, must be ScpNomination")
-      return
-    }
-    result.Nominate = &tv
-  }
+switch ScpStatementType(aType) {
+    case ScpStatementTypeScpStPrepare:
+                  tv, ok := value.(ScpStatementPrepare)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpStatementPrepare")
+              return
+            }
+            result.Prepare = &tv
+    case ScpStatementTypeScpStConfirm:
+                  tv, ok := value.(ScpStatementConfirm)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpStatementConfirm")
+              return
+            }
+            result.Confirm = &tv
+    case ScpStatementTypeScpStExternalize:
+                  tv, ok := value.(ScpStatementExternalize)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpStatementExternalize")
+              return
+            }
+            result.Externalize = &tv
+    case ScpStatementTypeScpStNominate:
+                  tv, ok := value.(ScpNomination)
+            if !ok {
+              err = fmt.Errorf("invalid value, must be ScpNomination")
+              return
+            }
+            result.Nominate = &tv
+}
   return
 }
 // MustPrepare retrieves the Prepare value from the union,
@@ -7668,7 +7676,7 @@ func (u ScpStatementPledges) GetNominate() (result ScpNomination, ok bool) {
 //    {
 //        NodeID nodeID;    // v
 //        uint64 slotIndex; // i
-//
+//    
 //        union switch (SCPStatementType type)
 //        {
 //        case SCP_ST_PREPARE:
@@ -7704,9 +7712,9 @@ func (u ScpStatementPledges) GetNominate() (result ScpNomination, ok bool) {
 //    };
 //
 type ScpStatement struct {
-  NodeId NodeId
-  SlotIndex Uint64
-  Pledges ScpStatementPledges
+  NodeId NodeId 
+  SlotIndex Uint64 
+  Pledges ScpStatementPledges 
 }
 
 // ScpEnvelope is an XDR Struct defines as:
@@ -7718,8 +7726,8 @@ type ScpStatement struct {
 //    };
 //
 type ScpEnvelope struct {
-  Statement ScpStatement
-  Signature Signature
+  Statement ScpStatement 
+  Signature Signature 
 }
 
 // ScpQuorumSet is an XDR Struct defines as:
@@ -7732,10 +7740,10 @@ type ScpEnvelope struct {
 //    };
 //
 type ScpQuorumSet struct {
-  Threshold Uint32
-  Validators []PublicKey
-  InnerSets []ScpQuorumSet
+  Threshold Uint32 
+  Validators []PublicKey 
+  InnerSets []ScpQuorumSet 
 }
 
-var fmtTest = fmt.Sprint("this is a dummy usage of fmt")
+        var fmtTest = fmt.Sprint("this is a dummy usage of fmt")
 

@@ -367,6 +367,7 @@ func (is *Session) ingestOperation() {
 
 	is.Err = is.Ingestion.Operation(
 		is.Cursor.OperationID(),
+		//is.Cursor.Accout
 		is.Cursor.TransactionID(),
 		is.Cursor.OperationOrder(),
 		is.Cursor.OperationSourceAccount(),

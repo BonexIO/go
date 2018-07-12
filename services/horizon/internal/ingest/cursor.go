@@ -197,6 +197,12 @@ func (c *Cursor) OperationSourceAccount() xdr.AccountId {
 	return c.TransactionSourceAccount()
 }
 
+// OperationSourceAccountType returns the role of source account
+func (c *Cursor) OperationSourceAccountType() xdr.AccountType  {
+
+	return
+}
+
 // OperationType returns the current operation type
 func (c *Cursor) OperationType() xdr.OperationType {
 	return c.Operation().Body.Type
