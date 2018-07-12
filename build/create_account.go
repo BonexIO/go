@@ -56,7 +56,7 @@ func (b *CreateAccountBuilder) Mutate(muts ...interface{}) {
 //}
 
 func (m AccountType) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
-	o.AccountType = xdr.Uint32(m.Type)
+	o.AccountType = xdr.Uint32(m)
 	return
 }
 
