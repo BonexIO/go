@@ -44,8 +44,6 @@ var (
 // Amount is a mutator capable of setting the amount
 type Amount string
 
-//type AccountType uint32
-
 // Asset is struct used in path_payment mutators
 type Asset struct {
 	Code   string
@@ -147,10 +145,6 @@ type NativeAmount struct {
 // VENDOR 1
 // MERCHANT 2
 // CLIENT 3
-//type AccountType struct {
-//	accType AccountType
-//	//accType uint32
-//}
 type AccountType struct {
 	Type uint32
 }
@@ -224,7 +218,7 @@ type Signer struct {
 // an xdr.Operation and an xdr.Transaction
 type SourceAccount struct {
 	AddressOrSeed string
-	//AccountType int32
+	AccountType int32
 }
 
 // Thresholds is a mutator capable of setting account thresholds

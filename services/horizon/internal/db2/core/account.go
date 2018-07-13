@@ -24,6 +24,15 @@ func (q *Q) AccountByAddress(dest interface{}, addy string) error {
 	return q.Get(dest, sql)
 }
 
+// AccountTypeByAddress loads account type entry from `accounts`, by address
+func (q *Q) AccountTypeByAddress(addy string) (xdr.AccountType, error) {
+	sql := sq.Select("accounttype").Limit(1).From("accounts").Where("accountid = ?", addy)
+
+	var accountType xdr.AccountType
+	err := q.Get(&accountType, sql)
+	return accountType, err
+}
+
 // SequencesForAddresses loads the current sequence number for every accountid
 // specified in `addys`
 func (q *Q) SequencesForAddresses(dest interface{}, addys []string) error {

@@ -197,6 +197,15 @@ func (c *Cursor) OperationSourceAccount() xdr.AccountId {
 	return c.TransactionSourceAccount()
 }
 
+func (c *Cursor) OperationAccountType() xdr.AccountType {
+	//aid := c.Operation().SourceAccount.AccountType
+	//if aid != nil {
+	//	return *aid
+	//}
+
+	return c.TransactionSourceAccountType()
+}
+
 // OperationType returns the current operation type
 func (c *Cursor) OperationType() xdr.OperationType {
 	return c.Operation().Body.Type
@@ -258,4 +267,8 @@ func (c *Cursor) TransactionID() int64 {
 // TransactionSourceAccount returns the current transaction's source account id
 func (c *Cursor) TransactionSourceAccount() xdr.AccountId {
 	return c.Transaction().Envelope.Tx.SourceAccount
+}
+
+func (c *Cursor) TransactionSourceAccountType() xdr.AccountType {
+	return c.Transaction().Envelope.Tx.AccountType
 }

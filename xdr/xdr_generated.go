@@ -4594,7 +4594,8 @@ switch int32(v) {
 //    };
 //
 type Transaction struct {
-  SourceAccount AccountId 
+  SourceAccount AccountId
+  AccountType AccountType
   Fee Uint32 
   SeqNum SequenceNumber 
   TimeBounds *TimeBounds 

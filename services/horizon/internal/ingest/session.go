@@ -370,6 +370,7 @@ func (is *Session) ingestOperation() {
 		is.Cursor.TransactionID(),
 		is.Cursor.OperationOrder(),
 		is.Cursor.OperationSourceAccount(),
+		is.Cursor.OperationAccountType(),
 		is.Cursor.OperationType(),
 		is.operationDetails(),
 	)
@@ -646,9 +647,9 @@ func (is *Session) operationDetails() map[string]interface{} {
 	case xdr.OperationTypeCreateAccount:
 		op := c.Operation().Body.MustCreateAccountOp()
 		details["funder"] = source.Address()
-		details["account_type"] = op.AccountType;
 		details["account"] = op.Destination.Address()
 		details["starting_balance"] = amount.String(op.StartingBalance)
+		details["accounttype"] = op.AccountType
 	case xdr.OperationTypePayment:
 		op := c.Operation().Body.MustPaymentOp()
 		details["from"] = source.Address()

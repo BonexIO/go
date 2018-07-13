@@ -18,7 +18,6 @@ func CreateAccount(muts ...interface{}) (result CreateAccountBuilder) {
 // specify how they modify an xdr.PaymentOp object
 type CreateAccountMutator interface {
 	MutateCreateAccount(*xdr.CreateAccountOp) error
-	//SetAccountType(*xdr.CreateAccountOp)
 }
 
 // CreateAccountBuilder helps to build CreateAccountOp structs.
@@ -35,7 +34,6 @@ func (b *CreateAccountBuilder) Mutate(muts ...interface{}) {
 		switch mut := m.(type) {
 		case CreateAccountMutator:
 			err = mut.MutateCreateAccount(&b.CA)
-			//err = SetAccountType(&b.CA)
 		case OperationMutator:
 			err = mut.MutateOperation(&b.O)
 		default:

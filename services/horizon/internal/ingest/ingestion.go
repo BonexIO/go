@@ -208,7 +208,7 @@ func (ingest *Ingestion) Operation(
 	txid int64,
 	order int32,
 	source xdr.AccountId,
-	//accountType xdr.AccountType,
+	accountType xdr.AccountType,
 	typ xdr.OperationType,
 	details map[string]interface{},
 
@@ -218,7 +218,7 @@ func (ingest *Ingestion) Operation(
 		return errors.Wrap(err, "Error marshaling details")
 	}
 
-	ingest.builders[OperationsTableName].Values(id, txid, order, source.Address(), typ, djson)
+	ingest.builders[OperationsTableName].Values(id, txid, order, source.Address(), accountType, typ, djson)
 	return nil
 }
 
