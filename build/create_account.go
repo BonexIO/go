@@ -49,22 +49,17 @@ func (b *CreateAccountBuilder) Mutate(muts ...interface{}) {
 	}
 }
 
-// SetAccountType sets AccType
-//func (n AccountType) SetAccountType(op *xdr.CreateAccountOp) error {
-//	op.AccType = xdr.Uint32(n)
-//	return
-//}
-
-func (m AccountType) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
-	o.AccountType = xdr.Uint32(m)
-	return
-}
-
 // MutateCreateAccount for Destination sets the CreateAccountOp's Destination
 // field
 func (m Destination) MutateCreateAccount(o *xdr.CreateAccountOp) error {
 	return setAccountId(m.AddressOrSeed, &o.Destination)
 }
+
+func (m AccountType) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
+	o.AccountType = xdr.Uint32(m.Type)
+	return
+}
+
 
 // MutateCreateAccount for NativeAmount sets the CreateAccountOp's
 // StartingBalance field
