@@ -208,6 +208,7 @@ func (ingest *Ingestion) Operation(
 	txid int64,
 	order int32,
 	source xdr.AccountId,
+	//accountType xdr.AccountType,
 	typ xdr.OperationType,
 	details map[string]interface{},
 
