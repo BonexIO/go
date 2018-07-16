@@ -107,7 +107,7 @@ const (
 type Account struct {
 	ID      int64
 	Address string `db:"address"`
-	//AccountType int32 `db:"address"`
+	AccountType xdr.AccountType `db:"accounttype"`
 }
 
 // AccountsQ is a helper struct to aid in configuring queries that loads

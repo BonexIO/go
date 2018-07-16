@@ -145,9 +145,7 @@ type NativeAmount struct {
 // VENDOR 1
 // MERCHANT 2
 // CLIENT 3
-type AccountType struct {
-	Type uint32
-}
+type AccountType uint32
 
 
 // OfferID is a mutator that sets offer ID on offer operations

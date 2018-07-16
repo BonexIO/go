@@ -26,7 +26,7 @@ func (q *Q) AccountByAddress(dest interface{}, addy string) error {
 
 // AccountTypeByAddress loads account type entry from `accounts`, by address
 func (q *Q) AccountTypeByAddress(addy string) (xdr.AccountType, error) {
-	sql := sq.Select("accounttype").Limit(1).From("accounts").Where("accountid = ?", addy)
+	sql := sq.Select("account_type").Limit(1).From("accounts").Where("accountid = ?", addy)
 
 	var accountType xdr.AccountType
 	err := q.Get(&accountType, sql)
@@ -77,4 +77,5 @@ var selectAccount = sq.Select(
 	"a.homedomain",
 	"a.thresholds",
 	"a.flags",
+	"a.accounttype",
 ).From("accounts a")

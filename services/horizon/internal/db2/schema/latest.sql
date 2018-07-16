@@ -137,7 +137,8 @@ CREATE SEQUENCE history_accounts_id_seq
 
 CREATE TABLE history_accounts (
     id bigint DEFAULT nextval('history_accounts_id_seq'::regclass) NOT NULL,
-    address character varying(64)
+    address character varying(64),
+    account_type integer NOT NULL
 );
 
 
@@ -378,6 +379,7 @@ INSERT INTO gorp_migrations VALUES ('9_add_header_xdr.sql', '2018-04-23 13:49:41
 INSERT INTO gorp_migrations VALUES ('10_add_trades_price.sql', '2018-04-23 13:49:41.522753-07');
 INSERT INTO gorp_migrations VALUES ('11_add_trades_account_index.sql', '2018-04-23 13:49:41.533861-07');
 INSERT INTO gorp_migrations VALUES ('12_asset_stats_amount_string.sql', '2018-05-09 19:14:41.628472+02');
+INSERT INTO gorp_migrations VALUES ('13_add_accounttype_field.sql', '2018-07-09 19:14:41.624472+02');
 
 
 --

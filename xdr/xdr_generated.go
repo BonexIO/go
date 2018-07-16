@@ -4584,6 +4584,10 @@ switch int32(v) {
 //    
 //        Operation operations<100>;
 //    
+//        // AccountType
+//    
+//        AccountType accountType;
+//    
 //        // reserved for future use
 //        union switch (int v)
 //        {
@@ -4594,13 +4598,13 @@ switch int32(v) {
 //    };
 //
 type Transaction struct {
-  SourceAccount AccountId
-  AccountType AccountType
+  SourceAccount AccountId 
   Fee Uint32 
   SeqNum SequenceNumber 
   TimeBounds *TimeBounds 
   Memo Memo 
   Operations []Operation `xdrmaxsize:"100"`
+  AccountType AccountType 
   Ext TransactionExt 
 }
 
