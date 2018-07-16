@@ -138,13 +138,13 @@ func init() {
 
 	rootCmd.PersistentFlags().Bool(
 		"ingest",
-		false,
+		true,
 		"causes this horizon process to ingest data from stellar-core into horizon's db",
 	)
 
 	rootCmd.PersistentFlags().String(
 		"network-passphrase",
-		"",
+		"PUBLIC BONEX Foundation Network; July 2018",
 		"Override the network passphrase",
 	)
 

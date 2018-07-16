@@ -198,11 +198,6 @@ func (c *Cursor) OperationSourceAccount() xdr.AccountId {
 }
 
 func (c *Cursor) OperationAccountType() xdr.AccountType {
-	//aid := c.Operation().SourceAccount.AccountType
-	//if aid != nil {
-	//	return *aid
-	//}
-
 	return c.TransactionSourceAccountType()
 }
 
