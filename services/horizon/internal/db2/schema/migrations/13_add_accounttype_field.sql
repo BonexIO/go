@@ -1,6 +1,6 @@
 -- +migrate Up
 
-ALTER TABLE ONLY history_accounts ADD COLUMN accounttype int NULL;
+ALTER TABLE ONLY history_accounts ADD COLUMN accounttype bigint NOT NULL;
 
 -- +migrate Down
 

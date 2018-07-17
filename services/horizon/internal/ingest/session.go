@@ -370,7 +370,6 @@ func (is *Session) ingestOperation() {
 		is.Cursor.TransactionID(),
 		is.Cursor.OperationOrder(),
 		is.Cursor.OperationSourceAccount(),
-		is.Cursor.OperationAccountType(),
 		is.Cursor.OperationType(),
 		is.operationDetails(),
 	)

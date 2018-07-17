@@ -332,10 +332,6 @@ struct Transaction
 
     Operation operations<100>;
 
-    // AccountType
-
-    AccountType accountType;
-
     // reserved for future use
     union switch (int v)
     {

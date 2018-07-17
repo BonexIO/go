@@ -197,9 +197,6 @@ func (c *Cursor) OperationSourceAccount() xdr.AccountId {
 	return c.TransactionSourceAccount()
 }
 
-func (c *Cursor) OperationAccountType() xdr.AccountType {
-	return c.TransactionSourceAccountType()
-}
 
 // OperationType returns the current operation type
 func (c *Cursor) OperationType() xdr.OperationType {
@@ -264,6 +261,3 @@ func (c *Cursor) TransactionSourceAccount() xdr.AccountId {
 	return c.Transaction().Envelope.Tx.SourceAccount
 }
 
-func (c *Cursor) TransactionSourceAccountType() xdr.AccountType {
-	return c.Transaction().Envelope.Tx.AccountType
-}
