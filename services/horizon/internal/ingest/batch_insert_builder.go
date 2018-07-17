@@ -8,6 +8,11 @@ import (
 	"github.com/stivens13/go/support/errors"
 )
 
+type Account struct {
+	address Address
+	accountType AccountType
+}
+
 func (b *BatchInsertBuilder) init() {
 	b.rows = make([][]interface{}, 0)
 }

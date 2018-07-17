@@ -8,6 +8,22 @@ import (
 
 // Accounts provides a helper to filter rows from the `history_accounts` table
 // with pre-defined filters.  See `AccountsQ` methods for the available filters.
+
+// Account is a row of data from the `history_accounts` table
+type Account struct {
+	ID      	int64	`db:"id"`
+	Address 	string 	`db:"address"`
+	AccountType uint32  `db:"accounttype"`
+}
+
+func NewAccount(id int64, address string, accountType uint32) *Account {
+	return &Account{
+		ID: 		 id,
+		Address:     address,
+		AccountType: accountType,
+	}
+}
+
 func (q *Q) Accounts() *AccountsQ {
 	return &AccountsQ{
 		parent: q,
@@ -58,9 +74,12 @@ func (q *Q) AccountsByAddresses(dest interface{}, addresses []string) error {
 // CreateAccounts creates rows for addresses in history_accounts table and
 // put
 func (q *Q) CreateAccounts(dest interface{}, addresses []string) error {
-	sql := sq.Insert("history_accounts").Columns("address")
+//func (q *Q) CreateAccounts(dest interface{},  accs ...interface{}) error {
+	sql := sq.Insert("history_accounts").Columns("address", "accounttype")
+	tempAccountType := 1
+
 	for _, address := range addresses {
-		sql = sql.Values(address)
+		sql = sql.Values(address, tempAccountType)
 	}
 	sql = sql.Suffix("RETURNING *")
 

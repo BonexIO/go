@@ -29,6 +29,8 @@ const (
 // to record ID in a DB.
 type Address string
 
+type AccountType uint32
+
 type TableName string
 
 const (

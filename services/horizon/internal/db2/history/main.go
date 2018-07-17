@@ -103,12 +103,7 @@ const (
 
 )
 
-// Account is a row of data from the `history_accounts` table
-type Account struct {
-	ID      int64
-	Address string `db:"address"`
-	AccountType xdr.AccountType `db:"accounttype"`
-}
+
 
 // AccountsQ is a helper struct to aid in configuring queries that loads
 // slices of account structs.
