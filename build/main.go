@@ -216,7 +216,6 @@ type Signer struct {
 // an xdr.Operation and an xdr.Transaction
 type SourceAccount struct {
 	AddressOrSeed string
-	AccountType int32
 }
 
 // Thresholds is a mutator capable of setting account thresholds

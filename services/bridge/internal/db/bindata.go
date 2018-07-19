@@ -87,7 +87,7 @@ func latestSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "latest.sql", size: 5393, mode: os.FileMode(420), modTime: time.Unix(1530096833, 0)}
+	info := bindataFileInfo{name: "latest.sql", size: 5393, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -107,7 +107,7 @@ func migrations01_initSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/01_init.sql", size: 651, mode: os.FileMode(420), modTime: time.Unix(1530096833, 0)}
+	info := bindataFileInfo{name: "migrations/01_init.sql", size: 651, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -127,7 +127,7 @@ func migrations02_payment_idSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/02_payment_id.sql", size: 235, mode: os.FileMode(420), modTime: time.Unix(1530096833, 0)}
+	info := bindataFileInfo{name: "migrations/02_payment_id.sql", size: 235, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -147,7 +147,7 @@ func migrations03_transaction_idSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/03_transaction_id.sql", size: 156, mode: os.FileMode(420), modTime: time.Unix(1530096833, 0)}
+	info := bindataFileInfo{name: "migrations/03_transaction_id.sql", size: 156, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -167,7 +167,7 @@ func migrations04_table_namesSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/04_table_names.sql", size: 257, mode: os.FileMode(420), modTime: time.Unix(1530096833, 0)}
+	info := bindataFileInfo{name: "migrations/04_table_names.sql", size: 257, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

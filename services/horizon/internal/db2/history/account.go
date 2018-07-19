@@ -71,10 +71,18 @@ func (q *Q) AccountsByAddresses(dest interface{}, addresses []string) error {
 	return q.Select(dest, sql)
 }
 
+// CreateAccountWithType inserts account id and account type to history_accounts table
+func (q *Q) CreateAccountWithTypes(dest interface{}, address string, accountType xdr.AccountType) error {
+	sql := sq.Insert("history_accounts").Columns("address", "accounttype")
+	sql = sql.Values(address, accountType)
+	sql = sql.Suffix("RETURNING *")
+
+	return q.Select(dest, sql)
+}
+
 // CreateAccounts creates rows for addresses in history_accounts table and
 // put
 func (q *Q) CreateAccounts(dest interface{}, addresses []string) error {
-//func (q *Q) CreateAccounts(dest interface{},  accs ...interface{}) error {
 	sql := sq.Insert("history_accounts").Columns("address", "accounttype")
 	tempAccountType := 1
 

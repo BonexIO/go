@@ -90,14 +90,14 @@ func (ingest *Ingestion) Flush() error {
 		TransactionParticipantsTableName,
 		TransactionsTableName,
 	}
-	// Update IDs for accounts
+	//Update IDs for accounts
 	err := ingest.UpdateAccountIDs(tables)
 	if err != nil {
 		return errors.Wrap(err, "Error while updating account ids")
 	}
 
 	for _, tableName := range tables {
-		err = ingest.builders[tableName].Exec(ingest.DB)
+		err := ingest.builders[tableName].Exec(ingest.DB)
 		if err != nil {
 			return errors.Wrap(err, fmt.Sprintf("Error adding values while inserting to %s", tableName))
 		}
@@ -109,6 +109,15 @@ func (ingest *Ingestion) Flush() error {
 	}
 
 	return ingest.Start()
+}
+
+func (ingest *Ingestion) IngestNewAccount(address string, accountType xdr.AccountType) (result[] int64, err error) {
+
+	q := history.Q{Session: ingest.DB}
+
+	q.CreateAccountWithTypes(&result, address, accountType)
+
+	return
 }
 
 // UpdateAccountIDs updates IDs of the accounts before inserting
@@ -135,6 +144,7 @@ func (ingest *Ingestion) UpdateAccountIDs(tables []TableName) error {
 	// Get IDs and update map
 	q := history.Q{Session: ingest.DB}
 	dbAccounts := make([]history.Account, 0, len(addresses))
+	fmt.Printf("Addresses: %+v\n", addresses)
 	err := q.AccountsByAddresses(&dbAccounts, addresses)
 	if err != nil {
 		return errors.Wrap(err, "q.AccountsByAddresses error")
@@ -152,8 +162,12 @@ func (ingest *Ingestion) UpdateAccountIDs(tables []TableName) error {
 		}
 	}
 
+	//for _, row := range dbAccounts {
+	//	accounts[Address(row.Address)] = row.ID
+	//}
+	//
 	if len(addresses) > 0 {
-		// TODO we should probably batch this too
+		//TODO we should probably batch this too
 		dbAccounts = make([]history.Account, 0, len(addresses))
 		err = q.CreateAccounts(&dbAccounts, addresses)
 		if err != nil {
@@ -232,6 +246,7 @@ func (ingest *Ingestion) OperationParticipants(op int64, aids []xdr.AccountId) {
 
 // Rollback aborts this ingestions transaction
 func (ingest *Ingestion) Rollback() (err error) {
+	fmt.Printf("WE'reer   rolling back! \n")
 	err = ingest.DB.Rollback()
 	return
 }
