@@ -34,6 +34,7 @@ type AccountType uint32
 type TableName string
 
 const (
+	AccountsTableName                TableName = "history_accounts"
 	AssetStatsTableName              TableName = "asset_stats"
 	EffectsTableName                 TableName = "history_effects"
 	LedgersTableName                 TableName = "history_ledgers"
@@ -77,6 +78,11 @@ type EffectIngestion struct {
 	err         error
 	added       int
 	parent      *Ingestion
+}
+
+type NewAccountsIngestions struct {
+	AccountId xdr.AccountId
+	AccountType xdr.AccountType
 }
 
 // LedgerBundle represents a single ledger's worth of novelty created by one

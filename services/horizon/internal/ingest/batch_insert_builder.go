@@ -6,6 +6,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/stivens13/go/support/db"
 	"github.com/stivens13/go/support/errors"
+	"github.com/stivens13/go/xdr"
 )
 
 type Account struct {
@@ -28,6 +29,27 @@ func (b *BatchInsertBuilder) GetAddresses() (adds []Address) {
 				adds = append(adds, address)
 			}
 		}
+	}
+	return
+}
+
+func (b *BatchInsertBuilder) GetAddressesAndTypes() (accounts map[string]uint32)  {
+
+	accounts = map[string]uint32{}
+	for temp, row := range b.rows {
+
+		fmt.Println("What is temp: ", temp)
+		fmt.Println("What is row: ", row)
+
+		//for accountType, address := range row {
+			if _, ok := row[0].(Address); ok {
+				fmt.Println("Get addresses - Address: ", row[0], "type: ", row[1])
+				accounts[string(row[0].(Address))] =  uint32(row[1].(xdr.AccountType))
+			}
+
+		//}
+
+		//for entry :
 	}
 	return
 }

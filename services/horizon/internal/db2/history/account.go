@@ -4,6 +4,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/stivens13/go/services/horizon/internal/db2"
 	"github.com/stivens13/go/xdr"
+	"database/sql"
 )
 
 // Accounts provides a helper to filter rows from the `history_accounts` table
@@ -72,28 +73,43 @@ func (q *Q) AccountsByAddresses(dest interface{}, addresses []string) error {
 }
 
 // CreateAccountWithType inserts account id and account type to history_accounts table
-func (q *Q) CreateAccountWithTypes(dest interface{}, address string, accountType xdr.AccountType) error {
+func (q *Q) CreateAccountWithTypes(address string, accountType xdr.AccountType) (sql.Result, error) {
 	sql := sq.Insert("history_accounts").Columns("address", "accounttype")
 	sql = sql.Values(address, accountType)
-	sql = sql.Suffix("RETURNING *")
-
-	return q.Select(dest, sql)
+	return q.Exec(sql)
 }
 
 // CreateAccounts creates rows for addresses in history_accounts table and
 // put
-func (q *Q) CreateAccounts(dest interface{}, addresses []string) error {
+func (q *Q) CreateAccounts(dest interface{}, addresses map[string]uint32) error {
 	sql := sq.Insert("history_accounts").Columns("address", "accounttype")
-	tempAccountType := 1
 
-	for _, address := range addresses {
-		sql = sql.Values(address, tempAccountType)
+	added := 0
+
+	for address, accountType := range addresses {
+
+		var existing Account
+
+		err := q.AccountByAddress(&existing, address)
+
+		//account already exists, return id
+		if err == nil {
+			continue
+		}
+
+		added += 1
+
+		sql = sql.Values(address, accountType)
 	}
-	sql = sql.Suffix("RETURNING *")
 
-	return q.Select(dest, sql)
+	if added > 0 {
+		sql = sql.Suffix("RETURNING *")
+
+		return q.Select(dest, sql)
+	}
+
+	return nil
 }
-
 // Return id for account. If account doesn't exist, it will be created and the new id returned.
 func (q *Q) GetCreateAccountID(
 	aid xdr.AccountId,

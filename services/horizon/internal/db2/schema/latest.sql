@@ -138,7 +138,7 @@ CREATE SEQUENCE history_accounts_id_seq
 CREATE TABLE history_accounts (
     id bigint DEFAULT nextval('history_accounts_id_seq'::regclass) NOT NULL,
     address character varying(64),
-    account_type integer NOT NULL
+    accounttype integer DEFAULT NULL
 );
 
 

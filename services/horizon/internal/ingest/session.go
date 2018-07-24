@@ -18,6 +18,7 @@ import (
 	"github.com/stivens13/go/support/errors"
 	sTime "github.com/stivens13/go/support/time"
 	"github.com/stivens13/go/xdr"
+	"github.com/stivens13/go/network"
 )
 
 // Run starts an attempt to ingest the range of ledgers specified in this
@@ -357,6 +358,13 @@ func (is *Session) ingestLedger() {
 		is.Metrics.IngestLedgerTimer.Update(time.Since(start))
 	}
 
+	passphrase := network.PublicNetworkPassphrase
+
+	if is.Cursor.LedgerSequence() == 1 {
+		fmt.Println("Foundation created")
+		is.Ingestion.IngestNewAccount(Address(keypair.Master(passphrase).Address()), xdr.AccountTypeFoundation)
+	}
+
 	return
 }
 
@@ -376,6 +384,13 @@ func (is *Session) ingestOperation() {
 	if is.Err != nil {
 		is.Err = errors.Wrap(is.Err, "Ingestion.Operation error")
 		return
+	}
+
+	if is.Cursor.OperationType() == xdr.OperationTypeCreateAccount {
+		op := is.Cursor.Operation().Body.MustCreateAccountOp()
+
+		is.Ingestion.IngestNewAccount(Address(op.Destination.Address()), xdr.AccountType(op.AccountType))
+		fmt.Println("In session - Address: ", Address(op.Destination.Address()), "type: ", xdr.AccountType(op.AccountType) )
 	}
 
 	is.ingestOperationParticipants()

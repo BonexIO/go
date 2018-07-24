@@ -111,13 +111,10 @@ func (ingest *Ingestion) Flush() error {
 	return ingest.Start()
 }
 
-func (ingest *Ingestion) IngestNewAccount(address string, accountType xdr.AccountType) (result[] int64, err error) {
+func (ingest *Ingestion) IngestNewAccount(address Address, accountType xdr.AccountType) {
 
-	q := history.Q{Session: ingest.DB}
 
-	q.CreateAccountWithTypes(&result, address, accountType)
-
-	return
+	ingest.builders[AccountsTableName].Values(address, accountType)
 }
 
 // UpdateAccountIDs updates IDs of the accounts before inserting
@@ -126,6 +123,7 @@ func (ingest *Ingestion) UpdateAccountIDs(tables []TableName) error {
 	// address => ID in DB
 	accounts := map[Address]int64{}
 	addresses := []string{}
+	newAccounts := ingest.builders[AccountsTableName].GetAddressesAndTypes()
 
 	// Collect addresses to fetch
 	for _, tableName := range tables {
@@ -137,14 +135,13 @@ func (ingest *Ingestion) UpdateAccountIDs(tables []TableName) error {
 		}
 	}
 
-	if len(addresses) == 0 {
+	if len(addresses) == 0 && len(ingest.builders[AccountsTableName].GetAddressesAndTypes()) == 0 {
 		return nil
 	}
 
 	// Get IDs and update map
 	q := history.Q{Session: ingest.DB}
 	dbAccounts := make([]history.Account, 0, len(addresses))
-	fmt.Printf("Addresses: %+v\n", addresses)
 	err := q.AccountsByAddresses(&dbAccounts, addresses)
 	if err != nil {
 		return errors.Wrap(err, "q.AccountsByAddresses error")
@@ -154,22 +151,24 @@ func (ingest *Ingestion) UpdateAccountIDs(tables []TableName) error {
 		accounts[Address(row.Address)] = row.ID
 	}
 
-	// Insert non-existent addresses and update map
+	//Insert non-existent addresses and update map
 	addresses = []string{}
 	for address, id := range accounts {
 		if id == 0 {
+			fmt.Println("Update IDs - Address: ", address, "\nID: ", id)
 			addresses = append(addresses, string(address))
 		}
 	}
 
-	//for _, row := range dbAccounts {
-	//	accounts[Address(row.Address)] = row.ID
-	//}
-	//
-	if len(addresses) > 0 {
-		//TODO we should probably batch this too
-		dbAccounts = make([]history.Account, 0, len(addresses))
-		err = q.CreateAccounts(&dbAccounts, addresses)
+	for _, row := range dbAccounts {
+		accounts[Address(row.Address)] = row.ID
+	}
+
+	//if len(addresses) > 0 {
+	if len(newAccounts) > 0 {
+	//	TODO we should probably batch this too
+		dbAccounts = make([]history.Account, 0, len(newAccounts))
+		err = q.CreateAccounts(&dbAccounts, newAccounts)
 		if err != nil {
 			return errors.Wrap(err, "q.CreateAccounts error")
 		}
@@ -246,7 +245,6 @@ func (ingest *Ingestion) OperationParticipants(op int64, aids []xdr.AccountId) {
 
 // Rollback aborts this ingestions transaction
 func (ingest *Ingestion) Rollback() (err error) {
-	fmt.Printf("WE'reer   rolling back! \n")
 	err = ingest.DB.Rollback()
 	return
 }
@@ -364,6 +362,14 @@ func (ingest *Ingestion) TransactionParticipants(tx int64, aids []xdr.AccountId)
 
 func (ingest *Ingestion) createInsertBuilders() {
 	ingest.builders = make(map[TableName]*BatchInsertBuilder)
+
+	ingest.builders[AccountsTableName] = &BatchInsertBuilder{
+		TableName:AccountsTableName,
+		Columns: []string{
+			"address",
+			"accounttype",
+		},
+	}
 
 	ingest.builders[LedgersTableName] = &BatchInsertBuilder{
 		TableName: LedgersTableName,

@@ -265,7 +265,7 @@ func (s *Session) SelectRaw(
 // build converts the provided sql builder `b` into the sql and args to execute
 // against the raw database connections.
 func (s *Session) build(b sq.Sqlizer) (sql string, args []interface{}, err error) {
-	sql, args, err = b.ToSql()
+sql, args, err = b.ToSql()
 
 	if err != nil {
 		err = errors.Wrap(err, "to-sql failed")
