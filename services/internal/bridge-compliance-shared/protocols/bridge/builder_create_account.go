@@ -5,6 +5,7 @@ import (
 	b "github.com/stivens13/go/build"
 	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
 	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/stivens13/go/xdr"
 )
 
 // CreateAccountOperationBody represents create_account operation
@@ -12,7 +13,7 @@ type CreateAccountOperationBody struct {
 	Source          *string
 	Destination     string
 	StartingBalance string `json:"starting_balance"`
-	AccType 		uint32
+	AccType 	    xdr.AccountType
 }
 
 // ToTransactionMutator returns go-stellar-base TransactionMutator

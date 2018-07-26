@@ -8,6 +8,7 @@ import (
 	"github.com/stivens13/go/clients/horizon"
 	"github.com/stivens13/go/keypair"
 	"github.com/stivens13/go/support/errors"
+	"github.com/stivens13/go/xdr"
 )
 
 // TxResult is the result from the asynchronous submit transaction method over a channel
@@ -98,7 +99,11 @@ func (bot *Bot) checkSequenceRefresh() error {
 	return bot.refreshSequence()
 }
 
+//Friend bot can create only client types now
 func (bot *Bot) makeTx(destAddress string) (string, error) {
+
+	ClientType := xdr.AccountTypeClient
+
 	txn, err := b.Transaction(
 		b.SourceAccount{AddressOrSeed: bot.Secret},
 		b.Sequence{Sequence: bot.sequence + 1},
@@ -106,6 +111,7 @@ func (bot *Bot) makeTx(destAddress string) (string, error) {
 		b.CreateAccount(
 			b.Destination{AddressOrSeed: destAddress},
 			b.NativeAmount{Amount: bot.StartingBalance},
+			b.CreateAccount(ClientType),
 		),
 	)
 

@@ -54,7 +54,7 @@ func (m Destination) MutateCreateAccount(o *xdr.CreateAccountOp) error {
 }
 
 func (m AccountType) MutateCreateAccount(o *xdr.CreateAccountOp) (err error) {
-	o.AccountType = xdr.Uint32(m)
+	o.AccountType = xdr.Uint32(m.Type)
 	return
 }
 
