@@ -5,6 +5,7 @@ import (
 	b "github.com/BonexIO/go/build"
 	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
 	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/xdr"
 )
 
 // CreateAccountOperationBody represents create_account operation
@@ -12,7 +13,7 @@ type CreateAccountOperationBody struct {
 	Source          *string
 	Destination     string
 	StartingBalance string `json:"starting_balance"`
-	AccType 		uint32
+	AccType 		xdr.AccountType
 }
 
 // ToTransactionMutator returns go-stellar-base TransactionMutator
@@ -20,7 +21,7 @@ func (op CreateAccountOperationBody) ToTransactionMutator() b.TransactionMutator
 	mutators := []interface{}{
 		b.Destination{op.Destination},
 		b.NativeAmount{op.StartingBalance},
-		b.AccountType(op.AccType),
+		b.AccountType{op.AccType},
 	}
 
 	if op.Source != nil {

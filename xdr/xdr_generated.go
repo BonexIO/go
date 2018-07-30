@@ -522,7 +522,7 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //        AccountID* inflationDest; // Account to vote for during inflation
 //        uint32 flags;             // see AccountFlags
 //
-//        uint32 accountType;           // Account role
+//        AccountType accountType;           // Account role
 //
 //        string32 homeDomain; // can be used for reverse federation and memo lookup
 //
@@ -548,7 +548,7 @@ type AccountEntry struct {
 	NumSubEntries Uint32
 	InflationDest *AccountId
 	Flags Uint32
-	AccountType Uint32
+	AccountType AccountType
 	HomeDomain String32
 	Thresholds Thresholds
 	Signers []Signer `xdrmaxsize:"20"`
@@ -3518,14 +3518,14 @@ func (e OperationType) String() string {
 //    {
 //        AccountID destination; // account to create
 //        int64 startingBalance; // amount they end up with
-//        uint32 accountType; // role of the account
+//        accountType accountType; // role of the account
 //
 //    };
 //
 type CreateAccountOp struct {
 	Destination AccountId
 	StartingBalance Int64
-	AccountType Uint32
+	AccountType AccountType
 }
 
 // PaymentOp is an XDR Struct defines as:
