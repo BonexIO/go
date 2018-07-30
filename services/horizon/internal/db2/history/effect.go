@@ -6,10 +6,10 @@ import (
 	"math"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/stivens13/go/services/horizon/internal/db2"
-	"github.com/stivens13/go/services/horizon/internal/toid"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2"
+	"github.com/BonexIO/go/services/horizon/internal/toid"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // UnmarshalDetails unmarshals the details of this effect into `dest`

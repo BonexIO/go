@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"regexp"
 
-	"github.com/stivens13/go/keypair"
+	"github.com/BonexIO/go/keypair"
 )
 
 // Config contains config params of the bridge server

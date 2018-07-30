@@ -3,8 +3,8 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stivens13/go/services/horizon/internal/txsub"
-	. "github.com/stivens13/go/protocols/horizon"
+	"github.com/BonexIO/go/services/horizon/internal/txsub"
+	. "github.com/BonexIO/go/protocols/horizon"
 
 )
 

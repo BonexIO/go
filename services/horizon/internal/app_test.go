@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/stivens13/go/services/horizon/internal/test"
-	"github.com/stivens13/go/services/horizon/internal/render/sse"
+	"github.com/BonexIO/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/services/horizon/internal/render/sse"
 )
 
 func TestNewApp(t *testing.T) {

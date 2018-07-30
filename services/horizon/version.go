@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	apkg "github.com/stivens13/go/support/app"
+	apkg "github.com/BonexIO/go/support/app"
 )
 
 var versionCmd = &cobra.Command{

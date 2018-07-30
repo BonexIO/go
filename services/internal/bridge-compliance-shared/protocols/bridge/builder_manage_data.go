@@ -3,9 +3,9 @@ package bridge
 import (
 	"encoding/base64"
 
-	b "github.com/stivens13/go/build"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	b "github.com/BonexIO/go/build"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
 )
 
 // ManageDataOperationBody represents manage_data operation

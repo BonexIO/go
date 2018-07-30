@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/stivens13/go/keypair"
+	"github.com/BonexIO/go/keypair"
 )
 
 type Config struct {

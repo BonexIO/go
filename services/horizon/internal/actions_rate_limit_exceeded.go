@@ -3,8 +3,8 @@ package horizon
 import (
 	"net/http"
 
-	hProblem "github.com/stivens13/go/services/horizon/internal/render/problem"
-	"github.com/stivens13/go/support/render/problem"
+	hProblem "github.com/BonexIO/go/services/horizon/internal/render/problem"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // RateLimitExceededAction renders a 429 response

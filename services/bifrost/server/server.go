@@ -13,16 +13,16 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/stivens13/go/keypair"
-	"github.com/stivens13/go/services/bifrost/bitcoin"
-	"github.com/stivens13/go/services/bifrost/common"
-	"github.com/stivens13/go/services/bifrost/database"
-	"github.com/stivens13/go/services/bifrost/ethereum"
-	"github.com/stivens13/go/support/app"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/http"
-	"github.com/stivens13/go/support/log"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/services/bifrost/bitcoin"
+	"github.com/BonexIO/go/services/bifrost/common"
+	"github.com/BonexIO/go/services/bifrost/database"
+	"github.com/BonexIO/go/services/bifrost/ethereum"
+	"github.com/BonexIO/go/support/app"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/http"
+	"github.com/BonexIO/go/support/log"
+	"github.com/BonexIO/go/xdr"
 )
 
 func (s *Server) Start() error {

@@ -14,7 +14,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 )
 
 type XdrStream struct {

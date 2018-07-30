@@ -1,8 +1,8 @@
 package build
 
 import (
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // AllowTrust groups the creation of a new AllowTrustBuilder with a call to Mutate.

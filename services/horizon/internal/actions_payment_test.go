@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stivens13/go/services/horizon/internal/db2/history"
-	"github.com/stivens13/go/protocols/horizon/operations"
+	"github.com/BonexIO/go/services/horizon/internal/db2/history"
+	"github.com/BonexIO/go/protocols/horizon/operations"
 )
 
 func TestPaymentActions(t *testing.T) {

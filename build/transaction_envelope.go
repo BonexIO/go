@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"github.com/stivens13/go/keypair"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // TransactionEnvelopeMutator is a interface that wraps the

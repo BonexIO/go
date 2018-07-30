@@ -1,7 +1,7 @@
 package horizon
 
 import (
-	"github.com/stivens13/go/services/horizon/internal/log"
+	"github.com/BonexIO/go/services/horizon/internal/log"
 )
 
 // InitFn is a function that contributes to the initialization of an App struct

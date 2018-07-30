@@ -3,8 +3,8 @@ package horizon
 import (
 	"net/http"
 
-	"github.com/stivens13/go/services/horizon/internal/errors"
-	"github.com/stivens13/go/support/render/problem"
+	"github.com/BonexIO/go/services/horizon/internal/errors"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // RecoverMiddleware helps the server recover from panics.  It ensures that

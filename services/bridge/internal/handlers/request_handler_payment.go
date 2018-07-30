@@ -8,16 +8,16 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/stivens13/go/address"
-	b "github.com/stivens13/go/build"
-	"github.com/stivens13/go/clients/horizon"
-	"github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/protocols/federation"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/bridge"
-	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/address"
+	b "github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/clients/horizon"
+	"github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/protocols/federation"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/bridge"
+	callback "github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/BonexIO/go/xdr"
 )
 
 // Payment implements /payment endpoint

@@ -3,10 +3,10 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stivens13/go/amount"
-	"github.com/stivens13/go/price"
-	"github.com/stivens13/go/services/horizon/internal/db2/history"
-	. "github.com/stivens13/go/protocols/horizon"
+	"github.com/BonexIO/go/amount"
+	"github.com/BonexIO/go/price"
+	"github.com/BonexIO/go/services/horizon/internal/db2/history"
+	. "github.com/BonexIO/go/protocols/horizon"
 )
 
 // Populate fills out the details of a trade using a row from the history_trades

@@ -3,10 +3,10 @@ package history_test
 import (
 	"testing"
 
-	"github.com/stivens13/go/services/horizon/internal/db2"
-	. "github.com/stivens13/go/services/horizon/internal/db2/history"
-	"github.com/stivens13/go/services/horizon/internal/test"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2"
+	. "github.com/BonexIO/go/services/horizon/internal/db2/history"
+	"github.com/BonexIO/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/xdr"
 )
 
 func TestTradeQueries(t *testing.T) {

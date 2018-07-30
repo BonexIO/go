@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/url"
 
-	"github.com/stivens13/go/keypair"
-	"github.com/stivens13/go/support/config"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/support/config"
 )
 
 // Config contains config params of the compliance server

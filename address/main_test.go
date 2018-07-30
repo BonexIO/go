@@ -3,7 +3,7 @@ package address
 import (
 	"testing"
 
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/support/errors"
 	"github.com/stretchr/testify/assert"
 )
 

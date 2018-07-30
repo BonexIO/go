@@ -1,7 +1,7 @@
 package horizon
 
 import (
-	"github.com/stivens13/go/support/render/problem"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // NotFoundAction renders a 404 response

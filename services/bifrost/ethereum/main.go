@@ -5,8 +5,8 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/log"
 	"github.com/tyler-smith/go-bip32"
 )
 

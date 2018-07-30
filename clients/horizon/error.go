@@ -3,9 +3,9 @@ package horizon
 import (
 	"encoding/json"
 
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/render/problem"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/render/problem"
+	"github.com/BonexIO/go/xdr"
 )
 
 func (herr Error) Error() string {

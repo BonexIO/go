@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	ge "github.com/go-errors/errors"
-	"github.com/stivens13/go/support/test"
+	"github.com/BonexIO/go/support/test"
 	"github.com/stretchr/testify/assert"
 )
 

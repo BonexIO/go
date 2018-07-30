@@ -1,9 +1,9 @@
 package bridge
 
 import (
-	b "github.com/stivens13/go/build"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	b "github.com/BonexIO/go/build"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
 )
 
 // InflationOperationBody represents inflation operation

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/log"
 )
 
 const StellarAmountPrecision = 7

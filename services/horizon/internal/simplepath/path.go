@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/stivens13/go/services/horizon/internal/db2/core"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2/core"
+	"github.com/BonexIO/go/xdr"
 )
 
 // pathNode represents a path as a linked list pointing from source to destination

@@ -4,12 +4,12 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/stivens13/go/clients/federation"
-	"github.com/stivens13/go/clients/stellartoml"
-	"github.com/stivens13/go/services/compliance/internal/config"
-	"github.com/stivens13/go/services/compliance/internal/crypto"
-	"github.com/stivens13/go/services/compliance/internal/db"
-	"github.com/stivens13/go/support/http"
+	"github.com/BonexIO/go/clients/federation"
+	"github.com/BonexIO/go/clients/stellartoml"
+	"github.com/BonexIO/go/services/compliance/internal/config"
+	"github.com/BonexIO/go/services/compliance/internal/crypto"
+	"github.com/BonexIO/go/services/compliance/internal/db"
+	"github.com/BonexIO/go/support/http"
 )
 
 // RequestHandler implements compliance server request handlers

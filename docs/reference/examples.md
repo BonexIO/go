@@ -15,8 +15,8 @@ package main
 import (
 	"fmt"
 
-	b "github.com/stivens13/go/build"
-	"github.com/stivens13/go/clients/horizon"
+	b "github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/clients/horizon"
 )
 
 func main() {
@@ -64,7 +64,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/stivens13/go/clients/horizon"
+	"github.com/BonexIO/go/clients/horizon"
 )
 
 func main() {

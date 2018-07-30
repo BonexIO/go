@@ -3,10 +3,10 @@ package actions
 import (
 	"net/http"
 
-	"github.com/stivens13/go/services/horizon/internal/render"
-	hProblem "github.com/stivens13/go/services/horizon/internal/render/problem"
-	"github.com/stivens13/go/services/horizon/internal/render/sse"
-	"github.com/stivens13/go/support/render/problem"
+	"github.com/BonexIO/go/services/horizon/internal/render"
+	hProblem "github.com/BonexIO/go/services/horizon/internal/render/problem"
+	"github.com/BonexIO/go/services/horizon/internal/render/sse"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // Base is a helper struct you can use as part of a custom action via

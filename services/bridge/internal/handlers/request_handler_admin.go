@@ -9,12 +9,12 @@ import (
 
 	"github.com/go-chi/chi"
 	log "github.com/sirupsen/logrus"
-	"github.com/stivens13/go/clients/horizon"
-	"github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/services/bridge/internal/db"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/clients/horizon"
+	"github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/services/bridge/internal/db"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	callback "github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/BonexIO/go/support/errors"
 )
 
 // AdminReceivedPayment implements /admin/received-payments/{id} endpoint

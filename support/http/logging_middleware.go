@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
-	"github.com/stivens13/go/support/http/mutil"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/http/mutil"
+	"github.com/BonexIO/go/support/log"
 )
 
 // LoggingMiddleware is a middleware that logs requests to the logger.

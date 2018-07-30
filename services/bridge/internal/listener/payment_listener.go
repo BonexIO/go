@@ -14,13 +14,13 @@ import (
 	"encoding/base64"
 
 	"github.com/sirupsen/logrus"
-	"github.com/stivens13/go/clients/horizon"
-	"github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/services/bridge/internal/config"
-	"github.com/stivens13/go/services/bridge/internal/db"
-	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stivens13/go/strkey"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/clients/horizon"
+	"github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/services/bridge/internal/config"
+	"github.com/BonexIO/go/services/bridge/internal/db"
+	callback "github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/BonexIO/go/strkey"
+	"github.com/BonexIO/go/support/errors"
 )
 
 // PaymentListener is listening for a new payments received by ReceivingAccount

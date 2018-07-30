@@ -5,8 +5,8 @@ import (
 	"encoding/base32"
 	"encoding/binary"
 
-	"github.com/stivens13/go/crc16"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/crc16"
+	"github.com/BonexIO/go/support/errors"
 )
 
 // ErrInvalidVersionByte is returned when the version byte from a provided

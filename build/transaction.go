@@ -4,9 +4,9 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/stivens13/go/network"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/network"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // Transaction groups the creation of a new TransactionBuilder with a call

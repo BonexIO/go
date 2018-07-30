@@ -1,12 +1,12 @@
 package server
 
 import (
-	"github.com/stivens13/go/services/bifrost/bitcoin"
-	"github.com/stivens13/go/services/bifrost/database"
-	"github.com/stivens13/go/services/bifrost/queue"
-	"github.com/stivens13/go/services/bifrost/sse"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/services/bifrost/bitcoin"
+	"github.com/BonexIO/go/services/bifrost/database"
+	"github.com/BonexIO/go/services/bifrost/queue"
+	"github.com/BonexIO/go/services/bifrost/sse"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/log"
 )
 
 // onNewBitcoinTransaction checks if transaction is valid and adds it to

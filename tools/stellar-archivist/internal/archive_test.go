@@ -14,7 +14,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 	"github.com/stretchr/testify/assert"
 )
 

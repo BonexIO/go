@@ -3,11 +3,11 @@ package horizon
 import (
 	"net/http"
 
-	"github.com/stivens13/go/services/horizon/internal/db2/core"
-	"github.com/stivens13/go/services/horizon/internal/db2/history"
-	"github.com/stivens13/go/services/horizon/internal/txsub"
-	results "github.com/stivens13/go/services/horizon/internal/txsub/results/db"
-	"github.com/stivens13/go/services/horizon/internal/txsub/sequence"
+	"github.com/BonexIO/go/services/horizon/internal/db2/core"
+	"github.com/BonexIO/go/services/horizon/internal/db2/history"
+	"github.com/BonexIO/go/services/horizon/internal/txsub"
+	results "github.com/BonexIO/go/services/horizon/internal/txsub/results/db"
+	"github.com/BonexIO/go/services/horizon/internal/txsub/sequence"
 )
 
 func initSubmissionSystem(app *App) {

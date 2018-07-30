@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/stivens13/go/services/bifrost/common"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/services/bifrost/common"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/log"
 )
 
 func (l *Listener) Start(rpcServer string) error {

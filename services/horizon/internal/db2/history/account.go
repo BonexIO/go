@@ -2,8 +2,8 @@ package history
 
 import (
 	sq "github.com/Masterminds/squirrel"
-	"github.com/stivens13/go/services/horizon/internal/db2"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2"
+	"github.com/BonexIO/go/xdr"
 	"database/sql"
 )
 

@@ -3,8 +3,8 @@ package stellar
 import (
 	"sync"
 
-	"github.com/stivens13/go/clients/horizon"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/clients/horizon"
+	"github.com/BonexIO/go/support/log"
 )
 
 // Status describes status of account processing

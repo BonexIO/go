@@ -1,8 +1,8 @@
 package ingest
 
 import (
-	"github.com/stivens13/go/services/horizon/internal/db2/history"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2/history"
+	"github.com/BonexIO/go/xdr"
 )
 
 // Add writes an effect to the database while automatically tracking the index

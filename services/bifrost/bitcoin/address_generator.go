@@ -3,7 +3,7 @@ package bitcoin
 import (
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcutil"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/support/errors"
 	"github.com/tyler-smith/go-bip32"
 )
 

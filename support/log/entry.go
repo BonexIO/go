@@ -7,7 +7,7 @@ import (
 	gerr "github.com/go-errors/errors"
 	"github.com/sirupsen/logrus"
 	"github.com/sirupsen/logrus/hooks/test"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/support/errors"
 )
 
 func (e *Entry) SetLevel(level logrus.Level) {

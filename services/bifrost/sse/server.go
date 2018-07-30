@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/r3labs/sse"
-	"github.com/stivens13/go/services/bifrost/common"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/services/bifrost/common"
+	"github.com/BonexIO/go/support/log"
 )
 
 func (s *Server) init() {

@@ -7,7 +7,7 @@ package reap
 import (
 	"time"
 
-	"github.com/stivens13/go/support/db"
+	"github.com/BonexIO/go/support/db"
 )
 
 // System represents the history reaping subsystem of horizon.

@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/stivens13/go/protocols/horizon/base"
-	"github.com/stivens13/go/support/render/hal"
+	"github.com/BonexIO/go/protocols/horizon/base"
+	"github.com/BonexIO/go/support/render/hal"
 	"time"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 )
 
 // OperationTypeNames maps from operation type to the string used to represent that type

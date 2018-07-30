@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/lib/pq"
-	"github.com/stivens13/go/services/bifrost/queue"
-	"github.com/stivens13/go/services/bifrost/sse"
-	"github.com/stivens13/go/support/db"
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/services/bifrost/queue"
+	"github.com/BonexIO/go/services/bifrost/sse"
+	"github.com/BonexIO/go/support/db"
+	"github.com/BonexIO/go/support/errors"
 )
 
 const (

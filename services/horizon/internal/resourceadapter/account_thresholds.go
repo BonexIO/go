@@ -1,8 +1,8 @@
 package resourceadapter
 
 import (
-	"github.com/stivens13/go/services/horizon/internal/db2/core"
-	. "github.com/stivens13/go/protocols/horizon"
+	"github.com/BonexIO/go/services/horizon/internal/db2/core"
+	. "github.com/BonexIO/go/protocols/horizon"
 )
 
 func PopulateAccountThresholds(dest *AccountThresholds, row core.Account) {

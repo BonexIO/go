@@ -5,7 +5,7 @@ Go implementation of [Federation](https://www.stellar.org/developers/learn/conce
 
 ## Downloading the server
 
-[Prebuilt binaries](https://github.com/stivens13/go/releases) of the federation server are available on the [releases page](https://github.com/stivens13/go/releases).
+[Prebuilt binaries](https://github.com/BonexIO/go/releases) of the federation server are available on the [releases page](https://github.com/BonexIO/go/releases).
 
 ## Config
 
@@ -98,7 +98,7 @@ This service can built from source, provided you have installed the [go tools](h
 Given you have a running golang installation, you can build the server with:
 
 ```
-go get -u github.com/stivens13/go/services/federation
+go get -u github.com/BonexIO/go/services/federation
 ```
 
 After successful completion, you should find `bin/federation` is present in your configured GOPATH.

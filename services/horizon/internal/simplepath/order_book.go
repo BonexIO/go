@@ -7,8 +7,8 @@ import (
 	"math/big"
 
 	sq "github.com/Masterminds/squirrel"
-	"github.com/stivens13/go/services/horizon/internal/db2/core"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/db2/core"
+	"github.com/BonexIO/go/xdr"
 )
 
 // ErrNotEnough represents an error that occurs when pricing a trade on an

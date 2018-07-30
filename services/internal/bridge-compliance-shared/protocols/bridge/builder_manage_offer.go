@@ -3,11 +3,11 @@ package bridge
 import (
 	"strconv"
 
-	b "github.com/stivens13/go/build"
+	b "github.com/BonexIO/go/build"
 
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols"
 )
 
 // ManageOfferOperationBody represents manage_offer operation

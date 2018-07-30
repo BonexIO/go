@@ -14,7 +14,7 @@ import (
 	"log"
 	"sort"
 
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 )
 
 // Transaction sets are sorted in two different orders: one for hashing and

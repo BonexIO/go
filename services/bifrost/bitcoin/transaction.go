@@ -3,7 +3,7 @@ package bitcoin
 import (
 	"math/big"
 
-	"github.com/stivens13/go/services/bifrost/common"
+	"github.com/BonexIO/go/services/bifrost/common"
 )
 
 func (t Transaction) ValueToStellar() string {

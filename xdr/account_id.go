@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/stivens13/go/strkey"
+	"github.com/BonexIO/go/strkey"
 )
 
 // Address returns the strkey encoded form of this AccountId.  This method will

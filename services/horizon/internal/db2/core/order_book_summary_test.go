@@ -3,8 +3,8 @@ package core
 import (
 	"testing"
 
-	"github.com/stivens13/go/services/horizon/internal/test"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/xdr"
 )
 
 func TestGetOrderBookSummary(t *testing.T) {
@@ -64,7 +64,7 @@ func TestGetOrderBookSummary(t *testing.T) {
 	tt.Assert.Equal(bids[2].Pricef, iasks[2].InvertPricef())
 }
 
-// regression test for https://github.com/stivens13/go/services/horizon/internal/issues/310
+// regression test for https://github.com/BonexIO/go/services/horizon/internal/issues/310
 func TestGetOrderBookSummary_Regress310(t *testing.T) {
 	tt := test.Start(t).Scenario("order_books_310")
 	defer tt.Finish()

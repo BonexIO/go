@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/stivens13/go/services/horizon/internal/test"
-	"github.com/stivens13/go/protocols/horizon"
+	"github.com/BonexIO/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/protocols/horizon"
 )
 
 func TestRootAction(t *testing.T) {

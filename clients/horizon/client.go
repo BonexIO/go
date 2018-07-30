@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // HomeDomainForAccount returns the home domain for the provided strkey-encoded

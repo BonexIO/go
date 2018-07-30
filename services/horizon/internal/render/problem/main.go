@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/stivens13/go/support/context/requestid"
-	"github.com/stivens13/go/support/render/problem"
+	"github.com/BonexIO/go/support/context/requestid"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // Inflate expands a problem with contextal information, including setting basic info.

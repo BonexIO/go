@@ -2,8 +2,8 @@ package keypair
 
 import (
 	"github.com/agl/ed25519"
-	"github.com/stivens13/go/strkey"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/strkey"
+	"github.com/BonexIO/go/xdr"
 )
 
 // FromAddress represents a keypair to which only the address is know.  This KP

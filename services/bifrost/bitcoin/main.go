@@ -6,8 +6,8 @@ import (
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/wire"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/log"
 	"github.com/tyler-smith/go-bip32"
 )
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/stivens13/go/strkey"
+	"github.com/BonexIO/go/strkey"
 )
 
 // This file contains helpers for working with xdr.Asset structs

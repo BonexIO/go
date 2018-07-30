@@ -14,13 +14,13 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	baseAmount "github.com/stivens13/go/amount"
-	"github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/services/compliance/internal/db"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	httpHelpers "github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stivens13/go/xdr"
+	baseAmount "github.com/BonexIO/go/amount"
+	"github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/services/compliance/internal/db"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	httpHelpers "github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	callback "github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/BonexIO/go/xdr"
 )
 
 // HandlerAuth implements authorize endpoint

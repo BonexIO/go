@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 )
 
 // ErrMetaNotFound is returned when no meta that matches a provided filter can

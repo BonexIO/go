@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/rcrowley/go-metrics"
-	"github.com/stivens13/go/services/horizon/internal/log"
-	"github.com/stivens13/go/services/horizon/internal/txsub/sequence"
+	"github.com/BonexIO/go/services/horizon/internal/log"
+	"github.com/BonexIO/go/services/horizon/internal/txsub/sequence"
 )
 
 // System represents a completely configured transaction submission system.

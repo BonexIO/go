@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/r3labs/sse"
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/log"
 )
 
 // AddressEvent is an event sent to address SSE stream.

@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
-	"github.com/stivens13/go/tools/stellar-hd-wallet/commands"
+	"github.com/BonexIO/go/tools/stellar-hd-wallet/commands"
 )
 
 var mainCmd = &cobra.Command{

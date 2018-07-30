@@ -5,7 +5,7 @@ import (
 
 	"context"
 
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/xdr"
 )
 
 // ResultProvider represents an abstract store that can lookup Result objects

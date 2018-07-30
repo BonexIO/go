@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stivens13/go/support/http/httptest"
+	"github.com/BonexIO/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

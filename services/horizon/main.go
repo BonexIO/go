@@ -7,8 +7,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/stivens13/go/services/horizon/internal"
-	hlog "github.com/stivens13/go/services/horizon/internal/log"
+	"github.com/BonexIO/go/services/horizon/internal"
+	hlog "github.com/BonexIO/go/services/horizon/internal/log"
 	"fmt"
 )
 

@@ -2,7 +2,7 @@ package log
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/stivens13/go/services/horizon/internal/errors"
+	"github.com/BonexIO/go/services/horizon/internal/errors"
 )
 
 type Entry struct {

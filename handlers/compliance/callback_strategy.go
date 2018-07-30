@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"net/url"
 
-	proto "github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/support/errors"
+	proto "github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/support/errors"
 )
 
 type pendingResponse struct {

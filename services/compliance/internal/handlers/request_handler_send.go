@@ -6,15 +6,15 @@ import (
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
-	"github.com/stivens13/go/address"
-	b "github.com/stivens13/go/build"
-	"github.com/stivens13/go/protocols/compliance"
-	"github.com/stivens13/go/protocols/federation"
-	"github.com/stivens13/go/services/compliance/internal/db"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	callback "github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols/compliance"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/address"
+	b "github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/protocols/compliance"
+	"github.com/BonexIO/go/protocols/federation"
+	"github.com/BonexIO/go/services/compliance/internal/db"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	callback "github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols/compliance"
+	"github.com/BonexIO/go/xdr"
 )
 
 // HandlerSend implements /send endpoint

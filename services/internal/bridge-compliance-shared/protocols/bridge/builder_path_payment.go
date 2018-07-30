@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stivens13/go/amount"
-	b "github.com/stivens13/go/build"
-	shared "github.com/stivens13/go/services/internal/bridge-compliance-shared"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/protocols"
+	"github.com/BonexIO/go/amount"
+	b "github.com/BonexIO/go/build"
+	shared "github.com/BonexIO/go/services/internal/bridge-compliance-shared"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/protocols"
 )
 
 // PathPaymentOperationBody represents path_payment operation

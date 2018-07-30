@@ -1,14 +1,14 @@
 package handlers
 
 import (
-	"github.com/stivens13/go/clients/federation"
-	"github.com/stivens13/go/clients/horizon"
-	"github.com/stivens13/go/clients/stellartoml"
-	"github.com/stivens13/go/services/bridge/internal/config"
-	"github.com/stivens13/go/services/bridge/internal/db"
-	"github.com/stivens13/go/services/bridge/internal/listener"
-	"github.com/stivens13/go/services/bridge/internal/submitter"
-	"github.com/stivens13/go/support/http"
+	"github.com/BonexIO/go/clients/federation"
+	"github.com/BonexIO/go/clients/horizon"
+	"github.com/BonexIO/go/clients/stellartoml"
+	"github.com/BonexIO/go/services/bridge/internal/config"
+	"github.com/BonexIO/go/services/bridge/internal/db"
+	"github.com/BonexIO/go/services/bridge/internal/listener"
+	"github.com/BonexIO/go/services/bridge/internal/submitter"
+	"github.com/BonexIO/go/support/http"
 )
 
 // RequestHandler implements bridge server request handlers

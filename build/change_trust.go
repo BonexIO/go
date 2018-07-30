@@ -1,9 +1,9 @@
 package build
 
 import (
-	"github.com/stivens13/go/amount"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/amount"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // ChangeTrust groups the creation of a new ChangeTrustBuilder with a call to Mutate.

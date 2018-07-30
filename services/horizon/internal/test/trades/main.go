@@ -2,10 +2,10 @@
 package trades
 
 import (
-	"github.com/stivens13/go/keypair"
-	. "github.com/stivens13/go/services/horizon/internal/db2/history"
-	"github.com/stivens13/go/support/time"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/keypair"
+	. "github.com/BonexIO/go/services/horizon/internal/db2/history"
+	"github.com/BonexIO/go/support/time"
+	"github.com/BonexIO/go/xdr"
 )
 
 //GetTestAsset generates an issuer on the fly and creates a CreditAlphanum4 Asset with given code

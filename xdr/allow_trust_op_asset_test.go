@@ -1,7 +1,7 @@
 package xdr_test
 
 import (
-	. "github.com/stivens13/go/xdr"
+	. "github.com/BonexIO/go/xdr"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

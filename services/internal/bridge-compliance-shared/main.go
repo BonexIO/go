@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/stivens13/go/build"
-	"github.com/stivens13/go/hash"
-	"github.com/stivens13/go/keypair"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/hash"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // BuildTransaction is used in compliance server. The sequence number in built transaction will be equal 0!

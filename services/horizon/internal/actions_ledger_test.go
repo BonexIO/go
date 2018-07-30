@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/stivens13/go/protocols/horizon"
+	"github.com/BonexIO/go/protocols/horizon"
 )
 
 func TestLedgerActions_Index(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/support/errors"
 )
 
 var (

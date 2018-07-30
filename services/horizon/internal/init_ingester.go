@@ -3,7 +3,7 @@ package horizon
 import (
 	"log"
 
-	"github.com/stivens13/go/services/horizon/internal/ingest"
+	"github.com/BonexIO/go/services/horizon/internal/ingest"
 )
 
 func initIngester(app *App) {

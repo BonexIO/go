@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/stivens13/go/support/log"
+	"github.com/BonexIO/go/support/log"
 )
 
 // Event is the packet of data that gets sent over the wire to a connected

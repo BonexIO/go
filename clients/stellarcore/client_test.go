@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	proto "github.com/stivens13/go/protocols/stellarcore"
-	"github.com/stivens13/go/support/http/httptest"
+	proto "github.com/BonexIO/go/protocols/stellarcore"
+	"github.com/BonexIO/go/support/http/httptest"
 	"github.com/stretchr/testify/assert"
 )
 

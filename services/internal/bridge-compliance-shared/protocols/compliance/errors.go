@@ -3,7 +3,7 @@ package compliance
 import (
 	"net/http"
 
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
 )
 
 var (

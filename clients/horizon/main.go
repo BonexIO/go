@@ -12,9 +12,9 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/stivens13/go/build"
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // DefaultTestNetClient is a default client to connect to test network

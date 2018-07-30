@@ -1,10 +1,10 @@
 package horizon
 
 import (
-	"github.com/stivens13/go/protocols/horizon"
-	"github.com/stivens13/go/services/horizon/internal/paths"
-	"github.com/stivens13/go/services/horizon/internal/resourceadapter"
-	"github.com/stivens13/go/support/render/hal"
+	"github.com/BonexIO/go/protocols/horizon"
+	"github.com/BonexIO/go/services/horizon/internal/paths"
+	"github.com/BonexIO/go/services/horizon/internal/resourceadapter"
+	"github.com/BonexIO/go/support/render/hal"
 )
 
 // PathIndexAction provides path finding

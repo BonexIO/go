@@ -1,8 +1,8 @@
 package build
 
 import (
-	"github.com/stivens13/go/support/errors"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/xdr"
 )
 
 // MustXDR is the panicky version of ToXDR

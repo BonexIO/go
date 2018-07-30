@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"github.com/stivens13/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/services/horizon/internal/test"
 )
 
 func TestDefaultSubmitter(t *testing.T) {

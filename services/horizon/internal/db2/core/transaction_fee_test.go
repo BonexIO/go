@@ -3,7 +3,7 @@ package core
 import (
 	"testing"
 
-	"github.com/stivens13/go/services/horizon/internal/test"
+	"github.com/BonexIO/go/services/horizon/internal/test"
 )
 
 func TestTransactionFeesByLedger(t *testing.T) {

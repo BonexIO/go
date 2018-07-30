@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/stivens13/go/support/errors"
+	"github.com/BonexIO/go/support/errors"
 )
 
 // Queue adds `seq` to the load queue for the cache.

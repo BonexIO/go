@@ -8,9 +8,9 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/guregu/null"
-	"github.com/stivens13/go/services/horizon/internal/utf8"
-	"github.com/stivens13/go/strkey"
-	"github.com/stivens13/go/xdr"
+	"github.com/BonexIO/go/services/horizon/internal/utf8"
+	"github.com/BonexIO/go/strkey"
+	"github.com/BonexIO/go/xdr"
 )
 
 // Base64Signatures returns a slice of strings where each element is a base64

@@ -4,7 +4,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"net/http"
 
-	"github.com/stivens13/go/services/internal/bridge-compliance-shared/http/helpers"
+	"github.com/BonexIO/go/services/internal/bridge-compliance-shared/http/helpers"
 )
 
 // HandlerRemoveAccess implements /remove_access endpoint

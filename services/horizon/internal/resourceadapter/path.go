@@ -3,9 +3,9 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stivens13/go/amount"
-	"github.com/stivens13/go/protocols/horizon"
-	"github.com/stivens13/go/services/horizon/internal/paths"
+	"github.com/BonexIO/go/amount"
+	"github.com/BonexIO/go/protocols/horizon"
+	"github.com/BonexIO/go/services/horizon/internal/paths"
 )
 
 // PopulatePath converts the paths.Path into a Path

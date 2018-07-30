@@ -5,9 +5,9 @@ import (
 	"errors"
 	"sync"
 
-	. "github.com/stivens13/go/build"
-	"github.com/stivens13/go/keypair"
-	"github.com/stivens13/go/services/horizon/internal/txsub"
+	. "github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/services/horizon/internal/txsub"
 )
 
 // Bot represents the friendbot subsystem.

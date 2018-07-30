@@ -1,7 +1,7 @@
 package horizon
 
 import (
-	"github.com/stivens13/go/services/horizon/internal/reap"
+	"github.com/BonexIO/go/services/horizon/internal/reap"
 )
 
 func initReaper(app *App) {
