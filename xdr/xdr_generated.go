@@ -3518,7 +3518,7 @@ func (e OperationType) String() string {
 //    {
 //        AccountID destination; // account to create
 //        int64 startingBalance; // amount they end up with
-//        accountType accountType; // role of the account
+//        AccountType accountType; // role of the account
 //
 //    };
 //
