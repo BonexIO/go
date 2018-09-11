@@ -86,7 +86,7 @@ func latestSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "latest.sql", size: 7872, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
+	info := bindataFileInfo{name: "latest.sql", size: 7872, mode: os.FileMode(420), modTime: time.Unix(1532601484, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -106,7 +106,7 @@ func migrations01_initSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/01_init.sql", size: 992, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
+	info := bindataFileInfo{name: "migrations/01_init.sql", size: 992, mode: os.FileMode(420), modTime: time.Unix(1532601484, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -126,7 +126,7 @@ func migrations02_auth_dataSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/02_auth_data.sql", size: 272, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
+	info := bindataFileInfo{name: "migrations/02_auth_data.sql", size: 272, mode: os.FileMode(420), modTime: time.Unix(1532601484, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -146,7 +146,7 @@ func migrations03_table_namesSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "migrations/03_table_names.sql", size: 436, mode: os.FileMode(420), modTime: time.Unix(1530865730, 0)}
+	info := bindataFileInfo{name: "migrations/03_table_names.sql", size: 436, mode: os.FileMode(420), modTime: time.Unix(1532601484, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

@@ -297,23 +297,26 @@ func (u Asset) GetAlphaNum12() (result AssetAlphaNum12, ok bool) {
 //   enum AccountType
 //    {
 //        FOUNDATION = 0,
-//        VENDOR = 1,
-//        MERCHANT = 2,
-//        CLIENT = 3
+//        OPERATOR = 1,
+//        LBO = 2,
+//        ISSUER = 3,
+//        CLIENT = 4
 //    };
 //
 type AccountType int32
 const (
 	AccountTypeFoundation AccountType = 0
-	AccountTypeVendor AccountType = 1
-	AccountTypeMerchant AccountType = 2
-	AccountTypeClient AccountType = 3
+	AccountTypeOperator AccountType = 1
+	AccountTypeLbo AccountType = 2
+	AccountTypeIssuer AccountType = 3
+	AccountTypeClient AccountType = 4
 )
 var accountTypeMap = map[int32]string{
 	0: "AccountTypeFoundation",
-	1: "AccountTypeVendor",
-	2: "AccountTypeMerchant",
-	3: "AccountTypeClient",
+	1: "AccountTypeOperator",
+	2: "AccountTypeLbo",
+	3: "AccountTypeIssuer",
+	4: "AccountTypeClient",
 }
 
 // ValidEnum validates a proposed value for this enum.  Implements
@@ -522,7 +525,7 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //        AccountID* inflationDest; // Account to vote for during inflation
 //        uint32 flags;             // see AccountFlags
 //
-//        AccountType accountType;           // Account role
+//        uint32 accountType;           // Account role
 //
 //        string32 homeDomain; // can be used for reverse federation and memo lookup
 //
@@ -548,7 +551,7 @@ type AccountEntry struct {
 	NumSubEntries Uint32
 	InflationDest *AccountId
 	Flags Uint32
-	AccountType AccountType
+	AccountType Uint32
 	HomeDomain String32
 	Thresholds Thresholds
 	Signers []Signer `xdrmaxsize:"20"`
