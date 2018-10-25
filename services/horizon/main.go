@@ -26,12 +26,9 @@ func init() {
 	viper.SetDefault("history-retention-count", 0)
 
 	viper.BindEnv("port", "PORT")
-	viper.BindEnv("db-url", "postgres://localhost/horizon?sslmode=disable")
-	//viper.BindEnv("db-url", "DATABASE_URL")
-	viper.BindEnv("stellar-core-db-url", "postgres://localhost/stellar?sslmode=disable")
-	//viper.BindEnv("stellar-core-db-url", "STELLAR_CORE_DATABASE_URL")
-	viper.BindEnv("stellar-core-url", "http://localhost:8080")
-	//viper.BindEnv("stellar-core-url", "STELLAR_CORE_URL")
+	viper.BindEnv("db-url", "DATABASE_URL")
+	viper.BindEnv("stellar-core-db-url", "STELLAR_CORE_DATABASE_URL")
+	viper.BindEnv("stellar-core-url", "STELLAR_CORE_URL")
 	viper.BindEnv("per-hour-rate-limit", "PER_HOUR_RATE_LIMIT")
 	viper.BindEnv("redis-url", "REDIS_URL")
 	viper.BindEnv("ruby-horizon-url", "RUBY_HORIZON_URL")
@@ -60,19 +57,19 @@ func init() {
 
 	rootCmd.PersistentFlags().String(
 		"db-url",
-		"postgres://localhost/horizon?sslmode=disable",
+		"",
 		"horizon postgres database to connect with",
 	)
 
 	rootCmd.PersistentFlags().String(
 		"stellar-core-db-url",
-		"postgres://localhost/stellar?sslmode=disable",
+		"",
 		"stellar-core postgres database to connect with",
 	)
 
 	rootCmd.PersistentFlags().String(
 		"stellar-core-url",
-		"http://localhost:8080",
+		"",
 		"stellar-core to connect with (for http commands)",
 	)
 
@@ -144,7 +141,7 @@ func init() {
 
 	rootCmd.PersistentFlags().String(
 		"network-passphrase",
-		"PUBLIC BONEX Foundation Network; July 2018",
+		"",
 		"Override the network passphrase",
 	)
 
@@ -209,7 +206,6 @@ func initConfig() {
 	fmt.Println(viper.GetString("db-url"))
 
 	config = horizon.Config{
-		//DatabaseURL:            viper.GetString("db-url"),
 		DatabaseURL:            viper.GetString("db-url"),
 		StellarCoreDatabaseURL: viper.GetString("stellar-core-db-url"),
 		StellarCoreURL:         viper.GetString("stellar-core-url"),
