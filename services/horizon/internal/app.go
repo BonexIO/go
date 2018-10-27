@@ -8,9 +8,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/garyburd/redigo/redis"
-	metrics "github.com/rcrowley/go-metrics"
-	"github.com/BonexIO/go/build"
 	"github.com/BonexIO/go/clients/stellarcore"
 	"github.com/BonexIO/go/services/horizon/internal/db2/core"
 	"github.com/BonexIO/go/services/horizon/internal/db2/history"
@@ -19,12 +16,14 @@ import (
 	"github.com/BonexIO/go/services/horizon/internal/log"
 	"github.com/BonexIO/go/services/horizon/internal/paths"
 	"github.com/BonexIO/go/services/horizon/internal/reap"
+	"github.com/BonexIO/go/services/horizon/internal/render/sse"
 	"github.com/BonexIO/go/services/horizon/internal/txsub"
 	"github.com/BonexIO/go/support/app"
 	"github.com/BonexIO/go/support/db"
+	"github.com/garyburd/redigo/redis"
+	metrics "github.com/rcrowley/go-metrics"
 	"golang.org/x/net/http2"
 	graceful "gopkg.in/tylerb/graceful.v1"
-	"github.com/BonexIO/go/services/horizon/internal/render/sse"
 )
 
 // App represents the root of the state of a horizon instance.
@@ -61,7 +60,7 @@ func NewApp(config Config) (*App, error) {
 
 	result := &App{config: config}
 	result.horizonVersion = app.Version()
-	result.networkPassphrase = build.TestNetwork.Passphrase
+	// result.networkPassphrase = build.TestNetwork.Passphrase
 	result.ticks = time.NewTicker(1 * time.Second)
 	result.init()
 	return result, nil
