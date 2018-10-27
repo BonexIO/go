@@ -1,8 +1,8 @@
 package horizon
 
 import (
-	hProblem "github.com/stellar/go/services/horizon/internal/render/problem"
-	"github.com/stellar/go/support/render/problem"
+	hProblem "github.com/BonexIO/go/services/horizon/internal/render/problem"
+	"github.com/BonexIO/go/support/render/problem"
 )
 
 // NotImplementedAction renders a NotImplemented prblem

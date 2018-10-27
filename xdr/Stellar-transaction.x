@@ -29,6 +29,8 @@ enum OperationType
     BUMP_SEQUENCE = 11
 };
 
+
+
 /* CreateAccount
 Creates and funds a new account with the specified starting balance.
 
@@ -38,10 +40,13 @@ Result: CreateAccountResult
 
 */
 
+
 struct CreateAccountOp
 {
     AccountID destination; // account to create
     int64 startingBalance; // amount they end up with
+    AccountType accountType; // role of the account
+
 };
 
 /* Payment
@@ -387,7 +392,9 @@ enum CreateAccountResultCode
     CREATE_ACCOUNT_UNDERFUNDED = -2, // not enough funds in source account
     CREATE_ACCOUNT_LOW_RESERVE =
         -3, // would create an account below the min reserve
-    CREATE_ACCOUNT_ALREADY_EXIST = -4 // account already exists
+    CREATE_ACCOUNT_ALREADY_EXIST = -4, // account already exists
+
+    CREATE_ACCOUNT_UNDERAUTHORIZED = -5 // source account doesnt have enought rights to create this type of account
 };
 
 union CreateAccountResult switch (CreateAccountResultCode code)

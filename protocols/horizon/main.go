@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"encoding/base64"
-	"github.com/stellar/go/protocols/horizon/base"
-	"github.com/stellar/go/strkey"
-	"github.com/stellar/go/support/errors"
-	"github.com/stellar/go/support/render/hal"
-	"github.com/stellar/go/xdr"
+	"github.com/BonexIO/go/protocols/horizon/base"
+	"github.com/BonexIO/go/strkey"
+	"github.com/BonexIO/go/support/errors"
+	"github.com/BonexIO/go/support/render/hal"
+	"github.com/BonexIO/go/xdr"
 )
 
 // KeyTypeNames maps from strkey version bytes into json string values to use in

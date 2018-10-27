@@ -11,9 +11,9 @@ package build
 import (
 	"math"
 
-	"github.com/stellar/go/amount"
-	"github.com/stellar/go/network"
-	"github.com/stellar/go/xdr"
+	"github.com/BonexIO/go/amount"
+	"github.com/BonexIO/go/network"
+	"github.com/BonexIO/go/xdr"
 )
 
 const (

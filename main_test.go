@@ -7,10 +7,10 @@ import (
 	"log"
 	"strings"
 
-	b "github.com/stellar/go/build"
-	"github.com/stellar/go/hash"
-	"github.com/stellar/go/keypair"
-	"github.com/stellar/go/xdr"
+	b "github.com/BonexIO/go/build"
+	"github.com/BonexIO/go/hash"
+	"github.com/BonexIO/go/keypair"
+	"github.com/BonexIO/go/xdr"
 )
 
 // ExampleDecodeTransaction shows the lowest-level process to decode a base64

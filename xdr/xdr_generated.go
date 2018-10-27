@@ -1,18 +1,18 @@
-// Package xdr is generated from:
+// Package main is generated from:
 //
-//  xdr/Stellar-types.x
-//  xdr/Stellar-ledger-entries.x
-//  xdr/Stellar-transaction.x
-//  xdr/Stellar-ledger.x
-//  xdr/Stellar-overlay.x
-//  xdr/Stellar-SCP.x
+//  Stellar-ledger-entries.x
+//  Stellar-ledger.x
+//  Stellar-overlay.x
+//  Stellar-transaction.x
+//  Stellar-types.x
+//  Stellar-SCP.x
 //
 // DO NOT EDIT or your changes may be overwritten
 package xdr
 
 import (
-	"fmt"
 	"io"
+	"fmt"
 
 	"github.com/nullstyle/go-xdr/xdr3"
 )
@@ -29,477 +29,11 @@ func Marshal(w io.Writer, v interface{}) (int, error) {
 	return xdr.Marshal(w, v)
 }
 
-// Hash is an XDR Typedef defines as:
-//
-//   typedef opaque Hash[32];
-//
-type Hash [32]byte
-
-// XDRMaxSize implements the Sized interface for Hash
-func (e Hash) XDRMaxSize() int {
-	return 32
-}
-
-// Uint256 is an XDR Typedef defines as:
-//
-//   typedef opaque uint256[32];
-//
-type Uint256 [32]byte
-
-// XDRMaxSize implements the Sized interface for Uint256
-func (e Uint256) XDRMaxSize() int {
-	return 32
-}
-
-// Uint32 is an XDR Typedef defines as:
-//
-//   typedef unsigned int uint32;
-//
-type Uint32 uint32
-
-// Int32 is an XDR Typedef defines as:
-//
-//   typedef int int32;
-//
-type Int32 int32
-
-// Uint64 is an XDR Typedef defines as:
-//
-//   typedef unsigned hyper uint64;
-//
-type Uint64 uint64
-
-// Int64 is an XDR Typedef defines as:
-//
-//   typedef hyper int64;
-//
-type Int64 int64
-
-// CryptoKeyType is an XDR Enum defines as:
-//
-//   enum CryptoKeyType
-//    {
-//        KEY_TYPE_ED25519 = 0,
-//        KEY_TYPE_PRE_AUTH_TX = 1,
-//        KEY_TYPE_HASH_X = 2
-//    };
-//
-type CryptoKeyType int32
-
-const (
-	CryptoKeyTypeKeyTypeEd25519   CryptoKeyType = 0
-	CryptoKeyTypeKeyTypePreAuthTx CryptoKeyType = 1
-	CryptoKeyTypeKeyTypeHashX     CryptoKeyType = 2
-)
-
-var cryptoKeyTypeMap = map[int32]string{
-	0: "CryptoKeyTypeKeyTypeEd25519",
-	1: "CryptoKeyTypeKeyTypePreAuthTx",
-	2: "CryptoKeyTypeKeyTypeHashX",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for CryptoKeyType
-func (e CryptoKeyType) ValidEnum(v int32) bool {
-	_, ok := cryptoKeyTypeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e CryptoKeyType) String() string {
-	name, _ := cryptoKeyTypeMap[int32(e)]
-	return name
-}
-
-// PublicKeyType is an XDR Enum defines as:
-//
-//   enum PublicKeyType
-//    {
-//        PUBLIC_KEY_TYPE_ED25519 = KEY_TYPE_ED25519
-//    };
-//
-type PublicKeyType int32
-
-const (
-	PublicKeyTypePublicKeyTypeEd25519 PublicKeyType = 0
-)
-
-var publicKeyTypeMap = map[int32]string{
-	0: "PublicKeyTypePublicKeyTypeEd25519",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for PublicKeyType
-func (e PublicKeyType) ValidEnum(v int32) bool {
-	_, ok := publicKeyTypeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e PublicKeyType) String() string {
-	name, _ := publicKeyTypeMap[int32(e)]
-	return name
-}
-
-// SignerKeyType is an XDR Enum defines as:
-//
-//   enum SignerKeyType
-//    {
-//        SIGNER_KEY_TYPE_ED25519 = KEY_TYPE_ED25519,
-//        SIGNER_KEY_TYPE_PRE_AUTH_TX = KEY_TYPE_PRE_AUTH_TX,
-//        SIGNER_KEY_TYPE_HASH_X = KEY_TYPE_HASH_X
-//    };
-//
-type SignerKeyType int32
-
-const (
-	SignerKeyTypeSignerKeyTypeEd25519   SignerKeyType = 0
-	SignerKeyTypeSignerKeyTypePreAuthTx SignerKeyType = 1
-	SignerKeyTypeSignerKeyTypeHashX     SignerKeyType = 2
-)
-
-var signerKeyTypeMap = map[int32]string{
-	0: "SignerKeyTypeSignerKeyTypeEd25519",
-	1: "SignerKeyTypeSignerKeyTypePreAuthTx",
-	2: "SignerKeyTypeSignerKeyTypeHashX",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for SignerKeyType
-func (e SignerKeyType) ValidEnum(v int32) bool {
-	_, ok := signerKeyTypeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e SignerKeyType) String() string {
-	name, _ := signerKeyTypeMap[int32(e)]
-	return name
-}
-
-// PublicKey is an XDR Union defines as:
-//
-//   union PublicKey switch (PublicKeyType type)
-//    {
-//    case PUBLIC_KEY_TYPE_ED25519:
-//        uint256 ed25519;
-//    };
-//
-type PublicKey struct {
-	Type    PublicKeyType
-	Ed25519 *Uint256
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u PublicKey) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of PublicKey
-func (u PublicKey) ArmForSwitch(sw int32) (string, bool) {
-	switch PublicKeyType(sw) {
-	case PublicKeyTypePublicKeyTypeEd25519:
-		return "Ed25519", true
-	}
-	return "-", false
-}
-
-// NewPublicKey creates a new  PublicKey.
-func NewPublicKey(aType PublicKeyType, value interface{}) (result PublicKey, err error) {
-	result.Type = aType
-	switch PublicKeyType(aType) {
-	case PublicKeyTypePublicKeyTypeEd25519:
-		tv, ok := value.(Uint256)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Uint256")
-			return
-		}
-		result.Ed25519 = &tv
-	}
-	return
-}
-
-// MustEd25519 retrieves the Ed25519 value from the union,
-// panicing if the value is not set.
-func (u PublicKey) MustEd25519() Uint256 {
-	val, ok := u.GetEd25519()
-
-	if !ok {
-		panic("arm Ed25519 is not set")
-	}
-
-	return val
-}
-
-// GetEd25519 retrieves the Ed25519 value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u PublicKey) GetEd25519() (result Uint256, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Ed25519" {
-		result = *u.Ed25519
-		ok = true
-	}
-
-	return
-}
-
-// SignerKey is an XDR Union defines as:
-//
-//   union SignerKey switch (SignerKeyType type)
-//    {
-//    case SIGNER_KEY_TYPE_ED25519:
-//        uint256 ed25519;
-//    case SIGNER_KEY_TYPE_PRE_AUTH_TX:
-//        /* Hash of Transaction structure */
-//        uint256 preAuthTx;
-//    case SIGNER_KEY_TYPE_HASH_X:
-//        /* Hash of random 256 bit preimage X */
-//        uint256 hashX;
-//    };
-//
-type SignerKey struct {
-	Type      SignerKeyType
-	Ed25519   *Uint256
-	PreAuthTx *Uint256
-	HashX     *Uint256
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u SignerKey) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of SignerKey
-func (u SignerKey) ArmForSwitch(sw int32) (string, bool) {
-	switch SignerKeyType(sw) {
-	case SignerKeyTypeSignerKeyTypeEd25519:
-		return "Ed25519", true
-	case SignerKeyTypeSignerKeyTypePreAuthTx:
-		return "PreAuthTx", true
-	case SignerKeyTypeSignerKeyTypeHashX:
-		return "HashX", true
-	}
-	return "-", false
-}
-
-// NewSignerKey creates a new  SignerKey.
-func NewSignerKey(aType SignerKeyType, value interface{}) (result SignerKey, err error) {
-	result.Type = aType
-	switch SignerKeyType(aType) {
-	case SignerKeyTypeSignerKeyTypeEd25519:
-		tv, ok := value.(Uint256)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Uint256")
-			return
-		}
-		result.Ed25519 = &tv
-	case SignerKeyTypeSignerKeyTypePreAuthTx:
-		tv, ok := value.(Uint256)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Uint256")
-			return
-		}
-		result.PreAuthTx = &tv
-	case SignerKeyTypeSignerKeyTypeHashX:
-		tv, ok := value.(Uint256)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Uint256")
-			return
-		}
-		result.HashX = &tv
-	}
-	return
-}
-
-// MustEd25519 retrieves the Ed25519 value from the union,
-// panicing if the value is not set.
-func (u SignerKey) MustEd25519() Uint256 {
-	val, ok := u.GetEd25519()
-
-	if !ok {
-		panic("arm Ed25519 is not set")
-	}
-
-	return val
-}
-
-// GetEd25519 retrieves the Ed25519 value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u SignerKey) GetEd25519() (result Uint256, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Ed25519" {
-		result = *u.Ed25519
-		ok = true
-	}
-
-	return
-}
-
-// MustPreAuthTx retrieves the PreAuthTx value from the union,
-// panicing if the value is not set.
-func (u SignerKey) MustPreAuthTx() Uint256 {
-	val, ok := u.GetPreAuthTx()
-
-	if !ok {
-		panic("arm PreAuthTx is not set")
-	}
-
-	return val
-}
-
-// GetPreAuthTx retrieves the PreAuthTx value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u SignerKey) GetPreAuthTx() (result Uint256, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "PreAuthTx" {
-		result = *u.PreAuthTx
-		ok = true
-	}
-
-	return
-}
-
-// MustHashX retrieves the HashX value from the union,
-// panicing if the value is not set.
-func (u SignerKey) MustHashX() Uint256 {
-	val, ok := u.GetHashX()
-
-	if !ok {
-		panic("arm HashX is not set")
-	}
-
-	return val
-}
-
-// GetHashX retrieves the HashX value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u SignerKey) GetHashX() (result Uint256, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "HashX" {
-		result = *u.HashX
-		ok = true
-	}
-
-	return
-}
-
-// Signature is an XDR Typedef defines as:
-//
-//   typedef opaque Signature<64>;
-//
-type Signature []byte
-
-// XDRMaxSize implements the Sized interface for Signature
-func (e Signature) XDRMaxSize() int {
-	return 64
-}
-
-// SignatureHint is an XDR Typedef defines as:
-//
-//   typedef opaque SignatureHint[4];
-//
-type SignatureHint [4]byte
-
-// XDRMaxSize implements the Sized interface for SignatureHint
-func (e SignatureHint) XDRMaxSize() int {
-	return 4
-}
-
-// NodeId is an XDR Typedef defines as:
-//
-//   typedef PublicKey NodeID;
-//
-type NodeId PublicKey
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u NodeId) SwitchFieldName() string {
-	return PublicKey(u).SwitchFieldName()
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of PublicKey
-func (u NodeId) ArmForSwitch(sw int32) (string, bool) {
-	return PublicKey(u).ArmForSwitch(sw)
-}
-
-// NewNodeId creates a new  NodeId.
-func NewNodeId(aType PublicKeyType, value interface{}) (result NodeId, err error) {
-	u, err := NewPublicKey(aType, value)
-	result = NodeId(u)
-	return
-}
-
-// MustEd25519 retrieves the Ed25519 value from the union,
-// panicing if the value is not set.
-func (u NodeId) MustEd25519() Uint256 {
-	return PublicKey(u).MustEd25519()
-}
-
-// GetEd25519 retrieves the Ed25519 value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u NodeId) GetEd25519() (result Uint256, ok bool) {
-	return PublicKey(u).GetEd25519()
-}
-
-// Curve25519Secret is an XDR Struct defines as:
-//
-//   struct Curve25519Secret
-//    {
-//            opaque key[32];
-//    };
-//
-type Curve25519Secret struct {
-	Key [32]byte `xdrmaxsize:"32"`
-}
-
-// Curve25519Public is an XDR Struct defines as:
-//
-//   struct Curve25519Public
-//    {
-//            opaque key[32];
-//    };
-//
-type Curve25519Public struct {
-	Key [32]byte `xdrmaxsize:"32"`
-}
-
-// HmacSha256Key is an XDR Struct defines as:
-//
-//   struct HmacSha256Key
-//    {
-//            opaque key[32];
-//    };
-//
-type HmacSha256Key struct {
-	Key [32]byte `xdrmaxsize:"32"`
-}
-
-// HmacSha256Mac is an XDR Struct defines as:
-//
-//   struct HmacSha256Mac
-//    {
-//            opaque mac[32];
-//    };
-//
-type HmacSha256Mac struct {
-	Mac [32]byte `xdrmaxsize:"32"`
-}
-
 // AccountId is an XDR Typedef defines as:
 //
 //   typedef PublicKey AccountID;
 //
 type AccountId PublicKey
-
 // SwitchFieldName returns the field name in which this union's
 // discriminant is stored
 func (u AccountId) SwitchFieldName() string {
@@ -536,7 +70,6 @@ func (u AccountId) GetEd25519() (result Uint256, ok bool) {
 //   typedef opaque Thresholds[4];
 //
 type Thresholds [4]byte
-
 // XDRMaxSize implements the Sized interface for Thresholds
 func (e Thresholds) XDRMaxSize() int {
 	return 4
@@ -547,7 +80,6 @@ func (e Thresholds) XDRMaxSize() int {
 //   typedef string string32<32>;
 //
 type String32 string
-
 // XDRMaxSize implements the Sized interface for String32
 func (e String32) XDRMaxSize() int {
 	return 32
@@ -558,7 +90,6 @@ func (e String32) XDRMaxSize() int {
 //   typedef string string64<64>;
 //
 type String64 string
-
 // XDRMaxSize implements the Sized interface for String64
 func (e String64) XDRMaxSize() int {
 	return 64
@@ -575,7 +106,6 @@ type SequenceNumber Int64
 //   typedef opaque DataValue<64>;
 //
 type DataValue []byte
-
 // XDRMaxSize implements the Sized interface for DataValue
 func (e DataValue) XDRMaxSize() int {
 	return 64
@@ -591,13 +121,11 @@ func (e DataValue) XDRMaxSize() int {
 //    };
 //
 type AssetType int32
-
 const (
-	AssetTypeAssetTypeNative           AssetType = 0
-	AssetTypeAssetTypeCreditAlphanum4  AssetType = 1
+	AssetTypeAssetTypeNative AssetType = 0
+	AssetTypeAssetTypeCreditAlphanum4 AssetType = 1
 	AssetTypeAssetTypeCreditAlphanum12 AssetType = 2
 )
-
 var assetTypeMap = map[int32]string{
 	0: "AssetTypeAssetTypeNative",
 	1: "AssetTypeAssetTypeCreditAlphanum4",
@@ -610,7 +138,6 @@ func (e AssetType) ValidEnum(v int32) bool {
 	_, ok := assetTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e AssetType) String() string {
 	name, _ := assetTypeMap[int32(e)]
@@ -627,7 +154,7 @@ func (e AssetType) String() string {
 //
 type AssetAlphaNum4 struct {
 	AssetCode [4]byte `xdrmaxsize:"4"`
-	Issuer    AccountId
+	Issuer AccountId
 }
 
 // AssetAlphaNum12 is an XDR NestedStruct defines as:
@@ -640,7 +167,7 @@ type AssetAlphaNum4 struct {
 //
 type AssetAlphaNum12 struct {
 	AssetCode [12]byte `xdrmaxsize:"12"`
-	Issuer    AccountId
+	Issuer AccountId
 }
 
 // Asset is an XDR Union defines as:
@@ -667,9 +194,9 @@ type AssetAlphaNum12 struct {
 //        // add other asset types here in the future
 //    };
 //
-type Asset struct {
-	Type       AssetType
-	AlphaNum4  *AssetAlphaNum4
+type Asset struct{
+	Type AssetType
+	AlphaNum4 *AssetAlphaNum4
 	AlphaNum12 *AssetAlphaNum12
 }
 
@@ -716,7 +243,6 @@ func NewAsset(aType AssetType, value interface{}) (result Asset, err error) {
 	}
 	return
 }
-
 // MustAlphaNum4 retrieves the AlphaNum4 value from the union,
 // panicing if the value is not set.
 func (u Asset) MustAlphaNum4() AssetAlphaNum4 {
@@ -741,7 +267,6 @@ func (u Asset) GetAlphaNum4() (result AssetAlphaNum4, ok bool) {
 
 	return
 }
-
 // MustAlphaNum12 retrieves the AlphaNum12 value from the union,
 // panicing if the value is not set.
 func (u Asset) MustAlphaNum12() AssetAlphaNum12 {
@@ -765,6 +290,45 @@ func (u Asset) GetAlphaNum12() (result AssetAlphaNum12, ok bool) {
 	}
 
 	return
+}
+
+// AccountType is an XDR Enum defines as:
+//
+//   enum AccountType
+//    {
+//        FOUNDATION = 0,
+//        OPERATOR = 1,
+//        LBO = 2,
+//        ISSUER = 3,
+//        CLIENT = 4
+//    };
+//
+type AccountType int32
+const (
+	AccountTypeFoundation AccountType = 0
+	AccountTypeOperator AccountType = 1
+	AccountTypeLbo AccountType = 2
+	AccountTypeIssuer AccountType = 3
+	AccountTypeClient AccountType = 4
+)
+var accountTypeMap = map[int32]string{
+	0: "AccountTypeFoundation",
+	1: "AccountTypeOperator",
+	2: "AccountTypeLbo",
+	3: "AccountTypeIssuer",
+	4: "AccountTypeClient",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for AccountType
+func (e AccountType) ValidEnum(v int32) bool {
+	_, ok := accountTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e AccountType) String() string {
+	name, _ := accountTypeMap[int32(e)]
+	return name
 }
 
 // Price is an XDR Struct defines as:
@@ -791,14 +355,12 @@ type Price struct {
 //    };
 //
 type ThresholdIndexes int32
-
 const (
 	ThresholdIndexesThresholdMasterWeight ThresholdIndexes = 0
-	ThresholdIndexesThresholdLow          ThresholdIndexes = 1
-	ThresholdIndexesThresholdMed          ThresholdIndexes = 2
-	ThresholdIndexesThresholdHigh         ThresholdIndexes = 3
+	ThresholdIndexesThresholdLow ThresholdIndexes = 1
+	ThresholdIndexesThresholdMed ThresholdIndexes = 2
+	ThresholdIndexesThresholdHigh ThresholdIndexes = 3
 )
-
 var thresholdIndexesMap = map[int32]string{
 	0: "ThresholdIndexesThresholdMasterWeight",
 	1: "ThresholdIndexesThresholdLow",
@@ -812,7 +374,6 @@ func (e ThresholdIndexes) ValidEnum(v int32) bool {
 	_, ok := thresholdIndexesMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e ThresholdIndexes) String() string {
 	name, _ := thresholdIndexesMap[int32(e)]
@@ -830,14 +391,12 @@ func (e ThresholdIndexes) String() string {
 //    };
 //
 type LedgerEntryType int32
-
 const (
-	LedgerEntryTypeAccount   LedgerEntryType = 0
+	LedgerEntryTypeAccount LedgerEntryType = 0
 	LedgerEntryTypeTrustline LedgerEntryType = 1
-	LedgerEntryTypeOffer     LedgerEntryType = 2
-	LedgerEntryTypeData      LedgerEntryType = 3
+	LedgerEntryTypeOffer LedgerEntryType = 2
+	LedgerEntryTypeData LedgerEntryType = 3
 )
-
 var ledgerEntryTypeMap = map[int32]string{
 	0: "LedgerEntryTypeAccount",
 	1: "LedgerEntryTypeTrustline",
@@ -851,7 +410,6 @@ func (e LedgerEntryType) ValidEnum(v int32) bool {
 	_, ok := ledgerEntryTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e LedgerEntryType) String() string {
 	name, _ := ledgerEntryTypeMap[int32(e)]
@@ -867,7 +425,7 @@ func (e LedgerEntryType) String() string {
 //    };
 //
 type Signer struct {
-	Key    SignerKey
+	Key SignerKey
 	Weight Uint32
 }
 
@@ -888,13 +446,11 @@ type Signer struct {
 //    };
 //
 type AccountFlags int32
-
 const (
-	AccountFlagsAuthRequiredFlag  AccountFlags = 1
+	AccountFlagsAuthRequiredFlag AccountFlags = 1
 	AccountFlagsAuthRevocableFlag AccountFlags = 2
 	AccountFlagsAuthImmutableFlag AccountFlags = 4
 )
-
 var accountFlagsMap = map[int32]string{
 	1: "AccountFlagsAuthRequiredFlag",
 	2: "AccountFlagsAuthRevocableFlag",
@@ -907,7 +463,6 @@ func (e AccountFlags) ValidEnum(v int32) bool {
 	_, ok := accountFlagsMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e AccountFlags) String() string {
 	name, _ := accountFlagsMap[int32(e)]
@@ -928,7 +483,7 @@ const MaskAccountFlags = 0x7
 //            void;
 //        }
 //
-type AccountEntryExt struct {
+type AccountEntryExt struct{
 	V int32
 }
 
@@ -970,6 +525,8 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //        AccountID* inflationDest; // Account to vote for during inflation
 //        uint32 flags;             // see AccountFlags
 //
+//        uint32 accountType;           // Account role
+//
 //        string32 homeDomain; // can be used for reverse federation and memo lookup
 //
 //        // fields used for signatures
@@ -988,16 +545,17 @@ func NewAccountEntryExt(v int32, value interface{}) (result AccountEntryExt, err
 //    };
 //
 type AccountEntry struct {
-	AccountId     AccountId
-	Balance       Int64
-	SeqNum        SequenceNumber
+	AccountId AccountId
+	Balance Int64
+	SeqNum SequenceNumber
 	NumSubEntries Uint32
 	InflationDest *AccountId
-	Flags         Uint32
-	HomeDomain    String32
-	Thresholds    Thresholds
-	Signers       []Signer `xdrmaxsize:"20"`
-	Ext           AccountEntryExt
+	Flags Uint32
+	AccountType Uint32
+	HomeDomain String32
+	Thresholds Thresholds
+	Signers []Signer `xdrmaxsize:"20"`
+	Ext AccountEntryExt
 }
 
 // TrustLineFlags is an XDR Enum defines as:
@@ -1009,11 +567,9 @@ type AccountEntry struct {
 //    };
 //
 type TrustLineFlags int32
-
 const (
 	TrustLineFlagsAuthorizedFlag TrustLineFlags = 1
 )
-
 var trustLineFlagsMap = map[int32]string{
 	1: "TrustLineFlagsAuthorizedFlag",
 }
@@ -1024,7 +580,6 @@ func (e TrustLineFlags) ValidEnum(v int32) bool {
 	_, ok := trustLineFlagsMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e TrustLineFlags) String() string {
 	name, _ := trustLineFlagsMap[int32(e)]
@@ -1045,7 +600,7 @@ const MaskTrustlineFlags = 1
 //            void;
 //        }
 //
-type TrustLineEntryExt struct {
+type TrustLineEntryExt struct{
 	V int32
 }
 
@@ -1098,11 +653,11 @@ func NewTrustLineEntryExt(v int32, value interface{}) (result TrustLineEntryExt,
 //
 type TrustLineEntry struct {
 	AccountId AccountId
-	Asset     Asset
-	Balance   Int64
-	Limit     Int64
-	Flags     Uint32
-	Ext       TrustLineEntryExt
+	Asset Asset
+	Balance Int64
+	Limit Int64
+	Flags Uint32
+	Ext TrustLineEntryExt
 }
 
 // OfferEntryFlags is an XDR Enum defines as:
@@ -1114,11 +669,9 @@ type TrustLineEntry struct {
 //    };
 //
 type OfferEntryFlags int32
-
 const (
 	OfferEntryFlagsPassiveFlag OfferEntryFlags = 1
 )
-
 var offerEntryFlagsMap = map[int32]string{
 	1: "OfferEntryFlagsPassiveFlag",
 }
@@ -1129,7 +682,6 @@ func (e OfferEntryFlags) ValidEnum(v int32) bool {
 	_, ok := offerEntryFlagsMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e OfferEntryFlags) String() string {
 	name, _ := offerEntryFlagsMap[int32(e)]
@@ -1150,7 +702,7 @@ const MaskOfferentryFlags = 1
 //            void;
 //        }
 //
-type OfferEntryExt struct {
+type OfferEntryExt struct{
 	V int32
 }
 
@@ -1209,13 +761,13 @@ func NewOfferEntryExt(v int32, value interface{}) (result OfferEntryExt, err err
 //
 type OfferEntry struct {
 	SellerId AccountId
-	OfferId  Uint64
-	Selling  Asset
-	Buying   Asset
-	Amount   Int64
-	Price    Price
-	Flags    Uint32
-	Ext      OfferEntryExt
+	OfferId Uint64
+	Selling Asset
+	Buying Asset
+	Amount Int64
+	Price Price
+	Flags Uint32
+	Ext OfferEntryExt
 }
 
 // DataEntryExt is an XDR NestedUnion defines as:
@@ -1226,7 +778,7 @@ type OfferEntry struct {
 //            void;
 //        }
 //
-type DataEntryExt struct {
+type DataEntryExt struct{
 	V int32
 }
 
@@ -1275,9 +827,9 @@ func NewDataEntryExt(v int32, value interface{}) (result DataEntryExt, err error
 //
 type DataEntry struct {
 	AccountId AccountId
-	DataName  String64
+	DataName String64
 	DataValue DataValue
-	Ext       DataEntryExt
+	Ext DataEntryExt
 }
 
 // LedgerEntryData is an XDR NestedUnion defines as:
@@ -1294,12 +846,12 @@ type DataEntry struct {
 //            DataEntry data;
 //        }
 //
-type LedgerEntryData struct {
-	Type      LedgerEntryType
-	Account   *AccountEntry
+type LedgerEntryData struct{
+	Type LedgerEntryType
+	Account *AccountEntry
 	TrustLine *TrustLineEntry
-	Offer     *OfferEntry
-	Data      *DataEntry
+	Offer *OfferEntry
+	Data *DataEntry
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -1359,7 +911,6 @@ func NewLedgerEntryData(aType LedgerEntryType, value interface{}) (result Ledger
 	}
 	return
 }
-
 // MustAccount retrieves the Account value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryData) MustAccount() AccountEntry {
@@ -1384,7 +935,6 @@ func (u LedgerEntryData) GetAccount() (result AccountEntry, ok bool) {
 
 	return
 }
-
 // MustTrustLine retrieves the TrustLine value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryData) MustTrustLine() TrustLineEntry {
@@ -1409,7 +959,6 @@ func (u LedgerEntryData) GetTrustLine() (result TrustLineEntry, ok bool) {
 
 	return
 }
-
 // MustOffer retrieves the Offer value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryData) MustOffer() OfferEntry {
@@ -1434,7 +983,6 @@ func (u LedgerEntryData) GetOffer() (result OfferEntry, ok bool) {
 
 	return
 }
-
 // MustData retrieves the Data value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryData) MustData() DataEntry {
@@ -1468,7 +1016,7 @@ func (u LedgerEntryData) GetData() (result DataEntry, ok bool) {
 //            void;
 //        }
 //
-type LedgerEntryExt struct {
+type LedgerEntryExt struct{
 	V int32
 }
 
@@ -1528,8 +1076,8 @@ func NewLedgerEntryExt(v int32, value interface{}) (result LedgerEntryExt, err e
 //
 type LedgerEntry struct {
 	LastModifiedLedgerSeq Uint32
-	Data                  LedgerEntryData
-	Ext                   LedgerEntryExt
+	Data LedgerEntryData
+	Ext LedgerEntryExt
 }
 
 // EnvelopeType is an XDR Enum defines as:
@@ -1542,13 +1090,11 @@ type LedgerEntry struct {
 //    };
 //
 type EnvelopeType int32
-
 const (
-	EnvelopeTypeEnvelopeTypeScp  EnvelopeType = 1
-	EnvelopeTypeEnvelopeTypeTx   EnvelopeType = 2
+	EnvelopeTypeEnvelopeTypeScp EnvelopeType = 1
+	EnvelopeTypeEnvelopeTypeTx EnvelopeType = 2
 	EnvelopeTypeEnvelopeTypeAuth EnvelopeType = 3
 )
-
 var envelopeTypeMap = map[int32]string{
 	1: "EnvelopeTypeEnvelopeTypeScp",
 	2: "EnvelopeTypeEnvelopeTypeTx",
@@ -1561,3549 +1107,10 @@ func (e EnvelopeType) ValidEnum(v int32) bool {
 	_, ok := envelopeTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e EnvelopeType) String() string {
 	name, _ := envelopeTypeMap[int32(e)]
 	return name
-}
-
-// DecoratedSignature is an XDR Struct defines as:
-//
-//   struct DecoratedSignature
-//    {
-//        SignatureHint hint;  // last 4 bytes of the public key, used as a hint
-//        Signature signature; // actual signature
-//    };
-//
-type DecoratedSignature struct {
-	Hint      SignatureHint
-	Signature Signature
-}
-
-// OperationType is an XDR Enum defines as:
-//
-//   enum OperationType
-//    {
-//        CREATE_ACCOUNT = 0,
-//        PAYMENT = 1,
-//        PATH_PAYMENT = 2,
-//        MANAGE_OFFER = 3,
-//        CREATE_PASSIVE_OFFER = 4,
-//        SET_OPTIONS = 5,
-//        CHANGE_TRUST = 6,
-//        ALLOW_TRUST = 7,
-//        ACCOUNT_MERGE = 8,
-//        INFLATION = 9,
-//        MANAGE_DATA = 10,
-//        BUMP_SEQUENCE = 11
-//    };
-//
-type OperationType int32
-
-const (
-	OperationTypeCreateAccount      OperationType = 0
-	OperationTypePayment            OperationType = 1
-	OperationTypePathPayment        OperationType = 2
-	OperationTypeManageOffer        OperationType = 3
-	OperationTypeCreatePassiveOffer OperationType = 4
-	OperationTypeSetOptions         OperationType = 5
-	OperationTypeChangeTrust        OperationType = 6
-	OperationTypeAllowTrust         OperationType = 7
-	OperationTypeAccountMerge       OperationType = 8
-	OperationTypeInflation          OperationType = 9
-	OperationTypeManageData         OperationType = 10
-	OperationTypeBumpSequence       OperationType = 11
-)
-
-var operationTypeMap = map[int32]string{
-	0:  "OperationTypeCreateAccount",
-	1:  "OperationTypePayment",
-	2:  "OperationTypePathPayment",
-	3:  "OperationTypeManageOffer",
-	4:  "OperationTypeCreatePassiveOffer",
-	5:  "OperationTypeSetOptions",
-	6:  "OperationTypeChangeTrust",
-	7:  "OperationTypeAllowTrust",
-	8:  "OperationTypeAccountMerge",
-	9:  "OperationTypeInflation",
-	10: "OperationTypeManageData",
-	11: "OperationTypeBumpSequence",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for OperationType
-func (e OperationType) ValidEnum(v int32) bool {
-	_, ok := operationTypeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e OperationType) String() string {
-	name, _ := operationTypeMap[int32(e)]
-	return name
-}
-
-// CreateAccountOp is an XDR Struct defines as:
-//
-//   struct CreateAccountOp
-//    {
-//        AccountID destination; // account to create
-//        int64 startingBalance; // amount they end up with
-//    };
-//
-type CreateAccountOp struct {
-	Destination     AccountId
-	StartingBalance Int64
-}
-
-// PaymentOp is an XDR Struct defines as:
-//
-//   struct PaymentOp
-//    {
-//        AccountID destination; // recipient of the payment
-//        Asset asset;           // what they end up with
-//        int64 amount;          // amount they end up with
-//    };
-//
-type PaymentOp struct {
-	Destination AccountId
-	Asset       Asset
-	Amount      Int64
-}
-
-// PathPaymentOp is an XDR Struct defines as:
-//
-//   struct PathPaymentOp
-//    {
-//        Asset sendAsset; // asset we pay with
-//        int64 sendMax;   // the maximum amount of sendAsset to
-//                         // send (excluding fees).
-//                         // The operation will fail if can't be met
-//
-//        AccountID destination; // recipient of the payment
-//        Asset destAsset;       // what they end up with
-//        int64 destAmount;      // amount they end up with
-//
-//        Asset path<5>; // additional hops it must go through to get there
-//    };
-//
-type PathPaymentOp struct {
-	SendAsset   Asset
-	SendMax     Int64
-	Destination AccountId
-	DestAsset   Asset
-	DestAmount  Int64
-	Path        []Asset `xdrmaxsize:"5"`
-}
-
-// ManageOfferOp is an XDR Struct defines as:
-//
-//   struct ManageOfferOp
-//    {
-//        Asset selling;
-//        Asset buying;
-//        int64 amount; // amount being sold. if set to 0, delete the offer
-//        Price price;  // price of thing being sold in terms of what you are buying
-//
-//        // 0=create a new offer, otherwise edit an existing offer
-//        uint64 offerID;
-//    };
-//
-type ManageOfferOp struct {
-	Selling Asset
-	Buying  Asset
-	Amount  Int64
-	Price   Price
-	OfferId Uint64
-}
-
-// CreatePassiveOfferOp is an XDR Struct defines as:
-//
-//   struct CreatePassiveOfferOp
-//    {
-//        Asset selling; // A
-//        Asset buying;  // B
-//        int64 amount;  // amount taker gets. if set to 0, delete the offer
-//        Price price;   // cost of A in terms of B
-//    };
-//
-type CreatePassiveOfferOp struct {
-	Selling Asset
-	Buying  Asset
-	Amount  Int64
-	Price   Price
-}
-
-// SetOptionsOp is an XDR Struct defines as:
-//
-//   struct SetOptionsOp
-//    {
-//        AccountID* inflationDest; // sets the inflation destination
-//
-//        uint32* clearFlags; // which flags to clear
-//        uint32* setFlags;   // which flags to set
-//
-//        // account threshold manipulation
-//        uint32* masterWeight; // weight of the master account
-//        uint32* lowThreshold;
-//        uint32* medThreshold;
-//        uint32* highThreshold;
-//
-//        string32* homeDomain; // sets the home domain
-//
-//        // Add, update or remove a signer for the account
-//        // signer is deleted if the weight is 0
-//        Signer* signer;
-//    };
-//
-type SetOptionsOp struct {
-	InflationDest *AccountId
-	ClearFlags    *Uint32
-	SetFlags      *Uint32
-	MasterWeight  *Uint32
-	LowThreshold  *Uint32
-	MedThreshold  *Uint32
-	HighThreshold *Uint32
-	HomeDomain    *String32
-	Signer        *Signer
-}
-
-// ChangeTrustOp is an XDR Struct defines as:
-//
-//   struct ChangeTrustOp
-//    {
-//        Asset line;
-//
-//        // if limit is set to 0, deletes the trust line
-//        int64 limit;
-//    };
-//
-type ChangeTrustOp struct {
-	Line  Asset
-	Limit Int64
-}
-
-// AllowTrustOpAsset is an XDR NestedUnion defines as:
-//
-//   union switch (AssetType type)
-//        {
-//        // ASSET_TYPE_NATIVE is not allowed
-//        case ASSET_TYPE_CREDIT_ALPHANUM4:
-//            opaque assetCode4[4];
-//
-//        case ASSET_TYPE_CREDIT_ALPHANUM12:
-//            opaque assetCode12[12];
-//
-//            // add other asset types here in the future
-//        }
-//
-type AllowTrustOpAsset struct {
-	Type        AssetType
-	AssetCode4  *[4]byte  `xdrmaxsize:"4"`
-	AssetCode12 *[12]byte `xdrmaxsize:"12"`
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u AllowTrustOpAsset) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of AllowTrustOpAsset
-func (u AllowTrustOpAsset) ArmForSwitch(sw int32) (string, bool) {
-	switch AssetType(sw) {
-	case AssetTypeAssetTypeCreditAlphanum4:
-		return "AssetCode4", true
-	case AssetTypeAssetTypeCreditAlphanum12:
-		return "AssetCode12", true
-	}
-	return "-", false
-}
-
-// NewAllowTrustOpAsset creates a new  AllowTrustOpAsset.
-func NewAllowTrustOpAsset(aType AssetType, value interface{}) (result AllowTrustOpAsset, err error) {
-	result.Type = aType
-	switch AssetType(aType) {
-	case AssetTypeAssetTypeCreditAlphanum4:
-		tv, ok := value.([4]byte)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be [4]byte")
-			return
-		}
-		result.AssetCode4 = &tv
-	case AssetTypeAssetTypeCreditAlphanum12:
-		tv, ok := value.([12]byte)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be [12]byte")
-			return
-		}
-		result.AssetCode12 = &tv
-	}
-	return
-}
-
-// MustAssetCode4 retrieves the AssetCode4 value from the union,
-// panicing if the value is not set.
-func (u AllowTrustOpAsset) MustAssetCode4() [4]byte {
-	val, ok := u.GetAssetCode4()
-
-	if !ok {
-		panic("arm AssetCode4 is not set")
-	}
-
-	return val
-}
-
-// GetAssetCode4 retrieves the AssetCode4 value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u AllowTrustOpAsset) GetAssetCode4() (result [4]byte, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "AssetCode4" {
-		result = *u.AssetCode4
-		ok = true
-	}
-
-	return
-}
-
-// MustAssetCode12 retrieves the AssetCode12 value from the union,
-// panicing if the value is not set.
-func (u AllowTrustOpAsset) MustAssetCode12() [12]byte {
-	val, ok := u.GetAssetCode12()
-
-	if !ok {
-		panic("arm AssetCode12 is not set")
-	}
-
-	return val
-}
-
-// GetAssetCode12 retrieves the AssetCode12 value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u AllowTrustOpAsset) GetAssetCode12() (result [12]byte, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "AssetCode12" {
-		result = *u.AssetCode12
-		ok = true
-	}
-
-	return
-}
-
-// AllowTrustOp is an XDR Struct defines as:
-//
-//   struct AllowTrustOp
-//    {
-//        AccountID trustor;
-//        union switch (AssetType type)
-//        {
-//        // ASSET_TYPE_NATIVE is not allowed
-//        case ASSET_TYPE_CREDIT_ALPHANUM4:
-//            opaque assetCode4[4];
-//
-//        case ASSET_TYPE_CREDIT_ALPHANUM12:
-//            opaque assetCode12[12];
-//
-//            // add other asset types here in the future
-//        }
-//        asset;
-//
-//        bool authorize;
-//    };
-//
-type AllowTrustOp struct {
-	Trustor   AccountId
-	Asset     AllowTrustOpAsset
-	Authorize bool
-}
-
-// ManageDataOp is an XDR Struct defines as:
-//
-//   struct ManageDataOp
-//    {
-//        string64 dataName;
-//        DataValue* dataValue; // set to null to clear
-//    };
-//
-type ManageDataOp struct {
-	DataName  String64
-	DataValue *DataValue
-}
-
-// BumpSequenceOp is an XDR Struct defines as:
-//
-//   struct BumpSequenceOp
-//    {
-//        SequenceNumber bumpTo;
-//    };
-//
-type BumpSequenceOp struct {
-	BumpTo SequenceNumber
-}
-
-// OperationBody is an XDR NestedUnion defines as:
-//
-//   union switch (OperationType type)
-//        {
-//        case CREATE_ACCOUNT:
-//            CreateAccountOp createAccountOp;
-//        case PAYMENT:
-//            PaymentOp paymentOp;
-//        case PATH_PAYMENT:
-//            PathPaymentOp pathPaymentOp;
-//        case MANAGE_OFFER:
-//            ManageOfferOp manageOfferOp;
-//        case CREATE_PASSIVE_OFFER:
-//            CreatePassiveOfferOp createPassiveOfferOp;
-//        case SET_OPTIONS:
-//            SetOptionsOp setOptionsOp;
-//        case CHANGE_TRUST:
-//            ChangeTrustOp changeTrustOp;
-//        case ALLOW_TRUST:
-//            AllowTrustOp allowTrustOp;
-//        case ACCOUNT_MERGE:
-//            AccountID destination;
-//        case INFLATION:
-//            void;
-//        case MANAGE_DATA:
-//            ManageDataOp manageDataOp;
-//        case BUMP_SEQUENCE:
-//            BumpSequenceOp bumpSequenceOp;
-//        }
-//
-type OperationBody struct {
-	Type                 OperationType
-	CreateAccountOp      *CreateAccountOp
-	PaymentOp            *PaymentOp
-	PathPaymentOp        *PathPaymentOp
-	ManageOfferOp        *ManageOfferOp
-	CreatePassiveOfferOp *CreatePassiveOfferOp
-	SetOptionsOp         *SetOptionsOp
-	ChangeTrustOp        *ChangeTrustOp
-	AllowTrustOp         *AllowTrustOp
-	Destination          *AccountId
-	ManageDataOp         *ManageDataOp
-	BumpSequenceOp       *BumpSequenceOp
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u OperationBody) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of OperationBody
-func (u OperationBody) ArmForSwitch(sw int32) (string, bool) {
-	switch OperationType(sw) {
-	case OperationTypeCreateAccount:
-		return "CreateAccountOp", true
-	case OperationTypePayment:
-		return "PaymentOp", true
-	case OperationTypePathPayment:
-		return "PathPaymentOp", true
-	case OperationTypeManageOffer:
-		return "ManageOfferOp", true
-	case OperationTypeCreatePassiveOffer:
-		return "CreatePassiveOfferOp", true
-	case OperationTypeSetOptions:
-		return "SetOptionsOp", true
-	case OperationTypeChangeTrust:
-		return "ChangeTrustOp", true
-	case OperationTypeAllowTrust:
-		return "AllowTrustOp", true
-	case OperationTypeAccountMerge:
-		return "Destination", true
-	case OperationTypeInflation:
-		return "", true
-	case OperationTypeManageData:
-		return "ManageDataOp", true
-	case OperationTypeBumpSequence:
-		return "BumpSequenceOp", true
-	}
-	return "-", false
-}
-
-// NewOperationBody creates a new  OperationBody.
-func NewOperationBody(aType OperationType, value interface{}) (result OperationBody, err error) {
-	result.Type = aType
-	switch OperationType(aType) {
-	case OperationTypeCreateAccount:
-		tv, ok := value.(CreateAccountOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be CreateAccountOp")
-			return
-		}
-		result.CreateAccountOp = &tv
-	case OperationTypePayment:
-		tv, ok := value.(PaymentOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be PaymentOp")
-			return
-		}
-		result.PaymentOp = &tv
-	case OperationTypePathPayment:
-		tv, ok := value.(PathPaymentOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be PathPaymentOp")
-			return
-		}
-		result.PathPaymentOp = &tv
-	case OperationTypeManageOffer:
-		tv, ok := value.(ManageOfferOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageOfferOp")
-			return
-		}
-		result.ManageOfferOp = &tv
-	case OperationTypeCreatePassiveOffer:
-		tv, ok := value.(CreatePassiveOfferOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be CreatePassiveOfferOp")
-			return
-		}
-		result.CreatePassiveOfferOp = &tv
-	case OperationTypeSetOptions:
-		tv, ok := value.(SetOptionsOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be SetOptionsOp")
-			return
-		}
-		result.SetOptionsOp = &tv
-	case OperationTypeChangeTrust:
-		tv, ok := value.(ChangeTrustOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ChangeTrustOp")
-			return
-		}
-		result.ChangeTrustOp = &tv
-	case OperationTypeAllowTrust:
-		tv, ok := value.(AllowTrustOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be AllowTrustOp")
-			return
-		}
-		result.AllowTrustOp = &tv
-	case OperationTypeAccountMerge:
-		tv, ok := value.(AccountId)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be AccountId")
-			return
-		}
-		result.Destination = &tv
-	case OperationTypeInflation:
-		// void
-	case OperationTypeManageData:
-		tv, ok := value.(ManageDataOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageDataOp")
-			return
-		}
-		result.ManageDataOp = &tv
-	case OperationTypeBumpSequence:
-		tv, ok := value.(BumpSequenceOp)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be BumpSequenceOp")
-			return
-		}
-		result.BumpSequenceOp = &tv
-	}
-	return
-}
-
-// MustCreateAccountOp retrieves the CreateAccountOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustCreateAccountOp() CreateAccountOp {
-	val, ok := u.GetCreateAccountOp()
-
-	if !ok {
-		panic("arm CreateAccountOp is not set")
-	}
-
-	return val
-}
-
-// GetCreateAccountOp retrieves the CreateAccountOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetCreateAccountOp() (result CreateAccountOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "CreateAccountOp" {
-		result = *u.CreateAccountOp
-		ok = true
-	}
-
-	return
-}
-
-// MustPaymentOp retrieves the PaymentOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustPaymentOp() PaymentOp {
-	val, ok := u.GetPaymentOp()
-
-	if !ok {
-		panic("arm PaymentOp is not set")
-	}
-
-	return val
-}
-
-// GetPaymentOp retrieves the PaymentOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetPaymentOp() (result PaymentOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "PaymentOp" {
-		result = *u.PaymentOp
-		ok = true
-	}
-
-	return
-}
-
-// MustPathPaymentOp retrieves the PathPaymentOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustPathPaymentOp() PathPaymentOp {
-	val, ok := u.GetPathPaymentOp()
-
-	if !ok {
-		panic("arm PathPaymentOp is not set")
-	}
-
-	return val
-}
-
-// GetPathPaymentOp retrieves the PathPaymentOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetPathPaymentOp() (result PathPaymentOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "PathPaymentOp" {
-		result = *u.PathPaymentOp
-		ok = true
-	}
-
-	return
-}
-
-// MustManageOfferOp retrieves the ManageOfferOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustManageOfferOp() ManageOfferOp {
-	val, ok := u.GetManageOfferOp()
-
-	if !ok {
-		panic("arm ManageOfferOp is not set")
-	}
-
-	return val
-}
-
-// GetManageOfferOp retrieves the ManageOfferOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetManageOfferOp() (result ManageOfferOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ManageOfferOp" {
-		result = *u.ManageOfferOp
-		ok = true
-	}
-
-	return
-}
-
-// MustCreatePassiveOfferOp retrieves the CreatePassiveOfferOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustCreatePassiveOfferOp() CreatePassiveOfferOp {
-	val, ok := u.GetCreatePassiveOfferOp()
-
-	if !ok {
-		panic("arm CreatePassiveOfferOp is not set")
-	}
-
-	return val
-}
-
-// GetCreatePassiveOfferOp retrieves the CreatePassiveOfferOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetCreatePassiveOfferOp() (result CreatePassiveOfferOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "CreatePassiveOfferOp" {
-		result = *u.CreatePassiveOfferOp
-		ok = true
-	}
-
-	return
-}
-
-// MustSetOptionsOp retrieves the SetOptionsOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustSetOptionsOp() SetOptionsOp {
-	val, ok := u.GetSetOptionsOp()
-
-	if !ok {
-		panic("arm SetOptionsOp is not set")
-	}
-
-	return val
-}
-
-// GetSetOptionsOp retrieves the SetOptionsOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetSetOptionsOp() (result SetOptionsOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "SetOptionsOp" {
-		result = *u.SetOptionsOp
-		ok = true
-	}
-
-	return
-}
-
-// MustChangeTrustOp retrieves the ChangeTrustOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustChangeTrustOp() ChangeTrustOp {
-	val, ok := u.GetChangeTrustOp()
-
-	if !ok {
-		panic("arm ChangeTrustOp is not set")
-	}
-
-	return val
-}
-
-// GetChangeTrustOp retrieves the ChangeTrustOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetChangeTrustOp() (result ChangeTrustOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ChangeTrustOp" {
-		result = *u.ChangeTrustOp
-		ok = true
-	}
-
-	return
-}
-
-// MustAllowTrustOp retrieves the AllowTrustOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustAllowTrustOp() AllowTrustOp {
-	val, ok := u.GetAllowTrustOp()
-
-	if !ok {
-		panic("arm AllowTrustOp is not set")
-	}
-
-	return val
-}
-
-// GetAllowTrustOp retrieves the AllowTrustOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetAllowTrustOp() (result AllowTrustOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "AllowTrustOp" {
-		result = *u.AllowTrustOp
-		ok = true
-	}
-
-	return
-}
-
-// MustDestination retrieves the Destination value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustDestination() AccountId {
-	val, ok := u.GetDestination()
-
-	if !ok {
-		panic("arm Destination is not set")
-	}
-
-	return val
-}
-
-// GetDestination retrieves the Destination value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetDestination() (result AccountId, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Destination" {
-		result = *u.Destination
-		ok = true
-	}
-
-	return
-}
-
-// MustManageDataOp retrieves the ManageDataOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustManageDataOp() ManageDataOp {
-	val, ok := u.GetManageDataOp()
-
-	if !ok {
-		panic("arm ManageDataOp is not set")
-	}
-
-	return val
-}
-
-// GetManageDataOp retrieves the ManageDataOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetManageDataOp() (result ManageDataOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ManageDataOp" {
-		result = *u.ManageDataOp
-		ok = true
-	}
-
-	return
-}
-
-// MustBumpSequenceOp retrieves the BumpSequenceOp value from the union,
-// panicing if the value is not set.
-func (u OperationBody) MustBumpSequenceOp() BumpSequenceOp {
-	val, ok := u.GetBumpSequenceOp()
-
-	if !ok {
-		panic("arm BumpSequenceOp is not set")
-	}
-
-	return val
-}
-
-// GetBumpSequenceOp retrieves the BumpSequenceOp value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationBody) GetBumpSequenceOp() (result BumpSequenceOp, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "BumpSequenceOp" {
-		result = *u.BumpSequenceOp
-		ok = true
-	}
-
-	return
-}
-
-// Operation is an XDR Struct defines as:
-//
-//   struct Operation
-//    {
-//        // sourceAccount is the account used to run the operation
-//        // if not set, the runtime defaults to "sourceAccount" specified at
-//        // the transaction level
-//        AccountID* sourceAccount;
-//
-//        union switch (OperationType type)
-//        {
-//        case CREATE_ACCOUNT:
-//            CreateAccountOp createAccountOp;
-//        case PAYMENT:
-//            PaymentOp paymentOp;
-//        case PATH_PAYMENT:
-//            PathPaymentOp pathPaymentOp;
-//        case MANAGE_OFFER:
-//            ManageOfferOp manageOfferOp;
-//        case CREATE_PASSIVE_OFFER:
-//            CreatePassiveOfferOp createPassiveOfferOp;
-//        case SET_OPTIONS:
-//            SetOptionsOp setOptionsOp;
-//        case CHANGE_TRUST:
-//            ChangeTrustOp changeTrustOp;
-//        case ALLOW_TRUST:
-//            AllowTrustOp allowTrustOp;
-//        case ACCOUNT_MERGE:
-//            AccountID destination;
-//        case INFLATION:
-//            void;
-//        case MANAGE_DATA:
-//            ManageDataOp manageDataOp;
-//        case BUMP_SEQUENCE:
-//            BumpSequenceOp bumpSequenceOp;
-//        }
-//        body;
-//    };
-//
-type Operation struct {
-	SourceAccount *AccountId
-	Body          OperationBody
-}
-
-// MemoType is an XDR Enum defines as:
-//
-//   enum MemoType
-//    {
-//        MEMO_NONE = 0,
-//        MEMO_TEXT = 1,
-//        MEMO_ID = 2,
-//        MEMO_HASH = 3,
-//        MEMO_RETURN = 4
-//    };
-//
-type MemoType int32
-
-const (
-	MemoTypeMemoNone   MemoType = 0
-	MemoTypeMemoText   MemoType = 1
-	MemoTypeMemoId     MemoType = 2
-	MemoTypeMemoHash   MemoType = 3
-	MemoTypeMemoReturn MemoType = 4
-)
-
-var memoTypeMap = map[int32]string{
-	0: "MemoTypeMemoNone",
-	1: "MemoTypeMemoText",
-	2: "MemoTypeMemoId",
-	3: "MemoTypeMemoHash",
-	4: "MemoTypeMemoReturn",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for MemoType
-func (e MemoType) ValidEnum(v int32) bool {
-	_, ok := memoTypeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e MemoType) String() string {
-	name, _ := memoTypeMap[int32(e)]
-	return name
-}
-
-// Memo is an XDR Union defines as:
-//
-//   union Memo switch (MemoType type)
-//    {
-//    case MEMO_NONE:
-//        void;
-//    case MEMO_TEXT:
-//        string text<28>;
-//    case MEMO_ID:
-//        uint64 id;
-//    case MEMO_HASH:
-//        Hash hash; // the hash of what to pull from the content server
-//    case MEMO_RETURN:
-//        Hash retHash; // the hash of the tx you are rejecting
-//    };
-//
-type Memo struct {
-	Type    MemoType
-	Text    *string `xdrmaxsize:"28"`
-	Id      *Uint64
-	Hash    *Hash
-	RetHash *Hash
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u Memo) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of Memo
-func (u Memo) ArmForSwitch(sw int32) (string, bool) {
-	switch MemoType(sw) {
-	case MemoTypeMemoNone:
-		return "", true
-	case MemoTypeMemoText:
-		return "Text", true
-	case MemoTypeMemoId:
-		return "Id", true
-	case MemoTypeMemoHash:
-		return "Hash", true
-	case MemoTypeMemoReturn:
-		return "RetHash", true
-	}
-	return "-", false
-}
-
-// NewMemo creates a new  Memo.
-func NewMemo(aType MemoType, value interface{}) (result Memo, err error) {
-	result.Type = aType
-	switch MemoType(aType) {
-	case MemoTypeMemoNone:
-		// void
-	case MemoTypeMemoText:
-		tv, ok := value.(string)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be string")
-			return
-		}
-		result.Text = &tv
-	case MemoTypeMemoId:
-		tv, ok := value.(Uint64)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Uint64")
-			return
-		}
-		result.Id = &tv
-	case MemoTypeMemoHash:
-		tv, ok := value.(Hash)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Hash")
-			return
-		}
-		result.Hash = &tv
-	case MemoTypeMemoReturn:
-		tv, ok := value.(Hash)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Hash")
-			return
-		}
-		result.RetHash = &tv
-	}
-	return
-}
-
-// MustText retrieves the Text value from the union,
-// panicing if the value is not set.
-func (u Memo) MustText() string {
-	val, ok := u.GetText()
-
-	if !ok {
-		panic("arm Text is not set")
-	}
-
-	return val
-}
-
-// GetText retrieves the Text value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u Memo) GetText() (result string, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Text" {
-		result = *u.Text
-		ok = true
-	}
-
-	return
-}
-
-// MustId retrieves the Id value from the union,
-// panicing if the value is not set.
-func (u Memo) MustId() Uint64 {
-	val, ok := u.GetId()
-
-	if !ok {
-		panic("arm Id is not set")
-	}
-
-	return val
-}
-
-// GetId retrieves the Id value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u Memo) GetId() (result Uint64, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Id" {
-		result = *u.Id
-		ok = true
-	}
-
-	return
-}
-
-// MustHash retrieves the Hash value from the union,
-// panicing if the value is not set.
-func (u Memo) MustHash() Hash {
-	val, ok := u.GetHash()
-
-	if !ok {
-		panic("arm Hash is not set")
-	}
-
-	return val
-}
-
-// GetHash retrieves the Hash value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u Memo) GetHash() (result Hash, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Hash" {
-		result = *u.Hash
-		ok = true
-	}
-
-	return
-}
-
-// MustRetHash retrieves the RetHash value from the union,
-// panicing if the value is not set.
-func (u Memo) MustRetHash() Hash {
-	val, ok := u.GetRetHash()
-
-	if !ok {
-		panic("arm RetHash is not set")
-	}
-
-	return val
-}
-
-// GetRetHash retrieves the RetHash value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u Memo) GetRetHash() (result Hash, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "RetHash" {
-		result = *u.RetHash
-		ok = true
-	}
-
-	return
-}
-
-// TimeBounds is an XDR Struct defines as:
-//
-//   struct TimeBounds
-//    {
-//        uint64 minTime;
-//        uint64 maxTime; // 0 here means no maxTime
-//    };
-//
-type TimeBounds struct {
-	MinTime Uint64
-	MaxTime Uint64
-}
-
-// TransactionExt is an XDR NestedUnion defines as:
-//
-//   union switch (int v)
-//        {
-//        case 0:
-//            void;
-//        }
-//
-type TransactionExt struct {
-	V int32
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u TransactionExt) SwitchFieldName() string {
-	return "V"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of TransactionExt
-func (u TransactionExt) ArmForSwitch(sw int32) (string, bool) {
-	switch int32(sw) {
-	case 0:
-		return "", true
-	}
-	return "-", false
-}
-
-// NewTransactionExt creates a new  TransactionExt.
-func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err error) {
-	result.V = v
-	switch int32(v) {
-	case 0:
-		// void
-	}
-	return
-}
-
-// Transaction is an XDR Struct defines as:
-//
-//   struct Transaction
-//    {
-//        // account used to run the transaction
-//        AccountID sourceAccount;
-//
-//        // the fee the sourceAccount will pay
-//        uint32 fee;
-//
-//        // sequence number to consume in the account
-//        SequenceNumber seqNum;
-//
-//        // validity range (inclusive) for the last ledger close time
-//        TimeBounds* timeBounds;
-//
-//        Memo memo;
-//
-//        Operation operations<100>;
-//
-//        // reserved for future use
-//        union switch (int v)
-//        {
-//        case 0:
-//            void;
-//        }
-//        ext;
-//    };
-//
-type Transaction struct {
-	SourceAccount AccountId
-	Fee           Uint32
-	SeqNum        SequenceNumber
-	TimeBounds    *TimeBounds
-	Memo          Memo
-	Operations    []Operation `xdrmaxsize:"100"`
-	Ext           TransactionExt
-}
-
-// TransactionSignaturePayloadTaggedTransaction is an XDR NestedUnion defines as:
-//
-//   union switch (EnvelopeType type)
-//        {
-//        case ENVELOPE_TYPE_TX:
-//            Transaction tx;
-//            /* All other values of type are invalid */
-//        }
-//
-type TransactionSignaturePayloadTaggedTransaction struct {
-	Type EnvelopeType
-	Tx   *Transaction
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u TransactionSignaturePayloadTaggedTransaction) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of TransactionSignaturePayloadTaggedTransaction
-func (u TransactionSignaturePayloadTaggedTransaction) ArmForSwitch(sw int32) (string, bool) {
-	switch EnvelopeType(sw) {
-	case EnvelopeTypeEnvelopeTypeTx:
-		return "Tx", true
-	}
-	return "-", false
-}
-
-// NewTransactionSignaturePayloadTaggedTransaction creates a new  TransactionSignaturePayloadTaggedTransaction.
-func NewTransactionSignaturePayloadTaggedTransaction(aType EnvelopeType, value interface{}) (result TransactionSignaturePayloadTaggedTransaction, err error) {
-	result.Type = aType
-	switch EnvelopeType(aType) {
-	case EnvelopeTypeEnvelopeTypeTx:
-		tv, ok := value.(Transaction)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Transaction")
-			return
-		}
-		result.Tx = &tv
-	}
-	return
-}
-
-// MustTx retrieves the Tx value from the union,
-// panicing if the value is not set.
-func (u TransactionSignaturePayloadTaggedTransaction) MustTx() Transaction {
-	val, ok := u.GetTx()
-
-	if !ok {
-		panic("arm Tx is not set")
-	}
-
-	return val
-}
-
-// GetTx retrieves the Tx value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u TransactionSignaturePayloadTaggedTransaction) GetTx() (result Transaction, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "Tx" {
-		result = *u.Tx
-		ok = true
-	}
-
-	return
-}
-
-// TransactionSignaturePayload is an XDR Struct defines as:
-//
-//   struct TransactionSignaturePayload
-//    {
-//        Hash networkId;
-//        union switch (EnvelopeType type)
-//        {
-//        case ENVELOPE_TYPE_TX:
-//            Transaction tx;
-//            /* All other values of type are invalid */
-//        }
-//        taggedTransaction;
-//    };
-//
-type TransactionSignaturePayload struct {
-	NetworkId         Hash
-	TaggedTransaction TransactionSignaturePayloadTaggedTransaction
-}
-
-// TransactionEnvelope is an XDR Struct defines as:
-//
-//   struct TransactionEnvelope
-//    {
-//        Transaction tx;
-//        /* Each decorated signature is a signature over the SHA256 hash of
-//         * a TransactionSignaturePayload */
-//        DecoratedSignature signatures<20>;
-//    };
-//
-type TransactionEnvelope struct {
-	Tx         Transaction
-	Signatures []DecoratedSignature `xdrmaxsize:"20"`
-}
-
-// ClaimOfferAtom is an XDR Struct defines as:
-//
-//   struct ClaimOfferAtom
-//    {
-//        // emitted to identify the offer
-//        AccountID sellerID; // Account that owns the offer
-//        uint64 offerID;
-//
-//        // amount and asset taken from the owner
-//        Asset assetSold;
-//        int64 amountSold;
-//
-//        // amount and asset sent to the owner
-//        Asset assetBought;
-//        int64 amountBought;
-//    };
-//
-type ClaimOfferAtom struct {
-	SellerId     AccountId
-	OfferId      Uint64
-	AssetSold    Asset
-	AmountSold   Int64
-	AssetBought  Asset
-	AmountBought Int64
-}
-
-// CreateAccountResultCode is an XDR Enum defines as:
-//
-//   enum CreateAccountResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        CREATE_ACCOUNT_SUCCESS = 0, // account was created
-//
-//        // codes considered as "failure" for the operation
-//        CREATE_ACCOUNT_MALFORMED = -1,   // invalid destination
-//        CREATE_ACCOUNT_UNDERFUNDED = -2, // not enough funds in source account
-//        CREATE_ACCOUNT_LOW_RESERVE =
-//            -3, // would create an account below the min reserve
-//        CREATE_ACCOUNT_ALREADY_EXIST = -4 // account already exists
-//    };
-//
-type CreateAccountResultCode int32
-
-const (
-	CreateAccountResultCodeCreateAccountSuccess      CreateAccountResultCode = 0
-	CreateAccountResultCodeCreateAccountMalformed    CreateAccountResultCode = -1
-	CreateAccountResultCodeCreateAccountUnderfunded  CreateAccountResultCode = -2
-	CreateAccountResultCodeCreateAccountLowReserve   CreateAccountResultCode = -3
-	CreateAccountResultCodeCreateAccountAlreadyExist CreateAccountResultCode = -4
-)
-
-var createAccountResultCodeMap = map[int32]string{
-	0:  "CreateAccountResultCodeCreateAccountSuccess",
-	-1: "CreateAccountResultCodeCreateAccountMalformed",
-	-2: "CreateAccountResultCodeCreateAccountUnderfunded",
-	-3: "CreateAccountResultCodeCreateAccountLowReserve",
-	-4: "CreateAccountResultCodeCreateAccountAlreadyExist",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for CreateAccountResultCode
-func (e CreateAccountResultCode) ValidEnum(v int32) bool {
-	_, ok := createAccountResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e CreateAccountResultCode) String() string {
-	name, _ := createAccountResultCodeMap[int32(e)]
-	return name
-}
-
-// CreateAccountResult is an XDR Union defines as:
-//
-//   union CreateAccountResult switch (CreateAccountResultCode code)
-//    {
-//    case CREATE_ACCOUNT_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type CreateAccountResult struct {
-	Code CreateAccountResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u CreateAccountResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of CreateAccountResult
-func (u CreateAccountResult) ArmForSwitch(sw int32) (string, bool) {
-	switch CreateAccountResultCode(sw) {
-	case CreateAccountResultCodeCreateAccountSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewCreateAccountResult creates a new  CreateAccountResult.
-func NewCreateAccountResult(code CreateAccountResultCode, value interface{}) (result CreateAccountResult, err error) {
-	result.Code = code
-	switch CreateAccountResultCode(code) {
-	case CreateAccountResultCodeCreateAccountSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// PaymentResultCode is an XDR Enum defines as:
-//
-//   enum PaymentResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        PAYMENT_SUCCESS = 0, // payment successfuly completed
-//
-//        // codes considered as "failure" for the operation
-//        PAYMENT_MALFORMED = -1,          // bad input
-//        PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
-//        PAYMENT_SRC_NO_TRUST = -3,       // no trust line on source account
-//        PAYMENT_SRC_NOT_AUTHORIZED = -4, // source not authorized to transfer
-//        PAYMENT_NO_DESTINATION = -5,     // destination account does not exist
-//        PAYMENT_NO_TRUST = -6,       // destination missing a trust line for asset
-//        PAYMENT_NOT_AUTHORIZED = -7, // destination not authorized to hold asset
-//        PAYMENT_LINE_FULL = -8,      // destination would go above their limit
-//        PAYMENT_NO_ISSUER = -9       // missing issuer on asset
-//    };
-//
-type PaymentResultCode int32
-
-const (
-	PaymentResultCodePaymentSuccess          PaymentResultCode = 0
-	PaymentResultCodePaymentMalformed        PaymentResultCode = -1
-	PaymentResultCodePaymentUnderfunded      PaymentResultCode = -2
-	PaymentResultCodePaymentSrcNoTrust       PaymentResultCode = -3
-	PaymentResultCodePaymentSrcNotAuthorized PaymentResultCode = -4
-	PaymentResultCodePaymentNoDestination    PaymentResultCode = -5
-	PaymentResultCodePaymentNoTrust          PaymentResultCode = -6
-	PaymentResultCodePaymentNotAuthorized    PaymentResultCode = -7
-	PaymentResultCodePaymentLineFull         PaymentResultCode = -8
-	PaymentResultCodePaymentNoIssuer         PaymentResultCode = -9
-)
-
-var paymentResultCodeMap = map[int32]string{
-	0:  "PaymentResultCodePaymentSuccess",
-	-1: "PaymentResultCodePaymentMalformed",
-	-2: "PaymentResultCodePaymentUnderfunded",
-	-3: "PaymentResultCodePaymentSrcNoTrust",
-	-4: "PaymentResultCodePaymentSrcNotAuthorized",
-	-5: "PaymentResultCodePaymentNoDestination",
-	-6: "PaymentResultCodePaymentNoTrust",
-	-7: "PaymentResultCodePaymentNotAuthorized",
-	-8: "PaymentResultCodePaymentLineFull",
-	-9: "PaymentResultCodePaymentNoIssuer",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for PaymentResultCode
-func (e PaymentResultCode) ValidEnum(v int32) bool {
-	_, ok := paymentResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e PaymentResultCode) String() string {
-	name, _ := paymentResultCodeMap[int32(e)]
-	return name
-}
-
-// PaymentResult is an XDR Union defines as:
-//
-//   union PaymentResult switch (PaymentResultCode code)
-//    {
-//    case PAYMENT_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type PaymentResult struct {
-	Code PaymentResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u PaymentResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of PaymentResult
-func (u PaymentResult) ArmForSwitch(sw int32) (string, bool) {
-	switch PaymentResultCode(sw) {
-	case PaymentResultCodePaymentSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewPaymentResult creates a new  PaymentResult.
-func NewPaymentResult(code PaymentResultCode, value interface{}) (result PaymentResult, err error) {
-	result.Code = code
-	switch PaymentResultCode(code) {
-	case PaymentResultCodePaymentSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// PathPaymentResultCode is an XDR Enum defines as:
-//
-//   enum PathPaymentResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        PATH_PAYMENT_SUCCESS = 0, // success
-//
-//        // codes considered as "failure" for the operation
-//        PATH_PAYMENT_MALFORMED = -1,          // bad input
-//        PATH_PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
-//        PATH_PAYMENT_SRC_NO_TRUST = -3,       // no trust line on source account
-//        PATH_PAYMENT_SRC_NOT_AUTHORIZED = -4, // source not authorized to transfer
-//        PATH_PAYMENT_NO_DESTINATION = -5,     // destination account does not exist
-//        PATH_PAYMENT_NO_TRUST = -6,           // dest missing a trust line for asset
-//        PATH_PAYMENT_NOT_AUTHORIZED = -7,     // dest not authorized to hold asset
-//        PATH_PAYMENT_LINE_FULL = -8,          // dest would go above their limit
-//        PATH_PAYMENT_NO_ISSUER = -9,          // missing issuer on one asset
-//        PATH_PAYMENT_TOO_FEW_OFFERS = -10,    // not enough offers to satisfy path
-//        PATH_PAYMENT_OFFER_CROSS_SELF = -11,  // would cross one of its own offers
-//        PATH_PAYMENT_OVER_SENDMAX = -12       // could not satisfy sendmax
-//    };
-//
-type PathPaymentResultCode int32
-
-const (
-	PathPaymentResultCodePathPaymentSuccess          PathPaymentResultCode = 0
-	PathPaymentResultCodePathPaymentMalformed        PathPaymentResultCode = -1
-	PathPaymentResultCodePathPaymentUnderfunded      PathPaymentResultCode = -2
-	PathPaymentResultCodePathPaymentSrcNoTrust       PathPaymentResultCode = -3
-	PathPaymentResultCodePathPaymentSrcNotAuthorized PathPaymentResultCode = -4
-	PathPaymentResultCodePathPaymentNoDestination    PathPaymentResultCode = -5
-	PathPaymentResultCodePathPaymentNoTrust          PathPaymentResultCode = -6
-	PathPaymentResultCodePathPaymentNotAuthorized    PathPaymentResultCode = -7
-	PathPaymentResultCodePathPaymentLineFull         PathPaymentResultCode = -8
-	PathPaymentResultCodePathPaymentNoIssuer         PathPaymentResultCode = -9
-	PathPaymentResultCodePathPaymentTooFewOffers     PathPaymentResultCode = -10
-	PathPaymentResultCodePathPaymentOfferCrossSelf   PathPaymentResultCode = -11
-	PathPaymentResultCodePathPaymentOverSendmax      PathPaymentResultCode = -12
-)
-
-var pathPaymentResultCodeMap = map[int32]string{
-	0:   "PathPaymentResultCodePathPaymentSuccess",
-	-1:  "PathPaymentResultCodePathPaymentMalformed",
-	-2:  "PathPaymentResultCodePathPaymentUnderfunded",
-	-3:  "PathPaymentResultCodePathPaymentSrcNoTrust",
-	-4:  "PathPaymentResultCodePathPaymentSrcNotAuthorized",
-	-5:  "PathPaymentResultCodePathPaymentNoDestination",
-	-6:  "PathPaymentResultCodePathPaymentNoTrust",
-	-7:  "PathPaymentResultCodePathPaymentNotAuthorized",
-	-8:  "PathPaymentResultCodePathPaymentLineFull",
-	-9:  "PathPaymentResultCodePathPaymentNoIssuer",
-	-10: "PathPaymentResultCodePathPaymentTooFewOffers",
-	-11: "PathPaymentResultCodePathPaymentOfferCrossSelf",
-	-12: "PathPaymentResultCodePathPaymentOverSendmax",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for PathPaymentResultCode
-func (e PathPaymentResultCode) ValidEnum(v int32) bool {
-	_, ok := pathPaymentResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e PathPaymentResultCode) String() string {
-	name, _ := pathPaymentResultCodeMap[int32(e)]
-	return name
-}
-
-// SimplePaymentResult is an XDR Struct defines as:
-//
-//   struct SimplePaymentResult
-//    {
-//        AccountID destination;
-//        Asset asset;
-//        int64 amount;
-//    };
-//
-type SimplePaymentResult struct {
-	Destination AccountId
-	Asset       Asset
-	Amount      Int64
-}
-
-// PathPaymentResultSuccess is an XDR NestedStruct defines as:
-//
-//   struct
-//        {
-//            ClaimOfferAtom offers<>;
-//            SimplePaymentResult last;
-//        }
-//
-type PathPaymentResultSuccess struct {
-	Offers []ClaimOfferAtom
-	Last   SimplePaymentResult
-}
-
-// PathPaymentResult is an XDR Union defines as:
-//
-//   union PathPaymentResult switch (PathPaymentResultCode code)
-//    {
-//    case PATH_PAYMENT_SUCCESS:
-//        struct
-//        {
-//            ClaimOfferAtom offers<>;
-//            SimplePaymentResult last;
-//        } success;
-//    case PATH_PAYMENT_NO_ISSUER:
-//        Asset noIssuer; // the asset that caused the error
-//    default:
-//        void;
-//    };
-//
-type PathPaymentResult struct {
-	Code     PathPaymentResultCode
-	Success  *PathPaymentResultSuccess
-	NoIssuer *Asset
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u PathPaymentResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of PathPaymentResult
-func (u PathPaymentResult) ArmForSwitch(sw int32) (string, bool) {
-	switch PathPaymentResultCode(sw) {
-	case PathPaymentResultCodePathPaymentSuccess:
-		return "Success", true
-	case PathPaymentResultCodePathPaymentNoIssuer:
-		return "NoIssuer", true
-	default:
-		return "", true
-	}
-}
-
-// NewPathPaymentResult creates a new  PathPaymentResult.
-func NewPathPaymentResult(code PathPaymentResultCode, value interface{}) (result PathPaymentResult, err error) {
-	result.Code = code
-	switch PathPaymentResultCode(code) {
-	case PathPaymentResultCodePathPaymentSuccess:
-		tv, ok := value.(PathPaymentResultSuccess)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be PathPaymentResultSuccess")
-			return
-		}
-		result.Success = &tv
-	case PathPaymentResultCodePathPaymentNoIssuer:
-		tv, ok := value.(Asset)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Asset")
-			return
-		}
-		result.NoIssuer = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustSuccess retrieves the Success value from the union,
-// panicing if the value is not set.
-func (u PathPaymentResult) MustSuccess() PathPaymentResultSuccess {
-	val, ok := u.GetSuccess()
-
-	if !ok {
-		panic("arm Success is not set")
-	}
-
-	return val
-}
-
-// GetSuccess retrieves the Success value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u PathPaymentResult) GetSuccess() (result PathPaymentResultSuccess, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "Success" {
-		result = *u.Success
-		ok = true
-	}
-
-	return
-}
-
-// MustNoIssuer retrieves the NoIssuer value from the union,
-// panicing if the value is not set.
-func (u PathPaymentResult) MustNoIssuer() Asset {
-	val, ok := u.GetNoIssuer()
-
-	if !ok {
-		panic("arm NoIssuer is not set")
-	}
-
-	return val
-}
-
-// GetNoIssuer retrieves the NoIssuer value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "NoIssuer" {
-		result = *u.NoIssuer
-		ok = true
-	}
-
-	return
-}
-
-// ManageOfferResultCode is an XDR Enum defines as:
-//
-//   enum ManageOfferResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        MANAGE_OFFER_SUCCESS = 0,
-//
-//        // codes considered as "failure" for the operation
-//        MANAGE_OFFER_MALFORMED = -1,     // generated offer would be invalid
-//        MANAGE_OFFER_SELL_NO_TRUST = -2, // no trust line for what we're selling
-//        MANAGE_OFFER_BUY_NO_TRUST = -3,  // no trust line for what we're buying
-//        MANAGE_OFFER_SELL_NOT_AUTHORIZED = -4, // not authorized to sell
-//        MANAGE_OFFER_BUY_NOT_AUTHORIZED = -5,  // not authorized to buy
-//        MANAGE_OFFER_LINE_FULL = -6,      // can't receive more of what it's buying
-//        MANAGE_OFFER_UNDERFUNDED = -7,    // doesn't hold what it's trying to sell
-//        MANAGE_OFFER_CROSS_SELF = -8,     // would cross an offer from the same user
-//        MANAGE_OFFER_SELL_NO_ISSUER = -9, // no issuer for what we're selling
-//        MANAGE_OFFER_BUY_NO_ISSUER = -10, // no issuer for what we're buying
-//
-//        // update errors
-//        MANAGE_OFFER_NOT_FOUND = -11, // offerID does not match an existing offer
-//
-//        MANAGE_OFFER_LOW_RESERVE = -12 // not enough funds to create a new Offer
-//    };
-//
-type ManageOfferResultCode int32
-
-const (
-	ManageOfferResultCodeManageOfferSuccess           ManageOfferResultCode = 0
-	ManageOfferResultCodeManageOfferMalformed         ManageOfferResultCode = -1
-	ManageOfferResultCodeManageOfferSellNoTrust       ManageOfferResultCode = -2
-	ManageOfferResultCodeManageOfferBuyNoTrust        ManageOfferResultCode = -3
-	ManageOfferResultCodeManageOfferSellNotAuthorized ManageOfferResultCode = -4
-	ManageOfferResultCodeManageOfferBuyNotAuthorized  ManageOfferResultCode = -5
-	ManageOfferResultCodeManageOfferLineFull          ManageOfferResultCode = -6
-	ManageOfferResultCodeManageOfferUnderfunded       ManageOfferResultCode = -7
-	ManageOfferResultCodeManageOfferCrossSelf         ManageOfferResultCode = -8
-	ManageOfferResultCodeManageOfferSellNoIssuer      ManageOfferResultCode = -9
-	ManageOfferResultCodeManageOfferBuyNoIssuer       ManageOfferResultCode = -10
-	ManageOfferResultCodeManageOfferNotFound          ManageOfferResultCode = -11
-	ManageOfferResultCodeManageOfferLowReserve        ManageOfferResultCode = -12
-)
-
-var manageOfferResultCodeMap = map[int32]string{
-	0:   "ManageOfferResultCodeManageOfferSuccess",
-	-1:  "ManageOfferResultCodeManageOfferMalformed",
-	-2:  "ManageOfferResultCodeManageOfferSellNoTrust",
-	-3:  "ManageOfferResultCodeManageOfferBuyNoTrust",
-	-4:  "ManageOfferResultCodeManageOfferSellNotAuthorized",
-	-5:  "ManageOfferResultCodeManageOfferBuyNotAuthorized",
-	-6:  "ManageOfferResultCodeManageOfferLineFull",
-	-7:  "ManageOfferResultCodeManageOfferUnderfunded",
-	-8:  "ManageOfferResultCodeManageOfferCrossSelf",
-	-9:  "ManageOfferResultCodeManageOfferSellNoIssuer",
-	-10: "ManageOfferResultCodeManageOfferBuyNoIssuer",
-	-11: "ManageOfferResultCodeManageOfferNotFound",
-	-12: "ManageOfferResultCodeManageOfferLowReserve",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for ManageOfferResultCode
-func (e ManageOfferResultCode) ValidEnum(v int32) bool {
-	_, ok := manageOfferResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e ManageOfferResultCode) String() string {
-	name, _ := manageOfferResultCodeMap[int32(e)]
-	return name
-}
-
-// ManageOfferEffect is an XDR Enum defines as:
-//
-//   enum ManageOfferEffect
-//    {
-//        MANAGE_OFFER_CREATED = 0,
-//        MANAGE_OFFER_UPDATED = 1,
-//        MANAGE_OFFER_DELETED = 2
-//    };
-//
-type ManageOfferEffect int32
-
-const (
-	ManageOfferEffectManageOfferCreated ManageOfferEffect = 0
-	ManageOfferEffectManageOfferUpdated ManageOfferEffect = 1
-	ManageOfferEffectManageOfferDeleted ManageOfferEffect = 2
-)
-
-var manageOfferEffectMap = map[int32]string{
-	0: "ManageOfferEffectManageOfferCreated",
-	1: "ManageOfferEffectManageOfferUpdated",
-	2: "ManageOfferEffectManageOfferDeleted",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for ManageOfferEffect
-func (e ManageOfferEffect) ValidEnum(v int32) bool {
-	_, ok := manageOfferEffectMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e ManageOfferEffect) String() string {
-	name, _ := manageOfferEffectMap[int32(e)]
-	return name
-}
-
-// ManageOfferSuccessResultOffer is an XDR NestedUnion defines as:
-//
-//   union switch (ManageOfferEffect effect)
-//        {
-//        case MANAGE_OFFER_CREATED:
-//        case MANAGE_OFFER_UPDATED:
-//            OfferEntry offer;
-//        default:
-//            void;
-//        }
-//
-type ManageOfferSuccessResultOffer struct {
-	Effect ManageOfferEffect
-	Offer  *OfferEntry
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u ManageOfferSuccessResultOffer) SwitchFieldName() string {
-	return "Effect"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of ManageOfferSuccessResultOffer
-func (u ManageOfferSuccessResultOffer) ArmForSwitch(sw int32) (string, bool) {
-	switch ManageOfferEffect(sw) {
-	case ManageOfferEffectManageOfferCreated:
-		return "Offer", true
-	case ManageOfferEffectManageOfferUpdated:
-		return "Offer", true
-	default:
-		return "", true
-	}
-}
-
-// NewManageOfferSuccessResultOffer creates a new  ManageOfferSuccessResultOffer.
-func NewManageOfferSuccessResultOffer(effect ManageOfferEffect, value interface{}) (result ManageOfferSuccessResultOffer, err error) {
-	result.Effect = effect
-	switch ManageOfferEffect(effect) {
-	case ManageOfferEffectManageOfferCreated:
-		tv, ok := value.(OfferEntry)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be OfferEntry")
-			return
-		}
-		result.Offer = &tv
-	case ManageOfferEffectManageOfferUpdated:
-		tv, ok := value.(OfferEntry)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be OfferEntry")
-			return
-		}
-		result.Offer = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustOffer retrieves the Offer value from the union,
-// panicing if the value is not set.
-func (u ManageOfferSuccessResultOffer) MustOffer() OfferEntry {
-	val, ok := u.GetOffer()
-
-	if !ok {
-		panic("arm Offer is not set")
-	}
-
-	return val
-}
-
-// GetOffer retrieves the Offer value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u ManageOfferSuccessResultOffer) GetOffer() (result OfferEntry, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Effect))
-
-	if armName == "Offer" {
-		result = *u.Offer
-		ok = true
-	}
-
-	return
-}
-
-// ManageOfferSuccessResult is an XDR Struct defines as:
-//
-//   struct ManageOfferSuccessResult
-//    {
-//        // offers that got claimed while creating this offer
-//        ClaimOfferAtom offersClaimed<>;
-//
-//        union switch (ManageOfferEffect effect)
-//        {
-//        case MANAGE_OFFER_CREATED:
-//        case MANAGE_OFFER_UPDATED:
-//            OfferEntry offer;
-//        default:
-//            void;
-//        }
-//        offer;
-//    };
-//
-type ManageOfferSuccessResult struct {
-	OffersClaimed []ClaimOfferAtom
-	Offer         ManageOfferSuccessResultOffer
-}
-
-// ManageOfferResult is an XDR Union defines as:
-//
-//   union ManageOfferResult switch (ManageOfferResultCode code)
-//    {
-//    case MANAGE_OFFER_SUCCESS:
-//        ManageOfferSuccessResult success;
-//    default:
-//        void;
-//    };
-//
-type ManageOfferResult struct {
-	Code    ManageOfferResultCode
-	Success *ManageOfferSuccessResult
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u ManageOfferResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of ManageOfferResult
-func (u ManageOfferResult) ArmForSwitch(sw int32) (string, bool) {
-	switch ManageOfferResultCode(sw) {
-	case ManageOfferResultCodeManageOfferSuccess:
-		return "Success", true
-	default:
-		return "", true
-	}
-}
-
-// NewManageOfferResult creates a new  ManageOfferResult.
-func NewManageOfferResult(code ManageOfferResultCode, value interface{}) (result ManageOfferResult, err error) {
-	result.Code = code
-	switch ManageOfferResultCode(code) {
-	case ManageOfferResultCodeManageOfferSuccess:
-		tv, ok := value.(ManageOfferSuccessResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageOfferSuccessResult")
-			return
-		}
-		result.Success = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustSuccess retrieves the Success value from the union,
-// panicing if the value is not set.
-func (u ManageOfferResult) MustSuccess() ManageOfferSuccessResult {
-	val, ok := u.GetSuccess()
-
-	if !ok {
-		panic("arm Success is not set")
-	}
-
-	return val
-}
-
-// GetSuccess retrieves the Success value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u ManageOfferResult) GetSuccess() (result ManageOfferSuccessResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "Success" {
-		result = *u.Success
-		ok = true
-	}
-
-	return
-}
-
-// SetOptionsResultCode is an XDR Enum defines as:
-//
-//   enum SetOptionsResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        SET_OPTIONS_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        SET_OPTIONS_LOW_RESERVE = -1,      // not enough funds to add a signer
-//        SET_OPTIONS_TOO_MANY_SIGNERS = -2, // max number of signers already reached
-//        SET_OPTIONS_BAD_FLAGS = -3,        // invalid combination of clear/set flags
-//        SET_OPTIONS_INVALID_INFLATION = -4,      // inflation account does not exist
-//        SET_OPTIONS_CANT_CHANGE = -5,            // can no longer change this option
-//        SET_OPTIONS_UNKNOWN_FLAG = -6,           // can't set an unknown flag
-//        SET_OPTIONS_THRESHOLD_OUT_OF_RANGE = -7, // bad value for weight/threshold
-//        SET_OPTIONS_BAD_SIGNER = -8,             // signer cannot be masterkey
-//        SET_OPTIONS_INVALID_HOME_DOMAIN = -9     // malformed home domain
-//    };
-//
-type SetOptionsResultCode int32
-
-const (
-	SetOptionsResultCodeSetOptionsSuccess             SetOptionsResultCode = 0
-	SetOptionsResultCodeSetOptionsLowReserve          SetOptionsResultCode = -1
-	SetOptionsResultCodeSetOptionsTooManySigners      SetOptionsResultCode = -2
-	SetOptionsResultCodeSetOptionsBadFlags            SetOptionsResultCode = -3
-	SetOptionsResultCodeSetOptionsInvalidInflation    SetOptionsResultCode = -4
-	SetOptionsResultCodeSetOptionsCantChange          SetOptionsResultCode = -5
-	SetOptionsResultCodeSetOptionsUnknownFlag         SetOptionsResultCode = -6
-	SetOptionsResultCodeSetOptionsThresholdOutOfRange SetOptionsResultCode = -7
-	SetOptionsResultCodeSetOptionsBadSigner           SetOptionsResultCode = -8
-	SetOptionsResultCodeSetOptionsInvalidHomeDomain   SetOptionsResultCode = -9
-)
-
-var setOptionsResultCodeMap = map[int32]string{
-	0:  "SetOptionsResultCodeSetOptionsSuccess",
-	-1: "SetOptionsResultCodeSetOptionsLowReserve",
-	-2: "SetOptionsResultCodeSetOptionsTooManySigners",
-	-3: "SetOptionsResultCodeSetOptionsBadFlags",
-	-4: "SetOptionsResultCodeSetOptionsInvalidInflation",
-	-5: "SetOptionsResultCodeSetOptionsCantChange",
-	-6: "SetOptionsResultCodeSetOptionsUnknownFlag",
-	-7: "SetOptionsResultCodeSetOptionsThresholdOutOfRange",
-	-8: "SetOptionsResultCodeSetOptionsBadSigner",
-	-9: "SetOptionsResultCodeSetOptionsInvalidHomeDomain",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for SetOptionsResultCode
-func (e SetOptionsResultCode) ValidEnum(v int32) bool {
-	_, ok := setOptionsResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e SetOptionsResultCode) String() string {
-	name, _ := setOptionsResultCodeMap[int32(e)]
-	return name
-}
-
-// SetOptionsResult is an XDR Union defines as:
-//
-//   union SetOptionsResult switch (SetOptionsResultCode code)
-//    {
-//    case SET_OPTIONS_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type SetOptionsResult struct {
-	Code SetOptionsResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u SetOptionsResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of SetOptionsResult
-func (u SetOptionsResult) ArmForSwitch(sw int32) (string, bool) {
-	switch SetOptionsResultCode(sw) {
-	case SetOptionsResultCodeSetOptionsSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewSetOptionsResult creates a new  SetOptionsResult.
-func NewSetOptionsResult(code SetOptionsResultCode, value interface{}) (result SetOptionsResult, err error) {
-	result.Code = code
-	switch SetOptionsResultCode(code) {
-	case SetOptionsResultCodeSetOptionsSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// ChangeTrustResultCode is an XDR Enum defines as:
-//
-//   enum ChangeTrustResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        CHANGE_TRUST_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        CHANGE_TRUST_MALFORMED = -1,     // bad input
-//        CHANGE_TRUST_NO_ISSUER = -2,     // could not find issuer
-//        CHANGE_TRUST_INVALID_LIMIT = -3, // cannot drop limit below balance
-//                                         // cannot create with a limit of 0
-//        CHANGE_TRUST_LOW_RESERVE =
-//            -4, // not enough funds to create a new trust line,
-//        CHANGE_TRUST_SELF_NOT_ALLOWED = -5 // trusting self is not allowed
-//    };
-//
-type ChangeTrustResultCode int32
-
-const (
-	ChangeTrustResultCodeChangeTrustSuccess        ChangeTrustResultCode = 0
-	ChangeTrustResultCodeChangeTrustMalformed      ChangeTrustResultCode = -1
-	ChangeTrustResultCodeChangeTrustNoIssuer       ChangeTrustResultCode = -2
-	ChangeTrustResultCodeChangeTrustInvalidLimit   ChangeTrustResultCode = -3
-	ChangeTrustResultCodeChangeTrustLowReserve     ChangeTrustResultCode = -4
-	ChangeTrustResultCodeChangeTrustSelfNotAllowed ChangeTrustResultCode = -5
-)
-
-var changeTrustResultCodeMap = map[int32]string{
-	0:  "ChangeTrustResultCodeChangeTrustSuccess",
-	-1: "ChangeTrustResultCodeChangeTrustMalformed",
-	-2: "ChangeTrustResultCodeChangeTrustNoIssuer",
-	-3: "ChangeTrustResultCodeChangeTrustInvalidLimit",
-	-4: "ChangeTrustResultCodeChangeTrustLowReserve",
-	-5: "ChangeTrustResultCodeChangeTrustSelfNotAllowed",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for ChangeTrustResultCode
-func (e ChangeTrustResultCode) ValidEnum(v int32) bool {
-	_, ok := changeTrustResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e ChangeTrustResultCode) String() string {
-	name, _ := changeTrustResultCodeMap[int32(e)]
-	return name
-}
-
-// ChangeTrustResult is an XDR Union defines as:
-//
-//   union ChangeTrustResult switch (ChangeTrustResultCode code)
-//    {
-//    case CHANGE_TRUST_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type ChangeTrustResult struct {
-	Code ChangeTrustResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u ChangeTrustResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of ChangeTrustResult
-func (u ChangeTrustResult) ArmForSwitch(sw int32) (string, bool) {
-	switch ChangeTrustResultCode(sw) {
-	case ChangeTrustResultCodeChangeTrustSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewChangeTrustResult creates a new  ChangeTrustResult.
-func NewChangeTrustResult(code ChangeTrustResultCode, value interface{}) (result ChangeTrustResult, err error) {
-	result.Code = code
-	switch ChangeTrustResultCode(code) {
-	case ChangeTrustResultCodeChangeTrustSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// AllowTrustResultCode is an XDR Enum defines as:
-//
-//   enum AllowTrustResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        ALLOW_TRUST_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        ALLOW_TRUST_MALFORMED = -1,     // asset is not ASSET_TYPE_ALPHANUM
-//        ALLOW_TRUST_NO_TRUST_LINE = -2, // trustor does not have a trustline
-//                                        // source account does not require trust
-//        ALLOW_TRUST_TRUST_NOT_REQUIRED = -3,
-//        ALLOW_TRUST_CANT_REVOKE = -4,     // source account can't revoke trust,
-//        ALLOW_TRUST_SELF_NOT_ALLOWED = -5 // trusting self is not allowed
-//    };
-//
-type AllowTrustResultCode int32
-
-const (
-	AllowTrustResultCodeAllowTrustSuccess          AllowTrustResultCode = 0
-	AllowTrustResultCodeAllowTrustMalformed        AllowTrustResultCode = -1
-	AllowTrustResultCodeAllowTrustNoTrustLine      AllowTrustResultCode = -2
-	AllowTrustResultCodeAllowTrustTrustNotRequired AllowTrustResultCode = -3
-	AllowTrustResultCodeAllowTrustCantRevoke       AllowTrustResultCode = -4
-	AllowTrustResultCodeAllowTrustSelfNotAllowed   AllowTrustResultCode = -5
-)
-
-var allowTrustResultCodeMap = map[int32]string{
-	0:  "AllowTrustResultCodeAllowTrustSuccess",
-	-1: "AllowTrustResultCodeAllowTrustMalformed",
-	-2: "AllowTrustResultCodeAllowTrustNoTrustLine",
-	-3: "AllowTrustResultCodeAllowTrustTrustNotRequired",
-	-4: "AllowTrustResultCodeAllowTrustCantRevoke",
-	-5: "AllowTrustResultCodeAllowTrustSelfNotAllowed",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for AllowTrustResultCode
-func (e AllowTrustResultCode) ValidEnum(v int32) bool {
-	_, ok := allowTrustResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e AllowTrustResultCode) String() string {
-	name, _ := allowTrustResultCodeMap[int32(e)]
-	return name
-}
-
-// AllowTrustResult is an XDR Union defines as:
-//
-//   union AllowTrustResult switch (AllowTrustResultCode code)
-//    {
-//    case ALLOW_TRUST_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type AllowTrustResult struct {
-	Code AllowTrustResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u AllowTrustResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of AllowTrustResult
-func (u AllowTrustResult) ArmForSwitch(sw int32) (string, bool) {
-	switch AllowTrustResultCode(sw) {
-	case AllowTrustResultCodeAllowTrustSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewAllowTrustResult creates a new  AllowTrustResult.
-func NewAllowTrustResult(code AllowTrustResultCode, value interface{}) (result AllowTrustResult, err error) {
-	result.Code = code
-	switch AllowTrustResultCode(code) {
-	case AllowTrustResultCodeAllowTrustSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// AccountMergeResultCode is an XDR Enum defines as:
-//
-//   enum AccountMergeResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        ACCOUNT_MERGE_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        ACCOUNT_MERGE_MALFORMED = -1,       // can't merge onto itself
-//        ACCOUNT_MERGE_NO_ACCOUNT = -2,      // destination does not exist
-//        ACCOUNT_MERGE_IMMUTABLE_SET = -3,   // source account has AUTH_IMMUTABLE set
-//        ACCOUNT_MERGE_HAS_SUB_ENTRIES = -4, // account has trust lines/offers
-//        ACCOUNT_MERGE_SEQNUM_TOO_FAR = -5   // sequence number is over max allowed
-//    };
-//
-type AccountMergeResultCode int32
-
-const (
-	AccountMergeResultCodeAccountMergeSuccess       AccountMergeResultCode = 0
-	AccountMergeResultCodeAccountMergeMalformed     AccountMergeResultCode = -1
-	AccountMergeResultCodeAccountMergeNoAccount     AccountMergeResultCode = -2
-	AccountMergeResultCodeAccountMergeImmutableSet  AccountMergeResultCode = -3
-	AccountMergeResultCodeAccountMergeHasSubEntries AccountMergeResultCode = -4
-	AccountMergeResultCodeAccountMergeSeqnumTooFar  AccountMergeResultCode = -5
-)
-
-var accountMergeResultCodeMap = map[int32]string{
-	0:  "AccountMergeResultCodeAccountMergeSuccess",
-	-1: "AccountMergeResultCodeAccountMergeMalformed",
-	-2: "AccountMergeResultCodeAccountMergeNoAccount",
-	-3: "AccountMergeResultCodeAccountMergeImmutableSet",
-	-4: "AccountMergeResultCodeAccountMergeHasSubEntries",
-	-5: "AccountMergeResultCodeAccountMergeSeqnumTooFar",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for AccountMergeResultCode
-func (e AccountMergeResultCode) ValidEnum(v int32) bool {
-	_, ok := accountMergeResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e AccountMergeResultCode) String() string {
-	name, _ := accountMergeResultCodeMap[int32(e)]
-	return name
-}
-
-// AccountMergeResult is an XDR Union defines as:
-//
-//   union AccountMergeResult switch (AccountMergeResultCode code)
-//    {
-//    case ACCOUNT_MERGE_SUCCESS:
-//        int64 sourceAccountBalance; // how much got transfered from source account
-//    default:
-//        void;
-//    };
-//
-type AccountMergeResult struct {
-	Code                 AccountMergeResultCode
-	SourceAccountBalance *Int64
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u AccountMergeResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of AccountMergeResult
-func (u AccountMergeResult) ArmForSwitch(sw int32) (string, bool) {
-	switch AccountMergeResultCode(sw) {
-	case AccountMergeResultCodeAccountMergeSuccess:
-		return "SourceAccountBalance", true
-	default:
-		return "", true
-	}
-}
-
-// NewAccountMergeResult creates a new  AccountMergeResult.
-func NewAccountMergeResult(code AccountMergeResultCode, value interface{}) (result AccountMergeResult, err error) {
-	result.Code = code
-	switch AccountMergeResultCode(code) {
-	case AccountMergeResultCodeAccountMergeSuccess:
-		tv, ok := value.(Int64)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be Int64")
-			return
-		}
-		result.SourceAccountBalance = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustSourceAccountBalance retrieves the SourceAccountBalance value from the union,
-// panicing if the value is not set.
-func (u AccountMergeResult) MustSourceAccountBalance() Int64 {
-	val, ok := u.GetSourceAccountBalance()
-
-	if !ok {
-		panic("arm SourceAccountBalance is not set")
-	}
-
-	return val
-}
-
-// GetSourceAccountBalance retrieves the SourceAccountBalance value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u AccountMergeResult) GetSourceAccountBalance() (result Int64, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "SourceAccountBalance" {
-		result = *u.SourceAccountBalance
-		ok = true
-	}
-
-	return
-}
-
-// InflationResultCode is an XDR Enum defines as:
-//
-//   enum InflationResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        INFLATION_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        INFLATION_NOT_TIME = -1
-//    };
-//
-type InflationResultCode int32
-
-const (
-	InflationResultCodeInflationSuccess InflationResultCode = 0
-	InflationResultCodeInflationNotTime InflationResultCode = -1
-)
-
-var inflationResultCodeMap = map[int32]string{
-	0:  "InflationResultCodeInflationSuccess",
-	-1: "InflationResultCodeInflationNotTime",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for InflationResultCode
-func (e InflationResultCode) ValidEnum(v int32) bool {
-	_, ok := inflationResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e InflationResultCode) String() string {
-	name, _ := inflationResultCodeMap[int32(e)]
-	return name
-}
-
-// InflationPayout is an XDR Struct defines as:
-//
-//   struct InflationPayout // or use PaymentResultAtom to limit types?
-//    {
-//        AccountID destination;
-//        int64 amount;
-//    };
-//
-type InflationPayout struct {
-	Destination AccountId
-	Amount      Int64
-}
-
-// InflationResult is an XDR Union defines as:
-//
-//   union InflationResult switch (InflationResultCode code)
-//    {
-//    case INFLATION_SUCCESS:
-//        InflationPayout payouts<>;
-//    default:
-//        void;
-//    };
-//
-type InflationResult struct {
-	Code    InflationResultCode
-	Payouts *[]InflationPayout
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u InflationResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of InflationResult
-func (u InflationResult) ArmForSwitch(sw int32) (string, bool) {
-	switch InflationResultCode(sw) {
-	case InflationResultCodeInflationSuccess:
-		return "Payouts", true
-	default:
-		return "", true
-	}
-}
-
-// NewInflationResult creates a new  InflationResult.
-func NewInflationResult(code InflationResultCode, value interface{}) (result InflationResult, err error) {
-	result.Code = code
-	switch InflationResultCode(code) {
-	case InflationResultCodeInflationSuccess:
-		tv, ok := value.([]InflationPayout)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be []InflationPayout")
-			return
-		}
-		result.Payouts = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustPayouts retrieves the Payouts value from the union,
-// panicing if the value is not set.
-func (u InflationResult) MustPayouts() []InflationPayout {
-	val, ok := u.GetPayouts()
-
-	if !ok {
-		panic("arm Payouts is not set")
-	}
-
-	return val
-}
-
-// GetPayouts retrieves the Payouts value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u InflationResult) GetPayouts() (result []InflationPayout, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "Payouts" {
-		result = *u.Payouts
-		ok = true
-	}
-
-	return
-}
-
-// ManageDataResultCode is an XDR Enum defines as:
-//
-//   enum ManageDataResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        MANAGE_DATA_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        MANAGE_DATA_NOT_SUPPORTED_YET =
-//            -1, // The network hasn't moved to this protocol change yet
-//        MANAGE_DATA_NAME_NOT_FOUND =
-//            -2, // Trying to remove a Data Entry that isn't there
-//        MANAGE_DATA_LOW_RESERVE = -3, // not enough funds to create a new Data Entry
-//        MANAGE_DATA_INVALID_NAME = -4 // Name not a valid string
-//    };
-//
-type ManageDataResultCode int32
-
-const (
-	ManageDataResultCodeManageDataSuccess         ManageDataResultCode = 0
-	ManageDataResultCodeManageDataNotSupportedYet ManageDataResultCode = -1
-	ManageDataResultCodeManageDataNameNotFound    ManageDataResultCode = -2
-	ManageDataResultCodeManageDataLowReserve      ManageDataResultCode = -3
-	ManageDataResultCodeManageDataInvalidName     ManageDataResultCode = -4
-)
-
-var manageDataResultCodeMap = map[int32]string{
-	0:  "ManageDataResultCodeManageDataSuccess",
-	-1: "ManageDataResultCodeManageDataNotSupportedYet",
-	-2: "ManageDataResultCodeManageDataNameNotFound",
-	-3: "ManageDataResultCodeManageDataLowReserve",
-	-4: "ManageDataResultCodeManageDataInvalidName",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for ManageDataResultCode
-func (e ManageDataResultCode) ValidEnum(v int32) bool {
-	_, ok := manageDataResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e ManageDataResultCode) String() string {
-	name, _ := manageDataResultCodeMap[int32(e)]
-	return name
-}
-
-// ManageDataResult is an XDR Union defines as:
-//
-//   union ManageDataResult switch (ManageDataResultCode code)
-//    {
-//    case MANAGE_DATA_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type ManageDataResult struct {
-	Code ManageDataResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u ManageDataResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of ManageDataResult
-func (u ManageDataResult) ArmForSwitch(sw int32) (string, bool) {
-	switch ManageDataResultCode(sw) {
-	case ManageDataResultCodeManageDataSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewManageDataResult creates a new  ManageDataResult.
-func NewManageDataResult(code ManageDataResultCode, value interface{}) (result ManageDataResult, err error) {
-	result.Code = code
-	switch ManageDataResultCode(code) {
-	case ManageDataResultCodeManageDataSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// BumpSequenceResultCode is an XDR Enum defines as:
-//
-//   enum BumpSequenceResultCode
-//    {
-//        // codes considered as "success" for the operation
-//        BUMP_SEQUENCE_SUCCESS = 0,
-//        // codes considered as "failure" for the operation
-//        BUMP_SEQUENCE_BAD_SEQ = -1 // `bumpTo` is not within bounds
-//    };
-//
-type BumpSequenceResultCode int32
-
-const (
-	BumpSequenceResultCodeBumpSequenceSuccess BumpSequenceResultCode = 0
-	BumpSequenceResultCodeBumpSequenceBadSeq  BumpSequenceResultCode = -1
-)
-
-var bumpSequenceResultCodeMap = map[int32]string{
-	0:  "BumpSequenceResultCodeBumpSequenceSuccess",
-	-1: "BumpSequenceResultCodeBumpSequenceBadSeq",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for BumpSequenceResultCode
-func (e BumpSequenceResultCode) ValidEnum(v int32) bool {
-	_, ok := bumpSequenceResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e BumpSequenceResultCode) String() string {
-	name, _ := bumpSequenceResultCodeMap[int32(e)]
-	return name
-}
-
-// BumpSequenceResult is an XDR Union defines as:
-//
-//   union BumpSequenceResult switch (BumpSequenceResultCode code)
-//    {
-//    case BUMP_SEQUENCE_SUCCESS:
-//        void;
-//    default:
-//        void;
-//    };
-//
-type BumpSequenceResult struct {
-	Code BumpSequenceResultCode
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u BumpSequenceResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of BumpSequenceResult
-func (u BumpSequenceResult) ArmForSwitch(sw int32) (string, bool) {
-	switch BumpSequenceResultCode(sw) {
-	case BumpSequenceResultCodeBumpSequenceSuccess:
-		return "", true
-	default:
-		return "", true
-	}
-}
-
-// NewBumpSequenceResult creates a new  BumpSequenceResult.
-func NewBumpSequenceResult(code BumpSequenceResultCode, value interface{}) (result BumpSequenceResult, err error) {
-	result.Code = code
-	switch BumpSequenceResultCode(code) {
-	case BumpSequenceResultCodeBumpSequenceSuccess:
-		// void
-	default:
-		// void
-	}
-	return
-}
-
-// OperationResultCode is an XDR Enum defines as:
-//
-//   enum OperationResultCode
-//    {
-//        opINNER = 0, // inner object result is valid
-//
-//        opBAD_AUTH = -1,     // too few valid signatures / wrong network
-//        opNO_ACCOUNT = -2,   // source account was not found
-//        opNOT_SUPPORTED = -3 // operation not supported at this time
-//    };
-//
-type OperationResultCode int32
-
-const (
-	OperationResultCodeOpInner        OperationResultCode = 0
-	OperationResultCodeOpBadAuth      OperationResultCode = -1
-	OperationResultCodeOpNoAccount    OperationResultCode = -2
-	OperationResultCodeOpNotSupported OperationResultCode = -3
-)
-
-var operationResultCodeMap = map[int32]string{
-	0:  "OperationResultCodeOpInner",
-	-1: "OperationResultCodeOpBadAuth",
-	-2: "OperationResultCodeOpNoAccount",
-	-3: "OperationResultCodeOpNotSupported",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for OperationResultCode
-func (e OperationResultCode) ValidEnum(v int32) bool {
-	_, ok := operationResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e OperationResultCode) String() string {
-	name, _ := operationResultCodeMap[int32(e)]
-	return name
-}
-
-// OperationResultTr is an XDR NestedUnion defines as:
-//
-//   union switch (OperationType type)
-//        {
-//        case CREATE_ACCOUNT:
-//            CreateAccountResult createAccountResult;
-//        case PAYMENT:
-//            PaymentResult paymentResult;
-//        case PATH_PAYMENT:
-//            PathPaymentResult pathPaymentResult;
-//        case MANAGE_OFFER:
-//            ManageOfferResult manageOfferResult;
-//        case CREATE_PASSIVE_OFFER:
-//            ManageOfferResult createPassiveOfferResult;
-//        case SET_OPTIONS:
-//            SetOptionsResult setOptionsResult;
-//        case CHANGE_TRUST:
-//            ChangeTrustResult changeTrustResult;
-//        case ALLOW_TRUST:
-//            AllowTrustResult allowTrustResult;
-//        case ACCOUNT_MERGE:
-//            AccountMergeResult accountMergeResult;
-//        case INFLATION:
-//            InflationResult inflationResult;
-//        case MANAGE_DATA:
-//            ManageDataResult manageDataResult;
-//        case BUMP_SEQUENCE:
-//            BumpSequenceResult bumpSeqResult;
-//        }
-//
-type OperationResultTr struct {
-	Type                     OperationType
-	CreateAccountResult      *CreateAccountResult
-	PaymentResult            *PaymentResult
-	PathPaymentResult        *PathPaymentResult
-	ManageOfferResult        *ManageOfferResult
-	CreatePassiveOfferResult *ManageOfferResult
-	SetOptionsResult         *SetOptionsResult
-	ChangeTrustResult        *ChangeTrustResult
-	AllowTrustResult         *AllowTrustResult
-	AccountMergeResult       *AccountMergeResult
-	InflationResult          *InflationResult
-	ManageDataResult         *ManageDataResult
-	BumpSeqResult            *BumpSequenceResult
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u OperationResultTr) SwitchFieldName() string {
-	return "Type"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of OperationResultTr
-func (u OperationResultTr) ArmForSwitch(sw int32) (string, bool) {
-	switch OperationType(sw) {
-	case OperationTypeCreateAccount:
-		return "CreateAccountResult", true
-	case OperationTypePayment:
-		return "PaymentResult", true
-	case OperationTypePathPayment:
-		return "PathPaymentResult", true
-	case OperationTypeManageOffer:
-		return "ManageOfferResult", true
-	case OperationTypeCreatePassiveOffer:
-		return "CreatePassiveOfferResult", true
-	case OperationTypeSetOptions:
-		return "SetOptionsResult", true
-	case OperationTypeChangeTrust:
-		return "ChangeTrustResult", true
-	case OperationTypeAllowTrust:
-		return "AllowTrustResult", true
-	case OperationTypeAccountMerge:
-		return "AccountMergeResult", true
-	case OperationTypeInflation:
-		return "InflationResult", true
-	case OperationTypeManageData:
-		return "ManageDataResult", true
-	case OperationTypeBumpSequence:
-		return "BumpSeqResult", true
-	}
-	return "-", false
-}
-
-// NewOperationResultTr creates a new  OperationResultTr.
-func NewOperationResultTr(aType OperationType, value interface{}) (result OperationResultTr, err error) {
-	result.Type = aType
-	switch OperationType(aType) {
-	case OperationTypeCreateAccount:
-		tv, ok := value.(CreateAccountResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be CreateAccountResult")
-			return
-		}
-		result.CreateAccountResult = &tv
-	case OperationTypePayment:
-		tv, ok := value.(PaymentResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be PaymentResult")
-			return
-		}
-		result.PaymentResult = &tv
-	case OperationTypePathPayment:
-		tv, ok := value.(PathPaymentResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be PathPaymentResult")
-			return
-		}
-		result.PathPaymentResult = &tv
-	case OperationTypeManageOffer:
-		tv, ok := value.(ManageOfferResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageOfferResult")
-			return
-		}
-		result.ManageOfferResult = &tv
-	case OperationTypeCreatePassiveOffer:
-		tv, ok := value.(ManageOfferResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageOfferResult")
-			return
-		}
-		result.CreatePassiveOfferResult = &tv
-	case OperationTypeSetOptions:
-		tv, ok := value.(SetOptionsResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be SetOptionsResult")
-			return
-		}
-		result.SetOptionsResult = &tv
-	case OperationTypeChangeTrust:
-		tv, ok := value.(ChangeTrustResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ChangeTrustResult")
-			return
-		}
-		result.ChangeTrustResult = &tv
-	case OperationTypeAllowTrust:
-		tv, ok := value.(AllowTrustResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be AllowTrustResult")
-			return
-		}
-		result.AllowTrustResult = &tv
-	case OperationTypeAccountMerge:
-		tv, ok := value.(AccountMergeResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be AccountMergeResult")
-			return
-		}
-		result.AccountMergeResult = &tv
-	case OperationTypeInflation:
-		tv, ok := value.(InflationResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be InflationResult")
-			return
-		}
-		result.InflationResult = &tv
-	case OperationTypeManageData:
-		tv, ok := value.(ManageDataResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be ManageDataResult")
-			return
-		}
-		result.ManageDataResult = &tv
-	case OperationTypeBumpSequence:
-		tv, ok := value.(BumpSequenceResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be BumpSequenceResult")
-			return
-		}
-		result.BumpSeqResult = &tv
-	}
-	return
-}
-
-// MustCreateAccountResult retrieves the CreateAccountResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustCreateAccountResult() CreateAccountResult {
-	val, ok := u.GetCreateAccountResult()
-
-	if !ok {
-		panic("arm CreateAccountResult is not set")
-	}
-
-	return val
-}
-
-// GetCreateAccountResult retrieves the CreateAccountResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetCreateAccountResult() (result CreateAccountResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "CreateAccountResult" {
-		result = *u.CreateAccountResult
-		ok = true
-	}
-
-	return
-}
-
-// MustPaymentResult retrieves the PaymentResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustPaymentResult() PaymentResult {
-	val, ok := u.GetPaymentResult()
-
-	if !ok {
-		panic("arm PaymentResult is not set")
-	}
-
-	return val
-}
-
-// GetPaymentResult retrieves the PaymentResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetPaymentResult() (result PaymentResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "PaymentResult" {
-		result = *u.PaymentResult
-		ok = true
-	}
-
-	return
-}
-
-// MustPathPaymentResult retrieves the PathPaymentResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustPathPaymentResult() PathPaymentResult {
-	val, ok := u.GetPathPaymentResult()
-
-	if !ok {
-		panic("arm PathPaymentResult is not set")
-	}
-
-	return val
-}
-
-// GetPathPaymentResult retrieves the PathPaymentResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetPathPaymentResult() (result PathPaymentResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "PathPaymentResult" {
-		result = *u.PathPaymentResult
-		ok = true
-	}
-
-	return
-}
-
-// MustManageOfferResult retrieves the ManageOfferResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustManageOfferResult() ManageOfferResult {
-	val, ok := u.GetManageOfferResult()
-
-	if !ok {
-		panic("arm ManageOfferResult is not set")
-	}
-
-	return val
-}
-
-// GetManageOfferResult retrieves the ManageOfferResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetManageOfferResult() (result ManageOfferResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ManageOfferResult" {
-		result = *u.ManageOfferResult
-		ok = true
-	}
-
-	return
-}
-
-// MustCreatePassiveOfferResult retrieves the CreatePassiveOfferResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustCreatePassiveOfferResult() ManageOfferResult {
-	val, ok := u.GetCreatePassiveOfferResult()
-
-	if !ok {
-		panic("arm CreatePassiveOfferResult is not set")
-	}
-
-	return val
-}
-
-// GetCreatePassiveOfferResult retrieves the CreatePassiveOfferResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetCreatePassiveOfferResult() (result ManageOfferResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "CreatePassiveOfferResult" {
-		result = *u.CreatePassiveOfferResult
-		ok = true
-	}
-
-	return
-}
-
-// MustSetOptionsResult retrieves the SetOptionsResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustSetOptionsResult() SetOptionsResult {
-	val, ok := u.GetSetOptionsResult()
-
-	if !ok {
-		panic("arm SetOptionsResult is not set")
-	}
-
-	return val
-}
-
-// GetSetOptionsResult retrieves the SetOptionsResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetSetOptionsResult() (result SetOptionsResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "SetOptionsResult" {
-		result = *u.SetOptionsResult
-		ok = true
-	}
-
-	return
-}
-
-// MustChangeTrustResult retrieves the ChangeTrustResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustChangeTrustResult() ChangeTrustResult {
-	val, ok := u.GetChangeTrustResult()
-
-	if !ok {
-		panic("arm ChangeTrustResult is not set")
-	}
-
-	return val
-}
-
-// GetChangeTrustResult retrieves the ChangeTrustResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetChangeTrustResult() (result ChangeTrustResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ChangeTrustResult" {
-		result = *u.ChangeTrustResult
-		ok = true
-	}
-
-	return
-}
-
-// MustAllowTrustResult retrieves the AllowTrustResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustAllowTrustResult() AllowTrustResult {
-	val, ok := u.GetAllowTrustResult()
-
-	if !ok {
-		panic("arm AllowTrustResult is not set")
-	}
-
-	return val
-}
-
-// GetAllowTrustResult retrieves the AllowTrustResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetAllowTrustResult() (result AllowTrustResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "AllowTrustResult" {
-		result = *u.AllowTrustResult
-		ok = true
-	}
-
-	return
-}
-
-// MustAccountMergeResult retrieves the AccountMergeResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustAccountMergeResult() AccountMergeResult {
-	val, ok := u.GetAccountMergeResult()
-
-	if !ok {
-		panic("arm AccountMergeResult is not set")
-	}
-
-	return val
-}
-
-// GetAccountMergeResult retrieves the AccountMergeResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetAccountMergeResult() (result AccountMergeResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "AccountMergeResult" {
-		result = *u.AccountMergeResult
-		ok = true
-	}
-
-	return
-}
-
-// MustInflationResult retrieves the InflationResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustInflationResult() InflationResult {
-	val, ok := u.GetInflationResult()
-
-	if !ok {
-		panic("arm InflationResult is not set")
-	}
-
-	return val
-}
-
-// GetInflationResult retrieves the InflationResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetInflationResult() (result InflationResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "InflationResult" {
-		result = *u.InflationResult
-		ok = true
-	}
-
-	return
-}
-
-// MustManageDataResult retrieves the ManageDataResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustManageDataResult() ManageDataResult {
-	val, ok := u.GetManageDataResult()
-
-	if !ok {
-		panic("arm ManageDataResult is not set")
-	}
-
-	return val
-}
-
-// GetManageDataResult retrieves the ManageDataResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetManageDataResult() (result ManageDataResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "ManageDataResult" {
-		result = *u.ManageDataResult
-		ok = true
-	}
-
-	return
-}
-
-// MustBumpSeqResult retrieves the BumpSeqResult value from the union,
-// panicing if the value is not set.
-func (u OperationResultTr) MustBumpSeqResult() BumpSequenceResult {
-	val, ok := u.GetBumpSeqResult()
-
-	if !ok {
-		panic("arm BumpSeqResult is not set")
-	}
-
-	return val
-}
-
-// GetBumpSeqResult retrieves the BumpSeqResult value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResultTr) GetBumpSeqResult() (result BumpSequenceResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Type))
-
-	if armName == "BumpSeqResult" {
-		result = *u.BumpSeqResult
-		ok = true
-	}
-
-	return
-}
-
-// OperationResult is an XDR Union defines as:
-//
-//   union OperationResult switch (OperationResultCode code)
-//    {
-//    case opINNER:
-//        union switch (OperationType type)
-//        {
-//        case CREATE_ACCOUNT:
-//            CreateAccountResult createAccountResult;
-//        case PAYMENT:
-//            PaymentResult paymentResult;
-//        case PATH_PAYMENT:
-//            PathPaymentResult pathPaymentResult;
-//        case MANAGE_OFFER:
-//            ManageOfferResult manageOfferResult;
-//        case CREATE_PASSIVE_OFFER:
-//            ManageOfferResult createPassiveOfferResult;
-//        case SET_OPTIONS:
-//            SetOptionsResult setOptionsResult;
-//        case CHANGE_TRUST:
-//            ChangeTrustResult changeTrustResult;
-//        case ALLOW_TRUST:
-//            AllowTrustResult allowTrustResult;
-//        case ACCOUNT_MERGE:
-//            AccountMergeResult accountMergeResult;
-//        case INFLATION:
-//            InflationResult inflationResult;
-//        case MANAGE_DATA:
-//            ManageDataResult manageDataResult;
-//        case BUMP_SEQUENCE:
-//            BumpSequenceResult bumpSeqResult;
-//        }
-//        tr;
-//    default:
-//        void;
-//    };
-//
-type OperationResult struct {
-	Code OperationResultCode
-	Tr   *OperationResultTr
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u OperationResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of OperationResult
-func (u OperationResult) ArmForSwitch(sw int32) (string, bool) {
-	switch OperationResultCode(sw) {
-	case OperationResultCodeOpInner:
-		return "Tr", true
-	default:
-		return "", true
-	}
-}
-
-// NewOperationResult creates a new  OperationResult.
-func NewOperationResult(code OperationResultCode, value interface{}) (result OperationResult, err error) {
-	result.Code = code
-	switch OperationResultCode(code) {
-	case OperationResultCodeOpInner:
-		tv, ok := value.(OperationResultTr)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be OperationResultTr")
-			return
-		}
-		result.Tr = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustTr retrieves the Tr value from the union,
-// panicing if the value is not set.
-func (u OperationResult) MustTr() OperationResultTr {
-	val, ok := u.GetTr()
-
-	if !ok {
-		panic("arm Tr is not set")
-	}
-
-	return val
-}
-
-// GetTr retrieves the Tr value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u OperationResult) GetTr() (result OperationResultTr, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "Tr" {
-		result = *u.Tr
-		ok = true
-	}
-
-	return
-}
-
-// TransactionResultCode is an XDR Enum defines as:
-//
-//   enum TransactionResultCode
-//    {
-//        txSUCCESS = 0, // all operations succeeded
-//
-//        txFAILED = -1, // one of the operations failed (none were applied)
-//
-//        txTOO_EARLY = -2,         // ledger closeTime before minTime
-//        txTOO_LATE = -3,          // ledger closeTime after maxTime
-//        txMISSING_OPERATION = -4, // no operation was specified
-//        txBAD_SEQ = -5,           // sequence number does not match source account
-//
-//        txBAD_AUTH = -6,             // too few valid signatures / wrong network
-//        txINSUFFICIENT_BALANCE = -7, // fee would bring account below reserve
-//        txNO_ACCOUNT = -8,           // source account not found
-//        txINSUFFICIENT_FEE = -9,     // fee is too small
-//        txBAD_AUTH_EXTRA = -10,      // unused signatures attached to transaction
-//        txINTERNAL_ERROR = -11       // an unknown error occured
-//    };
-//
-type TransactionResultCode int32
-
-const (
-	TransactionResultCodeTxSuccess             TransactionResultCode = 0
-	TransactionResultCodeTxFailed              TransactionResultCode = -1
-	TransactionResultCodeTxTooEarly            TransactionResultCode = -2
-	TransactionResultCodeTxTooLate             TransactionResultCode = -3
-	TransactionResultCodeTxMissingOperation    TransactionResultCode = -4
-	TransactionResultCodeTxBadSeq              TransactionResultCode = -5
-	TransactionResultCodeTxBadAuth             TransactionResultCode = -6
-	TransactionResultCodeTxInsufficientBalance TransactionResultCode = -7
-	TransactionResultCodeTxNoAccount           TransactionResultCode = -8
-	TransactionResultCodeTxInsufficientFee     TransactionResultCode = -9
-	TransactionResultCodeTxBadAuthExtra        TransactionResultCode = -10
-	TransactionResultCodeTxInternalError       TransactionResultCode = -11
-)
-
-var transactionResultCodeMap = map[int32]string{
-	0:   "TransactionResultCodeTxSuccess",
-	-1:  "TransactionResultCodeTxFailed",
-	-2:  "TransactionResultCodeTxTooEarly",
-	-3:  "TransactionResultCodeTxTooLate",
-	-4:  "TransactionResultCodeTxMissingOperation",
-	-5:  "TransactionResultCodeTxBadSeq",
-	-6:  "TransactionResultCodeTxBadAuth",
-	-7:  "TransactionResultCodeTxInsufficientBalance",
-	-8:  "TransactionResultCodeTxNoAccount",
-	-9:  "TransactionResultCodeTxInsufficientFee",
-	-10: "TransactionResultCodeTxBadAuthExtra",
-	-11: "TransactionResultCodeTxInternalError",
-}
-
-// ValidEnum validates a proposed value for this enum.  Implements
-// the Enum interface for TransactionResultCode
-func (e TransactionResultCode) ValidEnum(v int32) bool {
-	_, ok := transactionResultCodeMap[v]
-	return ok
-}
-
-// String returns the name of `e`
-func (e TransactionResultCode) String() string {
-	name, _ := transactionResultCodeMap[int32(e)]
-	return name
-}
-
-// TransactionResultResult is an XDR NestedUnion defines as:
-//
-//   union switch (TransactionResultCode code)
-//        {
-//        case txSUCCESS:
-//        case txFAILED:
-//            OperationResult results<>;
-//        default:
-//            void;
-//        }
-//
-type TransactionResultResult struct {
-	Code    TransactionResultCode
-	Results *[]OperationResult
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u TransactionResultResult) SwitchFieldName() string {
-	return "Code"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of TransactionResultResult
-func (u TransactionResultResult) ArmForSwitch(sw int32) (string, bool) {
-	switch TransactionResultCode(sw) {
-	case TransactionResultCodeTxSuccess:
-		return "Results", true
-	case TransactionResultCodeTxFailed:
-		return "Results", true
-	default:
-		return "", true
-	}
-}
-
-// NewTransactionResultResult creates a new  TransactionResultResult.
-func NewTransactionResultResult(code TransactionResultCode, value interface{}) (result TransactionResultResult, err error) {
-	result.Code = code
-	switch TransactionResultCode(code) {
-	case TransactionResultCodeTxSuccess:
-		tv, ok := value.([]OperationResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be []OperationResult")
-			return
-		}
-		result.Results = &tv
-	case TransactionResultCodeTxFailed:
-		tv, ok := value.([]OperationResult)
-		if !ok {
-			err = fmt.Errorf("invalid value, must be []OperationResult")
-			return
-		}
-		result.Results = &tv
-	default:
-		// void
-	}
-	return
-}
-
-// MustResults retrieves the Results value from the union,
-// panicing if the value is not set.
-func (u TransactionResultResult) MustResults() []OperationResult {
-	val, ok := u.GetResults()
-
-	if !ok {
-		panic("arm Results is not set")
-	}
-
-	return val
-}
-
-// GetResults retrieves the Results value from the union,
-// returning ok if the union's switch indicated the value is valid.
-func (u TransactionResultResult) GetResults() (result []OperationResult, ok bool) {
-	armName, _ := u.ArmForSwitch(int32(u.Code))
-
-	if armName == "Results" {
-		result = *u.Results
-		ok = true
-	}
-
-	return
-}
-
-// TransactionResultExt is an XDR NestedUnion defines as:
-//
-//   union switch (int v)
-//        {
-//        case 0:
-//            void;
-//        }
-//
-type TransactionResultExt struct {
-	V int32
-}
-
-// SwitchFieldName returns the field name in which this union's
-// discriminant is stored
-func (u TransactionResultExt) SwitchFieldName() string {
-	return "V"
-}
-
-// ArmForSwitch returns which field name should be used for storing
-// the value for an instance of TransactionResultExt
-func (u TransactionResultExt) ArmForSwitch(sw int32) (string, bool) {
-	switch int32(sw) {
-	case 0:
-		return "", true
-	}
-	return "-", false
-}
-
-// NewTransactionResultExt creates a new  TransactionResultExt.
-func NewTransactionResultExt(v int32, value interface{}) (result TransactionResultExt, err error) {
-	result.V = v
-	switch int32(v) {
-	case 0:
-		// void
-	}
-	return
-}
-
-// TransactionResult is an XDR Struct defines as:
-//
-//   struct TransactionResult
-//    {
-//        int64 feeCharged; // actual fee charged for the transaction
-//
-//        union switch (TransactionResultCode code)
-//        {
-//        case txSUCCESS:
-//        case txFAILED:
-//            OperationResult results<>;
-//        default:
-//            void;
-//        }
-//        result;
-//
-//        // reserved for future use
-//        union switch (int v)
-//        {
-//        case 0:
-//            void;
-//        }
-//        ext;
-//    };
-//
-type TransactionResult struct {
-	FeeCharged Int64
-	Result     TransactionResultResult
-	Ext        TransactionResultExt
 }
 
 // UpgradeType is an XDR Typedef defines as:
@@ -5111,7 +1118,6 @@ type TransactionResult struct {
 //   typedef opaque UpgradeType<128>;
 //
 type UpgradeType []byte
-
 // XDRMaxSize implements the Sized interface for UpgradeType
 func (e UpgradeType) XDRMaxSize() int {
 	return 128
@@ -5125,7 +1131,7 @@ func (e UpgradeType) XDRMaxSize() int {
 //            void;
 //        }
 //
-type StellarValueExt struct {
+type StellarValueExt struct{
 	V int32
 }
 
@@ -5181,8 +1187,8 @@ func NewStellarValueExt(v int32, value interface{}) (result StellarValueExt, err
 type StellarValue struct {
 	TxSetHash Hash
 	CloseTime Uint64
-	Upgrades  []UpgradeType `xdrmaxsize:"6"`
-	Ext       StellarValueExt
+	Upgrades []UpgradeType `xdrmaxsize:"6"`
+	Ext StellarValueExt
 }
 
 // LedgerHeaderExt is an XDR NestedUnion defines as:
@@ -5193,7 +1199,7 @@ type StellarValue struct {
 //            void;
 //        }
 //
-type LedgerHeaderExt struct {
+type LedgerHeaderExt struct{
 	V int32
 }
 
@@ -5264,21 +1270,21 @@ func NewLedgerHeaderExt(v int32, value interface{}) (result LedgerHeaderExt, err
 //    };
 //
 type LedgerHeader struct {
-	LedgerVersion      Uint32
+	LedgerVersion Uint32
 	PreviousLedgerHash Hash
-	ScpValue           StellarValue
-	TxSetResultHash    Hash
-	BucketListHash     Hash
-	LedgerSeq          Uint32
-	TotalCoins         Int64
-	FeePool            Int64
-	InflationSeq       Uint32
-	IdPool             Uint64
-	BaseFee            Uint32
-	BaseReserve        Uint32
-	MaxTxSetSize       Uint32
-	SkipList           [4]Hash
-	Ext                LedgerHeaderExt
+	ScpValue StellarValue
+	TxSetResultHash Hash
+	BucketListHash Hash
+	LedgerSeq Uint32
+	TotalCoins Int64
+	FeePool Int64
+	InflationSeq Uint32
+	IdPool Uint64
+	BaseFee Uint32
+	BaseReserve Uint32
+	MaxTxSetSize Uint32
+	SkipList [4]Hash
+	Ext LedgerHeaderExt
 }
 
 // LedgerUpgradeType is an XDR Enum defines as:
@@ -5292,14 +1298,12 @@ type LedgerHeader struct {
 //    };
 //
 type LedgerUpgradeType int32
-
 const (
-	LedgerUpgradeTypeLedgerUpgradeVersion      LedgerUpgradeType = 1
-	LedgerUpgradeTypeLedgerUpgradeBaseFee      LedgerUpgradeType = 2
+	LedgerUpgradeTypeLedgerUpgradeVersion LedgerUpgradeType = 1
+	LedgerUpgradeTypeLedgerUpgradeBaseFee LedgerUpgradeType = 2
 	LedgerUpgradeTypeLedgerUpgradeMaxTxSetSize LedgerUpgradeType = 3
-	LedgerUpgradeTypeLedgerUpgradeBaseReserve  LedgerUpgradeType = 4
+	LedgerUpgradeTypeLedgerUpgradeBaseReserve LedgerUpgradeType = 4
 )
-
 var ledgerUpgradeTypeMap = map[int32]string{
 	1: "LedgerUpgradeTypeLedgerUpgradeVersion",
 	2: "LedgerUpgradeTypeLedgerUpgradeBaseFee",
@@ -5313,7 +1317,6 @@ func (e LedgerUpgradeType) ValidEnum(v int32) bool {
 	_, ok := ledgerUpgradeTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e LedgerUpgradeType) String() string {
 	name, _ := ledgerUpgradeTypeMap[int32(e)]
@@ -5334,12 +1337,12 @@ func (e LedgerUpgradeType) String() string {
 //        uint32 newBaseReserve; // update baseReserve
 //    };
 //
-type LedgerUpgrade struct {
-	Type             LedgerUpgradeType
+type LedgerUpgrade struct{
+	Type LedgerUpgradeType
 	NewLedgerVersion *Uint32
-	NewBaseFee       *Uint32
-	NewMaxTxSetSize  *Uint32
-	NewBaseReserve   *Uint32
+	NewBaseFee *Uint32
+	NewMaxTxSetSize *Uint32
+	NewBaseReserve *Uint32
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5399,7 +1402,6 @@ func NewLedgerUpgrade(aType LedgerUpgradeType, value interface{}) (result Ledger
 	}
 	return
 }
-
 // MustNewLedgerVersion retrieves the NewLedgerVersion value from the union,
 // panicing if the value is not set.
 func (u LedgerUpgrade) MustNewLedgerVersion() Uint32 {
@@ -5424,7 +1426,6 @@ func (u LedgerUpgrade) GetNewLedgerVersion() (result Uint32, ok bool) {
 
 	return
 }
-
 // MustNewBaseFee retrieves the NewBaseFee value from the union,
 // panicing if the value is not set.
 func (u LedgerUpgrade) MustNewBaseFee() Uint32 {
@@ -5449,7 +1450,6 @@ func (u LedgerUpgrade) GetNewBaseFee() (result Uint32, ok bool) {
 
 	return
 }
-
 // MustNewMaxTxSetSize retrieves the NewMaxTxSetSize value from the union,
 // panicing if the value is not set.
 func (u LedgerUpgrade) MustNewMaxTxSetSize() Uint32 {
@@ -5474,7 +1474,6 @@ func (u LedgerUpgrade) GetNewMaxTxSetSize() (result Uint32, ok bool) {
 
 	return
 }
-
 // MustNewBaseReserve retrieves the NewBaseReserve value from the union,
 // panicing if the value is not set.
 func (u LedgerUpgrade) MustNewBaseReserve() Uint32 {
@@ -5521,7 +1520,7 @@ type LedgerKeyAccount struct {
 //
 type LedgerKeyTrustLine struct {
 	AccountId AccountId
-	Asset     Asset
+	Asset Asset
 }
 
 // LedgerKeyOffer is an XDR NestedStruct defines as:
@@ -5534,7 +1533,7 @@ type LedgerKeyTrustLine struct {
 //
 type LedgerKeyOffer struct {
 	SellerId AccountId
-	OfferId  Uint64
+	OfferId Uint64
 }
 
 // LedgerKeyData is an XDR NestedStruct defines as:
@@ -5547,7 +1546,7 @@ type LedgerKeyOffer struct {
 //
 type LedgerKeyData struct {
 	AccountId AccountId
-	DataName  String64
+	DataName String64
 }
 
 // LedgerKey is an XDR Union defines as:
@@ -5582,12 +1581,12 @@ type LedgerKeyData struct {
 //        } data;
 //    };
 //
-type LedgerKey struct {
-	Type      LedgerEntryType
-	Account   *LedgerKeyAccount
+type LedgerKey struct{
+	Type LedgerEntryType
+	Account *LedgerKeyAccount
 	TrustLine *LedgerKeyTrustLine
-	Offer     *LedgerKeyOffer
-	Data      *LedgerKeyData
+	Offer *LedgerKeyOffer
+	Data *LedgerKeyData
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -5647,7 +1646,6 @@ func NewLedgerKey(aType LedgerEntryType, value interface{}) (result LedgerKey, e
 	}
 	return
 }
-
 // MustAccount retrieves the Account value from the union,
 // panicing if the value is not set.
 func (u LedgerKey) MustAccount() LedgerKeyAccount {
@@ -5672,7 +1670,6 @@ func (u LedgerKey) GetAccount() (result LedgerKeyAccount, ok bool) {
 
 	return
 }
-
 // MustTrustLine retrieves the TrustLine value from the union,
 // panicing if the value is not set.
 func (u LedgerKey) MustTrustLine() LedgerKeyTrustLine {
@@ -5697,7 +1694,6 @@ func (u LedgerKey) GetTrustLine() (result LedgerKeyTrustLine, ok bool) {
 
 	return
 }
-
 // MustOffer retrieves the Offer value from the union,
 // panicing if the value is not set.
 func (u LedgerKey) MustOffer() LedgerKeyOffer {
@@ -5722,7 +1718,6 @@ func (u LedgerKey) GetOffer() (result LedgerKeyOffer, ok bool) {
 
 	return
 }
-
 // MustData retrieves the Data value from the union,
 // panicing if the value is not set.
 func (u LedgerKey) MustData() LedgerKeyData {
@@ -5757,12 +1752,10 @@ func (u LedgerKey) GetData() (result LedgerKeyData, ok bool) {
 //    };
 //
 type BucketEntryType int32
-
 const (
 	BucketEntryTypeLiveentry BucketEntryType = 0
 	BucketEntryTypeDeadentry BucketEntryType = 1
 )
-
 var bucketEntryTypeMap = map[int32]string{
 	0: "BucketEntryTypeLiveentry",
 	1: "BucketEntryTypeDeadentry",
@@ -5774,7 +1767,6 @@ func (e BucketEntryType) ValidEnum(v int32) bool {
 	_, ok := bucketEntryTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e BucketEntryType) String() string {
 	name, _ := bucketEntryTypeMap[int32(e)]
@@ -5792,8 +1784,8 @@ func (e BucketEntryType) String() string {
 //        LedgerKey deadEntry;
 //    };
 //
-type BucketEntry struct {
-	Type      BucketEntryType
+type BucketEntry struct{
+	Type BucketEntryType
 	LiveEntry *LedgerEntry
 	DeadEntry *LedgerKey
 }
@@ -5837,7 +1829,6 @@ func NewBucketEntry(aType BucketEntryType, value interface{}) (result BucketEntr
 	}
 	return
 }
-
 // MustLiveEntry retrieves the LiveEntry value from the union,
 // panicing if the value is not set.
 func (u BucketEntry) MustLiveEntry() LedgerEntry {
@@ -5862,7 +1853,6 @@ func (u BucketEntry) GetLiveEntry() (result LedgerEntry, ok bool) {
 
 	return
 }
-
 // MustDeadEntry retrieves the DeadEntry value from the union,
 // panicing if the value is not set.
 func (u BucketEntry) MustDeadEntry() LedgerKey {
@@ -5898,7 +1888,7 @@ func (u BucketEntry) GetDeadEntry() (result LedgerKey, ok bool) {
 //
 type TransactionSet struct {
 	PreviousLedgerHash Hash
-	Txs                []TransactionEnvelope
+	Txs []TransactionEnvelope
 }
 
 // TransactionResultPair is an XDR Struct defines as:
@@ -5911,7 +1901,7 @@ type TransactionSet struct {
 //
 type TransactionResultPair struct {
 	TransactionHash Hash
-	Result          TransactionResult
+	Result TransactionResult
 }
 
 // TransactionResultSet is an XDR Struct defines as:
@@ -5933,7 +1923,7 @@ type TransactionResultSet struct {
 //            void;
 //        }
 //
-type TransactionHistoryEntryExt struct {
+type TransactionHistoryEntryExt struct{
 	V int32
 }
 
@@ -5981,8 +1971,8 @@ func NewTransactionHistoryEntryExt(v int32, value interface{}) (result Transacti
 //
 type TransactionHistoryEntry struct {
 	LedgerSeq Uint32
-	TxSet     TransactionSet
-	Ext       TransactionHistoryEntryExt
+	TxSet TransactionSet
+	Ext TransactionHistoryEntryExt
 }
 
 // TransactionHistoryResultEntryExt is an XDR NestedUnion defines as:
@@ -5993,7 +1983,7 @@ type TransactionHistoryEntry struct {
 //            void;
 //        }
 //
-type TransactionHistoryResultEntryExt struct {
+type TransactionHistoryResultEntryExt struct{
 	V int32
 }
 
@@ -6040,9 +2030,9 @@ func NewTransactionHistoryResultEntryExt(v int32, value interface{}) (result Tra
 //    };
 //
 type TransactionHistoryResultEntry struct {
-	LedgerSeq   Uint32
+	LedgerSeq Uint32
 	TxResultSet TransactionResultSet
-	Ext         TransactionHistoryResultEntryExt
+	Ext TransactionHistoryResultEntryExt
 }
 
 // LedgerHeaderHistoryEntryExt is an XDR NestedUnion defines as:
@@ -6053,7 +2043,7 @@ type TransactionHistoryResultEntry struct {
 //            void;
 //        }
 //
-type LedgerHeaderHistoryEntryExt struct {
+type LedgerHeaderHistoryEntryExt struct{
 	V int32
 }
 
@@ -6100,9 +2090,9 @@ func NewLedgerHeaderHistoryEntryExt(v int32, value interface{}) (result LedgerHe
 //    };
 //
 type LedgerHeaderHistoryEntry struct {
-	Hash   Hash
+	Hash Hash
 	Header LedgerHeader
-	Ext    LedgerHeaderHistoryEntryExt
+	Ext LedgerHeaderHistoryEntryExt
 }
 
 // LedgerScpMessages is an XDR Struct defines as:
@@ -6115,7 +2105,7 @@ type LedgerHeaderHistoryEntry struct {
 //
 type LedgerScpMessages struct {
 	LedgerSeq Uint32
-	Messages  []ScpEnvelope
+	Messages []ScpEnvelope
 }
 
 // ScpHistoryEntryV0 is an XDR Struct defines as:
@@ -6127,7 +2117,7 @@ type LedgerScpMessages struct {
 //    };
 //
 type ScpHistoryEntryV0 struct {
-	QuorumSets     []ScpQuorumSet
+	QuorumSets []ScpQuorumSet
 	LedgerMessages LedgerScpMessages
 }
 
@@ -6139,8 +2129,8 @@ type ScpHistoryEntryV0 struct {
 //        SCPHistoryEntryV0 v0;
 //    };
 //
-type ScpHistoryEntry struct {
-	V  int32
+type ScpHistoryEntry struct{
+	V int32
 	V0 *ScpHistoryEntryV0
 }
 
@@ -6174,7 +2164,6 @@ func NewScpHistoryEntry(v int32, value interface{}) (result ScpHistoryEntry, err
 	}
 	return
 }
-
 // MustV0 retrieves the V0 value from the union,
 // panicing if the value is not set.
 func (u ScpHistoryEntry) MustV0() ScpHistoryEntryV0 {
@@ -6211,14 +2200,12 @@ func (u ScpHistoryEntry) GetV0() (result ScpHistoryEntryV0, ok bool) {
 //    };
 //
 type LedgerEntryChangeType int32
-
 const (
 	LedgerEntryChangeTypeLedgerEntryCreated LedgerEntryChangeType = 0
 	LedgerEntryChangeTypeLedgerEntryUpdated LedgerEntryChangeType = 1
 	LedgerEntryChangeTypeLedgerEntryRemoved LedgerEntryChangeType = 2
-	LedgerEntryChangeTypeLedgerEntryState   LedgerEntryChangeType = 3
+	LedgerEntryChangeTypeLedgerEntryState LedgerEntryChangeType = 3
 )
-
 var ledgerEntryChangeTypeMap = map[int32]string{
 	0: "LedgerEntryChangeTypeLedgerEntryCreated",
 	1: "LedgerEntryChangeTypeLedgerEntryUpdated",
@@ -6232,7 +2219,6 @@ func (e LedgerEntryChangeType) ValidEnum(v int32) bool {
 	_, ok := ledgerEntryChangeTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e LedgerEntryChangeType) String() string {
 	name, _ := ledgerEntryChangeTypeMap[int32(e)]
@@ -6253,12 +2239,12 @@ func (e LedgerEntryChangeType) String() string {
 //        LedgerEntry state;
 //    };
 //
-type LedgerEntryChange struct {
-	Type    LedgerEntryChangeType
+type LedgerEntryChange struct{
+	Type LedgerEntryChangeType
 	Created *LedgerEntry
 	Updated *LedgerEntry
 	Removed *LedgerKey
-	State   *LedgerEntry
+	State *LedgerEntry
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -6318,7 +2304,6 @@ func NewLedgerEntryChange(aType LedgerEntryChangeType, value interface{}) (resul
 	}
 	return
 }
-
 // MustCreated retrieves the Created value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryChange) MustCreated() LedgerEntry {
@@ -6343,7 +2328,6 @@ func (u LedgerEntryChange) GetCreated() (result LedgerEntry, ok bool) {
 
 	return
 }
-
 // MustUpdated retrieves the Updated value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryChange) MustUpdated() LedgerEntry {
@@ -6368,7 +2352,6 @@ func (u LedgerEntryChange) GetUpdated() (result LedgerEntry, ok bool) {
 
 	return
 }
-
 // MustRemoved retrieves the Removed value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryChange) MustRemoved() LedgerKey {
@@ -6393,7 +2376,6 @@ func (u LedgerEntryChange) GetRemoved() (result LedgerKey, ok bool) {
 
 	return
 }
-
 // MustState retrieves the State value from the union,
 // panicing if the value is not set.
 func (u LedgerEntryChange) MustState() LedgerEntry {
@@ -6424,7 +2406,6 @@ func (u LedgerEntryChange) GetState() (result LedgerEntry, ok bool) {
 //   typedef LedgerEntryChange LedgerEntryChanges<>;
 //
 type LedgerEntryChanges []LedgerEntryChange
-
 // OperationMeta is an XDR Struct defines as:
 //
 //   struct OperationMeta
@@ -6445,7 +2426,7 @@ type OperationMeta struct {
 //    };
 //
 type TransactionMetaV1 struct {
-	TxChanges  LedgerEntryChanges
+	TxChanges LedgerEntryChanges
 	Operations []OperationMeta
 }
 
@@ -6459,10 +2440,10 @@ type TransactionMetaV1 struct {
 //        TransactionMetaV1 v1;
 //    };
 //
-type TransactionMeta struct {
-	V          int32
+type TransactionMeta struct{
+	V int32
 	Operations *[]OperationMeta
-	V1         *TransactionMetaV1
+	V1 *TransactionMetaV1
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -6504,7 +2485,6 @@ func NewTransactionMeta(v int32, value interface{}) (result TransactionMeta, err
 	}
 	return
 }
-
 // MustOperations retrieves the Operations value from the union,
 // panicing if the value is not set.
 func (u TransactionMeta) MustOperations() []OperationMeta {
@@ -6529,7 +2509,6 @@ func (u TransactionMeta) GetOperations() (result []OperationMeta, ok bool) {
 
 	return
 }
-
 // MustV1 retrieves the V1 value from the union,
 // panicing if the value is not set.
 func (u TransactionMeta) MustV1() TransactionMetaV1 {
@@ -6567,7 +2546,6 @@ func (u TransactionMeta) GetV1() (result TransactionMetaV1, ok bool) {
 //    };
 //
 type ErrorCode int32
-
 const (
 	ErrorCodeErrMisc ErrorCode = 0
 	ErrorCodeErrData ErrorCode = 1
@@ -6575,7 +2553,6 @@ const (
 	ErrorCodeErrAuth ErrorCode = 3
 	ErrorCodeErrLoad ErrorCode = 4
 )
-
 var errorCodeMap = map[int32]string{
 	0: "ErrorCodeErrMisc",
 	1: "ErrorCodeErrData",
@@ -6590,7 +2567,6 @@ func (e ErrorCode) ValidEnum(v int32) bool {
 	_, ok := errorCodeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e ErrorCode) String() string {
 	name, _ := errorCodeMap[int32(e)]
@@ -6607,7 +2583,7 @@ func (e ErrorCode) String() string {
 //
 type Error struct {
 	Code ErrorCode
-	Msg  string `xdrmaxsize:"100"`
+	Msg string `xdrmaxsize:"100"`
 }
 
 // AuthCert is an XDR Struct defines as:
@@ -6620,9 +2596,9 @@ type Error struct {
 //    };
 //
 type AuthCert struct {
-	Pubkey     Curve25519Public
+	Pubkey Curve25519Public
 	Expiration Uint64
-	Sig        Signature
+	Sig Signature
 }
 
 // Hello is an XDR Struct defines as:
@@ -6641,15 +2617,15 @@ type AuthCert struct {
 //    };
 //
 type Hello struct {
-	LedgerVersion     Uint32
-	OverlayVersion    Uint32
+	LedgerVersion Uint32
+	OverlayVersion Uint32
 	OverlayMinVersion Uint32
-	NetworkId         Hash
-	VersionStr        string `xdrmaxsize:"100"`
-	ListeningPort     int32
-	PeerId            NodeId
-	Cert              AuthCert
-	Nonce             Uint256
+	NetworkId Hash
+	VersionStr string `xdrmaxsize:"100"`
+	ListeningPort int32
+	PeerId NodeId
+	Cert AuthCert
+	Nonce Uint256
 }
 
 // Auth is an XDR Struct defines as:
@@ -6674,12 +2650,10 @@ type Auth struct {
 //    };
 //
 type IpAddrType int32
-
 const (
 	IpAddrTypeIPv4 IpAddrType = 0
 	IpAddrTypeIPv6 IpAddrType = 1
 )
-
 var ipAddrTypeMap = map[int32]string{
 	0: "IpAddrTypeIPv4",
 	1: "IpAddrTypeIPv6",
@@ -6691,7 +2665,6 @@ func (e IpAddrType) ValidEnum(v int32) bool {
 	_, ok := ipAddrTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e IpAddrType) String() string {
 	name, _ := ipAddrTypeMap[int32(e)]
@@ -6708,9 +2681,9 @@ func (e IpAddrType) String() string {
 //            opaque ipv6[16];
 //        }
 //
-type PeerAddressIp struct {
+type PeerAddressIp struct{
 	Type IpAddrType
-	Ipv4 *[4]byte  `xdrmaxsize:"4"`
+	Ipv4 *[4]byte `xdrmaxsize:"4"`
 	Ipv6 *[16]byte `xdrmaxsize:"16"`
 }
 
@@ -6753,7 +2726,6 @@ func NewPeerAddressIp(aType IpAddrType, value interface{}) (result PeerAddressIp
 	}
 	return
 }
-
 // MustIpv4 retrieves the Ipv4 value from the union,
 // panicing if the value is not set.
 func (u PeerAddressIp) MustIpv4() [4]byte {
@@ -6778,7 +2750,6 @@ func (u PeerAddressIp) GetIpv4() (result [4]byte, ok bool) {
 
 	return
 }
-
 // MustIpv6 retrieves the Ipv6 value from the union,
 // panicing if the value is not set.
 func (u PeerAddressIp) MustIpv6() [16]byte {
@@ -6821,8 +2792,8 @@ func (u PeerAddressIp) GetIpv6() (result [16]byte, ok bool) {
 //    };
 //
 type PeerAddress struct {
-	Ip          PeerAddressIp
-	Port        Uint32
+	Ip PeerAddressIp
+	Port Uint32
 	NumFailures Uint32
 }
 
@@ -6853,33 +2824,31 @@ type PeerAddress struct {
 //    };
 //
 type MessageType int32
-
 const (
-	MessageTypeErrorMsg        MessageType = 0
-	MessageTypeAuth            MessageType = 2
-	MessageTypeDontHave        MessageType = 3
-	MessageTypeGetPeers        MessageType = 4
-	MessageTypePeers           MessageType = 5
-	MessageTypeGetTxSet        MessageType = 6
-	MessageTypeTxSet           MessageType = 7
-	MessageTypeTransaction     MessageType = 8
+	MessageTypeErrorMsg MessageType = 0
+	MessageTypeAuth MessageType = 2
+	MessageTypeDontHave MessageType = 3
+	MessageTypeGetPeers MessageType = 4
+	MessageTypePeers MessageType = 5
+	MessageTypeGetTxSet MessageType = 6
+	MessageTypeTxSet MessageType = 7
+	MessageTypeTransaction MessageType = 8
 	MessageTypeGetScpQuorumset MessageType = 9
-	MessageTypeScpQuorumset    MessageType = 10
-	MessageTypeScpMessage      MessageType = 11
-	MessageTypeGetScpState     MessageType = 12
-	MessageTypeHello           MessageType = 13
+	MessageTypeScpQuorumset MessageType = 10
+	MessageTypeScpMessage MessageType = 11
+	MessageTypeGetScpState MessageType = 12
+	MessageTypeHello MessageType = 13
 )
-
 var messageTypeMap = map[int32]string{
-	0:  "MessageTypeErrorMsg",
-	2:  "MessageTypeAuth",
-	3:  "MessageTypeDontHave",
-	4:  "MessageTypeGetPeers",
-	5:  "MessageTypePeers",
-	6:  "MessageTypeGetTxSet",
-	7:  "MessageTypeTxSet",
-	8:  "MessageTypeTransaction",
-	9:  "MessageTypeGetScpQuorumset",
+	0: "MessageTypeErrorMsg",
+	2: "MessageTypeAuth",
+	3: "MessageTypeDontHave",
+	4: "MessageTypeGetPeers",
+	5: "MessageTypePeers",
+	6: "MessageTypeGetTxSet",
+	7: "MessageTypeTxSet",
+	8: "MessageTypeTransaction",
+	9: "MessageTypeGetScpQuorumset",
 	10: "MessageTypeScpQuorumset",
 	11: "MessageTypeScpMessage",
 	12: "MessageTypeGetScpState",
@@ -6892,7 +2861,6 @@ func (e MessageType) ValidEnum(v int32) bool {
 	_, ok := messageTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e MessageType) String() string {
 	name, _ := messageTypeMap[int32(e)]
@@ -6908,7 +2876,7 @@ func (e MessageType) String() string {
 //    };
 //
 type DontHave struct {
-	Type    MessageType
+	Type MessageType
 	ReqHash Uint256
 }
 
@@ -6948,19 +2916,19 @@ type DontHave struct {
 //        uint32 getSCPLedgerSeq; // ledger seq requested ; if 0, requests the latest
 //    };
 //
-type StellarMessage struct {
-	Type            MessageType
-	Error           *Error
-	Hello           *Hello
-	Auth            *Auth
-	DontHave        *DontHave
-	Peers           *[]PeerAddress `xdrmaxsize:"100"`
-	TxSetHash       *Uint256
-	TxSet           *TransactionSet
-	Transaction     *TransactionEnvelope
-	QSetHash        *Uint256
-	QSet            *ScpQuorumSet
-	Envelope        *ScpEnvelope
+type StellarMessage struct{
+	Type MessageType
+	Error *Error
+	Hello *Hello
+	Auth *Auth
+	DontHave *DontHave
+	Peers *[]PeerAddress `xdrmaxsize:"100"`
+	TxSetHash *Uint256
+	TxSet *TransactionSet
+	Transaction *TransactionEnvelope
+	QSetHash *Uint256
+	QSet *ScpQuorumSet
+	Envelope *ScpEnvelope
 	GetScpLedgerSeq *Uint32
 }
 
@@ -7097,7 +3065,6 @@ func NewStellarMessage(aType MessageType, value interface{}) (result StellarMess
 	}
 	return
 }
-
 // MustError retrieves the Error value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustError() Error {
@@ -7122,7 +3089,6 @@ func (u StellarMessage) GetError() (result Error, ok bool) {
 
 	return
 }
-
 // MustHello retrieves the Hello value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustHello() Hello {
@@ -7147,7 +3113,6 @@ func (u StellarMessage) GetHello() (result Hello, ok bool) {
 
 	return
 }
-
 // MustAuth retrieves the Auth value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustAuth() Auth {
@@ -7172,7 +3137,6 @@ func (u StellarMessage) GetAuth() (result Auth, ok bool) {
 
 	return
 }
-
 // MustDontHave retrieves the DontHave value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustDontHave() DontHave {
@@ -7197,7 +3161,6 @@ func (u StellarMessage) GetDontHave() (result DontHave, ok bool) {
 
 	return
 }
-
 // MustPeers retrieves the Peers value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustPeers() []PeerAddress {
@@ -7222,7 +3185,6 @@ func (u StellarMessage) GetPeers() (result []PeerAddress, ok bool) {
 
 	return
 }
-
 // MustTxSetHash retrieves the TxSetHash value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustTxSetHash() Uint256 {
@@ -7247,7 +3209,6 @@ func (u StellarMessage) GetTxSetHash() (result Uint256, ok bool) {
 
 	return
 }
-
 // MustTxSet retrieves the TxSet value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustTxSet() TransactionSet {
@@ -7272,7 +3233,6 @@ func (u StellarMessage) GetTxSet() (result TransactionSet, ok bool) {
 
 	return
 }
-
 // MustTransaction retrieves the Transaction value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustTransaction() TransactionEnvelope {
@@ -7297,7 +3257,6 @@ func (u StellarMessage) GetTransaction() (result TransactionEnvelope, ok bool) {
 
 	return
 }
-
 // MustQSetHash retrieves the QSetHash value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustQSetHash() Uint256 {
@@ -7322,7 +3281,6 @@ func (u StellarMessage) GetQSetHash() (result Uint256, ok bool) {
 
 	return
 }
-
 // MustQSet retrieves the QSet value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustQSet() ScpQuorumSet {
@@ -7347,7 +3305,6 @@ func (u StellarMessage) GetQSet() (result ScpQuorumSet, ok bool) {
 
 	return
 }
-
 // MustEnvelope retrieves the Envelope value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustEnvelope() ScpEnvelope {
@@ -7372,7 +3329,6 @@ func (u StellarMessage) GetEnvelope() (result ScpEnvelope, ok bool) {
 
 	return
 }
-
 // MustGetScpLedgerSeq retrieves the GetScpLedgerSeq value from the union,
 // panicing if the value is not set.
 func (u StellarMessage) MustGetScpLedgerSeq() Uint32 {
@@ -7409,8 +3365,8 @@ func (u StellarMessage) GetGetScpLedgerSeq() (result Uint32, ok bool) {
 //
 type AuthenticatedMessageV0 struct {
 	Sequence Uint64
-	Message  StellarMessage
-	Mac      HmacSha256Mac
+	Message StellarMessage
+	Mac HmacSha256Mac
 }
 
 // AuthenticatedMessage is an XDR Union defines as:
@@ -7426,8 +3382,8 @@ type AuthenticatedMessageV0 struct {
 //        } v0;
 //    };
 //
-type AuthenticatedMessage struct {
-	V  Uint32
+type AuthenticatedMessage struct{
+	V Uint32
 	V0 *AuthenticatedMessageV0
 }
 
@@ -7461,7 +3417,6 @@ func NewAuthenticatedMessage(v Uint32, value interface{}) (result AuthenticatedM
 	}
 	return
 }
-
 // MustV0 retrieves the V0 value from the union,
 // panicing if the value is not set.
 func (u AuthenticatedMessage) MustV0() AuthenticatedMessageV0 {
@@ -7487,6 +3442,3912 @@ func (u AuthenticatedMessage) GetV0() (result AuthenticatedMessageV0, ok bool) {
 	return
 }
 
+// DecoratedSignature is an XDR Struct defines as:
+//
+//   struct DecoratedSignature
+//    {
+//        SignatureHint hint;  // last 4 bytes of the public key, used as a hint
+//        Signature signature; // actual signature
+//    };
+//
+type DecoratedSignature struct {
+	Hint SignatureHint
+	Signature Signature
+}
+
+// OperationType is an XDR Enum defines as:
+//
+//   enum OperationType
+//    {
+//        CREATE_ACCOUNT = 0,
+//        PAYMENT = 1,
+//        PATH_PAYMENT = 2,
+//        MANAGE_OFFER = 3,
+//        CREATE_PASSIVE_OFFER = 4,
+//        SET_OPTIONS = 5,
+//        CHANGE_TRUST = 6,
+//        ALLOW_TRUST = 7,
+//        ACCOUNT_MERGE = 8,
+//        INFLATION = 9,
+//        MANAGE_DATA = 10,
+//        BUMP_SEQUENCE = 11
+//    };
+//
+type OperationType int32
+const (
+	OperationTypeCreateAccount OperationType = 0
+	OperationTypePayment OperationType = 1
+	OperationTypePathPayment OperationType = 2
+	OperationTypeManageOffer OperationType = 3
+	OperationTypeCreatePassiveOffer OperationType = 4
+	OperationTypeSetOptions OperationType = 5
+	OperationTypeChangeTrust OperationType = 6
+	OperationTypeAllowTrust OperationType = 7
+	OperationTypeAccountMerge OperationType = 8
+	OperationTypeInflation OperationType = 9
+	OperationTypeManageData OperationType = 10
+	OperationTypeBumpSequence OperationType = 11
+)
+var operationTypeMap = map[int32]string{
+	0: "OperationTypeCreateAccount",
+	1: "OperationTypePayment",
+	2: "OperationTypePathPayment",
+	3: "OperationTypeManageOffer",
+	4: "OperationTypeCreatePassiveOffer",
+	5: "OperationTypeSetOptions",
+	6: "OperationTypeChangeTrust",
+	7: "OperationTypeAllowTrust",
+	8: "OperationTypeAccountMerge",
+	9: "OperationTypeInflation",
+	10: "OperationTypeManageData",
+	11: "OperationTypeBumpSequence",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for OperationType
+func (e OperationType) ValidEnum(v int32) bool {
+	_, ok := operationTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e OperationType) String() string {
+	name, _ := operationTypeMap[int32(e)]
+	return name
+}
+
+// CreateAccountOp is an XDR Struct defines as:
+//
+//   struct CreateAccountOp
+//    {
+//        AccountID destination; // account to create
+//        int64 startingBalance; // amount they end up with
+//        AccountType accountType; // role of the account
+//
+//    };
+//
+type CreateAccountOp struct {
+	Destination AccountId
+	StartingBalance Int64
+	AccountType AccountType
+}
+
+// PaymentOp is an XDR Struct defines as:
+//
+//   struct PaymentOp
+//    {
+//        AccountID destination; // recipient of the payment
+//        Asset asset;           // what they end up with
+//        int64 amount;          // amount they end up with
+//    };
+//
+type PaymentOp struct {
+	Destination AccountId
+	Asset Asset
+	Amount Int64
+}
+
+// PathPaymentOp is an XDR Struct defines as:
+//
+//   struct PathPaymentOp
+//    {
+//        Asset sendAsset; // asset we pay with
+//        int64 sendMax;   // the maximum amount of sendAsset to
+//                         // send (excluding fees).
+//                         // The operation will fail if can't be met
+//
+//        AccountID destination; // recipient of the payment
+//        Asset destAsset;       // what they end up with
+//        int64 destAmount;      // amount they end up with
+//
+//        Asset path<5>; // additional hops it must go through to get there
+//    };
+//
+type PathPaymentOp struct {
+	SendAsset Asset
+	SendMax Int64
+	Destination AccountId
+	DestAsset Asset
+	DestAmount Int64
+	Path []Asset `xdrmaxsize:"5"`
+}
+
+// ManageOfferOp is an XDR Struct defines as:
+//
+//   struct ManageOfferOp
+//    {
+//        Asset selling;
+//        Asset buying;
+//        int64 amount; // amount being sold. if set to 0, delete the offer
+//        Price price;  // price of thing being sold in terms of what you are buying
+//
+//        // 0=create a new offer, otherwise edit an existing offer
+//        uint64 offerID;
+//    };
+//
+type ManageOfferOp struct {
+	Selling Asset
+	Buying Asset
+	Amount Int64
+	Price Price
+	OfferId Uint64
+}
+
+// CreatePassiveOfferOp is an XDR Struct defines as:
+//
+//   struct CreatePassiveOfferOp
+//    {
+//        Asset selling; // A
+//        Asset buying;  // B
+//        int64 amount;  // amount taker gets. if set to 0, delete the offer
+//        Price price;   // cost of A in terms of B
+//    };
+//
+type CreatePassiveOfferOp struct {
+	Selling Asset
+	Buying Asset
+	Amount Int64
+	Price Price
+}
+
+// SetOptionsOp is an XDR Struct defines as:
+//
+//   struct SetOptionsOp
+//    {
+//        AccountID* inflationDest; // sets the inflation destination
+//
+//        uint32* clearFlags; // which flags to clear
+//        uint32* setFlags;   // which flags to set
+//
+//        // account threshold manipulation
+//        uint32* masterWeight; // weight of the master account
+//        uint32* lowThreshold;
+//        uint32* medThreshold;
+//        uint32* highThreshold;
+//
+//        string32* homeDomain; // sets the home domain
+//
+//        // Add, update or remove a signer for the account
+//        // signer is deleted if the weight is 0
+//        Signer* signer;
+//    };
+//
+type SetOptionsOp struct {
+	InflationDest *AccountId
+	ClearFlags *Uint32
+	SetFlags *Uint32
+	MasterWeight *Uint32
+	LowThreshold *Uint32
+	MedThreshold *Uint32
+	HighThreshold *Uint32
+	HomeDomain *String32
+	Signer *Signer
+}
+
+// ChangeTrustOp is an XDR Struct defines as:
+//
+//   struct ChangeTrustOp
+//    {
+//        Asset line;
+//
+//        // if limit is set to 0, deletes the trust line
+//        int64 limit;
+//    };
+//
+type ChangeTrustOp struct {
+	Line Asset
+	Limit Int64
+}
+
+// AllowTrustOpAsset is an XDR NestedUnion defines as:
+//
+//   union switch (AssetType type)
+//        {
+//        // ASSET_TYPE_NATIVE is not allowed
+//        case ASSET_TYPE_CREDIT_ALPHANUM4:
+//            opaque assetCode4[4];
+//
+//        case ASSET_TYPE_CREDIT_ALPHANUM12:
+//            opaque assetCode12[12];
+//
+//            // add other asset types here in the future
+//        }
+//
+type AllowTrustOpAsset struct{
+	Type AssetType
+	AssetCode4 *[4]byte `xdrmaxsize:"4"`
+	AssetCode12 *[12]byte `xdrmaxsize:"12"`
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u AllowTrustOpAsset) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of AllowTrustOpAsset
+func (u AllowTrustOpAsset) ArmForSwitch(sw int32) (string, bool) {
+	switch AssetType(sw) {
+	case AssetTypeAssetTypeCreditAlphanum4:
+		return "AssetCode4", true
+	case AssetTypeAssetTypeCreditAlphanum12:
+		return "AssetCode12", true
+	}
+	return "-", false
+}
+
+// NewAllowTrustOpAsset creates a new  AllowTrustOpAsset.
+func NewAllowTrustOpAsset(aType AssetType, value interface{}) (result AllowTrustOpAsset, err error) {
+	result.Type = aType
+	switch AssetType(aType) {
+	case AssetTypeAssetTypeCreditAlphanum4:
+		tv, ok := value.([4]byte)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be [4]byte")
+			return
+		}
+		result.AssetCode4 = &tv
+	case AssetTypeAssetTypeCreditAlphanum12:
+		tv, ok := value.([12]byte)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be [12]byte")
+			return
+		}
+		result.AssetCode12 = &tv
+	}
+	return
+}
+// MustAssetCode4 retrieves the AssetCode4 value from the union,
+// panicing if the value is not set.
+func (u AllowTrustOpAsset) MustAssetCode4() [4]byte {
+	val, ok := u.GetAssetCode4()
+
+	if !ok {
+		panic("arm AssetCode4 is not set")
+	}
+
+	return val
+}
+
+// GetAssetCode4 retrieves the AssetCode4 value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u AllowTrustOpAsset) GetAssetCode4() (result [4]byte, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "AssetCode4" {
+		result = *u.AssetCode4
+		ok = true
+	}
+
+	return
+}
+// MustAssetCode12 retrieves the AssetCode12 value from the union,
+// panicing if the value is not set.
+func (u AllowTrustOpAsset) MustAssetCode12() [12]byte {
+	val, ok := u.GetAssetCode12()
+
+	if !ok {
+		panic("arm AssetCode12 is not set")
+	}
+
+	return val
+}
+
+// GetAssetCode12 retrieves the AssetCode12 value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u AllowTrustOpAsset) GetAssetCode12() (result [12]byte, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "AssetCode12" {
+		result = *u.AssetCode12
+		ok = true
+	}
+
+	return
+}
+
+// AllowTrustOp is an XDR Struct defines as:
+//
+//   struct AllowTrustOp
+//    {
+//        AccountID trustor;
+//        union switch (AssetType type)
+//        {
+//        // ASSET_TYPE_NATIVE is not allowed
+//        case ASSET_TYPE_CREDIT_ALPHANUM4:
+//            opaque assetCode4[4];
+//
+//        case ASSET_TYPE_CREDIT_ALPHANUM12:
+//            opaque assetCode12[12];
+//
+//            // add other asset types here in the future
+//        }
+//        asset;
+//
+//        bool authorize;
+//    };
+//
+type AllowTrustOp struct {
+	Trustor AccountId
+	Asset AllowTrustOpAsset
+	Authorize bool
+}
+
+// ManageDataOp is an XDR Struct defines as:
+//
+//   struct ManageDataOp
+//    {
+//        string64 dataName;
+//        DataValue* dataValue; // set to null to clear
+//    };
+//
+type ManageDataOp struct {
+	DataName String64
+	DataValue *DataValue
+}
+
+// BumpSequenceOp is an XDR Struct defines as:
+//
+//   struct BumpSequenceOp
+//    {
+//        SequenceNumber bumpTo;
+//    };
+//
+type BumpSequenceOp struct {
+	BumpTo SequenceNumber
+}
+
+// OperationBody is an XDR NestedUnion defines as:
+//
+//   union switch (OperationType type)
+//        {
+//        case CREATE_ACCOUNT:
+//            CreateAccountOp createAccountOp;
+//        case PAYMENT:
+//            PaymentOp paymentOp;
+//        case PATH_PAYMENT:
+//            PathPaymentOp pathPaymentOp;
+//        case MANAGE_OFFER:
+//            ManageOfferOp manageOfferOp;
+//        case CREATE_PASSIVE_OFFER:
+//            CreatePassiveOfferOp createPassiveOfferOp;
+//        case SET_OPTIONS:
+//            SetOptionsOp setOptionsOp;
+//        case CHANGE_TRUST:
+//            ChangeTrustOp changeTrustOp;
+//        case ALLOW_TRUST:
+//            AllowTrustOp allowTrustOp;
+//        case ACCOUNT_MERGE:
+//            AccountID destination;
+//        case INFLATION:
+//            void;
+//        case MANAGE_DATA:
+//            ManageDataOp manageDataOp;
+//        case BUMP_SEQUENCE:
+//            BumpSequenceOp bumpSequenceOp;
+//        }
+//
+type OperationBody struct{
+	Type OperationType
+	CreateAccountOp *CreateAccountOp
+	PaymentOp *PaymentOp
+	PathPaymentOp *PathPaymentOp
+	ManageOfferOp *ManageOfferOp
+	CreatePassiveOfferOp *CreatePassiveOfferOp
+	SetOptionsOp *SetOptionsOp
+	ChangeTrustOp *ChangeTrustOp
+	AllowTrustOp *AllowTrustOp
+	Destination *AccountId
+	ManageDataOp *ManageDataOp
+	BumpSequenceOp *BumpSequenceOp
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u OperationBody) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of OperationBody
+func (u OperationBody) ArmForSwitch(sw int32) (string, bool) {
+	switch OperationType(sw) {
+	case OperationTypeCreateAccount:
+		return "CreateAccountOp", true
+	case OperationTypePayment:
+		return "PaymentOp", true
+	case OperationTypePathPayment:
+		return "PathPaymentOp", true
+	case OperationTypeManageOffer:
+		return "ManageOfferOp", true
+	case OperationTypeCreatePassiveOffer:
+		return "CreatePassiveOfferOp", true
+	case OperationTypeSetOptions:
+		return "SetOptionsOp", true
+	case OperationTypeChangeTrust:
+		return "ChangeTrustOp", true
+	case OperationTypeAllowTrust:
+		return "AllowTrustOp", true
+	case OperationTypeAccountMerge:
+		return "Destination", true
+	case OperationTypeInflation:
+		return "", true
+	case OperationTypeManageData:
+		return "ManageDataOp", true
+	case OperationTypeBumpSequence:
+		return "BumpSequenceOp", true
+	}
+	return "-", false
+}
+
+// NewOperationBody creates a new  OperationBody.
+func NewOperationBody(aType OperationType, value interface{}) (result OperationBody, err error) {
+	result.Type = aType
+	switch OperationType(aType) {
+	case OperationTypeCreateAccount:
+		tv, ok := value.(CreateAccountOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be CreateAccountOp")
+			return
+		}
+		result.CreateAccountOp = &tv
+	case OperationTypePayment:
+		tv, ok := value.(PaymentOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be PaymentOp")
+			return
+		}
+		result.PaymentOp = &tv
+	case OperationTypePathPayment:
+		tv, ok := value.(PathPaymentOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be PathPaymentOp")
+			return
+		}
+		result.PathPaymentOp = &tv
+	case OperationTypeManageOffer:
+		tv, ok := value.(ManageOfferOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageOfferOp")
+			return
+		}
+		result.ManageOfferOp = &tv
+	case OperationTypeCreatePassiveOffer:
+		tv, ok := value.(CreatePassiveOfferOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be CreatePassiveOfferOp")
+			return
+		}
+		result.CreatePassiveOfferOp = &tv
+	case OperationTypeSetOptions:
+		tv, ok := value.(SetOptionsOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be SetOptionsOp")
+			return
+		}
+		result.SetOptionsOp = &tv
+	case OperationTypeChangeTrust:
+		tv, ok := value.(ChangeTrustOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ChangeTrustOp")
+			return
+		}
+		result.ChangeTrustOp = &tv
+	case OperationTypeAllowTrust:
+		tv, ok := value.(AllowTrustOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be AllowTrustOp")
+			return
+		}
+		result.AllowTrustOp = &tv
+	case OperationTypeAccountMerge:
+		tv, ok := value.(AccountId)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be AccountId")
+			return
+		}
+		result.Destination = &tv
+	case OperationTypeInflation:
+		// void
+	case OperationTypeManageData:
+		tv, ok := value.(ManageDataOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageDataOp")
+			return
+		}
+		result.ManageDataOp = &tv
+	case OperationTypeBumpSequence:
+		tv, ok := value.(BumpSequenceOp)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be BumpSequenceOp")
+			return
+		}
+		result.BumpSequenceOp = &tv
+	}
+	return
+}
+// MustCreateAccountOp retrieves the CreateAccountOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustCreateAccountOp() CreateAccountOp {
+	val, ok := u.GetCreateAccountOp()
+
+	if !ok {
+		panic("arm CreateAccountOp is not set")
+	}
+
+	return val
+}
+
+// GetCreateAccountOp retrieves the CreateAccountOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetCreateAccountOp() (result CreateAccountOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "CreateAccountOp" {
+		result = *u.CreateAccountOp
+		ok = true
+	}
+
+	return
+}
+// MustPaymentOp retrieves the PaymentOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustPaymentOp() PaymentOp {
+	val, ok := u.GetPaymentOp()
+
+	if !ok {
+		panic("arm PaymentOp is not set")
+	}
+
+	return val
+}
+
+// GetPaymentOp retrieves the PaymentOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetPaymentOp() (result PaymentOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "PaymentOp" {
+		result = *u.PaymentOp
+		ok = true
+	}
+
+	return
+}
+// MustPathPaymentOp retrieves the PathPaymentOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustPathPaymentOp() PathPaymentOp {
+	val, ok := u.GetPathPaymentOp()
+
+	if !ok {
+		panic("arm PathPaymentOp is not set")
+	}
+
+	return val
+}
+
+// GetPathPaymentOp retrieves the PathPaymentOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetPathPaymentOp() (result PathPaymentOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "PathPaymentOp" {
+		result = *u.PathPaymentOp
+		ok = true
+	}
+
+	return
+}
+// MustManageOfferOp retrieves the ManageOfferOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustManageOfferOp() ManageOfferOp {
+	val, ok := u.GetManageOfferOp()
+
+	if !ok {
+		panic("arm ManageOfferOp is not set")
+	}
+
+	return val
+}
+
+// GetManageOfferOp retrieves the ManageOfferOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetManageOfferOp() (result ManageOfferOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ManageOfferOp" {
+		result = *u.ManageOfferOp
+		ok = true
+	}
+
+	return
+}
+// MustCreatePassiveOfferOp retrieves the CreatePassiveOfferOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustCreatePassiveOfferOp() CreatePassiveOfferOp {
+	val, ok := u.GetCreatePassiveOfferOp()
+
+	if !ok {
+		panic("arm CreatePassiveOfferOp is not set")
+	}
+
+	return val
+}
+
+// GetCreatePassiveOfferOp retrieves the CreatePassiveOfferOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetCreatePassiveOfferOp() (result CreatePassiveOfferOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "CreatePassiveOfferOp" {
+		result = *u.CreatePassiveOfferOp
+		ok = true
+	}
+
+	return
+}
+// MustSetOptionsOp retrieves the SetOptionsOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustSetOptionsOp() SetOptionsOp {
+	val, ok := u.GetSetOptionsOp()
+
+	if !ok {
+		panic("arm SetOptionsOp is not set")
+	}
+
+	return val
+}
+
+// GetSetOptionsOp retrieves the SetOptionsOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetSetOptionsOp() (result SetOptionsOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "SetOptionsOp" {
+		result = *u.SetOptionsOp
+		ok = true
+	}
+
+	return
+}
+// MustChangeTrustOp retrieves the ChangeTrustOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustChangeTrustOp() ChangeTrustOp {
+	val, ok := u.GetChangeTrustOp()
+
+	if !ok {
+		panic("arm ChangeTrustOp is not set")
+	}
+
+	return val
+}
+
+// GetChangeTrustOp retrieves the ChangeTrustOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetChangeTrustOp() (result ChangeTrustOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ChangeTrustOp" {
+		result = *u.ChangeTrustOp
+		ok = true
+	}
+
+	return
+}
+// MustAllowTrustOp retrieves the AllowTrustOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustAllowTrustOp() AllowTrustOp {
+	val, ok := u.GetAllowTrustOp()
+
+	if !ok {
+		panic("arm AllowTrustOp is not set")
+	}
+
+	return val
+}
+
+// GetAllowTrustOp retrieves the AllowTrustOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetAllowTrustOp() (result AllowTrustOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "AllowTrustOp" {
+		result = *u.AllowTrustOp
+		ok = true
+	}
+
+	return
+}
+// MustDestination retrieves the Destination value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustDestination() AccountId {
+	val, ok := u.GetDestination()
+
+	if !ok {
+		panic("arm Destination is not set")
+	}
+
+	return val
+}
+
+// GetDestination retrieves the Destination value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetDestination() (result AccountId, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Destination" {
+		result = *u.Destination
+		ok = true
+	}
+
+	return
+}
+// MustManageDataOp retrieves the ManageDataOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustManageDataOp() ManageDataOp {
+	val, ok := u.GetManageDataOp()
+
+	if !ok {
+		panic("arm ManageDataOp is not set")
+	}
+
+	return val
+}
+
+// GetManageDataOp retrieves the ManageDataOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetManageDataOp() (result ManageDataOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ManageDataOp" {
+		result = *u.ManageDataOp
+		ok = true
+	}
+
+	return
+}
+// MustBumpSequenceOp retrieves the BumpSequenceOp value from the union,
+// panicing if the value is not set.
+func (u OperationBody) MustBumpSequenceOp() BumpSequenceOp {
+	val, ok := u.GetBumpSequenceOp()
+
+	if !ok {
+		panic("arm BumpSequenceOp is not set")
+	}
+
+	return val
+}
+
+// GetBumpSequenceOp retrieves the BumpSequenceOp value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationBody) GetBumpSequenceOp() (result BumpSequenceOp, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "BumpSequenceOp" {
+		result = *u.BumpSequenceOp
+		ok = true
+	}
+
+	return
+}
+
+// Operation is an XDR Struct defines as:
+//
+//   struct Operation
+//    {
+//        // sourceAccount is the account used to run the operation
+//        // if not set, the runtime defaults to "sourceAccount" specified at
+//        // the transaction level
+//        AccountID* sourceAccount;
+//
+//        union switch (OperationType type)
+//        {
+//        case CREATE_ACCOUNT:
+//            CreateAccountOp createAccountOp;
+//        case PAYMENT:
+//            PaymentOp paymentOp;
+//        case PATH_PAYMENT:
+//            PathPaymentOp pathPaymentOp;
+//        case MANAGE_OFFER:
+//            ManageOfferOp manageOfferOp;
+//        case CREATE_PASSIVE_OFFER:
+//            CreatePassiveOfferOp createPassiveOfferOp;
+//        case SET_OPTIONS:
+//            SetOptionsOp setOptionsOp;
+//        case CHANGE_TRUST:
+//            ChangeTrustOp changeTrustOp;
+//        case ALLOW_TRUST:
+//            AllowTrustOp allowTrustOp;
+//        case ACCOUNT_MERGE:
+//            AccountID destination;
+//        case INFLATION:
+//            void;
+//        case MANAGE_DATA:
+//            ManageDataOp manageDataOp;
+//        case BUMP_SEQUENCE:
+//            BumpSequenceOp bumpSequenceOp;
+//        }
+//        body;
+//    };
+//
+type Operation struct {
+	SourceAccount *AccountId
+	Body OperationBody
+}
+
+// MemoType is an XDR Enum defines as:
+//
+//   enum MemoType
+//    {
+//        MEMO_NONE = 0,
+//        MEMO_TEXT = 1,
+//        MEMO_ID = 2,
+//        MEMO_HASH = 3,
+//        MEMO_RETURN = 4
+//    };
+//
+type MemoType int32
+const (
+	MemoTypeMemoNone MemoType = 0
+	MemoTypeMemoText MemoType = 1
+	MemoTypeMemoId MemoType = 2
+	MemoTypeMemoHash MemoType = 3
+	MemoTypeMemoReturn MemoType = 4
+)
+var memoTypeMap = map[int32]string{
+	0: "MemoTypeMemoNone",
+	1: "MemoTypeMemoText",
+	2: "MemoTypeMemoId",
+	3: "MemoTypeMemoHash",
+	4: "MemoTypeMemoReturn",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for MemoType
+func (e MemoType) ValidEnum(v int32) bool {
+	_, ok := memoTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e MemoType) String() string {
+	name, _ := memoTypeMap[int32(e)]
+	return name
+}
+
+// Memo is an XDR Union defines as:
+//
+//   union Memo switch (MemoType type)
+//    {
+//    case MEMO_NONE:
+//        void;
+//    case MEMO_TEXT:
+//        string text<28>;
+//    case MEMO_ID:
+//        uint64 id;
+//    case MEMO_HASH:
+//        Hash hash; // the hash of what to pull from the content server
+//    case MEMO_RETURN:
+//        Hash retHash; // the hash of the tx you are rejecting
+//    };
+//
+type Memo struct{
+	Type MemoType
+	Text *string `xdrmaxsize:"28"`
+	Id *Uint64
+	Hash *Hash
+	RetHash *Hash
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u Memo) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of Memo
+func (u Memo) ArmForSwitch(sw int32) (string, bool) {
+	switch MemoType(sw) {
+	case MemoTypeMemoNone:
+		return "", true
+	case MemoTypeMemoText:
+		return "Text", true
+	case MemoTypeMemoId:
+		return "Id", true
+	case MemoTypeMemoHash:
+		return "Hash", true
+	case MemoTypeMemoReturn:
+		return "RetHash", true
+	}
+	return "-", false
+}
+
+// NewMemo creates a new  Memo.
+func NewMemo(aType MemoType, value interface{}) (result Memo, err error) {
+	result.Type = aType
+	switch MemoType(aType) {
+	case MemoTypeMemoNone:
+		// void
+	case MemoTypeMemoText:
+		tv, ok := value.(string)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be string")
+			return
+		}
+		result.Text = &tv
+	case MemoTypeMemoId:
+		tv, ok := value.(Uint64)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Uint64")
+			return
+		}
+		result.Id = &tv
+	case MemoTypeMemoHash:
+		tv, ok := value.(Hash)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Hash")
+			return
+		}
+		result.Hash = &tv
+	case MemoTypeMemoReturn:
+		tv, ok := value.(Hash)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Hash")
+			return
+		}
+		result.RetHash = &tv
+	}
+	return
+}
+// MustText retrieves the Text value from the union,
+// panicing if the value is not set.
+func (u Memo) MustText() string {
+	val, ok := u.GetText()
+
+	if !ok {
+		panic("arm Text is not set")
+	}
+
+	return val
+}
+
+// GetText retrieves the Text value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u Memo) GetText() (result string, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Text" {
+		result = *u.Text
+		ok = true
+	}
+
+	return
+}
+// MustId retrieves the Id value from the union,
+// panicing if the value is not set.
+func (u Memo) MustId() Uint64 {
+	val, ok := u.GetId()
+
+	if !ok {
+		panic("arm Id is not set")
+	}
+
+	return val
+}
+
+// GetId retrieves the Id value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u Memo) GetId() (result Uint64, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Id" {
+		result = *u.Id
+		ok = true
+	}
+
+	return
+}
+// MustHash retrieves the Hash value from the union,
+// panicing if the value is not set.
+func (u Memo) MustHash() Hash {
+	val, ok := u.GetHash()
+
+	if !ok {
+		panic("arm Hash is not set")
+	}
+
+	return val
+}
+
+// GetHash retrieves the Hash value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u Memo) GetHash() (result Hash, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Hash" {
+		result = *u.Hash
+		ok = true
+	}
+
+	return
+}
+// MustRetHash retrieves the RetHash value from the union,
+// panicing if the value is not set.
+func (u Memo) MustRetHash() Hash {
+	val, ok := u.GetRetHash()
+
+	if !ok {
+		panic("arm RetHash is not set")
+	}
+
+	return val
+}
+
+// GetRetHash retrieves the RetHash value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u Memo) GetRetHash() (result Hash, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "RetHash" {
+		result = *u.RetHash
+		ok = true
+	}
+
+	return
+}
+
+// TimeBounds is an XDR Struct defines as:
+//
+//   struct TimeBounds
+//    {
+//        uint64 minTime;
+//        uint64 maxTime; // 0 here means no maxTime
+//    };
+//
+type TimeBounds struct {
+	MinTime Uint64
+	MaxTime Uint64
+}
+
+// TransactionExt is an XDR NestedUnion defines as:
+//
+//   union switch (int v)
+//        {
+//        case 0:
+//            void;
+//        }
+//
+type TransactionExt struct{
+	V int32
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u TransactionExt) SwitchFieldName() string {
+	return "V"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of TransactionExt
+func (u TransactionExt) ArmForSwitch(sw int32) (string, bool) {
+	switch int32(sw) {
+	case 0:
+		return "", true
+	}
+	return "-", false
+}
+
+// NewTransactionExt creates a new  TransactionExt.
+func NewTransactionExt(v int32, value interface{}) (result TransactionExt, err error) {
+	result.V = v
+	switch int32(v) {
+	case 0:
+		// void
+	}
+	return
+}
+
+// Transaction is an XDR Struct defines as:
+//
+//   struct Transaction
+//    {
+//        // account used to run the transaction
+//        AccountID sourceAccount;
+//
+//        // the fee the sourceAccount will pay
+//        uint32 fee;
+//
+//        // sequence number to consume in the account
+//        SequenceNumber seqNum;
+//
+//        // validity range (inclusive) for the last ledger close time
+//        TimeBounds* timeBounds;
+//
+//        Memo memo;
+//
+//        Operation operations<100>;
+//
+//        // reserved for future use
+//        union switch (int v)
+//        {
+//        case 0:
+//            void;
+//        }
+//        ext;
+//    };
+//
+type Transaction struct {
+	SourceAccount AccountId
+	Fee Uint32
+	SeqNum SequenceNumber
+	TimeBounds *TimeBounds
+	Memo Memo
+	Operations []Operation `xdrmaxsize:"100"`
+	Ext TransactionExt
+}
+
+// TransactionSignaturePayloadTaggedTransaction is an XDR NestedUnion defines as:
+//
+//   union switch (EnvelopeType type)
+//        {
+//        case ENVELOPE_TYPE_TX:
+//            Transaction tx;
+//            /* All other values of type are invalid */
+//        }
+//
+type TransactionSignaturePayloadTaggedTransaction struct{
+	Type EnvelopeType
+	Tx *Transaction
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u TransactionSignaturePayloadTaggedTransaction) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of TransactionSignaturePayloadTaggedTransaction
+func (u TransactionSignaturePayloadTaggedTransaction) ArmForSwitch(sw int32) (string, bool) {
+	switch EnvelopeType(sw) {
+	case EnvelopeTypeEnvelopeTypeTx:
+		return "Tx", true
+	}
+	return "-", false
+}
+
+// NewTransactionSignaturePayloadTaggedTransaction creates a new  TransactionSignaturePayloadTaggedTransaction.
+func NewTransactionSignaturePayloadTaggedTransaction(aType EnvelopeType, value interface{}) (result TransactionSignaturePayloadTaggedTransaction, err error) {
+	result.Type = aType
+	switch EnvelopeType(aType) {
+	case EnvelopeTypeEnvelopeTypeTx:
+		tv, ok := value.(Transaction)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Transaction")
+			return
+		}
+		result.Tx = &tv
+	}
+	return
+}
+// MustTx retrieves the Tx value from the union,
+// panicing if the value is not set.
+func (u TransactionSignaturePayloadTaggedTransaction) MustTx() Transaction {
+	val, ok := u.GetTx()
+
+	if !ok {
+		panic("arm Tx is not set")
+	}
+
+	return val
+}
+
+// GetTx retrieves the Tx value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u TransactionSignaturePayloadTaggedTransaction) GetTx() (result Transaction, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Tx" {
+		result = *u.Tx
+		ok = true
+	}
+
+	return
+}
+
+// TransactionSignaturePayload is an XDR Struct defines as:
+//
+//   struct TransactionSignaturePayload
+//    {
+//        Hash networkId;
+//        union switch (EnvelopeType type)
+//        {
+//        case ENVELOPE_TYPE_TX:
+//            Transaction tx;
+//            /* All other values of type are invalid */
+//        }
+//        taggedTransaction;
+//    };
+//
+type TransactionSignaturePayload struct {
+	NetworkId Hash
+	TaggedTransaction TransactionSignaturePayloadTaggedTransaction
+}
+
+// TransactionEnvelope is an XDR Struct defines as:
+//
+//   struct TransactionEnvelope
+//    {
+//        Transaction tx;
+//        /* Each decorated signature is a signature over the SHA256 hash of
+//         * a TransactionSignaturePayload */
+//        DecoratedSignature signatures<20>;
+//    };
+//
+type TransactionEnvelope struct {
+	Tx Transaction
+	Signatures []DecoratedSignature `xdrmaxsize:"20"`
+}
+
+// ClaimOfferAtom is an XDR Struct defines as:
+//
+//   struct ClaimOfferAtom
+//    {
+//        // emitted to identify the offer
+//        AccountID sellerID; // Account that owns the offer
+//        uint64 offerID;
+//
+//        // amount and asset taken from the owner
+//        Asset assetSold;
+//        int64 amountSold;
+//
+//        // amount and asset sent to the owner
+//        Asset assetBought;
+//        int64 amountBought;
+//    };
+//
+type ClaimOfferAtom struct {
+	SellerId AccountId
+	OfferId Uint64
+	AssetSold Asset
+	AmountSold Int64
+	AssetBought Asset
+	AmountBought Int64
+}
+
+// CreateAccountResultCode is an XDR Enum defines as:
+//
+//   enum CreateAccountResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        CREATE_ACCOUNT_SUCCESS = 0, // account was created
+//
+//        // codes considered as "failure" for the operation
+//        CREATE_ACCOUNT_MALFORMED = -1,   // invalid destination
+//        CREATE_ACCOUNT_UNDERFUNDED = -2, // not enough funds in source account
+//        CREATE_ACCOUNT_LOW_RESERVE =
+//            -3, // would create an account below the min reserve
+//        CREATE_ACCOUNT_ALREADY_EXIST = -4, // account already exists
+//
+//        CREATE_ACCOUNT_UNDERAUTHORIZED = -5 // source account doesnt have enought rights to create this type of account
+//    };
+//
+type CreateAccountResultCode int32
+const (
+	CreateAccountResultCodeCreateAccountSuccess CreateAccountResultCode = 0
+	CreateAccountResultCodeCreateAccountMalformed CreateAccountResultCode = -1
+	CreateAccountResultCodeCreateAccountUnderfunded CreateAccountResultCode = -2
+	CreateAccountResultCodeCreateAccountLowReserve CreateAccountResultCode = -3
+	CreateAccountResultCodeCreateAccountAlreadyExist CreateAccountResultCode = -4
+	CreateAccountResultCodeCreateAccountUnderauthorized CreateAccountResultCode = -5
+)
+var createAccountResultCodeMap = map[int32]string{
+	0: "CreateAccountResultCodeCreateAccountSuccess",
+	-1: "CreateAccountResultCodeCreateAccountMalformed",
+	-2: "CreateAccountResultCodeCreateAccountUnderfunded",
+	-3: "CreateAccountResultCodeCreateAccountLowReserve",
+	-4: "CreateAccountResultCodeCreateAccountAlreadyExist",
+	-5: "CreateAccountResultCodeCreateAccountUnderauthorized",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for CreateAccountResultCode
+func (e CreateAccountResultCode) ValidEnum(v int32) bool {
+	_, ok := createAccountResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e CreateAccountResultCode) String() string {
+	name, _ := createAccountResultCodeMap[int32(e)]
+	return name
+}
+
+// CreateAccountResult is an XDR Union defines as:
+//
+//   union CreateAccountResult switch (CreateAccountResultCode code)
+//    {
+//    case CREATE_ACCOUNT_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type CreateAccountResult struct{
+	Code CreateAccountResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u CreateAccountResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of CreateAccountResult
+func (u CreateAccountResult) ArmForSwitch(sw int32) (string, bool) {
+	switch CreateAccountResultCode(sw) {
+	case CreateAccountResultCodeCreateAccountSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewCreateAccountResult creates a new  CreateAccountResult.
+func NewCreateAccountResult(code CreateAccountResultCode, value interface{}) (result CreateAccountResult, err error) {
+	result.Code = code
+	switch CreateAccountResultCode(code) {
+	case CreateAccountResultCodeCreateAccountSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// PaymentResultCode is an XDR Enum defines as:
+//
+//   enum PaymentResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        PAYMENT_SUCCESS = 0, // payment successfuly completed
+//
+//        // codes considered as "failure" for the operation
+//        PAYMENT_MALFORMED = -1,          // bad input
+//        PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
+//        PAYMENT_SRC_NO_TRUST = -3,       // no trust line on source account
+//        PAYMENT_SRC_NOT_AUTHORIZED = -4, // source not authorized to transfer
+//        PAYMENT_NO_DESTINATION = -5,     // destination account does not exist
+//        PAYMENT_NO_TRUST = -6,       // destination missing a trust line for asset
+//        PAYMENT_NOT_AUTHORIZED = -7, // destination not authorized to hold asset
+//        PAYMENT_LINE_FULL = -8,      // destination would go above their limit
+//        PAYMENT_NO_ISSUER = -9       // missing issuer on asset
+//    };
+//
+type PaymentResultCode int32
+const (
+	PaymentResultCodePaymentSuccess PaymentResultCode = 0
+	PaymentResultCodePaymentMalformed PaymentResultCode = -1
+	PaymentResultCodePaymentUnderfunded PaymentResultCode = -2
+	PaymentResultCodePaymentSrcNoTrust PaymentResultCode = -3
+	PaymentResultCodePaymentSrcNotAuthorized PaymentResultCode = -4
+	PaymentResultCodePaymentNoDestination PaymentResultCode = -5
+	PaymentResultCodePaymentNoTrust PaymentResultCode = -6
+	PaymentResultCodePaymentNotAuthorized PaymentResultCode = -7
+	PaymentResultCodePaymentLineFull PaymentResultCode = -8
+	PaymentResultCodePaymentNoIssuer PaymentResultCode = -9
+)
+var paymentResultCodeMap = map[int32]string{
+	0: "PaymentResultCodePaymentSuccess",
+	-1: "PaymentResultCodePaymentMalformed",
+	-2: "PaymentResultCodePaymentUnderfunded",
+	-3: "PaymentResultCodePaymentSrcNoTrust",
+	-4: "PaymentResultCodePaymentSrcNotAuthorized",
+	-5: "PaymentResultCodePaymentNoDestination",
+	-6: "PaymentResultCodePaymentNoTrust",
+	-7: "PaymentResultCodePaymentNotAuthorized",
+	-8: "PaymentResultCodePaymentLineFull",
+	-9: "PaymentResultCodePaymentNoIssuer",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for PaymentResultCode
+func (e PaymentResultCode) ValidEnum(v int32) bool {
+	_, ok := paymentResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e PaymentResultCode) String() string {
+	name, _ := paymentResultCodeMap[int32(e)]
+	return name
+}
+
+// PaymentResult is an XDR Union defines as:
+//
+//   union PaymentResult switch (PaymentResultCode code)
+//    {
+//    case PAYMENT_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type PaymentResult struct{
+	Code PaymentResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u PaymentResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of PaymentResult
+func (u PaymentResult) ArmForSwitch(sw int32) (string, bool) {
+	switch PaymentResultCode(sw) {
+	case PaymentResultCodePaymentSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewPaymentResult creates a new  PaymentResult.
+func NewPaymentResult(code PaymentResultCode, value interface{}) (result PaymentResult, err error) {
+	result.Code = code
+	switch PaymentResultCode(code) {
+	case PaymentResultCodePaymentSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// PathPaymentResultCode is an XDR Enum defines as:
+//
+//   enum PathPaymentResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        PATH_PAYMENT_SUCCESS = 0, // success
+//
+//        // codes considered as "failure" for the operation
+//        PATH_PAYMENT_MALFORMED = -1,          // bad input
+//        PATH_PAYMENT_UNDERFUNDED = -2,        // not enough funds in source account
+//        PATH_PAYMENT_SRC_NO_TRUST = -3,       // no trust line on source account
+//        PATH_PAYMENT_SRC_NOT_AUTHORIZED = -4, // source not authorized to transfer
+//        PATH_PAYMENT_NO_DESTINATION = -5,     // destination account does not exist
+//        PATH_PAYMENT_NO_TRUST = -6,           // dest missing a trust line for asset
+//        PATH_PAYMENT_NOT_AUTHORIZED = -7,     // dest not authorized to hold asset
+//        PATH_PAYMENT_LINE_FULL = -8,          // dest would go above their limit
+//        PATH_PAYMENT_NO_ISSUER = -9,          // missing issuer on one asset
+//        PATH_PAYMENT_TOO_FEW_OFFERS = -10,    // not enough offers to satisfy path
+//        PATH_PAYMENT_OFFER_CROSS_SELF = -11,  // would cross one of its own offers
+//        PATH_PAYMENT_OVER_SENDMAX = -12       // could not satisfy sendmax
+//    };
+//
+type PathPaymentResultCode int32
+const (
+	PathPaymentResultCodePathPaymentSuccess PathPaymentResultCode = 0
+	PathPaymentResultCodePathPaymentMalformed PathPaymentResultCode = -1
+	PathPaymentResultCodePathPaymentUnderfunded PathPaymentResultCode = -2
+	PathPaymentResultCodePathPaymentSrcNoTrust PathPaymentResultCode = -3
+	PathPaymentResultCodePathPaymentSrcNotAuthorized PathPaymentResultCode = -4
+	PathPaymentResultCodePathPaymentNoDestination PathPaymentResultCode = -5
+	PathPaymentResultCodePathPaymentNoTrust PathPaymentResultCode = -6
+	PathPaymentResultCodePathPaymentNotAuthorized PathPaymentResultCode = -7
+	PathPaymentResultCodePathPaymentLineFull PathPaymentResultCode = -8
+	PathPaymentResultCodePathPaymentNoIssuer PathPaymentResultCode = -9
+	PathPaymentResultCodePathPaymentTooFewOffers PathPaymentResultCode = -10
+	PathPaymentResultCodePathPaymentOfferCrossSelf PathPaymentResultCode = -11
+	PathPaymentResultCodePathPaymentOverSendmax PathPaymentResultCode = -12
+)
+var pathPaymentResultCodeMap = map[int32]string{
+	0: "PathPaymentResultCodePathPaymentSuccess",
+	-1: "PathPaymentResultCodePathPaymentMalformed",
+	-2: "PathPaymentResultCodePathPaymentUnderfunded",
+	-3: "PathPaymentResultCodePathPaymentSrcNoTrust",
+	-4: "PathPaymentResultCodePathPaymentSrcNotAuthorized",
+	-5: "PathPaymentResultCodePathPaymentNoDestination",
+	-6: "PathPaymentResultCodePathPaymentNoTrust",
+	-7: "PathPaymentResultCodePathPaymentNotAuthorized",
+	-8: "PathPaymentResultCodePathPaymentLineFull",
+	-9: "PathPaymentResultCodePathPaymentNoIssuer",
+	-10: "PathPaymentResultCodePathPaymentTooFewOffers",
+	-11: "PathPaymentResultCodePathPaymentOfferCrossSelf",
+	-12: "PathPaymentResultCodePathPaymentOverSendmax",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for PathPaymentResultCode
+func (e PathPaymentResultCode) ValidEnum(v int32) bool {
+	_, ok := pathPaymentResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e PathPaymentResultCode) String() string {
+	name, _ := pathPaymentResultCodeMap[int32(e)]
+	return name
+}
+
+// SimplePaymentResult is an XDR Struct defines as:
+//
+//   struct SimplePaymentResult
+//    {
+//        AccountID destination;
+//        Asset asset;
+//        int64 amount;
+//    };
+//
+type SimplePaymentResult struct {
+	Destination AccountId
+	Asset Asset
+	Amount Int64
+}
+
+// PathPaymentResultSuccess is an XDR NestedStruct defines as:
+//
+//   struct
+//        {
+//            ClaimOfferAtom offers<>;
+//            SimplePaymentResult last;
+//        }
+//
+type PathPaymentResultSuccess struct {
+	Offers []ClaimOfferAtom
+	Last SimplePaymentResult
+}
+
+// PathPaymentResult is an XDR Union defines as:
+//
+//   union PathPaymentResult switch (PathPaymentResultCode code)
+//    {
+//    case PATH_PAYMENT_SUCCESS:
+//        struct
+//        {
+//            ClaimOfferAtom offers<>;
+//            SimplePaymentResult last;
+//        } success;
+//    case PATH_PAYMENT_NO_ISSUER:
+//        Asset noIssuer; // the asset that caused the error
+//    default:
+//        void;
+//    };
+//
+type PathPaymentResult struct{
+	Code PathPaymentResultCode
+	Success *PathPaymentResultSuccess
+	NoIssuer *Asset
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u PathPaymentResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of PathPaymentResult
+func (u PathPaymentResult) ArmForSwitch(sw int32) (string, bool) {
+	switch PathPaymentResultCode(sw) {
+	case PathPaymentResultCodePathPaymentSuccess:
+		return "Success", true
+	case PathPaymentResultCodePathPaymentNoIssuer:
+		return "NoIssuer", true
+	default:
+		return "", true
+	}
+}
+
+// NewPathPaymentResult creates a new  PathPaymentResult.
+func NewPathPaymentResult(code PathPaymentResultCode, value interface{}) (result PathPaymentResult, err error) {
+	result.Code = code
+	switch PathPaymentResultCode(code) {
+	case PathPaymentResultCodePathPaymentSuccess:
+		tv, ok := value.(PathPaymentResultSuccess)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be PathPaymentResultSuccess")
+			return
+		}
+		result.Success = &tv
+	case PathPaymentResultCodePathPaymentNoIssuer:
+		tv, ok := value.(Asset)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Asset")
+			return
+		}
+		result.NoIssuer = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustSuccess retrieves the Success value from the union,
+// panicing if the value is not set.
+func (u PathPaymentResult) MustSuccess() PathPaymentResultSuccess {
+	val, ok := u.GetSuccess()
+
+	if !ok {
+		panic("arm Success is not set")
+	}
+
+	return val
+}
+
+// GetSuccess retrieves the Success value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u PathPaymentResult) GetSuccess() (result PathPaymentResultSuccess, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "Success" {
+		result = *u.Success
+		ok = true
+	}
+
+	return
+}
+// MustNoIssuer retrieves the NoIssuer value from the union,
+// panicing if the value is not set.
+func (u PathPaymentResult) MustNoIssuer() Asset {
+	val, ok := u.GetNoIssuer()
+
+	if !ok {
+		panic("arm NoIssuer is not set")
+	}
+
+	return val
+}
+
+// GetNoIssuer retrieves the NoIssuer value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u PathPaymentResult) GetNoIssuer() (result Asset, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "NoIssuer" {
+		result = *u.NoIssuer
+		ok = true
+	}
+
+	return
+}
+
+// ManageOfferResultCode is an XDR Enum defines as:
+//
+//   enum ManageOfferResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        MANAGE_OFFER_SUCCESS = 0,
+//
+//        // codes considered as "failure" for the operation
+//        MANAGE_OFFER_MALFORMED = -1,     // generated offer would be invalid
+//        MANAGE_OFFER_SELL_NO_TRUST = -2, // no trust line for what we're selling
+//        MANAGE_OFFER_BUY_NO_TRUST = -3,  // no trust line for what we're buying
+//        MANAGE_OFFER_SELL_NOT_AUTHORIZED = -4, // not authorized to sell
+//        MANAGE_OFFER_BUY_NOT_AUTHORIZED = -5,  // not authorized to buy
+//        MANAGE_OFFER_LINE_FULL = -6,      // can't receive more of what it's buying
+//        MANAGE_OFFER_UNDERFUNDED = -7,    // doesn't hold what it's trying to sell
+//        MANAGE_OFFER_CROSS_SELF = -8,     // would cross an offer from the same user
+//        MANAGE_OFFER_SELL_NO_ISSUER = -9, // no issuer for what we're selling
+//        MANAGE_OFFER_BUY_NO_ISSUER = -10, // no issuer for what we're buying
+//
+//        // update errors
+//        MANAGE_OFFER_NOT_FOUND = -11, // offerID does not match an existing offer
+//
+//        MANAGE_OFFER_LOW_RESERVE = -12 // not enough funds to create a new Offer
+//    };
+//
+type ManageOfferResultCode int32
+const (
+	ManageOfferResultCodeManageOfferSuccess ManageOfferResultCode = 0
+	ManageOfferResultCodeManageOfferMalformed ManageOfferResultCode = -1
+	ManageOfferResultCodeManageOfferSellNoTrust ManageOfferResultCode = -2
+	ManageOfferResultCodeManageOfferBuyNoTrust ManageOfferResultCode = -3
+	ManageOfferResultCodeManageOfferSellNotAuthorized ManageOfferResultCode = -4
+	ManageOfferResultCodeManageOfferBuyNotAuthorized ManageOfferResultCode = -5
+	ManageOfferResultCodeManageOfferLineFull ManageOfferResultCode = -6
+	ManageOfferResultCodeManageOfferUnderfunded ManageOfferResultCode = -7
+	ManageOfferResultCodeManageOfferCrossSelf ManageOfferResultCode = -8
+	ManageOfferResultCodeManageOfferSellNoIssuer ManageOfferResultCode = -9
+	ManageOfferResultCodeManageOfferBuyNoIssuer ManageOfferResultCode = -10
+	ManageOfferResultCodeManageOfferNotFound ManageOfferResultCode = -11
+	ManageOfferResultCodeManageOfferLowReserve ManageOfferResultCode = -12
+)
+var manageOfferResultCodeMap = map[int32]string{
+	0: "ManageOfferResultCodeManageOfferSuccess",
+	-1: "ManageOfferResultCodeManageOfferMalformed",
+	-2: "ManageOfferResultCodeManageOfferSellNoTrust",
+	-3: "ManageOfferResultCodeManageOfferBuyNoTrust",
+	-4: "ManageOfferResultCodeManageOfferSellNotAuthorized",
+	-5: "ManageOfferResultCodeManageOfferBuyNotAuthorized",
+	-6: "ManageOfferResultCodeManageOfferLineFull",
+	-7: "ManageOfferResultCodeManageOfferUnderfunded",
+	-8: "ManageOfferResultCodeManageOfferCrossSelf",
+	-9: "ManageOfferResultCodeManageOfferSellNoIssuer",
+	-10: "ManageOfferResultCodeManageOfferBuyNoIssuer",
+	-11: "ManageOfferResultCodeManageOfferNotFound",
+	-12: "ManageOfferResultCodeManageOfferLowReserve",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for ManageOfferResultCode
+func (e ManageOfferResultCode) ValidEnum(v int32) bool {
+	_, ok := manageOfferResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e ManageOfferResultCode) String() string {
+	name, _ := manageOfferResultCodeMap[int32(e)]
+	return name
+}
+
+// ManageOfferEffect is an XDR Enum defines as:
+//
+//   enum ManageOfferEffect
+//    {
+//        MANAGE_OFFER_CREATED = 0,
+//        MANAGE_OFFER_UPDATED = 1,
+//        MANAGE_OFFER_DELETED = 2
+//    };
+//
+type ManageOfferEffect int32
+const (
+	ManageOfferEffectManageOfferCreated ManageOfferEffect = 0
+	ManageOfferEffectManageOfferUpdated ManageOfferEffect = 1
+	ManageOfferEffectManageOfferDeleted ManageOfferEffect = 2
+)
+var manageOfferEffectMap = map[int32]string{
+	0: "ManageOfferEffectManageOfferCreated",
+	1: "ManageOfferEffectManageOfferUpdated",
+	2: "ManageOfferEffectManageOfferDeleted",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for ManageOfferEffect
+func (e ManageOfferEffect) ValidEnum(v int32) bool {
+	_, ok := manageOfferEffectMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e ManageOfferEffect) String() string {
+	name, _ := manageOfferEffectMap[int32(e)]
+	return name
+}
+
+// ManageOfferSuccessResultOffer is an XDR NestedUnion defines as:
+//
+//   union switch (ManageOfferEffect effect)
+//        {
+//        case MANAGE_OFFER_CREATED:
+//        case MANAGE_OFFER_UPDATED:
+//            OfferEntry offer;
+//        default:
+//            void;
+//        }
+//
+type ManageOfferSuccessResultOffer struct{
+	Effect ManageOfferEffect
+	Offer *OfferEntry
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u ManageOfferSuccessResultOffer) SwitchFieldName() string {
+	return "Effect"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of ManageOfferSuccessResultOffer
+func (u ManageOfferSuccessResultOffer) ArmForSwitch(sw int32) (string, bool) {
+	switch ManageOfferEffect(sw) {
+	case ManageOfferEffectManageOfferCreated:
+		return "Offer", true
+	case ManageOfferEffectManageOfferUpdated:
+		return "Offer", true
+	default:
+		return "", true
+	}
+}
+
+// NewManageOfferSuccessResultOffer creates a new  ManageOfferSuccessResultOffer.
+func NewManageOfferSuccessResultOffer(effect ManageOfferEffect, value interface{}) (result ManageOfferSuccessResultOffer, err error) {
+	result.Effect = effect
+	switch ManageOfferEffect(effect) {
+	case ManageOfferEffectManageOfferCreated:
+		tv, ok := value.(OfferEntry)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be OfferEntry")
+			return
+		}
+		result.Offer = &tv
+	case ManageOfferEffectManageOfferUpdated:
+		tv, ok := value.(OfferEntry)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be OfferEntry")
+			return
+		}
+		result.Offer = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustOffer retrieves the Offer value from the union,
+// panicing if the value is not set.
+func (u ManageOfferSuccessResultOffer) MustOffer() OfferEntry {
+	val, ok := u.GetOffer()
+
+	if !ok {
+		panic("arm Offer is not set")
+	}
+
+	return val
+}
+
+// GetOffer retrieves the Offer value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u ManageOfferSuccessResultOffer) GetOffer() (result OfferEntry, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Effect))
+
+	if armName == "Offer" {
+		result = *u.Offer
+		ok = true
+	}
+
+	return
+}
+
+// ManageOfferSuccessResult is an XDR Struct defines as:
+//
+//   struct ManageOfferSuccessResult
+//    {
+//        // offers that got claimed while creating this offer
+//        ClaimOfferAtom offersClaimed<>;
+//
+//        union switch (ManageOfferEffect effect)
+//        {
+//        case MANAGE_OFFER_CREATED:
+//        case MANAGE_OFFER_UPDATED:
+//            OfferEntry offer;
+//        default:
+//            void;
+//        }
+//        offer;
+//    };
+//
+type ManageOfferSuccessResult struct {
+	OffersClaimed []ClaimOfferAtom
+	Offer ManageOfferSuccessResultOffer
+}
+
+// ManageOfferResult is an XDR Union defines as:
+//
+//   union ManageOfferResult switch (ManageOfferResultCode code)
+//    {
+//    case MANAGE_OFFER_SUCCESS:
+//        ManageOfferSuccessResult success;
+//    default:
+//        void;
+//    };
+//
+type ManageOfferResult struct{
+	Code ManageOfferResultCode
+	Success *ManageOfferSuccessResult
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u ManageOfferResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of ManageOfferResult
+func (u ManageOfferResult) ArmForSwitch(sw int32) (string, bool) {
+	switch ManageOfferResultCode(sw) {
+	case ManageOfferResultCodeManageOfferSuccess:
+		return "Success", true
+	default:
+		return "", true
+	}
+}
+
+// NewManageOfferResult creates a new  ManageOfferResult.
+func NewManageOfferResult(code ManageOfferResultCode, value interface{}) (result ManageOfferResult, err error) {
+	result.Code = code
+	switch ManageOfferResultCode(code) {
+	case ManageOfferResultCodeManageOfferSuccess:
+		tv, ok := value.(ManageOfferSuccessResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageOfferSuccessResult")
+			return
+		}
+		result.Success = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustSuccess retrieves the Success value from the union,
+// panicing if the value is not set.
+func (u ManageOfferResult) MustSuccess() ManageOfferSuccessResult {
+	val, ok := u.GetSuccess()
+
+	if !ok {
+		panic("arm Success is not set")
+	}
+
+	return val
+}
+
+// GetSuccess retrieves the Success value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u ManageOfferResult) GetSuccess() (result ManageOfferSuccessResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "Success" {
+		result = *u.Success
+		ok = true
+	}
+
+	return
+}
+
+// SetOptionsResultCode is an XDR Enum defines as:
+//
+//   enum SetOptionsResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        SET_OPTIONS_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        SET_OPTIONS_LOW_RESERVE = -1,      // not enough funds to add a signer
+//        SET_OPTIONS_TOO_MANY_SIGNERS = -2, // max number of signers already reached
+//        SET_OPTIONS_BAD_FLAGS = -3,        // invalid combination of clear/set flags
+//        SET_OPTIONS_INVALID_INFLATION = -4,      // inflation account does not exist
+//        SET_OPTIONS_CANT_CHANGE = -5,            // can no longer change this option
+//        SET_OPTIONS_UNKNOWN_FLAG = -6,           // can't set an unknown flag
+//        SET_OPTIONS_THRESHOLD_OUT_OF_RANGE = -7, // bad value for weight/threshold
+//        SET_OPTIONS_BAD_SIGNER = -8,             // signer cannot be masterkey
+//        SET_OPTIONS_INVALID_HOME_DOMAIN = -9     // malformed home domain
+//    };
+//
+type SetOptionsResultCode int32
+const (
+	SetOptionsResultCodeSetOptionsSuccess SetOptionsResultCode = 0
+	SetOptionsResultCodeSetOptionsLowReserve SetOptionsResultCode = -1
+	SetOptionsResultCodeSetOptionsTooManySigners SetOptionsResultCode = -2
+	SetOptionsResultCodeSetOptionsBadFlags SetOptionsResultCode = -3
+	SetOptionsResultCodeSetOptionsInvalidInflation SetOptionsResultCode = -4
+	SetOptionsResultCodeSetOptionsCantChange SetOptionsResultCode = -5
+	SetOptionsResultCodeSetOptionsUnknownFlag SetOptionsResultCode = -6
+	SetOptionsResultCodeSetOptionsThresholdOutOfRange SetOptionsResultCode = -7
+	SetOptionsResultCodeSetOptionsBadSigner SetOptionsResultCode = -8
+	SetOptionsResultCodeSetOptionsInvalidHomeDomain SetOptionsResultCode = -9
+)
+var setOptionsResultCodeMap = map[int32]string{
+	0: "SetOptionsResultCodeSetOptionsSuccess",
+	-1: "SetOptionsResultCodeSetOptionsLowReserve",
+	-2: "SetOptionsResultCodeSetOptionsTooManySigners",
+	-3: "SetOptionsResultCodeSetOptionsBadFlags",
+	-4: "SetOptionsResultCodeSetOptionsInvalidInflation",
+	-5: "SetOptionsResultCodeSetOptionsCantChange",
+	-6: "SetOptionsResultCodeSetOptionsUnknownFlag",
+	-7: "SetOptionsResultCodeSetOptionsThresholdOutOfRange",
+	-8: "SetOptionsResultCodeSetOptionsBadSigner",
+	-9: "SetOptionsResultCodeSetOptionsInvalidHomeDomain",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for SetOptionsResultCode
+func (e SetOptionsResultCode) ValidEnum(v int32) bool {
+	_, ok := setOptionsResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e SetOptionsResultCode) String() string {
+	name, _ := setOptionsResultCodeMap[int32(e)]
+	return name
+}
+
+// SetOptionsResult is an XDR Union defines as:
+//
+//   union SetOptionsResult switch (SetOptionsResultCode code)
+//    {
+//    case SET_OPTIONS_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type SetOptionsResult struct{
+	Code SetOptionsResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u SetOptionsResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of SetOptionsResult
+func (u SetOptionsResult) ArmForSwitch(sw int32) (string, bool) {
+	switch SetOptionsResultCode(sw) {
+	case SetOptionsResultCodeSetOptionsSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewSetOptionsResult creates a new  SetOptionsResult.
+func NewSetOptionsResult(code SetOptionsResultCode, value interface{}) (result SetOptionsResult, err error) {
+	result.Code = code
+	switch SetOptionsResultCode(code) {
+	case SetOptionsResultCodeSetOptionsSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// ChangeTrustResultCode is an XDR Enum defines as:
+//
+//   enum ChangeTrustResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        CHANGE_TRUST_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        CHANGE_TRUST_MALFORMED = -1,     // bad input
+//        CHANGE_TRUST_NO_ISSUER = -2,     // could not find issuer
+//        CHANGE_TRUST_INVALID_LIMIT = -3, // cannot drop limit below balance
+//                                         // cannot create with a limit of 0
+//        CHANGE_TRUST_LOW_RESERVE =
+//            -4, // not enough funds to create a new trust line,
+//        CHANGE_TRUST_SELF_NOT_ALLOWED = -5 // trusting self is not allowed
+//    };
+//
+type ChangeTrustResultCode int32
+const (
+	ChangeTrustResultCodeChangeTrustSuccess ChangeTrustResultCode = 0
+	ChangeTrustResultCodeChangeTrustMalformed ChangeTrustResultCode = -1
+	ChangeTrustResultCodeChangeTrustNoIssuer ChangeTrustResultCode = -2
+	ChangeTrustResultCodeChangeTrustInvalidLimit ChangeTrustResultCode = -3
+	ChangeTrustResultCodeChangeTrustLowReserve ChangeTrustResultCode = -4
+	ChangeTrustResultCodeChangeTrustSelfNotAllowed ChangeTrustResultCode = -5
+)
+var changeTrustResultCodeMap = map[int32]string{
+	0: "ChangeTrustResultCodeChangeTrustSuccess",
+	-1: "ChangeTrustResultCodeChangeTrustMalformed",
+	-2: "ChangeTrustResultCodeChangeTrustNoIssuer",
+	-3: "ChangeTrustResultCodeChangeTrustInvalidLimit",
+	-4: "ChangeTrustResultCodeChangeTrustLowReserve",
+	-5: "ChangeTrustResultCodeChangeTrustSelfNotAllowed",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for ChangeTrustResultCode
+func (e ChangeTrustResultCode) ValidEnum(v int32) bool {
+	_, ok := changeTrustResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e ChangeTrustResultCode) String() string {
+	name, _ := changeTrustResultCodeMap[int32(e)]
+	return name
+}
+
+// ChangeTrustResult is an XDR Union defines as:
+//
+//   union ChangeTrustResult switch (ChangeTrustResultCode code)
+//    {
+//    case CHANGE_TRUST_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type ChangeTrustResult struct{
+	Code ChangeTrustResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u ChangeTrustResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of ChangeTrustResult
+func (u ChangeTrustResult) ArmForSwitch(sw int32) (string, bool) {
+	switch ChangeTrustResultCode(sw) {
+	case ChangeTrustResultCodeChangeTrustSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewChangeTrustResult creates a new  ChangeTrustResult.
+func NewChangeTrustResult(code ChangeTrustResultCode, value interface{}) (result ChangeTrustResult, err error) {
+	result.Code = code
+	switch ChangeTrustResultCode(code) {
+	case ChangeTrustResultCodeChangeTrustSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// AllowTrustResultCode is an XDR Enum defines as:
+//
+//   enum AllowTrustResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        ALLOW_TRUST_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        ALLOW_TRUST_MALFORMED = -1,     // asset is not ASSET_TYPE_ALPHANUM
+//        ALLOW_TRUST_NO_TRUST_LINE = -2, // trustor does not have a trustline
+//                                        // source account does not require trust
+//        ALLOW_TRUST_TRUST_NOT_REQUIRED = -3,
+//        ALLOW_TRUST_CANT_REVOKE = -4,     // source account can't revoke trust,
+//        ALLOW_TRUST_SELF_NOT_ALLOWED = -5 // trusting self is not allowed
+//    };
+//
+type AllowTrustResultCode int32
+const (
+	AllowTrustResultCodeAllowTrustSuccess AllowTrustResultCode = 0
+	AllowTrustResultCodeAllowTrustMalformed AllowTrustResultCode = -1
+	AllowTrustResultCodeAllowTrustNoTrustLine AllowTrustResultCode = -2
+	AllowTrustResultCodeAllowTrustTrustNotRequired AllowTrustResultCode = -3
+	AllowTrustResultCodeAllowTrustCantRevoke AllowTrustResultCode = -4
+	AllowTrustResultCodeAllowTrustSelfNotAllowed AllowTrustResultCode = -5
+)
+var allowTrustResultCodeMap = map[int32]string{
+	0: "AllowTrustResultCodeAllowTrustSuccess",
+	-1: "AllowTrustResultCodeAllowTrustMalformed",
+	-2: "AllowTrustResultCodeAllowTrustNoTrustLine",
+	-3: "AllowTrustResultCodeAllowTrustTrustNotRequired",
+	-4: "AllowTrustResultCodeAllowTrustCantRevoke",
+	-5: "AllowTrustResultCodeAllowTrustSelfNotAllowed",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for AllowTrustResultCode
+func (e AllowTrustResultCode) ValidEnum(v int32) bool {
+	_, ok := allowTrustResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e AllowTrustResultCode) String() string {
+	name, _ := allowTrustResultCodeMap[int32(e)]
+	return name
+}
+
+// AllowTrustResult is an XDR Union defines as:
+//
+//   union AllowTrustResult switch (AllowTrustResultCode code)
+//    {
+//    case ALLOW_TRUST_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type AllowTrustResult struct{
+	Code AllowTrustResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u AllowTrustResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of AllowTrustResult
+func (u AllowTrustResult) ArmForSwitch(sw int32) (string, bool) {
+	switch AllowTrustResultCode(sw) {
+	case AllowTrustResultCodeAllowTrustSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewAllowTrustResult creates a new  AllowTrustResult.
+func NewAllowTrustResult(code AllowTrustResultCode, value interface{}) (result AllowTrustResult, err error) {
+	result.Code = code
+	switch AllowTrustResultCode(code) {
+	case AllowTrustResultCodeAllowTrustSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// AccountMergeResultCode is an XDR Enum defines as:
+//
+//   enum AccountMergeResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        ACCOUNT_MERGE_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        ACCOUNT_MERGE_MALFORMED = -1,       // can't merge onto itself
+//        ACCOUNT_MERGE_NO_ACCOUNT = -2,      // destination does not exist
+//        ACCOUNT_MERGE_IMMUTABLE_SET = -3,   // source account has AUTH_IMMUTABLE set
+//        ACCOUNT_MERGE_HAS_SUB_ENTRIES = -4, // account has trust lines/offers
+//        ACCOUNT_MERGE_SEQNUM_TOO_FAR = -5   // sequence number is over max allowed
+//    };
+//
+type AccountMergeResultCode int32
+const (
+	AccountMergeResultCodeAccountMergeSuccess AccountMergeResultCode = 0
+	AccountMergeResultCodeAccountMergeMalformed AccountMergeResultCode = -1
+	AccountMergeResultCodeAccountMergeNoAccount AccountMergeResultCode = -2
+	AccountMergeResultCodeAccountMergeImmutableSet AccountMergeResultCode = -3
+	AccountMergeResultCodeAccountMergeHasSubEntries AccountMergeResultCode = -4
+	AccountMergeResultCodeAccountMergeSeqnumTooFar AccountMergeResultCode = -5
+)
+var accountMergeResultCodeMap = map[int32]string{
+	0: "AccountMergeResultCodeAccountMergeSuccess",
+	-1: "AccountMergeResultCodeAccountMergeMalformed",
+	-2: "AccountMergeResultCodeAccountMergeNoAccount",
+	-3: "AccountMergeResultCodeAccountMergeImmutableSet",
+	-4: "AccountMergeResultCodeAccountMergeHasSubEntries",
+	-5: "AccountMergeResultCodeAccountMergeSeqnumTooFar",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for AccountMergeResultCode
+func (e AccountMergeResultCode) ValidEnum(v int32) bool {
+	_, ok := accountMergeResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e AccountMergeResultCode) String() string {
+	name, _ := accountMergeResultCodeMap[int32(e)]
+	return name
+}
+
+// AccountMergeResult is an XDR Union defines as:
+//
+//   union AccountMergeResult switch (AccountMergeResultCode code)
+//    {
+//    case ACCOUNT_MERGE_SUCCESS:
+//        int64 sourceAccountBalance; // how much got transfered from source account
+//    default:
+//        void;
+//    };
+//
+type AccountMergeResult struct{
+	Code AccountMergeResultCode
+	SourceAccountBalance *Int64
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u AccountMergeResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of AccountMergeResult
+func (u AccountMergeResult) ArmForSwitch(sw int32) (string, bool) {
+	switch AccountMergeResultCode(sw) {
+	case AccountMergeResultCodeAccountMergeSuccess:
+		return "SourceAccountBalance", true
+	default:
+		return "", true
+	}
+}
+
+// NewAccountMergeResult creates a new  AccountMergeResult.
+func NewAccountMergeResult(code AccountMergeResultCode, value interface{}) (result AccountMergeResult, err error) {
+	result.Code = code
+	switch AccountMergeResultCode(code) {
+	case AccountMergeResultCodeAccountMergeSuccess:
+		tv, ok := value.(Int64)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Int64")
+			return
+		}
+		result.SourceAccountBalance = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustSourceAccountBalance retrieves the SourceAccountBalance value from the union,
+// panicing if the value is not set.
+func (u AccountMergeResult) MustSourceAccountBalance() Int64 {
+	val, ok := u.GetSourceAccountBalance()
+
+	if !ok {
+		panic("arm SourceAccountBalance is not set")
+	}
+
+	return val
+}
+
+// GetSourceAccountBalance retrieves the SourceAccountBalance value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u AccountMergeResult) GetSourceAccountBalance() (result Int64, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "SourceAccountBalance" {
+		result = *u.SourceAccountBalance
+		ok = true
+	}
+
+	return
+}
+
+// InflationResultCode is an XDR Enum defines as:
+//
+//   enum InflationResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        INFLATION_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        INFLATION_NOT_TIME = -1
+//    };
+//
+type InflationResultCode int32
+const (
+	InflationResultCodeInflationSuccess InflationResultCode = 0
+	InflationResultCodeInflationNotTime InflationResultCode = -1
+)
+var inflationResultCodeMap = map[int32]string{
+	0: "InflationResultCodeInflationSuccess",
+	-1: "InflationResultCodeInflationNotTime",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for InflationResultCode
+func (e InflationResultCode) ValidEnum(v int32) bool {
+	_, ok := inflationResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e InflationResultCode) String() string {
+	name, _ := inflationResultCodeMap[int32(e)]
+	return name
+}
+
+// InflationPayout is an XDR Struct defines as:
+//
+//   struct InflationPayout // or use PaymentResultAtom to limit types?
+//    {
+//        AccountID destination;
+//        int64 amount;
+//    };
+//
+type InflationPayout struct {
+	Destination AccountId
+	Amount Int64
+}
+
+// InflationResult is an XDR Union defines as:
+//
+//   union InflationResult switch (InflationResultCode code)
+//    {
+//    case INFLATION_SUCCESS:
+//        InflationPayout payouts<>;
+//    default:
+//        void;
+//    };
+//
+type InflationResult struct{
+	Code InflationResultCode
+	Payouts *[]InflationPayout
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u InflationResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of InflationResult
+func (u InflationResult) ArmForSwitch(sw int32) (string, bool) {
+	switch InflationResultCode(sw) {
+	case InflationResultCodeInflationSuccess:
+		return "Payouts", true
+	default:
+		return "", true
+	}
+}
+
+// NewInflationResult creates a new  InflationResult.
+func NewInflationResult(code InflationResultCode, value interface{}) (result InflationResult, err error) {
+	result.Code = code
+	switch InflationResultCode(code) {
+	case InflationResultCodeInflationSuccess:
+		tv, ok := value.([]InflationPayout)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be []InflationPayout")
+			return
+		}
+		result.Payouts = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustPayouts retrieves the Payouts value from the union,
+// panicing if the value is not set.
+func (u InflationResult) MustPayouts() []InflationPayout {
+	val, ok := u.GetPayouts()
+
+	if !ok {
+		panic("arm Payouts is not set")
+	}
+
+	return val
+}
+
+// GetPayouts retrieves the Payouts value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u InflationResult) GetPayouts() (result []InflationPayout, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "Payouts" {
+		result = *u.Payouts
+		ok = true
+	}
+
+	return
+}
+
+// ManageDataResultCode is an XDR Enum defines as:
+//
+//   enum ManageDataResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        MANAGE_DATA_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        MANAGE_DATA_NOT_SUPPORTED_YET =
+//            -1, // The network hasn't moved to this protocol change yet
+//        MANAGE_DATA_NAME_NOT_FOUND =
+//            -2, // Trying to remove a Data Entry that isn't there
+//        MANAGE_DATA_LOW_RESERVE = -3, // not enough funds to create a new Data Entry
+//        MANAGE_DATA_INVALID_NAME = -4 // Name not a valid string
+//    };
+//
+type ManageDataResultCode int32
+const (
+	ManageDataResultCodeManageDataSuccess ManageDataResultCode = 0
+	ManageDataResultCodeManageDataNotSupportedYet ManageDataResultCode = -1
+	ManageDataResultCodeManageDataNameNotFound ManageDataResultCode = -2
+	ManageDataResultCodeManageDataLowReserve ManageDataResultCode = -3
+	ManageDataResultCodeManageDataInvalidName ManageDataResultCode = -4
+)
+var manageDataResultCodeMap = map[int32]string{
+	0: "ManageDataResultCodeManageDataSuccess",
+	-1: "ManageDataResultCodeManageDataNotSupportedYet",
+	-2: "ManageDataResultCodeManageDataNameNotFound",
+	-3: "ManageDataResultCodeManageDataLowReserve",
+	-4: "ManageDataResultCodeManageDataInvalidName",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for ManageDataResultCode
+func (e ManageDataResultCode) ValidEnum(v int32) bool {
+	_, ok := manageDataResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e ManageDataResultCode) String() string {
+	name, _ := manageDataResultCodeMap[int32(e)]
+	return name
+}
+
+// ManageDataResult is an XDR Union defines as:
+//
+//   union ManageDataResult switch (ManageDataResultCode code)
+//    {
+//    case MANAGE_DATA_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type ManageDataResult struct{
+	Code ManageDataResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u ManageDataResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of ManageDataResult
+func (u ManageDataResult) ArmForSwitch(sw int32) (string, bool) {
+	switch ManageDataResultCode(sw) {
+	case ManageDataResultCodeManageDataSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewManageDataResult creates a new  ManageDataResult.
+func NewManageDataResult(code ManageDataResultCode, value interface{}) (result ManageDataResult, err error) {
+	result.Code = code
+	switch ManageDataResultCode(code) {
+	case ManageDataResultCodeManageDataSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// BumpSequenceResultCode is an XDR Enum defines as:
+//
+//   enum BumpSequenceResultCode
+//    {
+//        // codes considered as "success" for the operation
+//        BUMP_SEQUENCE_SUCCESS = 0,
+//        // codes considered as "failure" for the operation
+//        BUMP_SEQUENCE_BAD_SEQ = -1 // `bumpTo` is not within bounds
+//    };
+//
+type BumpSequenceResultCode int32
+const (
+	BumpSequenceResultCodeBumpSequenceSuccess BumpSequenceResultCode = 0
+	BumpSequenceResultCodeBumpSequenceBadSeq BumpSequenceResultCode = -1
+)
+var bumpSequenceResultCodeMap = map[int32]string{
+	0: "BumpSequenceResultCodeBumpSequenceSuccess",
+	-1: "BumpSequenceResultCodeBumpSequenceBadSeq",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for BumpSequenceResultCode
+func (e BumpSequenceResultCode) ValidEnum(v int32) bool {
+	_, ok := bumpSequenceResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e BumpSequenceResultCode) String() string {
+	name, _ := bumpSequenceResultCodeMap[int32(e)]
+	return name
+}
+
+// BumpSequenceResult is an XDR Union defines as:
+//
+//   union BumpSequenceResult switch (BumpSequenceResultCode code)
+//    {
+//    case BUMP_SEQUENCE_SUCCESS:
+//        void;
+//    default:
+//        void;
+//    };
+//
+type BumpSequenceResult struct{
+	Code BumpSequenceResultCode
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u BumpSequenceResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of BumpSequenceResult
+func (u BumpSequenceResult) ArmForSwitch(sw int32) (string, bool) {
+	switch BumpSequenceResultCode(sw) {
+	case BumpSequenceResultCodeBumpSequenceSuccess:
+		return "", true
+	default:
+		return "", true
+	}
+}
+
+// NewBumpSequenceResult creates a new  BumpSequenceResult.
+func NewBumpSequenceResult(code BumpSequenceResultCode, value interface{}) (result BumpSequenceResult, err error) {
+	result.Code = code
+	switch BumpSequenceResultCode(code) {
+	case BumpSequenceResultCodeBumpSequenceSuccess:
+		// void
+	default:
+		// void
+	}
+	return
+}
+
+// OperationResultCode is an XDR Enum defines as:
+//
+//   enum OperationResultCode
+//    {
+//        opINNER = 0, // inner object result is valid
+//
+//        opBAD_AUTH = -1,     // too few valid signatures / wrong network
+//        opNO_ACCOUNT = -2,   // source account was not found
+//        opNOT_SUPPORTED = -3 // operation not supported at this time
+//    };
+//
+type OperationResultCode int32
+const (
+	OperationResultCodeOpInner OperationResultCode = 0
+	OperationResultCodeOpBadAuth OperationResultCode = -1
+	OperationResultCodeOpNoAccount OperationResultCode = -2
+	OperationResultCodeOpNotSupported OperationResultCode = -3
+)
+var operationResultCodeMap = map[int32]string{
+	0: "OperationResultCodeOpInner",
+	-1: "OperationResultCodeOpBadAuth",
+	-2: "OperationResultCodeOpNoAccount",
+	-3: "OperationResultCodeOpNotSupported",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for OperationResultCode
+func (e OperationResultCode) ValidEnum(v int32) bool {
+	_, ok := operationResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e OperationResultCode) String() string {
+	name, _ := operationResultCodeMap[int32(e)]
+	return name
+}
+
+// OperationResultTr is an XDR NestedUnion defines as:
+//
+//   union switch (OperationType type)
+//        {
+//        case CREATE_ACCOUNT:
+//            CreateAccountResult createAccountResult;
+//        case PAYMENT:
+//            PaymentResult paymentResult;
+//        case PATH_PAYMENT:
+//            PathPaymentResult pathPaymentResult;
+//        case MANAGE_OFFER:
+//            ManageOfferResult manageOfferResult;
+//        case CREATE_PASSIVE_OFFER:
+//            ManageOfferResult createPassiveOfferResult;
+//        case SET_OPTIONS:
+//            SetOptionsResult setOptionsResult;
+//        case CHANGE_TRUST:
+//            ChangeTrustResult changeTrustResult;
+//        case ALLOW_TRUST:
+//            AllowTrustResult allowTrustResult;
+//        case ACCOUNT_MERGE:
+//            AccountMergeResult accountMergeResult;
+//        case INFLATION:
+//            InflationResult inflationResult;
+//        case MANAGE_DATA:
+//            ManageDataResult manageDataResult;
+//        case BUMP_SEQUENCE:
+//            BumpSequenceResult bumpSeqResult;
+//        }
+//
+type OperationResultTr struct{
+	Type OperationType
+	CreateAccountResult *CreateAccountResult
+	PaymentResult *PaymentResult
+	PathPaymentResult *PathPaymentResult
+	ManageOfferResult *ManageOfferResult
+	CreatePassiveOfferResult *ManageOfferResult
+	SetOptionsResult *SetOptionsResult
+	ChangeTrustResult *ChangeTrustResult
+	AllowTrustResult *AllowTrustResult
+	AccountMergeResult *AccountMergeResult
+	InflationResult *InflationResult
+	ManageDataResult *ManageDataResult
+	BumpSeqResult *BumpSequenceResult
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u OperationResultTr) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of OperationResultTr
+func (u OperationResultTr) ArmForSwitch(sw int32) (string, bool) {
+	switch OperationType(sw) {
+	case OperationTypeCreateAccount:
+		return "CreateAccountResult", true
+	case OperationTypePayment:
+		return "PaymentResult", true
+	case OperationTypePathPayment:
+		return "PathPaymentResult", true
+	case OperationTypeManageOffer:
+		return "ManageOfferResult", true
+	case OperationTypeCreatePassiveOffer:
+		return "CreatePassiveOfferResult", true
+	case OperationTypeSetOptions:
+		return "SetOptionsResult", true
+	case OperationTypeChangeTrust:
+		return "ChangeTrustResult", true
+	case OperationTypeAllowTrust:
+		return "AllowTrustResult", true
+	case OperationTypeAccountMerge:
+		return "AccountMergeResult", true
+	case OperationTypeInflation:
+		return "InflationResult", true
+	case OperationTypeManageData:
+		return "ManageDataResult", true
+	case OperationTypeBumpSequence:
+		return "BumpSeqResult", true
+	}
+	return "-", false
+}
+
+// NewOperationResultTr creates a new  OperationResultTr.
+func NewOperationResultTr(aType OperationType, value interface{}) (result OperationResultTr, err error) {
+	result.Type = aType
+	switch OperationType(aType) {
+	case OperationTypeCreateAccount:
+		tv, ok := value.(CreateAccountResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be CreateAccountResult")
+			return
+		}
+		result.CreateAccountResult = &tv
+	case OperationTypePayment:
+		tv, ok := value.(PaymentResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be PaymentResult")
+			return
+		}
+		result.PaymentResult = &tv
+	case OperationTypePathPayment:
+		tv, ok := value.(PathPaymentResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be PathPaymentResult")
+			return
+		}
+		result.PathPaymentResult = &tv
+	case OperationTypeManageOffer:
+		tv, ok := value.(ManageOfferResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageOfferResult")
+			return
+		}
+		result.ManageOfferResult = &tv
+	case OperationTypeCreatePassiveOffer:
+		tv, ok := value.(ManageOfferResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageOfferResult")
+			return
+		}
+		result.CreatePassiveOfferResult = &tv
+	case OperationTypeSetOptions:
+		tv, ok := value.(SetOptionsResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be SetOptionsResult")
+			return
+		}
+		result.SetOptionsResult = &tv
+	case OperationTypeChangeTrust:
+		tv, ok := value.(ChangeTrustResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ChangeTrustResult")
+			return
+		}
+		result.ChangeTrustResult = &tv
+	case OperationTypeAllowTrust:
+		tv, ok := value.(AllowTrustResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be AllowTrustResult")
+			return
+		}
+		result.AllowTrustResult = &tv
+	case OperationTypeAccountMerge:
+		tv, ok := value.(AccountMergeResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be AccountMergeResult")
+			return
+		}
+		result.AccountMergeResult = &tv
+	case OperationTypeInflation:
+		tv, ok := value.(InflationResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be InflationResult")
+			return
+		}
+		result.InflationResult = &tv
+	case OperationTypeManageData:
+		tv, ok := value.(ManageDataResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be ManageDataResult")
+			return
+		}
+		result.ManageDataResult = &tv
+	case OperationTypeBumpSequence:
+		tv, ok := value.(BumpSequenceResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be BumpSequenceResult")
+			return
+		}
+		result.BumpSeqResult = &tv
+	}
+	return
+}
+// MustCreateAccountResult retrieves the CreateAccountResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustCreateAccountResult() CreateAccountResult {
+	val, ok := u.GetCreateAccountResult()
+
+	if !ok {
+		panic("arm CreateAccountResult is not set")
+	}
+
+	return val
+}
+
+// GetCreateAccountResult retrieves the CreateAccountResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetCreateAccountResult() (result CreateAccountResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "CreateAccountResult" {
+		result = *u.CreateAccountResult
+		ok = true
+	}
+
+	return
+}
+// MustPaymentResult retrieves the PaymentResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustPaymentResult() PaymentResult {
+	val, ok := u.GetPaymentResult()
+
+	if !ok {
+		panic("arm PaymentResult is not set")
+	}
+
+	return val
+}
+
+// GetPaymentResult retrieves the PaymentResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetPaymentResult() (result PaymentResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "PaymentResult" {
+		result = *u.PaymentResult
+		ok = true
+	}
+
+	return
+}
+// MustPathPaymentResult retrieves the PathPaymentResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustPathPaymentResult() PathPaymentResult {
+	val, ok := u.GetPathPaymentResult()
+
+	if !ok {
+		panic("arm PathPaymentResult is not set")
+	}
+
+	return val
+}
+
+// GetPathPaymentResult retrieves the PathPaymentResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetPathPaymentResult() (result PathPaymentResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "PathPaymentResult" {
+		result = *u.PathPaymentResult
+		ok = true
+	}
+
+	return
+}
+// MustManageOfferResult retrieves the ManageOfferResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustManageOfferResult() ManageOfferResult {
+	val, ok := u.GetManageOfferResult()
+
+	if !ok {
+		panic("arm ManageOfferResult is not set")
+	}
+
+	return val
+}
+
+// GetManageOfferResult retrieves the ManageOfferResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetManageOfferResult() (result ManageOfferResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ManageOfferResult" {
+		result = *u.ManageOfferResult
+		ok = true
+	}
+
+	return
+}
+// MustCreatePassiveOfferResult retrieves the CreatePassiveOfferResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustCreatePassiveOfferResult() ManageOfferResult {
+	val, ok := u.GetCreatePassiveOfferResult()
+
+	if !ok {
+		panic("arm CreatePassiveOfferResult is not set")
+	}
+
+	return val
+}
+
+// GetCreatePassiveOfferResult retrieves the CreatePassiveOfferResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetCreatePassiveOfferResult() (result ManageOfferResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "CreatePassiveOfferResult" {
+		result = *u.CreatePassiveOfferResult
+		ok = true
+	}
+
+	return
+}
+// MustSetOptionsResult retrieves the SetOptionsResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustSetOptionsResult() SetOptionsResult {
+	val, ok := u.GetSetOptionsResult()
+
+	if !ok {
+		panic("arm SetOptionsResult is not set")
+	}
+
+	return val
+}
+
+// GetSetOptionsResult retrieves the SetOptionsResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetSetOptionsResult() (result SetOptionsResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "SetOptionsResult" {
+		result = *u.SetOptionsResult
+		ok = true
+	}
+
+	return
+}
+// MustChangeTrustResult retrieves the ChangeTrustResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustChangeTrustResult() ChangeTrustResult {
+	val, ok := u.GetChangeTrustResult()
+
+	if !ok {
+		panic("arm ChangeTrustResult is not set")
+	}
+
+	return val
+}
+
+// GetChangeTrustResult retrieves the ChangeTrustResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetChangeTrustResult() (result ChangeTrustResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ChangeTrustResult" {
+		result = *u.ChangeTrustResult
+		ok = true
+	}
+
+	return
+}
+// MustAllowTrustResult retrieves the AllowTrustResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustAllowTrustResult() AllowTrustResult {
+	val, ok := u.GetAllowTrustResult()
+
+	if !ok {
+		panic("arm AllowTrustResult is not set")
+	}
+
+	return val
+}
+
+// GetAllowTrustResult retrieves the AllowTrustResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetAllowTrustResult() (result AllowTrustResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "AllowTrustResult" {
+		result = *u.AllowTrustResult
+		ok = true
+	}
+
+	return
+}
+// MustAccountMergeResult retrieves the AccountMergeResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustAccountMergeResult() AccountMergeResult {
+	val, ok := u.GetAccountMergeResult()
+
+	if !ok {
+		panic("arm AccountMergeResult is not set")
+	}
+
+	return val
+}
+
+// GetAccountMergeResult retrieves the AccountMergeResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetAccountMergeResult() (result AccountMergeResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "AccountMergeResult" {
+		result = *u.AccountMergeResult
+		ok = true
+	}
+
+	return
+}
+// MustInflationResult retrieves the InflationResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustInflationResult() InflationResult {
+	val, ok := u.GetInflationResult()
+
+	if !ok {
+		panic("arm InflationResult is not set")
+	}
+
+	return val
+}
+
+// GetInflationResult retrieves the InflationResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetInflationResult() (result InflationResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "InflationResult" {
+		result = *u.InflationResult
+		ok = true
+	}
+
+	return
+}
+// MustManageDataResult retrieves the ManageDataResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustManageDataResult() ManageDataResult {
+	val, ok := u.GetManageDataResult()
+
+	if !ok {
+		panic("arm ManageDataResult is not set")
+	}
+
+	return val
+}
+
+// GetManageDataResult retrieves the ManageDataResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetManageDataResult() (result ManageDataResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "ManageDataResult" {
+		result = *u.ManageDataResult
+		ok = true
+	}
+
+	return
+}
+// MustBumpSeqResult retrieves the BumpSeqResult value from the union,
+// panicing if the value is not set.
+func (u OperationResultTr) MustBumpSeqResult() BumpSequenceResult {
+	val, ok := u.GetBumpSeqResult()
+
+	if !ok {
+		panic("arm BumpSeqResult is not set")
+	}
+
+	return val
+}
+
+// GetBumpSeqResult retrieves the BumpSeqResult value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResultTr) GetBumpSeqResult() (result BumpSequenceResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "BumpSeqResult" {
+		result = *u.BumpSeqResult
+		ok = true
+	}
+
+	return
+}
+
+// OperationResult is an XDR Union defines as:
+//
+//   union OperationResult switch (OperationResultCode code)
+//    {
+//    case opINNER:
+//        union switch (OperationType type)
+//        {
+//        case CREATE_ACCOUNT:
+//            CreateAccountResult createAccountResult;
+//        case PAYMENT:
+//            PaymentResult paymentResult;
+//        case PATH_PAYMENT:
+//            PathPaymentResult pathPaymentResult;
+//        case MANAGE_OFFER:
+//            ManageOfferResult manageOfferResult;
+//        case CREATE_PASSIVE_OFFER:
+//            ManageOfferResult createPassiveOfferResult;
+//        case SET_OPTIONS:
+//            SetOptionsResult setOptionsResult;
+//        case CHANGE_TRUST:
+//            ChangeTrustResult changeTrustResult;
+//        case ALLOW_TRUST:
+//            AllowTrustResult allowTrustResult;
+//        case ACCOUNT_MERGE:
+//            AccountMergeResult accountMergeResult;
+//        case INFLATION:
+//            InflationResult inflationResult;
+//        case MANAGE_DATA:
+//            ManageDataResult manageDataResult;
+//        case BUMP_SEQUENCE:
+//            BumpSequenceResult bumpSeqResult;
+//        }
+//        tr;
+//    default:
+//        void;
+//    };
+//
+type OperationResult struct{
+	Code OperationResultCode
+	Tr *OperationResultTr
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u OperationResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of OperationResult
+func (u OperationResult) ArmForSwitch(sw int32) (string, bool) {
+	switch OperationResultCode(sw) {
+	case OperationResultCodeOpInner:
+		return "Tr", true
+	default:
+		return "", true
+	}
+}
+
+// NewOperationResult creates a new  OperationResult.
+func NewOperationResult(code OperationResultCode, value interface{}) (result OperationResult, err error) {
+	result.Code = code
+	switch OperationResultCode(code) {
+	case OperationResultCodeOpInner:
+		tv, ok := value.(OperationResultTr)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be OperationResultTr")
+			return
+		}
+		result.Tr = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustTr retrieves the Tr value from the union,
+// panicing if the value is not set.
+func (u OperationResult) MustTr() OperationResultTr {
+	val, ok := u.GetTr()
+
+	if !ok {
+		panic("arm Tr is not set")
+	}
+
+	return val
+}
+
+// GetTr retrieves the Tr value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u OperationResult) GetTr() (result OperationResultTr, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "Tr" {
+		result = *u.Tr
+		ok = true
+	}
+
+	return
+}
+
+// TransactionResultCode is an XDR Enum defines as:
+//
+//   enum TransactionResultCode
+//    {
+//        txSUCCESS = 0, // all operations succeeded
+//
+//        txFAILED = -1, // one of the operations failed (none were applied)
+//
+//        txTOO_EARLY = -2,         // ledger closeTime before minTime
+//        txTOO_LATE = -3,          // ledger closeTime after maxTime
+//        txMISSING_OPERATION = -4, // no operation was specified
+//        txBAD_SEQ = -5,           // sequence number does not match source account
+//
+//        txBAD_AUTH = -6,             // too few valid signatures / wrong network
+//        txINSUFFICIENT_BALANCE = -7, // fee would bring account below reserve
+//        txNO_ACCOUNT = -8,           // source account not found
+//        txINSUFFICIENT_FEE = -9,     // fee is too small
+//        txBAD_AUTH_EXTRA = -10,      // unused signatures attached to transaction
+//        txINTERNAL_ERROR = -11       // an unknown error occured
+//    };
+//
+type TransactionResultCode int32
+const (
+	TransactionResultCodeTxSuccess TransactionResultCode = 0
+	TransactionResultCodeTxFailed TransactionResultCode = -1
+	TransactionResultCodeTxTooEarly TransactionResultCode = -2
+	TransactionResultCodeTxTooLate TransactionResultCode = -3
+	TransactionResultCodeTxMissingOperation TransactionResultCode = -4
+	TransactionResultCodeTxBadSeq TransactionResultCode = -5
+	TransactionResultCodeTxBadAuth TransactionResultCode = -6
+	TransactionResultCodeTxInsufficientBalance TransactionResultCode = -7
+	TransactionResultCodeTxNoAccount TransactionResultCode = -8
+	TransactionResultCodeTxInsufficientFee TransactionResultCode = -9
+	TransactionResultCodeTxBadAuthExtra TransactionResultCode = -10
+	TransactionResultCodeTxInternalError TransactionResultCode = -11
+)
+var transactionResultCodeMap = map[int32]string{
+	0: "TransactionResultCodeTxSuccess",
+	-1: "TransactionResultCodeTxFailed",
+	-2: "TransactionResultCodeTxTooEarly",
+	-3: "TransactionResultCodeTxTooLate",
+	-4: "TransactionResultCodeTxMissingOperation",
+	-5: "TransactionResultCodeTxBadSeq",
+	-6: "TransactionResultCodeTxBadAuth",
+	-7: "TransactionResultCodeTxInsufficientBalance",
+	-8: "TransactionResultCodeTxNoAccount",
+	-9: "TransactionResultCodeTxInsufficientFee",
+	-10: "TransactionResultCodeTxBadAuthExtra",
+	-11: "TransactionResultCodeTxInternalError",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for TransactionResultCode
+func (e TransactionResultCode) ValidEnum(v int32) bool {
+	_, ok := transactionResultCodeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e TransactionResultCode) String() string {
+	name, _ := transactionResultCodeMap[int32(e)]
+	return name
+}
+
+// TransactionResultResult is an XDR NestedUnion defines as:
+//
+//   union switch (TransactionResultCode code)
+//        {
+//        case txSUCCESS:
+//        case txFAILED:
+//            OperationResult results<>;
+//        default:
+//            void;
+//        }
+//
+type TransactionResultResult struct{
+	Code TransactionResultCode
+	Results *[]OperationResult
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u TransactionResultResult) SwitchFieldName() string {
+	return "Code"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of TransactionResultResult
+func (u TransactionResultResult) ArmForSwitch(sw int32) (string, bool) {
+	switch TransactionResultCode(sw) {
+	case TransactionResultCodeTxSuccess:
+		return "Results", true
+	case TransactionResultCodeTxFailed:
+		return "Results", true
+	default:
+		return "", true
+	}
+}
+
+// NewTransactionResultResult creates a new  TransactionResultResult.
+func NewTransactionResultResult(code TransactionResultCode, value interface{}) (result TransactionResultResult, err error) {
+	result.Code = code
+	switch TransactionResultCode(code) {
+	case TransactionResultCodeTxSuccess:
+		tv, ok := value.([]OperationResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be []OperationResult")
+			return
+		}
+		result.Results = &tv
+	case TransactionResultCodeTxFailed:
+		tv, ok := value.([]OperationResult)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be []OperationResult")
+			return
+		}
+		result.Results = &tv
+	default:
+		// void
+	}
+	return
+}
+// MustResults retrieves the Results value from the union,
+// panicing if the value is not set.
+func (u TransactionResultResult) MustResults() []OperationResult {
+	val, ok := u.GetResults()
+
+	if !ok {
+		panic("arm Results is not set")
+	}
+
+	return val
+}
+
+// GetResults retrieves the Results value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u TransactionResultResult) GetResults() (result []OperationResult, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Code))
+
+	if armName == "Results" {
+		result = *u.Results
+		ok = true
+	}
+
+	return
+}
+
+// TransactionResultExt is an XDR NestedUnion defines as:
+//
+//   union switch (int v)
+//        {
+//        case 0:
+//            void;
+//        }
+//
+type TransactionResultExt struct{
+	V int32
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u TransactionResultExt) SwitchFieldName() string {
+	return "V"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of TransactionResultExt
+func (u TransactionResultExt) ArmForSwitch(sw int32) (string, bool) {
+	switch int32(sw) {
+	case 0:
+		return "", true
+	}
+	return "-", false
+}
+
+// NewTransactionResultExt creates a new  TransactionResultExt.
+func NewTransactionResultExt(v int32, value interface{}) (result TransactionResultExt, err error) {
+	result.V = v
+	switch int32(v) {
+	case 0:
+		// void
+	}
+	return
+}
+
+// TransactionResult is an XDR Struct defines as:
+//
+//   struct TransactionResult
+//    {
+//        int64 feeCharged; // actual fee charged for the transaction
+//
+//        union switch (TransactionResultCode code)
+//        {
+//        case txSUCCESS:
+//        case txFAILED:
+//            OperationResult results<>;
+//        default:
+//            void;
+//        }
+//        result;
+//
+//        // reserved for future use
+//        union switch (int v)
+//        {
+//        case 0:
+//            void;
+//        }
+//        ext;
+//    };
+//
+type TransactionResult struct {
+	FeeCharged Int64
+	Result TransactionResultResult
+	Ext TransactionResultExt
+}
+
+// Hash is an XDR Typedef defines as:
+//
+//   typedef opaque Hash[32];
+//
+type Hash [32]byte
+// XDRMaxSize implements the Sized interface for Hash
+func (e Hash) XDRMaxSize() int {
+	return 32
+}
+
+// Uint256 is an XDR Typedef defines as:
+//
+//   typedef opaque uint256[32];
+//
+type Uint256 [32]byte
+// XDRMaxSize implements the Sized interface for Uint256
+func (e Uint256) XDRMaxSize() int {
+	return 32
+}
+
+// Uint32 is an XDR Typedef defines as:
+//
+//   typedef unsigned int uint32;
+//
+type Uint32 uint32
+
+// Int32 is an XDR Typedef defines as:
+//
+//   typedef int int32;
+//
+type Int32 int32
+
+// Uint64 is an XDR Typedef defines as:
+//
+//   typedef unsigned hyper uint64;
+//
+type Uint64 uint64
+
+// Int64 is an XDR Typedef defines as:
+//
+//   typedef hyper int64;
+//
+type Int64 int64
+
+// CryptoKeyType is an XDR Enum defines as:
+//
+//   enum CryptoKeyType
+//    {
+//        KEY_TYPE_ED25519 = 0,
+//        KEY_TYPE_PRE_AUTH_TX = 1,
+//        KEY_TYPE_HASH_X = 2
+//    };
+//
+type CryptoKeyType int32
+const (
+	CryptoKeyTypeKeyTypeEd25519 CryptoKeyType = 0
+	CryptoKeyTypeKeyTypePreAuthTx CryptoKeyType = 1
+	CryptoKeyTypeKeyTypeHashX CryptoKeyType = 2
+)
+var cryptoKeyTypeMap = map[int32]string{
+	0: "CryptoKeyTypeKeyTypeEd25519",
+	1: "CryptoKeyTypeKeyTypePreAuthTx",
+	2: "CryptoKeyTypeKeyTypeHashX",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for CryptoKeyType
+func (e CryptoKeyType) ValidEnum(v int32) bool {
+	_, ok := cryptoKeyTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e CryptoKeyType) String() string {
+	name, _ := cryptoKeyTypeMap[int32(e)]
+	return name
+}
+
+// PublicKeyType is an XDR Enum defines as:
+//
+//   enum PublicKeyType
+//    {
+//        PUBLIC_KEY_TYPE_ED25519 = KEY_TYPE_ED25519
+//    };
+//
+type PublicKeyType int32
+const (
+	PublicKeyTypePublicKeyTypeEd25519 PublicKeyType = 0
+)
+var publicKeyTypeMap = map[int32]string{
+	0: "PublicKeyTypePublicKeyTypeEd25519",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for PublicKeyType
+func (e PublicKeyType) ValidEnum(v int32) bool {
+	_, ok := publicKeyTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e PublicKeyType) String() string {
+	name, _ := publicKeyTypeMap[int32(e)]
+	return name
+}
+
+// SignerKeyType is an XDR Enum defines as:
+//
+//   enum SignerKeyType
+//    {
+//        SIGNER_KEY_TYPE_ED25519 = KEY_TYPE_ED25519,
+//        SIGNER_KEY_TYPE_PRE_AUTH_TX = KEY_TYPE_PRE_AUTH_TX,
+//        SIGNER_KEY_TYPE_HASH_X = KEY_TYPE_HASH_X
+//    };
+//
+type SignerKeyType int32
+const (
+	SignerKeyTypeSignerKeyTypeEd25519 SignerKeyType = 0
+	SignerKeyTypeSignerKeyTypePreAuthTx SignerKeyType = 1
+	SignerKeyTypeSignerKeyTypeHashX SignerKeyType = 2
+)
+var signerKeyTypeMap = map[int32]string{
+	0: "SignerKeyTypeSignerKeyTypeEd25519",
+	1: "SignerKeyTypeSignerKeyTypePreAuthTx",
+	2: "SignerKeyTypeSignerKeyTypeHashX",
+}
+
+// ValidEnum validates a proposed value for this enum.  Implements
+// the Enum interface for SignerKeyType
+func (e SignerKeyType) ValidEnum(v int32) bool {
+	_, ok := signerKeyTypeMap[v]
+	return ok
+}
+// String returns the name of `e`
+func (e SignerKeyType) String() string {
+	name, _ := signerKeyTypeMap[int32(e)]
+	return name
+}
+
+// PublicKey is an XDR Union defines as:
+//
+//   union PublicKey switch (PublicKeyType type)
+//    {
+//    case PUBLIC_KEY_TYPE_ED25519:
+//        uint256 ed25519;
+//    };
+//
+type PublicKey struct{
+	Type PublicKeyType
+	Ed25519 *Uint256
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u PublicKey) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of PublicKey
+func (u PublicKey) ArmForSwitch(sw int32) (string, bool) {
+	switch PublicKeyType(sw) {
+	case PublicKeyTypePublicKeyTypeEd25519:
+		return "Ed25519", true
+	}
+	return "-", false
+}
+
+// NewPublicKey creates a new  PublicKey.
+func NewPublicKey(aType PublicKeyType, value interface{}) (result PublicKey, err error) {
+	result.Type = aType
+	switch PublicKeyType(aType) {
+	case PublicKeyTypePublicKeyTypeEd25519:
+		tv, ok := value.(Uint256)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Uint256")
+			return
+		}
+		result.Ed25519 = &tv
+	}
+	return
+}
+// MustEd25519 retrieves the Ed25519 value from the union,
+// panicing if the value is not set.
+func (u PublicKey) MustEd25519() Uint256 {
+	val, ok := u.GetEd25519()
+
+	if !ok {
+		panic("arm Ed25519 is not set")
+	}
+
+	return val
+}
+
+// GetEd25519 retrieves the Ed25519 value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u PublicKey) GetEd25519() (result Uint256, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Ed25519" {
+		result = *u.Ed25519
+		ok = true
+	}
+
+	return
+}
+
+// SignerKey is an XDR Union defines as:
+//
+//   union SignerKey switch (SignerKeyType type)
+//    {
+//    case SIGNER_KEY_TYPE_ED25519:
+//        uint256 ed25519;
+//    case SIGNER_KEY_TYPE_PRE_AUTH_TX:
+//        /* Hash of Transaction structure */
+//        uint256 preAuthTx;
+//    case SIGNER_KEY_TYPE_HASH_X:
+//        /* Hash of random 256 bit preimage X */
+//        uint256 hashX;
+//    };
+//
+type SignerKey struct{
+	Type SignerKeyType
+	Ed25519 *Uint256
+	PreAuthTx *Uint256
+	HashX *Uint256
+}
+
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u SignerKey) SwitchFieldName() string {
+	return "Type"
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of SignerKey
+func (u SignerKey) ArmForSwitch(sw int32) (string, bool) {
+	switch SignerKeyType(sw) {
+	case SignerKeyTypeSignerKeyTypeEd25519:
+		return "Ed25519", true
+	case SignerKeyTypeSignerKeyTypePreAuthTx:
+		return "PreAuthTx", true
+	case SignerKeyTypeSignerKeyTypeHashX:
+		return "HashX", true
+	}
+	return "-", false
+}
+
+// NewSignerKey creates a new  SignerKey.
+func NewSignerKey(aType SignerKeyType, value interface{}) (result SignerKey, err error) {
+	result.Type = aType
+	switch SignerKeyType(aType) {
+	case SignerKeyTypeSignerKeyTypeEd25519:
+		tv, ok := value.(Uint256)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Uint256")
+			return
+		}
+		result.Ed25519 = &tv
+	case SignerKeyTypeSignerKeyTypePreAuthTx:
+		tv, ok := value.(Uint256)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Uint256")
+			return
+		}
+		result.PreAuthTx = &tv
+	case SignerKeyTypeSignerKeyTypeHashX:
+		tv, ok := value.(Uint256)
+		if !ok {
+			err = fmt.Errorf("invalid value, must be Uint256")
+			return
+		}
+		result.HashX = &tv
+	}
+	return
+}
+// MustEd25519 retrieves the Ed25519 value from the union,
+// panicing if the value is not set.
+func (u SignerKey) MustEd25519() Uint256 {
+	val, ok := u.GetEd25519()
+
+	if !ok {
+		panic("arm Ed25519 is not set")
+	}
+
+	return val
+}
+
+// GetEd25519 retrieves the Ed25519 value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u SignerKey) GetEd25519() (result Uint256, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "Ed25519" {
+		result = *u.Ed25519
+		ok = true
+	}
+
+	return
+}
+// MustPreAuthTx retrieves the PreAuthTx value from the union,
+// panicing if the value is not set.
+func (u SignerKey) MustPreAuthTx() Uint256 {
+	val, ok := u.GetPreAuthTx()
+
+	if !ok {
+		panic("arm PreAuthTx is not set")
+	}
+
+	return val
+}
+
+// GetPreAuthTx retrieves the PreAuthTx value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u SignerKey) GetPreAuthTx() (result Uint256, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "PreAuthTx" {
+		result = *u.PreAuthTx
+		ok = true
+	}
+
+	return
+}
+// MustHashX retrieves the HashX value from the union,
+// panicing if the value is not set.
+func (u SignerKey) MustHashX() Uint256 {
+	val, ok := u.GetHashX()
+
+	if !ok {
+		panic("arm HashX is not set")
+	}
+
+	return val
+}
+
+// GetHashX retrieves the HashX value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u SignerKey) GetHashX() (result Uint256, ok bool) {
+	armName, _ := u.ArmForSwitch(int32(u.Type))
+
+	if armName == "HashX" {
+		result = *u.HashX
+		ok = true
+	}
+
+	return
+}
+
+// Signature is an XDR Typedef defines as:
+//
+//   typedef opaque Signature<64>;
+//
+type Signature []byte
+// XDRMaxSize implements the Sized interface for Signature
+func (e Signature) XDRMaxSize() int {
+	return 64
+}
+
+// SignatureHint is an XDR Typedef defines as:
+//
+//   typedef opaque SignatureHint[4];
+//
+type SignatureHint [4]byte
+// XDRMaxSize implements the Sized interface for SignatureHint
+func (e SignatureHint) XDRMaxSize() int {
+	return 4
+}
+
+// NodeId is an XDR Typedef defines as:
+//
+//   typedef PublicKey NodeID;
+//
+type NodeId PublicKey
+// SwitchFieldName returns the field name in which this union's
+// discriminant is stored
+func (u NodeId) SwitchFieldName() string {
+	return PublicKey(u).SwitchFieldName()
+}
+
+// ArmForSwitch returns which field name should be used for storing
+// the value for an instance of PublicKey
+func (u NodeId) ArmForSwitch(sw int32) (string, bool) {
+	return PublicKey(u).ArmForSwitch(sw)
+}
+
+// NewNodeId creates a new  NodeId.
+func NewNodeId(aType PublicKeyType, value interface{}) (result NodeId, err error) {
+	u, err := NewPublicKey(aType, value)
+	result = NodeId(u)
+	return
+}
+
+// MustEd25519 retrieves the Ed25519 value from the union,
+// panicing if the value is not set.
+func (u NodeId) MustEd25519() Uint256 {
+	return PublicKey(u).MustEd25519()
+}
+
+// GetEd25519 retrieves the Ed25519 value from the union,
+// returning ok if the union's switch indicated the value is valid.
+func (u NodeId) GetEd25519() (result Uint256, ok bool) {
+	return PublicKey(u).GetEd25519()
+}
+
+// Curve25519Secret is an XDR Struct defines as:
+//
+//   struct Curve25519Secret
+//    {
+//            opaque key[32];
+//    };
+//
+type Curve25519Secret struct {
+	Key [32]byte `xdrmaxsize:"32"`
+}
+
+// Curve25519Public is an XDR Struct defines as:
+//
+//   struct Curve25519Public
+//    {
+//            opaque key[32];
+//    };
+//
+type Curve25519Public struct {
+	Key [32]byte `xdrmaxsize:"32"`
+}
+
+// HmacSha256Key is an XDR Struct defines as:
+//
+//   struct HmacSha256Key
+//    {
+//            opaque key[32];
+//    };
+//
+type HmacSha256Key struct {
+	Key [32]byte `xdrmaxsize:"32"`
+}
+
+// HmacSha256Mac is an XDR Struct defines as:
+//
+//   struct HmacSha256Mac
+//    {
+//            opaque mac[32];
+//    };
+//
+type HmacSha256Mac struct {
+	Mac [32]byte `xdrmaxsize:"32"`
+}
+
 // Value is an XDR Typedef defines as:
 //
 //   typedef opaque Value<>;
@@ -7503,7 +7364,7 @@ type Value []byte
 //
 type ScpBallot struct {
 	Counter Uint32
-	Value   Value
+	Value Value
 }
 
 // ScpStatementType is an XDR Enum defines as:
@@ -7517,14 +7378,12 @@ type ScpBallot struct {
 //    };
 //
 type ScpStatementType int32
-
 const (
-	ScpStatementTypeScpStPrepare     ScpStatementType = 0
-	ScpStatementTypeScpStConfirm     ScpStatementType = 1
+	ScpStatementTypeScpStPrepare ScpStatementType = 0
+	ScpStatementTypeScpStConfirm ScpStatementType = 1
 	ScpStatementTypeScpStExternalize ScpStatementType = 2
-	ScpStatementTypeScpStNominate    ScpStatementType = 3
+	ScpStatementTypeScpStNominate ScpStatementType = 3
 )
-
 var scpStatementTypeMap = map[int32]string{
 	0: "ScpStatementTypeScpStPrepare",
 	1: "ScpStatementTypeScpStConfirm",
@@ -7538,7 +7397,6 @@ func (e ScpStatementType) ValidEnum(v int32) bool {
 	_, ok := scpStatementTypeMap[v]
 	return ok
 }
-
 // String returns the name of `e`
 func (e ScpStatementType) String() string {
 	name, _ := scpStatementTypeMap[int32(e)]
@@ -7556,8 +7414,8 @@ func (e ScpStatementType) String() string {
 //
 type ScpNomination struct {
 	QuorumSetHash Hash
-	Votes         []Value
-	Accepted      []Value
+	Votes []Value
+	Accepted []Value
 }
 
 // ScpStatementPrepare is an XDR NestedStruct defines as:
@@ -7574,11 +7432,11 @@ type ScpNomination struct {
 //
 type ScpStatementPrepare struct {
 	QuorumSetHash Hash
-	Ballot        ScpBallot
-	Prepared      *ScpBallot
+	Ballot ScpBallot
+	Prepared *ScpBallot
 	PreparedPrime *ScpBallot
-	NC            Uint32
-	NH            Uint32
+	NC Uint32
+	NH Uint32
 }
 
 // ScpStatementConfirm is an XDR NestedStruct defines as:
@@ -7593,10 +7451,10 @@ type ScpStatementPrepare struct {
 //            }
 //
 type ScpStatementConfirm struct {
-	Ballot        ScpBallot
-	NPrepared     Uint32
-	NCommit       Uint32
-	NH            Uint32
+	Ballot ScpBallot
+	NPrepared Uint32
+	NCommit Uint32
+	NH Uint32
 	QuorumSetHash Hash
 }
 
@@ -7610,8 +7468,8 @@ type ScpStatementConfirm struct {
 //            }
 //
 type ScpStatementExternalize struct {
-	Commit              ScpBallot
-	NH                  Uint32
+	Commit ScpBallot
+	NH Uint32
 	CommitQuorumSetHash Hash
 }
 
@@ -7649,12 +7507,12 @@ type ScpStatementExternalize struct {
 //            SCPNomination nominate;
 //        }
 //
-type ScpStatementPledges struct {
-	Type        ScpStatementType
-	Prepare     *ScpStatementPrepare
-	Confirm     *ScpStatementConfirm
+type ScpStatementPledges struct{
+	Type ScpStatementType
+	Prepare *ScpStatementPrepare
+	Confirm *ScpStatementConfirm
 	Externalize *ScpStatementExternalize
-	Nominate    *ScpNomination
+	Nominate *ScpNomination
 }
 
 // SwitchFieldName returns the field name in which this union's
@@ -7714,7 +7572,6 @@ func NewScpStatementPledges(aType ScpStatementType, value interface{}) (result S
 	}
 	return
 }
-
 // MustPrepare retrieves the Prepare value from the union,
 // panicing if the value is not set.
 func (u ScpStatementPledges) MustPrepare() ScpStatementPrepare {
@@ -7739,7 +7596,6 @@ func (u ScpStatementPledges) GetPrepare() (result ScpStatementPrepare, ok bool) 
 
 	return
 }
-
 // MustConfirm retrieves the Confirm value from the union,
 // panicing if the value is not set.
 func (u ScpStatementPledges) MustConfirm() ScpStatementConfirm {
@@ -7764,7 +7620,6 @@ func (u ScpStatementPledges) GetConfirm() (result ScpStatementConfirm, ok bool) 
 
 	return
 }
-
 // MustExternalize retrieves the Externalize value from the union,
 // panicing if the value is not set.
 func (u ScpStatementPledges) MustExternalize() ScpStatementExternalize {
@@ -7789,7 +7644,6 @@ func (u ScpStatementPledges) GetExternalize() (result ScpStatementExternalize, o
 
 	return
 }
-
 // MustNominate retrieves the Nominate value from the union,
 // panicing if the value is not set.
 func (u ScpStatementPledges) MustNominate() ScpNomination {
@@ -7857,9 +7711,9 @@ func (u ScpStatementPledges) GetNominate() (result ScpNomination, ok bool) {
 //    };
 //
 type ScpStatement struct {
-	NodeId    NodeId
+	NodeId NodeId
 	SlotIndex Uint64
-	Pledges   ScpStatementPledges
+	Pledges ScpStatementPledges
 }
 
 // ScpEnvelope is an XDR Struct defines as:
@@ -7885,9 +7739,10 @@ type ScpEnvelope struct {
 //    };
 //
 type ScpQuorumSet struct {
-	Threshold  Uint32
+	Threshold Uint32
 	Validators []PublicKey
-	InnerSets  []ScpQuorumSet
+	InnerSets []ScpQuorumSet
 }
 
 var fmtTest = fmt.Sprint("this is a dummy usage of fmt")
+

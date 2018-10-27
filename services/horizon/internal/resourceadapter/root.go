@@ -3,10 +3,10 @@ package resourceadapter
 import (
 	"context"
 
-	"github.com/stellar/go/services/horizon/internal/httpx"
-	"github.com/stellar/go/services/horizon/internal/ledger"
-	. "github.com/stellar/go/protocols/horizon"
-	"github.com/stellar/go/support/render/hal"
+	"github.com/BonexIO/go/services/horizon/internal/httpx"
+	"github.com/BonexIO/go/services/horizon/internal/ledger"
+	. "github.com/BonexIO/go/protocols/horizon"
+	"github.com/BonexIO/go/support/render/hal"
 )
 
 // Populate fills in the details
